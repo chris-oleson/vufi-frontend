@@ -1,19 +1,19 @@
 <template>
-    <v-sheet class="pa-4" elevation="2">
-        <apexchart v-if="series[0].data.length" type="area" :options="options" :series="series"></apexchart>
-    </v-sheet>
+    <div class="mb-8">
+        <h2 class="mb-4 mt-8 font-weight-light text-center">Historic Value</h2>
+
+        <v-sheet class="pa-4" elevation="2">
+            <apexchart v-if="series[0].data.length" type="area" :options="options" :series="series"></apexchart>
+        </v-sheet>
+    </div>
 </template>
 
 <script>
 import axios from 'axios'
-import apexchart from 'vue-apexcharts'
 
 export default {
-    name: 'LineChart',
+    name: 'HistoricData',
     props: [],
-    components: {
-        apexchart
-    },
 
     data() {
         return {
@@ -22,10 +22,7 @@ export default {
             options: {
                 chart: {
                     id: 'vuechart-example',
-                    animations: {
-                        enabled: false,
-                    },
-                    
+
                     toolbar: {
                         show: true,
                         tools: {

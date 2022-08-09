@@ -1,6 +1,6 @@
 <template>
     <div class="ml-8 mb-8">
-        <h2 class="mb-4 mt-8 font-weight-light text-center">Assets</h2>
+        <h2 class="mb-4 mt-8 font-weight-light text-center">Assets and Liabilites</h2>
 
         <Asset v-for="(assetData, i) in assetsData" :key="i" :assetData="assetsData[i]"/>
 
@@ -32,12 +32,11 @@ export default {
     },
 
     mounted() {
-        this.loadData()
+        this.getAssetData()
     },
 
     methods: {
-        async loadData() {
-            console.log("loaded")
+        async getAssetData() {
             await axios.get('http://localhost:3000/assets').then(resp => {this.assetsData = resp.data})
         },
 

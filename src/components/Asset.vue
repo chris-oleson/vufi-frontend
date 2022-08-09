@@ -63,7 +63,7 @@ export default {
                         }
                     )
 
-                    await this.$parent.loadData()
+                    await this.$parent.getAssetData()
                     await this.$parent.updateChartData()
                 }
             }
@@ -75,7 +75,7 @@ export default {
 
         async deleteAsset() {
             await axios.delete('http://localhost:3000/assets/' + this.assetData.id)
-            await this.$parent.loadData()
+            await this.$parent.getAssetData()
             await this.$parent.updateChartData()
         },
     },

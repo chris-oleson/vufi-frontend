@@ -1,6 +1,6 @@
 <template>
     <div class="mr-8 mb-8">
-        <h2 class="mb-4 mt-8 font-weight-light text-center">Current Value Distribution</h2>
+        <h2 class="mb-4 mt-8 font-weight-light text-center">Asset Distribution</h2>
 
         <v-sheet class="pa-4" elevation="2">
             <apexchart v-if="series.length" type="pie" :options="options" :series="series"></apexchart>

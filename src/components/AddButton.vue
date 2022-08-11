@@ -5,20 +5,19 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
     name: 'AddButton',
 
     methods: {
         async addAsset() {
-            await axios.post('http://localhost:3000/assets',
+            await this.$store.dispatch('ADD_ASSET',
                 {
                     "assetName":null,
                     "value":null,
                     "editing":true
                 }
             )
-            this.$parent.loadData()
+            await this.$store.dispatch('LOAD_ASSETS')
         }
     }
 }

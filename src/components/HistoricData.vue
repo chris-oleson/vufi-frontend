@@ -3,22 +3,17 @@
         <h2 class="mb-4 mt-8 font-weight-light text-center">Historic Value</h2>
 
         <v-sheet class="pa-4" elevation="2">
-            <apexchart v-if="series[0].data.length" type="area" :options="options" :series="series"></apexchart>
+            <apexchart v-if="historicData[0].data.length" type="area" :options="options" :series="historicData"></apexchart>
         </v-sheet>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
     name: 'HistoricData',
-    props: [],
 
     data() {
         return {
-            assetHistory: [],
-
             options: {
                 chart: {
                     id: 'vuechart-example',
@@ -57,7 +52,7 @@ export default {
                             return 0
                         }
                         else {
-                            return smallest
+                            return smallest * 2
                         }
                     },
                     max: function(biggest) { return biggest * 1.1 },
@@ -84,33 +79,15 @@ export default {
                     }
                 },
             },
-
-            series: [{
-                name: "Net Worth",
-                data: []
-            }]
         }
     },
 
     mounted() {
-        this.loadData()
+        this.$store.dispatch('LOAD_HISTORY')
     },
 
-    methods: {
-        async loadData() {
-            await axios.get('http://localhost:3000/historicData').then(resp => {this.assetHistory = resp.data})
-
-            this.series[0].data = []
-
-            for (let i = 0; i < this.assetHistory.length; i++) {
-                let data = {
-                    x: this.assetHistory[i].date,
-                    y: this.assetHistory[i].totalValue,
-                }
-
-                this.series[0].data.push(data)
-            }
-        }
-    },
+    computed: {
+        historicData() { return [{ data: this.$store.state.historicData }] }
+    }
 }
 </script>

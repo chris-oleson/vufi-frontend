@@ -1,12 +1,6 @@
 {
   "assets": [
     {
-      "assetName": "Car",
-      "value": 10000,
-      "editing": false,
-      "id": 1
-    },
-    {
       "assetName": "401k",
       "value": 45000,
       "editing": false,
@@ -14,7 +8,7 @@
     },
     {
       "assetName": "Checking Account",
-      "value": 5500,
+      "value": 6500,
       "editing": false,
       "id": 3
     },
@@ -25,72 +19,93 @@
       "id": 4
     },
     {
+      "assetName": "Car",
+      "value": 10000,
+      "editing": false,
+      "id": 6
+    },
+    {
       "assetName": "Savings Account",
       "value": 3000,
       "editing": false,
-      "id": 5
+      "id": 7
     }
   ],
   "historicData": [
     {
-      "date": "Jul 28 2022",
-      "totalValue": 50000,
+      "x": "Jul 28 2022",
+      "y": 50000,
       "id": 2
     },
     {
-      "date": "Jul 29 2022",
-      "totalValue": 51000,
+      "x": "Jul 29 2022",
+      "y": 51000,
       "id": 3
     },
     {
-      "date": "Jul 30 2022",
-      "totalValue": 62000,
+      "x": "Jul 30 2022",
+      "y": 62000,
       "id": 4
     },
     {
-      "date": "Jul 31 2022",
-      "totalValue": 58000,
+      "x": "Jul 31 2022",
+      "y": 58000,
       "id": 5
     },
     {
-      "date": "Aug 01 2022",
-      "totalValue": 52000,
+      "x": "Aug 01 2022",
+      "y": 52000,
       "id": 6
     },
     {
-      "date": "Aug 02 2022",
-      "totalValue": 47000,
+      "x": "Aug 02 2022",
+      "y": 47000,
       "id": 7
     },
     {
-      "date": "Aug 03 2022",
-      "totalValue": 49000,
+      "x": "Aug 03 2022",
+      "y": 49000,
       "id": 8
     },
     {
-      "date": "Aug 04 2022",
-      "totalValue": 49000,
+      "x": "Aug 04 2022",
+      "y": 49000,
       "id": 9
     },
     {
-      "date": "Aug 05 2022",
-      "totalValue": 50000,
+      "x": "Aug 05 2022",
+      "y": 50000,
       "id": 10
     },
     {
-      "date": "Aug 06 2022",
-      "totalValue": 53000,
+      "x": "Aug 06 2022",
+      "y": 53000,
       "id": 11
     },
     {
-      "date": "Aug 07 2022",
-      "totalValue": 58000,
+      "x": "Aug 07 2022",
+      "y": 58000,
       "id": 12
     },
     {
-      "date": "Aug 08 2022",
-      "totalValue": 62500,
+      "x": "Aug 08 2022",
+      "y": 62500,
       "id": 13
+    },
+    {
+      "x": "Aug 09 2022",
+      "y": 63500,
+      "id": 14
+    },
+    {
+      "x": "Aug 10 2022",
+      "y": 63500,
+      "id": 15
+    },
+    {
+      "x": "Aug 11 2022",
+      "y": 63500,
+      "id": 16
     }
   ]
 }

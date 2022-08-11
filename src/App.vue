@@ -3,6 +3,8 @@
         <v-app-bar app>
             <v-img src="./assets/icons8-stack-of-money-96.png" max-height="50" max-width="50"></v-img>
             <h1 class="ml-2 font-weight-light">NetWorth</h1>
+            <v-spacer></v-spacer>
+            <h1 class="mr-2 font-weight-light">{{netWorth | toCurrency}}</h1>
         </v-app-bar>
         <v-main>
             <v-row>
@@ -36,9 +38,15 @@ export default {
 
     data() {
         return {
-
+            netWorth: null,
         }
     },
+
+    methods: {
+        updateNetWorth(value) {
+            this.netWorth = value
+        }
+    }
 };
 </script>
 
@@ -48,6 +56,6 @@ export default {
 }
 
 .apexcharts-zoom-icon.apexcharts-selected svg {
-    fill: #6E8192 !important
+    display: none !important
 }
 </style>

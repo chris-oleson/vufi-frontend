@@ -1,14 +1,14 @@
 <template>
-        <v-card class="asset my-2 d-flex justify-space-between">
+        <v-card class="asset my-2 pa-1 d-flex justify-space-between">
             <v-card-actions v-if="editing">
                 <v-text-field label="Asset" dense v-model="editName"></v-text-field>
             </v-card-actions>
-            <v-card-text v-else class="d-inline">{{assetData.assetName}}</v-card-text>
+            <v-card-text v-else class="d-inline">{{data.assetName}}</v-card-text>
 
             <v-card-actions v-if="editing">
                 <v-text-field label="Value" dense v-model="editValue"></v-text-field>
             </v-card-actions>
-            <v-card-text v-else class="d-inline text-right">{{assetData.value | toCurrency}}</v-card-text>
+            <v-card-text v-else class="d-inline text-right">{{data.value | toCurrency}}</v-card-text>
 
             <v-card-actions>
                 <v-btn v-show="!editing" @click="editAsset" fab small depressed>
@@ -21,32 +21,30 @@
                     <v-icon>mdi-trash-can-outline</v-icon>
                 </v-btn>
             </v-card-actions>
+
+            <v-snackbar v-model="showAlert" color="red lighten-2" timeout="2000" min-width="100">Please fill out all fields</v-snackbar>
         </v-card>
 </template>
 
 <script>
-import axios from 'axios'
 export default {
     name: 'Asset',
-    props: ['assetData'],
+    props: ['data'],
 
     data() {
         return {
-            editing: this.assetData.editing,
+            editing: this.data.editing,
             editName: null,
             editValue: null,
+            showAlert: false
         }
-    },
-
-    mounted() {
-
     },
 
     methods: {
         editAsset() {
             // Assign props to writable variables
-            this.editName = this.assetData.assetName
-            this.editValue = this.assetData.value
+            this.editName = this.data.assetName
+            this.editValue = this.data.value
             this.editing = true
         },
 
@@ -54,38 +52,27 @@ export default {
             if (this.editName && this.editValue) {
                 this.editing = false
 
-                if (this.editName != this.assetData.assetName || this.editValue != this.assetData.value) {
-                    await axios.patch('http://localhost:3000/assets/' + this.assetData.id,
-                        {
+                await this.$store.dispatch('SAVE_ASSET', {
+                    id: this.data.id,
+                    data: {
                             "assetName": this.editName,
                             "value": parseFloat(this.editValue),
                             "editing": false,
                         }
-                    )
-
-                    await this.$parent.getAssetData()
-                    await this.$parent.updateChartData()
-                }
+                    }
+                )
             }
             else {
-                this.$parent.showAlert = true
+                this.showAlert = true
             }
-            
         },
 
         async deleteAsset() {
-            await axios.delete('http://localhost:3000/assets/' + this.assetData.id)
-            await this.$parent.getAssetData()
-            await this.$parent.updateChartData()
+            await this.$store.dispatch('DELETE_ASSET', this.data.id)
+            this.editing = this.data.editing
+            this.editName = this.data.assetName
+            this.editValue = this.data.value
         },
     },
-
-    watch: { 
-        assetData: function(newData) {
-            this.editName = newData.assetName
-            this.editValue = newData.value
-            this.editing = newData.editing
-        }
-    }
 }
 </script>

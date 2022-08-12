@@ -1,9 +1,9 @@
 <template>
-    <div class="mb-8">
-        <h2 class="mb-4 mt-8 font-weight-light text-center">Historic Value</h2>
+    <div>
+        <h2 class="mb-4 font-weight-light text-center">Historic Value</h2>
 
         <v-sheet class="pa-4" elevation="2">
-            <apexchart v-if="historicData[0].data.length" type="area" :options="options" :series="historicData"></apexchart>
+            <apexchart v-if="historicData[0].data.length" type="area" :options="chartOptions" :series="historicData"></apexchart>
         </v-sheet>
     </div>
 </template>
@@ -12,24 +12,38 @@
 export default {
     name: 'HistoricData',
 
-    data() {
-        return {
-            options: {
-                chart: {
-                    id: 'vuechart-example',
+    mounted() {
+        this.$store.dispatch('LOAD_HISTORY')
+    },
 
+    computed: {
+        historicData() {
+            return [{
+                name: "Net Worth",
+                data: this.$store.state.historicData
+            }]
+        },
+
+        getTheme() {
+            if (this.$vuetify.theme.dark) {
+                return 'dark'
+            }
+            else {
+                return 'light'
+            }
+        },
+
+        chartOptions() {
+            return {
+                chart: {
                     toolbar: {
-                        show: true,
+                        show: false,
                         tools: {
-                            download: false,
-                            selection: false,
-                            zoom: true,
-                            zoomin: false,
-                            zoomout: false,
-                            pan: false,
-                            reset: true | '<img src="/static/icons/reset.png" width="20">',
+                            zoom: false,
                         },
-                    }
+                    },
+
+                    background: 'none'
                 },
                 dataLabels: {
                     enabled: false
@@ -72,22 +86,20 @@ export default {
                         opacityTo: 0,
                     }
                 },
-                colors: ['#aed581'],
-                tooltip: {
-                    marker: {
-                        show: false
+                plotOptions: {
+                    area: {
+                        fillTo: 'end',
                     }
                 },
-            },
+                colors: ['#aed581'],
+                tooltip: {
+                    theme: this.getTheme
+                },
+                theme: {
+                    mode: this.getTheme,
+                }
+            }
         }
-    },
-
-    mounted() {
-        this.$store.dispatch('LOAD_HISTORY')
-    },
-
-    computed: {
-        historicData() { return [{ data: this.$store.state.historicData }] }
     }
 }
 </script>

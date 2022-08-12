@@ -1,5 +1,5 @@
 <template>
-        <v-card class="asset my-2 pa-1 d-flex justify-space-between">
+        <v-card class="asset my-2 pa-2 d-flex justify-space-between">
             <v-card-actions v-if="editing">
                 <v-text-field label="Asset" dense v-model="editName"></v-text-field>
             </v-card-actions>

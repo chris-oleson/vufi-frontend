@@ -8,7 +8,7 @@
     },
     {
       "assetName": "Checking Account",
-      "value": 6500,
+      "value": 4500,
       "editing": false,
       "id": 3
     },
@@ -26,7 +26,7 @@
     },
     {
       "assetName": "Savings Account",
-      "value": 3000,
+      "value": 9000,
       "editing": false,
       "id": 7
     }
@@ -104,8 +104,13 @@
     },
     {
       "x": "Aug 11 2022",
-      "y": 63500,
+      "y": 69500,
       "id": 16
+    },
+    {
+      "x": "Aug 12 2022",
+      "y": 67500,
+      "id": 17
     }
   ]
 }

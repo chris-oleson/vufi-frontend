@@ -1,21 +1,21 @@
 <template>
     <v-app>
         <v-app-bar app>
-            <v-img src="./assets/icons8-stack-of-money-96.png" max-height="50" max-width="50"></v-img>
-            <h1 class="ml-2 font-weight-light">NetWorth</h1>
+            <v-img src="./assets/icons8-stack-of-money-96.png" max-height="50" max-width="50" class="mr-2"></v-img>
+            <h1 class="font-weight-light d-none d-sm-flex">NetWorth</h1>
             <v-spacer></v-spacer>
-            <h1 class="mr-2 font-weight-light">{{netWorth | toCurrency}}</h1>
+            <h1 class="font-weight-light">{{netWorth | toCurrency}}</h1>
         </v-app-bar>
         <v-main>
-            <v-row>
-                <v-col cols="4">
+            <v-row class="ma-4">
+                <v-col class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <AssetList/>
                 </v-col>
-                <v-col cols="4">
+                <v-col class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <HistoricData/>
                 </v-col>
-                <v-col cols="4">
-                    <ValueDistribution/>
+                <v-col class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <AssetDistribution/>
                 </v-col>
             </v-row>
         </v-main>
@@ -25,7 +25,7 @@
 <script>
 import AssetList from './components/AssetList'
 import HistoricData from './components/HistoricData.vue'
-import ValueDistribution from './components/ValueDistribution.vue'
+import AssetDistribution from './components/AssetDistribution.vue'
 
 export default {
     name: 'App',
@@ -33,29 +33,30 @@ export default {
     components: {
         AssetList,
         HistoricData,
-        ValueDistribution,
+        AssetDistribution,
     },
 
-    data() {
-        return {
-            netWorth: null,
-        }
+    mounted() {
+        // Check user prefs for dark mode
+        this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     },
 
-    methods: {
-        updateNetWorth(value) {
-            this.netWorth = value
-        }
+    computed: {
+        // Watch last entry in historic net worth totals
+        netWorth() {
+            if (this.$store.state.historicData.length) {
+                return this.$store.state.historicData[this.$store.state.historicData.length - 1].y
+            }
+            else {
+                return 0
+            }
+        },
     }
 };
 </script>
 
 <style>
 .v-btn:focus::before {
-    opacity: 0 !important;
-}
-
-.apexcharts-zoom-icon.apexcharts-selected svg {
-    display: none !important
+    opacity: 0 !important
 }
 </style>

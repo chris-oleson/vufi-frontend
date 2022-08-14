@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-app-bar app>
-            <v-img src="./assets/icons8-stack-of-money-96.png" max-height="50" max-width="50" class="mr-2"></v-img>
+            <v-img src="./assets/logo64x64.png" max-height="50" max-width="50" class="mr-2"></v-img>
             <h1 class="font-weight-light d-none d-sm-flex">VuFi</h1>
         </v-app-bar>
         <v-main>
@@ -23,12 +23,12 @@ export default {
     computed: {
 
     },
-    
+
     watch: {
         $route: {
             immediate: true,
             handler(newRoute) {
-                document.title = 'VuFi | ' + newRoute.meta.title;
+                document.title = newRoute.meta.title + ' | VuFi';
             }
         },
     }

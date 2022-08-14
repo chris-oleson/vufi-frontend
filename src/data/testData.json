@@ -2,7 +2,7 @@
   "assets": [
     {
       "assetName": "401k",
-      "value": 45000,
+      "value": 50000,
       "editing": false,
       "id": 2
     },
@@ -114,8 +114,15 @@
     },
     {
       "x": "Aug 14 2022",
-      "y": 67500,
+      "y": 72500,
       "id": 18
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin"
     }
   ]
 }

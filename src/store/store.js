@@ -8,7 +8,7 @@ export default new Vuex.Store({
     state: {
         assetData: [],
         historicData: [],
-        distributionData: [],
+        userData: [],
     },
 
     getters: {
@@ -23,6 +23,8 @@ export default new Vuex.Store({
         pullAssets(state, data) { state.assetData = data },
 
         pullHistory(state, data) { state.historicData = data },
+
+        pullUsers(state, data) { state.userData = data },
     },
 
     actions: {
@@ -77,6 +79,12 @@ export default new Vuex.Store({
             }
 
             await this.dispatch('LOAD_HISTORY')
+        },
+
+        async LOAD_USERS() {
+            await axios.get('http://localhost:3000/users/').then(resp => {
+                this.commit('pullUsers', resp.data)
+            })
         },
     }
 })

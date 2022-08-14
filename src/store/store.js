@@ -8,6 +8,7 @@ export default new Vuex.Store({
     state: {
         assetData: [],
         historicData: [],
+        distributionData: [],
     },
 
     getters: {
@@ -21,7 +22,7 @@ export default new Vuex.Store({
     mutations: {
         pullAssets(state, data) { state.assetData = data },
 
-        pullHistory(state, data) { state.historicData = data }
+        pullHistory(state, data) { state.historicData = data },
     },
 
     actions: {

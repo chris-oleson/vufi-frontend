@@ -12,10 +12,6 @@
 export default {
     name: 'AssetDistribution',
 
-    mounted() {
-        this.$store.dispatch('LOAD_ASSETS')
-    },
-
     computed: {
         series() {
             let series = []
@@ -52,7 +48,7 @@ export default {
                     mode: this.getTheme,
                     monochrome: {
                         enabled: true,
-                        color: '#aed581',
+                        color: this.$vuetify.theme.themes.light.primary,
                         shadeTo: this.getTheme,
                         shadeIntensity: 0.5,
                     },

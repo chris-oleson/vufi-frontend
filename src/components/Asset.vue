@@ -10,19 +10,20 @@
             </v-card-actions>
             <v-card-text v-else class="d-inline text-right">{{data.value | toCurrency}}</v-card-text>
 
+
             <v-card-actions>
                 <v-btn v-show="!editing" @click="editAsset" fab small depressed>
                     <v-icon>mdi-pencil</v-icon>
                 </v-btn>
-                <v-btn v-show="editing" @click="saveAsset" fab small depressed color="light-green lighten-2">
+                <v-btn v-show="editing" @click="saveAsset" fab small depressed color="primary">
                     <v-icon>mdi-check</v-icon>
                 </v-btn>
-                <v-btn v-show="editing" @click="deleteAsset" fab small depressed color="red lighten-2">
+                <v-btn v-show="editing" @click="deleteAsset" fab small depressed color="error">
                     <v-icon>mdi-trash-can-outline</v-icon>
                 </v-btn>
             </v-card-actions>
 
-            <v-snackbar v-model="showAlert" color="red lighten-2" timeout="2000" min-width="100">Please fill out all fields</v-snackbar>
+            <v-snackbar v-model="showAlert" color="error" timeout="2000" min-width="100">Please fill out all fields</v-snackbar>
         </v-card>
 </template>
 

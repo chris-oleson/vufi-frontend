@@ -91,7 +91,7 @@ export default {
                         fillTo: 'end',
                     }
                 },
-                colors: ['#aed581'],
+                colors: [this.$vuetify.theme.themes.light.primary],
                 tooltip: {
                     theme: this.getTheme
                 },

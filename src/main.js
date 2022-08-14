@@ -3,6 +3,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import VueApexCharts  from 'vue-apexcharts'
 import store from './store/store'
+import router from './router/index'
 
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
@@ -25,5 +26,6 @@ Vue.filter('toCurrency', function (value) {
 new Vue({
     store,
     vuetify,
+    router,
     render: h => h(App)
 }).$mount('#app')

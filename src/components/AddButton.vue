@@ -1,6 +1,6 @@
 <template>
     <v-card class="asset mb-2 pa-2 d-flex justify-center" width="100%">
-        <v-btn @click="addAsset" class="my-2 d-inline" fab dark small color="light-green lighten-2">
+        <v-btn @click="addAsset" class="my-2 d-inline" fab small color="primary">
             <v-icon>mdi-plus</v-icon>
         </v-btn>
     </v-card>

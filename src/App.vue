@@ -11,7 +11,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'App',
 
@@ -20,11 +19,8 @@ export default {
         this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     },
 
-    computed: {
-
-    },
-
     watch: {
+        // Update tab text when the page changes
         $route: {
             immediate: true,
             handler(newRoute) {
@@ -36,6 +32,15 @@ export default {
 </script>
 
 <style>
+/* Text selection color */
+::selection {
+    background: #aed581
+}
+::-moz-selection {
+  background: #aed581
+}
+
+/* Preventing changes to button color when focused */
 .v-btn:focus::before {
     opacity: 0 !important
 }

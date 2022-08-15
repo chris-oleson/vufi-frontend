@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="mb-4 font-weight-light text-center">Assets and Liabilites</h2>
+        <h2 class="mb-4 font-weight-light text-center">Assets</h2>
 
         <Asset v-for="(data, i) in assetData" :key="i" :data="assetData[i]"/>
 

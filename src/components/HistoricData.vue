@@ -81,7 +81,7 @@ export default {
                 fill: {
                     type: 'gradient',
                         gradient: {
-                        shadeIntensity: 1,
+                        shadeIntensity: 0,
                         opacityFrom: 1,
                         opacityTo: 0,
                     }

@@ -1,11 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from 'vuex-persist'
 import axios from 'axios'
 
 Vue.use(Vuex)
 
+const vuexLocal = new VuexPersistence({
+    reducer: (state) => ({currentUser: state.currentUser}),
+    storage: document.cookies
+})
+
 export default new Vuex.Store({
+    plugins: [vuexLocal.plugin],
+
     state: {
+        currentUser: {},
         assetData: [],
         historicData: [],
         userData: [],
@@ -20,17 +29,19 @@ export default new Vuex.Store({
     },
 
     mutations: {
-        pullAssets(state, data) { state.assetData = data },
+        setCurrentUser(state, data) { state.currentUser = data },
 
-        pullHistory(state, data) { state.historicData = data },
+        setAssets(state, data) { state.assetData = data },
 
-        pullUsers(state, data) { state.userData = data },
+        setHistory(state, data) { state.historicData = data },
+
+        setUsers(state, data) { state.userData = data },
     },
 
     actions: {
         async LOAD_ASSETS() {
             await axios.get('http://localhost:3000/assets').then(resp => {
-                this.commit('pullAssets', resp.data)
+                this.commit('setAssets', resp.data)
             })
         },
 
@@ -54,7 +65,7 @@ export default new Vuex.Store({
 
         async LOAD_HISTORY() {
             await axios.get('http://localhost:3000/historicData/').then(resp => {
-                this.commit('pullHistory', resp.data)
+                this.commit('setHistory', resp.data)
             })
         },
 
@@ -83,8 +94,12 @@ export default new Vuex.Store({
 
         async LOAD_USERS() {
             await axios.get('http://localhost:3000/users/').then(resp => {
-                this.commit('pullUsers', resp.data)
+                this.commit('setUsers', resp.data)
             })
+        },
+
+        async ADD_USER(context, user) {
+            await axios.post('http://localhost:3000/users', user)
         },
     }
 })

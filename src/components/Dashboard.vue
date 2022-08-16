@@ -25,5 +25,15 @@ export default ({
         HistoricData,
         AssetDistribution,
     },
+
+    mounted() {
+        if (!this.$store.state.currentUser.email) {
+            this.$router.push('/404')
+        }
+    },
+
+    computed: {
+        currentUser() { return this.$store.state.currentUser }
+    }
 })
 </script>

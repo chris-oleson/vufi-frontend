@@ -10,7 +10,6 @@
             </v-card-actions>
             <v-card-text v-else class="d-inline text-right">{{data.value | toCurrency}}</v-card-text>
 
-
             <v-card-actions>
                 <v-btn v-show="!editing" @click="editAsset" fab small depressed>
                     <v-icon>mdi-pencil</v-icon>

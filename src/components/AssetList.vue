@@ -4,20 +4,20 @@
 
         <Asset v-for="(data, i) in assetData" :key="i" :data="assetData[i]"/>
 
-        <h2 class="d-flex justify-center">
-            <AddButton/>
-        </h2>
+        <v-card class="asset mb-2 pa-2 d-flex justify-center" width="100%">
+            <v-btn @click="addAsset" class="my-2 d-inline primary" fab small>
+                <v-icon>mdi-plus</v-icon>
+            </v-btn>
+        </v-card>
     </div>
 </template>
 
 <script>
-import AddButton from '/src/components/AddButton.vue'
 import Asset from '/src/components/Asset.vue'
 
 export default {
     name: 'AssetList',
     components: {
-        AddButton,
         Asset
     },
 
@@ -34,5 +34,18 @@ export default {
     computed: {
         assetData() { return this.$store.state.assetData }
     },
+
+    methods: {
+        async addAsset() {
+            await this.$store.dispatch('ADD_ASSET',
+                {
+                    "assetName":null,
+                    "value":null,
+                    "editing":true
+                }
+            )
+            await this.$store.dispatch('LOAD_ASSETS')
+        }
+    }
 }
 </script>

@@ -116,13 +116,27 @@
       "x": "Aug 14 2022",
       "y": 72500,
       "id": 18
+    },
+    {
+      "x": "Aug 15 2022",
+      "y": 72500,
+      "id": 19
     }
   ],
   "users": [
     {
       "id": 1,
-      "username": "admin",
-      "password": "admin"
+      "firstName": "Chris",
+      "lastName": "Oleson",
+      "email": "crolesonjr@gmail.com",
+      "password": "password"
+    },
+    {
+      "firstName": "Test",
+      "lastName": "Testerson",
+      "email": "email@email.com",
+      "password": "password",
+      "id": 2
     }
   ]
 }

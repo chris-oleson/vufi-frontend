@@ -1,8 +1,13 @@
 <template>
     <v-app>
         <v-app-bar app>
-            <v-img src="./assets/logo64x64.png" max-height="50" max-width="50" class="mr-2"></v-img>
+            <v-img src="./assets/logo64x64.png" max-height="50" max-width="50" class="mr-4"></v-img>
             <h1 class="font-weight-light d-none d-sm-flex">VuFi</h1>
+            <v-spacer></v-spacer>
+            <v-btn v-if="!this.$store.state.currentUser.email && this.$route.meta.title == 'Home'" text @click="redirect('/login')">Log In</v-btn>
+            <v-btn v-if="!this.$store.state.currentUser.email && this.$route.meta.title == 'Home'" class="ml-4 primary" @click="redirect('/create-account')">Sign Up</v-btn>
+            <h3 v-if="this.$store.state.currentUser.email" class="font-weight-light">Welcome, {{this.$store.state.currentUser.firstName}}</h3>
+            <v-btn v-if="this.$store.state.currentUser.email" class="ml-4" text @click="logOut">Log out</v-btn>
         </v-app-bar>
         <v-main>
             <router-view></router-view>
@@ -17,6 +22,15 @@ export default {
     mounted() {
         // Check user prefs for dark mode
         this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    },
+
+    methods: {
+        redirect(link) { this.$router.push(link) },
+
+        logOut() {
+            this.$store.commit('setCurrentUser', {})
+            this.$router.push('/')
+        }
     },
 
     watch: {

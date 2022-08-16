@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Dashboard from '/src/components/Dashboard'
 import Login from '/src/components/Login'
 import PageNotFound from '/src/components/PageNotFound'
+import CreateAccount from '/src/components/CreateAccount'
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,12 @@ export default new VueRouter ({
         {
             path: '*',
             redirect: '/404',
+        },
+        {
+            path: '/',
+            meta: {
+                title: 'Home'
+            }
         },
         {
             path: '/dashboard',
@@ -25,6 +32,13 @@ export default new VueRouter ({
             component: Login,
             meta: {
                 title: 'Login'
+            }
+        },
+        {
+            path: '/create-account',
+            component: CreateAccount,
+            meta: {
+                title: 'Create Account'
             }
         },
         {

@@ -6,8 +6,7 @@
             <v-spacer></v-spacer>
             <v-btn v-if="!this.$store.state.currentUser.email && this.$route.meta.title == 'Home'" text @click="redirect('/login')">Log In</v-btn>
             <v-btn v-if="!this.$store.state.currentUser.email && this.$route.meta.title == 'Home'" class="ml-4 primary" @click="redirect('/create-account')">Sign Up</v-btn>
-            <h3 v-if="this.$store.state.currentUser.email" class="font-weight-light">Welcome, {{this.$store.state.currentUser.firstName}}</h3>
-            <v-btn v-if="this.$store.state.currentUser.email" class="ml-4" text @click="logOut">Log out</v-btn>
+            <AccountMenu v-if="this.$store.state.currentUser.email"/>
         </v-app-bar>
         <v-main>
             <router-view></router-view>
@@ -16,8 +15,13 @@
 </template>
 
 <script>
+import AccountMenu from './components/AccountMenu'
 export default {
     name: 'App',
+
+    components: {
+        AccountMenu
+    },
 
     mounted() {
         // Check user prefs for dark mode
@@ -26,11 +30,6 @@ export default {
 
     methods: {
         redirect(link) { this.$router.push(link) },
-
-        logOut() {
-            this.$store.commit('setCurrentUser', {})
-            this.$router.push('/')
-        }
     },
 
     watch: {

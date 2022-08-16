@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="ma-4">
         <h2 class="mb-4 font-weight-light text-center">Asset Distribution</h2>
 
-        <v-sheet class="pa-6" elevation="2">
+        <v-card class="pa-6">
             <apexchart v-if="series.length" type="pie" :options="chartOptions" :series="series"></apexchart>
-        </v-sheet>
+        </v-card>
     </div>
 </template>
 

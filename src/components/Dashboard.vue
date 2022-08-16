@@ -1,14 +1,14 @@
 <template>
     <v-row class="ma-4">
-        <v-col class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <v-flex xs12 sm12 md6 lg4>
             <AssetList/>
-        </v-col>
-        <v-col class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        </v-flex>
+        <v-flex xs12 sm12 md6 lg4>
             <HistoricData/>
-        </v-col>
-        <v-col class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        </v-flex>
+        <v-flex xs12 sm12 md6 lg4>
             <AssetDistribution/>
-        </v-col>
+        </v-flex>
     </v-row>
 </template>
 

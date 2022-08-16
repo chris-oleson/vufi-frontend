@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 const vuexLocal = new VuexPersistence({
     reducer: (state) => ({currentUser: state.currentUser}),
-    storage: document.cookies
+    storage: window.sessionStorage
 })
 
 export default new Vuex.Store({

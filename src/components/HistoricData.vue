@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="ma-4">
         <h2 class="mb-4 font-weight-light text-center">Historic Value</h2>
 
-        <v-sheet class="pa-4" elevation="2">
+        <v-card class="pa-4">
             <apexchart v-if="historicData[0].data.length" type="area" :options="chartOptions" :series="historicData"></apexchart>
-        </v-sheet>
+        </v-card>
     </div>
 </template>
 

@@ -83,7 +83,7 @@ export default {
 
                     // Log in with new user
                     this.$store.commit('setCurrentUser', newUser)
-                    this.$router.push('/dashboard')
+                    this.$router.push('/assets')
                 }
                 else {
                     this.passwordsMatch = true

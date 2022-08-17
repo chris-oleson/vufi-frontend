@@ -55,7 +55,7 @@ export default {
         login() {
             if (this.validateUser) {
                 this.$store.commit('setCurrentUser', this.validateUser)
-                this.$router.push('/dashboard')
+                this.$router.push('/assets')
             }
             else {
                 this.errorState = true

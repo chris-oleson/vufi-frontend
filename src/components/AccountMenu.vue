@@ -1,16 +1,20 @@
 <template>
     <div>
-        <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='10'>
+        <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ on, attrs }">
                 <v-btn fab small v-bind="attrs" v-on="on">
                     <v-icon>mdi-account</v-icon>
                 </v-btn>
             </template>
-            <v-list>
-                <h3 class="font-weight-light text-center ma-4">Welcome, {{this.$store.state.currentUser.firstName}}</h3>
-                <div class="d-flex justify-center ma-4">
-                    <v-btn v-if="this.$store.state.currentUser.email" text @click="logOut">Log out</v-btn>
-                </div>
+            <v-list class="font-weight-light">
+                <v-list-item>
+                    <v-list-item-title>{{this.$store.state.currentUser.firstName + " " + this.$store.state.currentUser.lastName}}</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item-group>
+                    <v-divider></v-divider>
+                    <v-list-item dense @click="logOut">Log out</v-list-item>
+                </v-list-item-group>
             </v-list>
         </v-menu>
     </div>

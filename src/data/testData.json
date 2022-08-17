@@ -13,12 +13,6 @@
       "id": 3
     },
     {
-      "assetName": "Credit Card",
-      "value": -1000,
-      "editing": false,
-      "id": 4
-    },
-    {
       "assetName": "Car",
       "value": 10000,
       "editing": false,
@@ -121,6 +115,16 @@
       "x": "Aug 15 2022",
       "y": 72500,
       "id": 19
+    },
+    {
+      "x": "Aug 16 2022",
+      "y": 73500,
+      "id": 20
+    },
+    {
+      "x": "Aug 17 2022",
+      "y": 73500,
+      "id": 21
     }
   ],
   "users": [

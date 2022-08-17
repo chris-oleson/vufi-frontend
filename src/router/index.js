@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Dashboard from '/src/components/Dashboard'
 import Login from '/src/components/Login'
 import PageNotFound from '/src/components/PageNotFound'
 import CreateAccount from '/src/components/CreateAccount'
+import Assets from '/src/components/Assets'
+import NetWorth from '/src/components/NetWorth'
 
 Vue.use(VueRouter)
 
@@ -21,10 +22,23 @@ export default new VueRouter ({
             }
         },
         {
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/assets',
+            component: Assets,
             meta: {
-                title: 'Dashboard'
+                title: 'Assets'
+            }
+        },
+        {
+            path: '/debts',
+            meta: {
+                title: 'Debts'
+            }
+        },
+        {
+            path: '/net-worth',
+            component: NetWorth,
+            meta: {
+                title: 'Net Worth'
             }
         },
         {

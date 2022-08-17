@@ -5,13 +5,8 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-const vuexLocal = new VuexPersistence({
-    reducer: (state) => ({currentUser: state.currentUser}),
-    storage: window.sessionStorage
-})
-
 export default new Vuex.Store({
-    plugins: [vuexLocal.plugin],
+    plugins: [new VuexPersistence({}).plugin],
 
     state: {
         currentUser: {},

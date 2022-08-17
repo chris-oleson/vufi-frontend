@@ -1,7 +1,5 @@
 <template>
-    <div class="ma-4">
-        <h2 class="mb-4 font-weight-light text-center">Assets</h2>
-
+    <div class="ma-2">
         <Asset v-for="(data, i) in assetData" :key="i" :data="assetData[i]"/>
 
         <v-card class="asset mb-2 pa-2 d-flex justify-center">
@@ -25,10 +23,6 @@ export default {
         return {
             showAlert: true,
         }
-    },
-
-    mounted() {
-        this.$store.dispatch('LOAD_ASSETS')
     },
 
     computed: {

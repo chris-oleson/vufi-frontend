@@ -1,7 +1,5 @@
 <template>
-    <div class="ma-4">
-        <h2 class="mb-4 font-weight-light text-center">Historic Value</h2>
-
+    <div class="ma-2">
         <v-card class="pa-4">
             <apexchart v-if="historicData[0].data.length" type="area" :options="chartOptions" :series="historicData"></apexchart>
         </v-card>
@@ -13,6 +11,7 @@ export default {
     name: 'HistoricData',
 
     mounted() {
+        this.$store.commit('setHistory', [])
         this.$store.dispatch('LOAD_HISTORY')
     },
 

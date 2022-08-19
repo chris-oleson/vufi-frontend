@@ -4,6 +4,7 @@ import Login from '/src/components/Login'
 import PageNotFound from '/src/components/PageNotFound'
 import CreateAccount from '/src/components/CreateAccount'
 import Assets from '/src/components/Assets'
+import Debts from '/src/components/Debts'
 import NetWorth from '/src/components/NetWorth'
 
 Vue.use(VueRouter)
@@ -30,6 +31,7 @@ export default new VueRouter ({
         },
         {
             path: '/debts',
+            component: Debts,
             meta: {
                 title: 'Debts'
             }

@@ -1,12 +1,13 @@
 <template>
-    <v-sheet class="pa-6 ma-2" elevation="2">
+    <v-card class="ma-2 pa-4">
         <apexchart v-if="series.length" type="pie" :options="chartOptions" :series="series"></apexchart>
-    </v-sheet>
+    </v-card>
 </template>
 
 <script>
 export default {
-    name: 'AssetDistribution',
+    name: 'PieChart',
+    props: ['theme'],
 
     computed: {
         series() {
@@ -44,7 +45,7 @@ export default {
                     mode: this.getTheme,
                     monochrome: {
                         enabled: true,
-                        color: this.$vuetify.theme.themes.light.primary,
+                        color: this.theme,
                         shadeTo: this.getTheme,
                         shadeIntensity: 0.5,
                     },
@@ -64,10 +65,11 @@ export default {
                     },
                 },
                 legend: {
-                    position: 'bottom'
+                    position: 'right'
                 },
                 tooltip: {
                     fillSeriesColor: false,
+                    theme: this.getTheme,
                     y: {
                         formatter(value) {
                             var formatter = new Intl.NumberFormat('en-US', {

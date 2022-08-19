@@ -1,19 +1,24 @@
 <template>
     <v-row class="ma-2">
-        <v-flex xs12 sm6 md6 lg6>
-            <HistoricData/>
+        <v-flex xs12 md6>
+            <LineChart theme="#aed581"/>
+        </v-flex>
+        <v-flex xs12 md6>
+            <PieChart theme="#aed581"/>
         </v-flex>
     </v-row>
 </template>
 
 <script>
-import HistoricData from '/src/components/HistoricData.vue'
+import LineChart from '/src/components/LineChart.vue'
+import PieChart from '/src/components/PieChart.vue'
 
 export default ({
     name: 'NetWorth',
 
     components: {
-        HistoricData,
+        LineChart,
+        PieChart,
     },
 
     mounted() {

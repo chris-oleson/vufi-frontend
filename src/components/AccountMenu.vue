@@ -13,7 +13,8 @@
 
                 <v-list-item-group>
                     <v-divider></v-divider>
-                    <v-list-item dense @click="logOut">Log out</v-list-item>
+                    <v-list-item>Account Settings</v-list-item>
+                    <v-list-item @click="logOut">Log out</v-list-item>
                 </v-list-item-group>
             </v-list>
         </v-menu>

@@ -1,19 +1,13 @@
 <template>
-    <div class="ma-2">
-        <v-card class="pa-4">
-            <apexchart v-if="historicData[0].data.length" type="area" :options="chartOptions" :series="historicData"></apexchart>
-        </v-card>
-    </div>
+    <v-card class="ma-2 pa-4">
+        <apexchart v-if="historicData[0].data.length" type="area" :options="chartOptions" :series="historicData"></apexchart>
+    </v-card>
 </template>
 
 <script>
 export default {
-    name: 'HistoricData',
-
-    mounted() {
-        this.$store.commit('setHistory', [])
-        this.$store.dispatch('LOAD_HISTORY')
-    },
+    name: 'LineChart',
+    props: ['theme'],
 
     computed: {
         historicData() {
@@ -85,12 +79,7 @@ export default {
                         opacityTo: 0,
                     }
                 },
-                plotOptions: {
-                    area: {
-                        fillTo: 'end',
-                    }
-                },
-                colors: [this.$vuetify.theme.themes.light.primary],
+                colors: [this.theme],
                 tooltip: {
                     theme: this.getTheme
                 },

@@ -1,11 +1,11 @@
 <template>
     <v-row class="ma-2">
         <v-flex xs12 md6>
-            <Table title="asset" theme="primary"/>
+            <Table title="debt" theme="error"/>
         </v-flex>
         <v-flex xs12 md6>
-                <PieChart class="mb-4" theme="#aed581"/>
-                <LineChart theme="#aed581"/>
+            <PieChart class="mb-4" theme="#e57373"/>
+            <LineChart theme="#e57373"/>
         </v-flex>
     </v-row>
 </template>

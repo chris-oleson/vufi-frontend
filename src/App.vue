@@ -1,9 +1,9 @@
 <template>
     <v-app>
         <v-app-bar app clipped-left height="70">
+            <v-app-bar-nav-icon v-if="!this.$vuetify.breakpoint.mobile" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
             <v-img src="./assets/logo64x64.png" max-height="50" max-width="50"></v-img>
-            <h1 class="font-weight-light d-none d-sm-flex mx-3">VuFi</h1>
-            <v-app-bar-nav-icon @click="mini = !mini"></v-app-bar-nav-icon>
+            <h1 class="font-weight-light ml-2">VuFi</h1>
 
             <v-spacer></v-spacer>
 
@@ -13,7 +13,7 @@
         </v-app-bar>
 
         <!-- Sidebar navigation -->
-        <v-navigation-drawer v-if="this.$store.state.currentUser.email" app clipped permanent :mini-variant.sync="this.mini">
+        <v-navigation-drawer v-if="this.$store.state.currentUser.email" app clipped permanent :mini-variant="mini">
             <v-list class="font-weight-light pa-0">
                 <v-list-item-group mandatory v-bind:value="page">
 
@@ -62,7 +62,7 @@ export default {
 
     data() {
         return {
-            mini: false,
+            mini: this.$vuetify.breakpoint.mobile,
         }
     },
 

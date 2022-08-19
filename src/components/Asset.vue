@@ -54,11 +54,11 @@ export default {
             this.editing = true
         },
 
-        async saveAsset() {
+        saveAsset() {
             if (this.editName && this.editValue) {
                 this.editing = false
 
-                await this.$store.dispatch('SAVE_ASSET', {
+                this.$store.dispatch('SAVE_ASSET', {
                     id: this.data.id,
                     data: {
                             "assetName": this.editName,

@@ -7,13 +7,13 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn v-if="!this.$store.state.currentUser.email && this.$route.meta.title == 'Home'" text @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="!this.$store.state.currentUser.email && this.$route.meta.title == 'Home'" class="ml-4 primary" @click="redirect('/create-account')">Sign Up</v-btn>
-            <AccountMenu v-if="this.$store.state.currentUser.email"/>
+            <v-btn v-if="!this.$store.state.userID && this.$route.meta.title == 'Home'" text @click="redirect('/login')">Log In</v-btn>
+            <v-btn v-if="!this.$store.state.userID && this.$route.meta.title == 'Home'" class="ml-4 primary" @click="redirect('/create-account')">Sign Up</v-btn>
+            <AccountMenu v-if="this.$store.state.userID"/>
         </v-app-bar>
 
         <!-- Sidebar navigation -->
-        <v-navigation-drawer v-if="this.$store.state.currentUser.email" app clipped permanent :mini-variant="mini">
+        <v-navigation-drawer v-if="this.$store.state.userID" app clipped permanent :mini-variant="mini">
             <v-list class="font-weight-light pa-0">
                 <v-list-item-group mandatory v-bind:value="page">
 

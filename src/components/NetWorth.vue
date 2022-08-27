@@ -22,7 +22,7 @@ export default ({
     },
 
     mounted() {
-        if (!this.$store.state.currentUser.email) {
+        if (!this.$store.state.userID) {
             this.$router.push('/404')
         }
     },

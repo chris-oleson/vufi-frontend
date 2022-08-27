@@ -1,11 +1,13 @@
 <template>
     <v-row class="ma-2">
+        <v-flex xs12>
+            <LineChart theme="#aed581"/>
+        </v-flex>
         <v-flex xs12 md6>
             <Table title="asset" theme="primary"/>
         </v-flex>
         <v-flex xs12 md6>
-                <PieChart class="mb-4" theme="#aed581"/>
-                <LineChart theme="#aed581"/>
+            <PieChart theme="#aed581"/>
         </v-flex>
     </v-row>
 </template>
@@ -25,15 +27,15 @@ export default ({
     },
 
     mounted() {
-        if (!this.$store.state.currentUser.email) {
+        if (!this.$store.state.userID) {
             this.$router.push('/404')
         }
 
         this.$store.commit('setAssets', [])
         this.$store.dispatch('LOAD_ASSETS')
 
-        this.$store.commit('setHistory', [])
-        this.$store.dispatch('LOAD_HISTORY')
+        // this.$store.commit('setHistory', [])
+        // this.$store.dispatch('LOAD_HISTORY')
     },
 })
 </script>

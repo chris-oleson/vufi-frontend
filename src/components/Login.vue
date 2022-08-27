@@ -23,43 +23,38 @@
 </template>
 
 <script>
+import axios from 'axios'
+import bcrypt from 'bcryptjs'
+
 export default {
     data() {
         return {
             email: '',
             password: '',
             errorState: false,
+            userID: null,
         }
     },
 
     mounted() {
-        this.$store.dispatch('LOAD_USERS')
+        const salt = bcrypt.genSaltSync(10)
+        console.log(bcrypt.hashSync('password', salt))
     },
     
     computed: {
         userData() { return this.$store.state.userData },
-
-        validateUser() {
-            for (let i = 0; i < this.userData.length; i++) {
-                if (this.email == this.userData[i].email) {
-                    if (this.password == this.userData[i].password) {
-                        return this.userData[i]
-                    }
-                }
-            }
-            return false
-        }
     },
 
     methods: {
-        login() {
-            if (this.validateUser) {
-                this.$store.commit('setCurrentUser', this.validateUser)
+        async login() {
+            // Send login data to backend for validation
+            await axios.get(`http://localhost:3000/api/login/${this.email}/${this.password}`).then(resp => {
+                this.$store.commit('setUserID', resp.data)
                 this.$router.push('/assets')
-            }
-            else {
+            }).catch(() => {
+                // Handles incorrect login
                 this.errorState = true
-            }
+            })
         },
 
         redirect(link) { this.$router.push(link) },

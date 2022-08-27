@@ -8,7 +8,7 @@
             </template>
             <v-list class="font-weight-light">
                 <v-list-item>
-                    <v-list-item-title>{{this.$store.state.currentUser.firstName + " " + this.$store.state.currentUser.lastName}}</v-list-item-title>
+                    <v-list-item-title>{{this.$store.state.userID}}</v-list-item-title>
                 </v-list-item>
 
                 <v-list-item-group>
@@ -33,7 +33,7 @@ export default {
 
     methods: {
         logOut() {
-            this.$store.commit('setCurrentUser', {})
+            this.$store.commit('setUserID', null)
             this.$router.push('/')
         }
     }

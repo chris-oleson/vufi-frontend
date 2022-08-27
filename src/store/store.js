@@ -9,7 +9,7 @@ export default new Vuex.Store({
     plugins: [new VuexPersistence({}).plugin],
 
     state: {
-        currentUser: {},
+        userID: null,
         assetData: [],
         historicData: [],
         userData: [],
@@ -24,7 +24,7 @@ export default new Vuex.Store({
     },
 
     mutations: {
-        setCurrentUser(state, data) { state.currentUser = data },
+        setUserID(state, data) { state.userID = data },
 
         setAssets(state, data) { state.assetData = data },
 
@@ -35,7 +35,7 @@ export default new Vuex.Store({
 
     actions: {
         async LOAD_ASSETS() {
-            await axios.get('http://localhost:3000/assets').then(resp => {
+            await axios.get('http://localhost:3000/api/assets').then(resp => {
                 this.commit('setAssets', resp.data)
             })
         },
@@ -85,12 +85,6 @@ export default new Vuex.Store({
             }
 
             await this.dispatch('LOAD_HISTORY')
-        },
-
-        async LOAD_USERS() {
-            await axios.get('http://localhost:3000/users/').then(resp => {
-                this.commit('setUsers', resp.data)
-            })
         },
 
         async ADD_USER(context, user) {

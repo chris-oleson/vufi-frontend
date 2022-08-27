@@ -1,11 +1,13 @@
 <template>
     <v-row class="ma-2">
+        <v-flex xs12>
+            <LineChart theme="#e57373"/>
+        </v-flex>
         <v-flex xs12 md6>
             <Table title="debt" theme="error"/>
         </v-flex>
         <v-flex xs12 md6>
             <PieChart class="mb-4" theme="#e57373"/>
-            <LineChart theme="#e57373"/>
         </v-flex>
     </v-row>
 </template>
@@ -25,7 +27,7 @@ export default ({
     },
 
     mounted() {
-        if (!this.$store.state.currentUser.email) {
+        if (!this.$store.state.userID) {
             this.$router.push('/404')
         }
 

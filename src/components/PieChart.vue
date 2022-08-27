@@ -1,6 +1,6 @@
 <template>
     <v-card class="ma-2 pa-4">
-        <apexchart v-if="series.length" type="pie" :options="chartOptions" :series="series"></apexchart>
+        <apexchart v-if="this.$store.state.userID" type="pie" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </template>
 

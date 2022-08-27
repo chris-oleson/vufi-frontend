@@ -1,6 +1,6 @@
 <template>
-    <v-card class="ma-2 pa-4">
-        <apexchart v-if="historicData[0].data.length" type="area" :options="chartOptions" :series="historicData"></apexchart>
+    <v-card class="ma-2 pa-4" height="300">
+        <apexchart v-if="this.$store.state.userID" type="area" :options="chartOptions" :series="historicData" height="100%"></apexchart>
     </v-card>
 </template>
 
@@ -64,6 +64,7 @@ export default {
                     },
                     max: function(biggest) { return biggest * 1.1 },
                     forceNiceScale: true,
+                    tickAmount: 4
                 },
                 xaxis: {
                     type: 'datetime',

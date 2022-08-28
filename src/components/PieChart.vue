@@ -1,27 +1,15 @@
 <template>
-    <v-card class="ma-2 pa-4">
-        <apexchart v-if="this.$store.state.userID" type="pie" :options="chartOptions" :series="series"></apexchart>
+    <v-card class="ma-2 pa-2">
+        <apexchart type="pie" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </template>
 
 <script>
 export default {
     name: 'PieChart',
-    props: ['theme'],
+    props: ['theme', 'series', 'labels'],
 
     computed: {
-        series() {
-            let series = []
-
-            for (let i = 0; i < this.$store.state.assetData.length; i++) {
-                if (this.$store.state.assetData[i].value > 0) {
-                    series.push(this.$store.state.assetData[i].value)
-                }
-            }
-
-            return series
-        },
-
         getTheme() {
             if (this.$vuetify.theme.dark) {
                 return 'dark'
@@ -32,14 +20,6 @@ export default {
         },
 
         chartOptions() {
-            let labels = []
-
-            for (let i = 0; i < this.$store.state.assetData.length; i++) {
-                if (this.$store.state.assetData[i].value > 0) {
-                    labels.push(this.$store.state.assetData[i].assetName)
-                }
-            }
-
             return {
                 theme: {
                     mode: this.getTheme,
@@ -50,7 +30,7 @@ export default {
                         shadeIntensity: 0.5,
                     },
                 },
-                labels: labels,
+                labels: this.labels,
                 plotOptions: {
                     pie: {
                         expandOnClick: false,
@@ -82,6 +62,9 @@ export default {
                 },
                 chart: {
                     background: 'none',
+                    animations: {
+                        enabled: false,
+                    }
                 }
             }
         }

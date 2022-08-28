@@ -12,7 +12,6 @@ export default new Vuex.Store({
         userID: null,
         assetData: [],
         historicData: [],
-        userData: [],
     },
 
     getters: {
@@ -29,8 +28,6 @@ export default new Vuex.Store({
         setAssets(state, data) { state.assetData = data },
 
         setHistory(state, data) { state.historicData = data },
-
-        setUsers(state, data) { state.userData = data },
     },
 
     actions: {
@@ -85,10 +82,6 @@ export default new Vuex.Store({
             }
 
             await this.dispatch('LOAD_HISTORY')
-        },
-
-        async ADD_USER(context, user) {
-            await axios.post('http://localhost:3000/users', user)
         },
     }
 })

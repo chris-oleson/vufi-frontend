@@ -16,7 +16,7 @@
             </v-card-actions>
 
             <v-card-actions class="justify-center">
-                <v-btn width="200" @click="redirect('/create-account')">Sign Up</v-btn>
+                <v-btn width="200" text @click="redirect('/create-account')">Create Account</v-btn>
             </v-card-actions>
         </v-card>
     </div>
@@ -24,7 +24,6 @@
 
 <script>
 import axios from 'axios'
-import bcrypt from 'bcryptjs'
 
 export default {
     data() {
@@ -32,13 +31,11 @@ export default {
             email: '',
             password: '',
             errorState: false,
-            userID: null,
         }
     },
 
     mounted() {
-        const salt = bcrypt.genSaltSync(10)
-        console.log(bcrypt.hashSync('password', salt))
+
     },
     
     computed: {
@@ -48,7 +45,10 @@ export default {
     methods: {
         async login() {
             // Send login data to backend for validation
-            await axios.get(`http://localhost:3000/api/login/${this.email}/${this.password}`).then(resp => {
+            await axios.post(`http://localhost:3000/api/auth/login`, {
+                email: this.email,
+                password: this.password,
+            }).then(resp => {
                 this.$store.commit('setUserID', resp.data)
                 this.$router.push('/assets')
             }).catch(() => {

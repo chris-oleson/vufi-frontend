@@ -1,14 +1,14 @@
 <template>
     <v-app>
         <v-app-bar app clipped-left height="70">
-            <v-app-bar-nav-icon v-if="!this.$vuetify.breakpoint.mobile" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon v-if="!this.$vuetify.breakpoint.mobile && this.$store.state.userID" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
             <v-img src="./assets/logo64x64.png" max-height="50" max-width="50"></v-img>
             <h1 class="font-weight-light ml-2">VuFi</h1>
 
             <v-spacer></v-spacer>
 
             <v-btn v-if="!this.$store.state.userID && this.$route.meta.title == 'Home'" text @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="!this.$store.state.userID && this.$route.meta.title == 'Home'" class="ml-4 primary" @click="redirect('/create-account')">Sign Up</v-btn>
+            <v-btn v-if="!this.$store.state.userID && this.$route.meta.title == 'Home'" class="ml-4 primary" @click="redirect('/create-account')">Create Account</v-btn>
             <AccountMenu v-if="this.$store.state.userID"/>
         </v-app-bar>
 

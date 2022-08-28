@@ -1,6 +1,6 @@
 <template>
-    <v-card class="ma-2 pa-4" height="300">
-        <apexchart v-if="this.$store.state.userID" type="area" :options="chartOptions" :series="historicData" height="100%"></apexchart>
+    <v-card class="ma-2 pa-2" height="300">
+        <apexchart type="area" :options="chartOptions" :series="historicData" height="100%"></apexchart>
     </v-card>
 </template>
 
@@ -35,7 +35,9 @@ export default {
                             zoom: false,
                         },
                     },
-
+                    animations: {
+                        enabled: false,
+                    },
                     background: 'none'
                 },
                 dataLabels: {

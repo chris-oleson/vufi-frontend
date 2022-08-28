@@ -7,7 +7,7 @@
             <Table title="debt" theme="error"/>
         </v-flex>
         <v-flex xs12 md6>
-            <PieChart class="mb-4" theme="#e57373"/>
+            <PieChart theme="#e57373" :series="series" :labels="labels"/>
         </v-flex>
     </v-row>
 </template>
@@ -20,6 +20,13 @@ import LineChart from '/src/components/LineChart.vue'
 export default ({
     name: 'Assets',
 
+    data() {
+        return {
+            series: [1, 2, 3, 4, 5],
+            labels: ['One', 'Two', 'Three', 'Four', 'Five']
+        }
+    },
+
     components: {
         Table,
         PieChart,
@@ -31,11 +38,11 @@ export default ({
             this.$router.push('/404')
         }
 
-        this.$store.commit('setAssets', [])
-        this.$store.dispatch('LOAD_ASSETS')
+        // this.$store.commit('setAssets', [])
+        // this.$store.dispatch('LOAD_ASSETS')
 
-        this.$store.commit('setHistory', [])
-        this.$store.dispatch('LOAD_HISTORY')
+        // this.$store.commit('setHistory', [])
+        // this.$store.dispatch('LOAD_HISTORY')
     },
 })
 </script>

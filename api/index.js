@@ -6,6 +6,8 @@ const port = 3000
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
+app.use(express.json())
+
 // Enables session data
 const session = require('express-session')
 app.use(session({
@@ -15,17 +17,16 @@ app.use(session({
 }))
 
 // Registered routes
-const login = require('./routes/login')
-app.use('/api/login', login)
-const users = require('./routes/users')
-app.use('/api/users', users)
+const auth = require('./routes/auth')
+app.use('/api/auth', auth)
+const user = require('./routes/user')
+app.use('/api/user', user)
 const assets = require('./routes/assets')
 app.use('/api/assets', assets)
 const debts = require('./routes/debts')
 app.use('/api/debts', debts)
 
-app.use(express.json())
 
 app.listen(port, () => {
-    console.log('listening on port ' + port)
+    console.log('Listening on port ' + port)
 })

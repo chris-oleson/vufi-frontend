@@ -1,22 +1,15 @@
 <template>
     <v-card class="ma-2 pa-2" height="300">
-        <apexchart type="area" :options="chartOptions" :series="historicData" height="100%"></apexchart>
+        <apexchart type="area" :options="chartOptions" :series="series" height="100%"></apexchart>
     </v-card>
 </template>
 
 <script>
 export default {
     name: 'LineChart',
-    props: ['theme'],
+    props: ['theme', 'series'],
 
     computed: {
-        historicData() {
-            return [{
-                name: "Net Worth",
-                data: this.$store.state.historicData
-            }]
-        },
-
         getTheme() {
             if (this.$vuetify.theme.dark) {
                 return 'dark'

@@ -6,14 +6,14 @@
                     <v-icon>mdi-account</v-icon>
                 </v-btn>
             </template>
-            <v-list class="font-weight-light">
+            <v-list class="font-weight-light" width="200">
                 <v-list-item>
                     <v-list-item-title>{{this.$store.state.userID}}</v-list-item-title>
                 </v-list-item>
 
                 <v-list-item-group>
                     <v-divider></v-divider>
-                    <v-list-item>Account Settings</v-list-item>
+                    <v-list-item @click="redirect('/settings')">Settings</v-list-item>
                     <v-list-item @click="logOut">Log out</v-list-item>
                 </v-list-item-group>
             </v-list>
@@ -35,7 +35,9 @@ export default {
         logOut() {
             this.$store.commit('setUserID', null)
             this.$router.push('/')
-        }
+        },
+
+        redirect(link) { this.$router.push(link) },
     }
 }
 </script>

@@ -1,32 +1,30 @@
 <template>
-    <div class="d-flex justify-center">
-        <v-card class="pa-6 ma-10" min-width="330">
-            <v-form v-model="validForm">
-                <v-img src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto"></v-img>
+    <v-card class="pa-6 mx-auto mt-10" width="330">
+        <v-form v-model="validForm">
+            <v-img src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto"></v-img>
 
-                <v-text-field class="mx-4 mt-4" label="First Name" v-model="firstName" :rules="[rules.required]"></v-text-field>
+            <v-text-field class="mx-4 mt-4" label="First Name" v-model="firstName" :rules="[rules.required]"></v-text-field>
 
-                <v-text-field class="mx-4" label="Last Name" v-model="lastName" :rules="[rules.required]"></v-text-field>
+            <v-text-field class="mx-4" label="Last Name" v-model="lastName" :rules="[rules.required]"></v-text-field>
 
-                <v-text-field class="mx-4" label="Email Address" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"></v-text-field>
-                <v-card-text v-if="emailExists" class="error--text text-center pa-0">This email is already registered</v-card-text>
-                <v-card-actions v-if="emailExists" class="justify-center">
-                    <v-btn width="200" color="error">Forgot Password</v-btn>
-                </v-card-actions>
+            <v-text-field class="mx-4" label="Email Address" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"></v-text-field>
+            <v-card-text v-if="emailExists" class="error--text text-center pa-0">This email is already registered</v-card-text>
+            <v-card-actions v-if="emailExists" class="justify-center">
+                <v-btn width="200" color="error">Forgot Password</v-btn>
+            </v-card-actions>
 
-                <v-text-field class="mx-4" label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
-                <v-text-field class="mx-4" label="Confirm Password" type="password" v-model="confirmPassword" :rules="[rules.match]"></v-text-field>
+            <v-text-field class="mx-4" label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
+            <v-text-field class="mx-4" label="Confirm Password" type="password" v-model="confirmPassword" :rules="[rules.match]"></v-text-field>
 
-                <v-card-actions class="justify-center mt-6">
-                    <v-btn width="200" color="primary" @click="createAccount">Create Account</v-btn>
-                </v-card-actions>
+            <v-card-actions class="justify-center mt-6">
+                <v-btn width="200" color="primary" @click="createAccount">Create Account</v-btn>
+            </v-card-actions>
 
-                <v-card-actions class="justify-center">
-                    <v-btn width="200" text @click="redirect('/login')">Log In</v-btn>
-                </v-card-actions>
-            </v-form>
-        </v-card>
-    </div>
+            <v-card-actions class="justify-center">
+                <v-btn width="200" text @click="redirect('/login')">Log In</v-btn>
+            </v-card-actions>
+        </v-form>
+    </v-card>
 </template>
 
 <script>

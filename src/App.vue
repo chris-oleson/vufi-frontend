@@ -1,19 +1,19 @@
 <template>
     <v-app>
         <v-app-bar app clipped-left height="70">
-            <v-app-bar-nav-icon v-if="!this.$vuetify.breakpoint.mobile && this.$store.state.userID" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon v-if="!this.$vuetify.breakpoint.mobile && this.$store.state.userID && this.$route.meta.title != 'Settings'" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
             <v-img src="./assets/logo64x64.png" max-height="50" max-width="50"></v-img>
-            <h1 class="font-weight-light ml-2">VuFi</h1>
+            <h1 v-if="!this.$vuetify.breakpoint.mobile" class="font-weight-light ml-2">VuFi</h1>
 
             <v-spacer></v-spacer>
 
             <v-btn v-if="!this.$store.state.userID && this.$route.meta.title == 'Home'" text @click="redirect('/login')">Log In</v-btn>
             <v-btn v-if="!this.$store.state.userID && this.$route.meta.title == 'Home'" class="ml-4 primary" @click="redirect('/create-account')">Create Account</v-btn>
-            <AccountMenu v-if="this.$store.state.userID"/>
+            <AccountMenu v-if="this.$store.state.userID && this.$route.meta.title != 'Settings'"/>
         </v-app-bar>
 
         <!-- Sidebar navigation -->
-        <v-navigation-drawer v-if="this.$store.state.userID" app clipped permanent :mini-variant="mini">
+        <v-navigation-drawer v-if="this.$store.state.userID && this.$route.meta.title != 'Settings'" app clipped permanent :mini-variant="mini">
             <v-list class="font-weight-light pa-0">
                 <v-list-item-group mandatory v-bind:value="page">
 
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import AccountMenu from './components/AccountMenu'
+import AccountMenu from '/src/components/AccountMenu'
 export default {
     name: 'App',
 
@@ -62,13 +62,21 @@ export default {
 
     data() {
         return {
-            mini: this.$vuetify.breakpoint.mobile,
+            mini: false
         }
     },
 
-    mounted() {
+    created() {
         // Check user prefs for dark mode
-        this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (this.$store.state.settings.darkMode === 0) {
+            this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        }
+        else if (this.$store.state.settings.darkMode === 1){
+            this.$vuetify.theme.dark = false
+        }
+        else if (this.$store.state.settings.darkMode === 2){
+            this.$vuetify.theme.dark = true
+        }
     },
 
     computed: {
@@ -82,7 +90,7 @@ export default {
             else if (this.$route.meta.title == "Net Worth") {
                 return 2
             }
-            return 0
+            return null
         }
     },
 
@@ -98,6 +106,10 @@ export default {
                 document.title = newRoute.meta.title + ' | VuFi';
             }
         },
+
+        '$vuetify.breakpoint.mobile'() {
+            this.mini = this.$vuetify.breakpoint.mobile
+        }
     }
 };
 </script>

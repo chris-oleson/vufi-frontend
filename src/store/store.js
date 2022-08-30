@@ -10,6 +10,9 @@ export default new Vuex.Store({
 
     state: {
         userID: null,
+        settings: {
+            darkMode: null
+        },
         assetData: [],
         historicData: [],
     },
@@ -24,6 +27,8 @@ export default new Vuex.Store({
 
     mutations: {
         setUserID(state, data) { state.userID = data },
+
+        setSettings(state, data) { state.settings = data },
 
         setAssets(state, data) { state.assetData = data },
 

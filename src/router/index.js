@@ -6,6 +6,7 @@ import CreateAccount from '/src/components/CreateAccount'
 import Assets from '/src/components/Assets'
 import Debts from '/src/components/Debts'
 import NetWorth from '/src/components/NetWorth'
+import Settings from '/src/components/Settings'
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,13 @@ export default new VueRouter ({
             component: CreateAccount,
             meta: {
                 title: 'Create Account'
+            }
+        },
+        {
+            path: '/settings',
+            component: Settings,
+            meta: {
+                title: 'Settings'
             }
         },
         {

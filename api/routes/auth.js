@@ -4,25 +4,26 @@ const bcrypt = require('bcryptjs')
 const db = require('../database')
 
 router.post('/login', (req, res) => {
-    let match = false
-    db.query('SELECT * FROM users', (err, results) => {
-        let users = results
-        for (let i=0; i < users.length; i++) {
-            if (users[i].email === req.body.email) {
-                if (bcrypt.compare(req.body.password, users[i].password)) {
-                    match = true
-                    res.send(users[i].id.toString())
+    // Search for matching email
+    db.query(`SELECT * FROM users WHERE email = '${req.body.email}'`, (err, results) => {
+        if (results.length) {
+            // Check if password matches
+            bcrypt.compare(req.body.password, results[0].password, (err, match) => {
+                if (match) {
+                    res.send(results[0].id.toString())
                 }
-            }
+                else {
+                    res.sendStatus(404)
+                }
+            })
         }
-        if (!match) {
+        else {
             res.sendStatus(404)
         }
     })
 })
 
 router.post('/create', (req, res) => {
-
     // Check if there is a matching existing email
     db.query(`SELECT * FROM users WHERE email = '${req.body.email}'`, (err, results) => {
         if (results.length) {

@@ -1,49 +1,19 @@
 <template>
     <v-app>
-        <v-app-bar app clipped-left height="70">
-            <v-app-bar-nav-icon v-if="!this.$vuetify.breakpoint.mobile && this.$store.state.userID && this.$route.meta.title != 'Settings'" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
+        <v-app-bar app clipped-left height="70" :hide-on-scroll="hideBar">
+            <v-app-bar-nav-icon v-if="this.$store.state.userID && (this.$route.path === '/assets' || this.$route.path === '/debts' || this.$route.path === '/net-worth')" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
             <v-img src="./assets/logo64x64.png" max-height="50" max-width="50"></v-img>
-            <h1 v-if="!this.$vuetify.breakpoint.mobile" class="font-weight-light ml-2">VuFi</h1>
+            <h1 class="font-weight-light ml-2 d-none d-sm-flex">VuFi</h1>
 
             <v-spacer></v-spacer>
 
-            <v-btn v-if="!this.$store.state.userID && this.$route.meta.title == 'Home'" text @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="!this.$store.state.userID && this.$route.meta.title == 'Home'" class="ml-4 primary" @click="redirect('/create-account')">Create Account</v-btn>
-            <AccountMenu v-if="this.$store.state.userID && this.$route.meta.title != 'Settings'"/>
+            <v-btn v-if="!this.$store.state.userID && this.$route.path == '/'" text @click="redirect('/login')">Log In</v-btn>
+            <v-btn v-if="!this.$store.state.userID && this.$route.path == '/'" outlined class="ml-4" @click="redirect('/signup')">Sign Up</v-btn>
+            <AccountMenu v-if="this.$store.state.userID"/>
         </v-app-bar>
 
         <!-- Sidebar navigation -->
-        <v-navigation-drawer v-if="this.$store.state.userID && this.$route.meta.title != 'Settings'" app clipped permanent :mini-variant="mini">
-            <v-list class="font-weight-light pa-0">
-                <v-list-item-group mandatory v-bind:value="page">
-
-                    <v-list-item @click="redirect('/assets')">
-                        <v-list-item-icon class="mr-4">
-                            <v-icon>mdi-cash-multiple</v-icon>
-                        </v-list-item-icon>
-                        <v-list-item-title>Assets</v-list-item-title>
-                        <v-list-item-subtitle class="text-right">$50,000</v-list-item-subtitle>
-                    </v-list-item>
-                    
-                    <v-list-item @click="redirect('/debts')">
-                        <v-list-item-icon class="mr-4">
-                            <v-icon>mdi-credit-card-multiple</v-icon>
-                        </v-list-item-icon>
-                        <v-list-item-title>Debts</v-list-item-title>
-                        <v-list-item-subtitle class="text-right">-$10,000</v-list-item-subtitle>
-                    </v-list-item>
-
-                    <v-list-item @click="redirect('/net-worth')">
-                        <v-list-item-icon class="mr-4">
-                            <v-icon>mdi-sigma</v-icon>
-                        </v-list-item-icon>
-                        <v-list-item-title>Net Worth</v-list-item-title>
-                        <v-list-item-subtitle class="text-right">$40,000</v-list-item-subtitle>
-                    </v-list-item>
-
-                </v-list-item-group>
-            </v-list>
-        </v-navigation-drawer>
+        <NavMenu v-if="this.$store.state.userID && (this.$route.path === '/assets' || this.$route.path === '/debts' || this.$route.path === '/net-worth')" :mini="mini"/>
 
         <v-main>
             <router-view></router-view>
@@ -53,16 +23,18 @@
 
 <script>
 import AccountMenu from '/src/components/AccountMenu'
+import NavMenu from '/src/components/NavMenu'
 export default {
     name: 'App',
 
     components: {
-        AccountMenu
+        AccountMenu,
+        NavMenu,
     },
 
     data() {
         return {
-            mini: false
+            mini: this.$vuetify.breakpoint.mobile
         }
     },
 
@@ -80,17 +52,13 @@ export default {
     },
 
     computed: {
-        page() {
-            if (this.$route.meta.title == "Assets") {
-                return 0
+        hideBar() {
+            if (this.$route.path === '/') {
+                return true
             }
-            else if (this.$route.meta.title == "Debts") {
-                return 1
+            else {
+                return false
             }
-            else if (this.$route.meta.title == "Net Worth") {
-                return 2
-            }
-            return null
         }
     },
 
@@ -103,12 +71,12 @@ export default {
         $route: {
             immediate: true,
             handler(newRoute) {
-                document.title = newRoute.meta.title + ' | VuFi';
+                document.title = newRoute.meta.title;
             }
         },
 
-        '$vuetify.breakpoint.mobile'() {
-            this.mini = this.$vuetify.breakpoint.mobile
+        '$vuetify.breakpoint.mobile'(data) {
+            this.mini = data
         }
     }
 };
@@ -126,5 +94,10 @@ export default {
 /* Preventing changes to button color when focused */
 .v-btn:focus::before {
     opacity: 0 !important
+}
+
+/* Adds class for non-caps buttons */
+.normal {
+    text-transform: unset !important;
 }
 </style>

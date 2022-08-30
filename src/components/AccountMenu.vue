@@ -25,12 +25,6 @@
 export default {
     name: 'AccountMenu',
 
-    data() {
-        return {
-
-        }
-    },
-
     methods: {
         logOut() {
             this.$store.commit('setUserID', null)
@@ -38,6 +32,12 @@ export default {
         },
 
         redirect(link) { this.$router.push(link) },
-    }
+    },
 }
 </script>
+
+<style scoped>
+.v-list-item--active::before {
+    opacity: 0 !important;
+}
+</style>

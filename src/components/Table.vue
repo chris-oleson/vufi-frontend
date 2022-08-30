@@ -4,7 +4,7 @@
             <v-toolbar flat rounded color="transparent">
 
                 <!-- Top bar -->
-                <v-toolbar-title class="font-weight-light text-h5">Total Value</v-toolbar-title>
+                <v-toolbar-title class="font-weight-light text-h5">{{title}}s</v-toolbar-title>
                 <v-divider class="mx-4" inset vertical></v-divider>
                 <v-toolbar-title class="font-weight-light text-h5">$50,000.00</v-toolbar-title>
                 <v-spacer></v-spacer>

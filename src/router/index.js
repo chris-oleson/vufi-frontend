@@ -7,6 +7,7 @@ import Assets from '/src/components/Assets'
 import Debts from '/src/components/Debts'
 import NetWorth from '/src/components/NetWorth'
 import Settings from '/src/components/Settings'
+import Home from '/src/components/Home'
 
 Vue.use(VueRouter)
 
@@ -19,50 +20,51 @@ export default new VueRouter ({
         },
         {
             path: '/',
+            component: Home,
             meta: {
-                title: 'Home'
+                title: 'VuFi - Assets at a Glance'
             }
         },
         {
             path: '/assets',
             component: Assets,
             meta: {
-                title: 'Assets'
+                title: 'Assets | VuFi'
             }
         },
         {
             path: '/debts',
             component: Debts,
             meta: {
-                title: 'Debts'
+                title: 'Debts | VuFi'
             }
         },
         {
             path: '/net-worth',
             component: NetWorth,
             meta: {
-                title: 'Net Worth'
+                title: 'Net Worth | VuFi'
             }
         },
         {
             path: '/login',
             component: Login,
             meta: {
-                title: 'Login'
+                title: 'Login | VuFi'
             }
         },
         {
-            path: '/create-account',
+            path: '/signup',
             component: CreateAccount,
             meta: {
-                title: 'Create Account'
+                title: 'Sign Up | VuFi'
             }
         },
         {
             path: '/settings',
             component: Settings,
             meta: {
-                title: 'Settings'
+                title: 'Settings | VuFi'
             }
         },
         {

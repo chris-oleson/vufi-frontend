@@ -1,22 +1,14 @@
 <template>
-    <v-card class="pa-6 mx-auto mt-10" width="330">
+    <v-card class="pa-6 mx-auto mt-10 text-center" width="330">
         <v-img src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto"></v-img>
 
         <v-text-field class="mx-4 mt-4" label="Email" v-model="email" :error="errorState"></v-text-field>
         <v-text-field class="mx-4" label="Password" type="password" v-model="password" :error="errorState" @keyup.enter="login"></v-text-field>
-        <v-card-text v-if="errorState" class="error--text text-center pa-0">Email or password does not match</v-card-text>
+        <v-card-text v-if="errorState" class="error--text pa-0">Email or password does not match</v-card-text>
 
-        <v-card-actions class="justify-center mt-6">
-            <v-btn width="200" color="primary" @click="login">Log In</v-btn>
-        </v-card-actions>
-
-        <v-card-actions class="justify-center">
-            <v-btn width="200" color="error">Forgot Password</v-btn>
-        </v-card-actions>
-
-        <v-card-actions class="justify-center">
-            <v-btn width="200" text @click="redirect('/create-account')">Create Account</v-btn>
-        </v-card-actions>
+        <v-btn width="200" class="primary mt-6 mb-2" @click="login">Log In</v-btn>
+        <v-btn width="200" class="error my-2">Forgot Password</v-btn>
+        <v-btn width="200" class="my-2" text @click="redirect('/signup')">Sign Up</v-btn>
     </v-card>
 </template>
 
@@ -24,6 +16,8 @@
 import axios from 'axios'
 
 export default {
+    name: 'Login',
+
     data() {
         return {
             email: '',

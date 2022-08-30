@@ -21,18 +21,6 @@ export default {
 
         chartOptions() {
             return {
-                chart: {
-                    toolbar: {
-                        show: false,
-                        tools: {
-                            zoom: false,
-                        },
-                    },
-                    animations: {
-                        enabled: false,
-                    },
-                    background: 'none'
-                },
                 dataLabels: {
                     enabled: false
                 },
@@ -81,6 +69,18 @@ export default {
                 },
                 theme: {
                     mode: this.getTheme,
+                },
+                chart: {
+                    toolbar: {
+                        show: false,
+                        tools: {
+                            zoom: false,
+                        },
+                    },
+                    animations: {
+                        enabled: false,
+                    },
+                    background: 'none'
                 }
             }
         }

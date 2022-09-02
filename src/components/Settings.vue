@@ -1,21 +1,34 @@
 <template>
-    <v-card class="pa-6 mx-auto mt-10" width="500">
+    <v-card class="pa-10 mx-auto mt-10" width="330">
         <v-card-title class="font-weight-light text-h5 justify-center">Settings</v-card-title>
 
-        <v-card-actions class="justify-center">
-            <v-btn-toggle mandatory v-model="selection">
-                <v-btn small class="pa-4">System Theme</v-btn>
-                <v-btn small class="pa-4">Light Theme</v-btn>
-                <v-btn small class="pa-4">Dark Theme</v-btn>
+        <!-- Theme Selection -->
+        <v-card-actions class="justify-center my-6">
+            <v-btn-toggle mandatory v-model="themeSelection">
+                <v-btn small class="pa-4">System</v-btn>
+                <v-btn small class="pa-4">Light</v-btn>
+                <v-btn small class="pa-4">Dark</v-btn>
             </v-btn-toggle>
         </v-card-actions>
 
-        <v-card-actions class="justify-center mt-6">
-            <v-btn width="200" color="primary" @click="save">Save</v-btn>
+        <!-- Change Default Currency -->
+        <v-card-actions class="mx-4">
+            <v-select :items="currencies" v-model="currencySelection" dense outlined label="Default Currency"></v-select>
         </v-card-actions>
 
+        <!-- Change Password -->
         <v-card-actions class="justify-center">
-            <v-btn width="200" text @click="cancel">Cancel</v-btn>
+            <v-btn width="200" @click="redirect('/update-password')">Change Password</v-btn>
+        </v-card-actions>
+
+        <!-- Change Email -->
+        <v-card-actions class="justify-center">
+            <v-btn width="200" @click="redirect('/update-email')">Change Email</v-btn>
+        </v-card-actions>
+
+        <!-- Change Email -->
+        <v-card-actions class="justify-center">
+            <v-btn width="200" @click="redirect('/delete-account')">Delete Account</v-btn>
         </v-card-actions>
     </v-card>
 </template>
@@ -26,42 +39,27 @@ export default {
 
     data() {
         return {
-            selection: this.$store.state.settings.darkMode
+            themeSelection: this.$store.state.settings.theme,
+
+            currencySelection: this.$store.state.settings.currency,
+            currencies: [
+                'USD'
+            ],
         }
     },
 
     mounted() {
-
-    },
-    
-    computed: {
-
+        if (!this.$store.state.userID) {
+            this.$router.push('/404')
+        }
     },
 
     methods: {
-        save() {
-            this.$store.commit('setSettings', {darkMode: this.selection})
-            this.redirect('/assets')
-        },
-
-        cancel() {
-            if (this.$store.state.settings.darkMode === 0) {
-                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-            }
-            else if (this.$store.state.settings.darkMode === 1){
-                this.$vuetify.theme.dark = false
-            }
-            else if (this.$store.state.settings.darkMode === 2){
-                this.$vuetify.theme.dark = true
-            }
-            this.redirect('/assets')
-        },
-
-        redirect(link) { this.$router.push(link) },
+        redirect(link) { this.$router.push(link) }
     },
 
     watch: {
-        selection(data) {
+        themeSelection(data) {
             if (data == 0) {
                 this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
             }
@@ -71,7 +69,12 @@ export default {
             else if (data == 2) {
                 this.$vuetify.theme.dark = true
             }
+            this.$store.commit('setTheme', data)
         },
+
+        currencySelection(data) {
+            this.$store.commit('setCurrency', data)
+        }
     }
 }
 </script>

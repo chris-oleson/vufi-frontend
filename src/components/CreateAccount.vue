@@ -1,20 +1,20 @@
 <template>
-    <v-card class="pa-6 mx-auto mt-10 text-center" width="330">
+    <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
         <v-form v-model="validForm">
-            <v-img src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto"></v-img>
+            <v-img eager src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto mb-4"></v-img>
 
-            <v-text-field class="mx-4 mt-4" label="First Name" v-model="firstName" :rules="[rules.required]"></v-text-field>
-            <v-text-field class="mx-4" label="Last Name" v-model="lastName" :rules="[rules.required]"></v-text-field>
+            <v-text-field label="First Name" v-model="firstName" :rules="[rules.required]"></v-text-field>
+            <v-text-field label="Last Name" v-model="lastName" :rules="[rules.required]"></v-text-field>
 
-            <v-text-field class="mx-4" label="Email Address" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"></v-text-field>
+            <v-text-field label="Email Address" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"></v-text-field>
             <v-card-text v-if="emailExists" class="error--text pa-0">This email is already registered</v-card-text>
             <v-btn v-if="emailExists" width="200" class="error my-4">Forgot Password?</v-btn>
 
-            <v-text-field class="mx-4" label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
-            <v-text-field class="mx-4" label="Confirm Password" type="password" v-model="confirmPassword" :rules="[rules.match]"></v-text-field>
+            <v-text-field label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
+            <v-text-field label="Confirm Password" type="password" v-model="confirmPassword" :rules="[rules.match]" @keyup.enter="createAccount"></v-text-field>
 
-            <v-btn width="200" class="primary mt-6 mb-2" @click="createAccount">Sign Up</v-btn>
-            <v-btn width="200" class="my-2" text @click="redirect('/login')">Log In</v-btn>
+            <v-btn width="200" class="primary mt-6 mb-4" @click="createAccount">Sign Up</v-btn>
+            <v-btn width="200" text @click="redirect('/login')">Log In</v-btn>
         </v-form>
     </v-card>
 </template>
@@ -57,17 +57,18 @@ export default {
         async createAccount() {
             // Check if fields are correct
             if (this.validForm) {
-
                 // Add user to the database
                 await axios.post('http://localhost:3000/api/auth/create', {
                     email: this.email,
                     password: this.password,
                     firstName: this.firstName,
                     lastName: this.lastName,
-                }).then(resp => {
+                })
+                .then(resp => {
                     this.$store.commit('setUserID', resp.data)
                     this.$router.push('/assets')
-                }).catch((err) => {
+                })
+                .catch((err) => {
                     // Handles pre-existing email
                     if (err.response.status == 409) {
                         this.emailExists = true

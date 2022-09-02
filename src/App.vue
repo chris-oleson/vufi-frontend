@@ -1,19 +1,19 @@
 <template>
     <v-app>
-        <v-app-bar app clipped-left height="70" :hide-on-scroll="hideBar">
-            <v-app-bar-nav-icon v-if="this.$store.state.userID && (this.$route.path === '/assets' || this.$route.path === '/debts' || this.$route.path === '/net-worth')" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
-            <v-img src="./assets/logo64x64.png" max-height="50" max-width="50"></v-img>
-            <h1 class="font-weight-light ml-2 d-none d-sm-flex">VuFi</h1>
+        <v-app-bar app clipped-left>
+            <v-app-bar-nav-icon v-if="$store.state.userID && ($route.path === '/assets' || $route.path === '/debts' || $route.path === '/net-worth')" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
+            <v-img src="./assets/logo64x64.png" max-height="50" max-width="50" class="link" @click="logoClicked"></v-img>
+            <h2 class="font-weight-light pl-2 d-none d-sm-flex link" @click="logoClicked">VuFi</h2>
 
             <v-spacer></v-spacer>
 
-            <v-btn v-if="!this.$store.state.userID && this.$route.path == '/'" text @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="!this.$store.state.userID && this.$route.path == '/'" outlined class="ml-4" @click="redirect('/signup')">Sign Up</v-btn>
-            <AccountMenu v-if="this.$store.state.userID"/>
+            <v-btn v-if="!$store.state.userID && $route.path == '/'" text @click="redirect('/login')">Log In</v-btn>
+            <v-btn v-if="!$store.state.userID && $route.path == '/'" outlined class="ml-4" @click="redirect('/signup')">Sign Up</v-btn>
+            <AccountMenu v-if="$store.state.userID"/>
         </v-app-bar>
 
         <!-- Sidebar navigation -->
-        <NavMenu v-if="this.$store.state.userID && (this.$route.path === '/assets' || this.$route.path === '/debts' || this.$route.path === '/net-worth')" :mini="mini"/>
+        <NavMenu v-if="$store.state.userID && ($route.path === '/assets' || $route.path === '/debts' || $route.path === '/net-worth')" :mini="mini"/>
 
         <v-main>
             <router-view></router-view>
@@ -39,31 +39,29 @@ export default {
     },
 
     created() {
-        // Check user prefs for dark mode
-        if (this.$store.state.settings.darkMode === 0) {
+        // Check user prefs for theme
+        if (this.$store.state.settings.theme === 0) {
             this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         }
-        else if (this.$store.state.settings.darkMode === 1){
+        else if (this.$store.state.settings.theme === 1){
             this.$vuetify.theme.dark = false
         }
-        else if (this.$store.state.settings.darkMode === 2){
+        else if (this.$store.state.settings.theme === 2){
             this.$vuetify.theme.dark = true
-        }
-    },
-
-    computed: {
-        hideBar() {
-            if (this.$route.path === '/') {
-                return true
-            }
-            else {
-                return false
-            }
         }
     },
 
     methods: {
         redirect(link) { this.$router.push(link) },
+
+        logoClicked() {
+            if (this.$store.state.userID) {
+                this.redirect('/assets')
+            }
+            else {
+                this.redirect('/')
+            }
+        }
     },
 
     watch: {
@@ -91,13 +89,17 @@ export default {
   background: #aed581
 }
 
-/* Preventing changes to button color when focused */
-.v-btn:focus::before {
-    opacity: 0 !important
-}
-
 /* Adds class for non-caps buttons */
 .normal {
     text-transform: unset !important;
+}
+
+/* Turning the logo into a button */
+.link:hover {
+    cursor: pointer;
+}
+
+.v-ripple__container {
+    display:none !important;
 }
 </style>

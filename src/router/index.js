@@ -7,6 +7,7 @@ import Assets from '/src/components/Assets'
 import Debts from '/src/components/Debts'
 import NetWorth from '/src/components/NetWorth'
 import Settings from '/src/components/Settings'
+import UpdatePassword from '/src/components/UpdatePassword'
 import Home from '/src/components/Home'
 
 Vue.use(VueRouter)
@@ -22,7 +23,7 @@ export default new VueRouter ({
             path: '/',
             component: Home,
             meta: {
-                title: 'VuFi - Assets at a Glance'
+                title: 'VuFi - Finance at a Glance'
             }
         },
         {
@@ -65,6 +66,13 @@ export default new VueRouter ({
             component: Settings,
             meta: {
                 title: 'Settings | VuFi'
+            }
+        },
+        {
+            path: '/update-password',
+            component: UpdatePassword,
+            meta: {
+                title: 'Update Password | VuFi'
             }
         },
         {

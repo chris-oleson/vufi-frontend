@@ -42,8 +42,7 @@ export default {
             // Check if fields are correct
             if (this.validForm) {
                 // Update password in the database
-                await axios.post('http://localhost:3000/api/auth/update/password', {
-                    userID: this.$store.state.userID,
+                await axios.patch(`http://localhost:3000/api/user/${this.$store.state.userID}/update/password`, {
                     oldPassword: this.currentPassword,
                     newPassword: this.newPassword
                 })

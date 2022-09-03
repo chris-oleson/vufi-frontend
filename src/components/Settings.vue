@@ -34,14 +34,16 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'Settings',
 
     data() {
         return {
-            themeSelection: this.$store.state.settings.theme,
+            themeSelection: this.$store.state.userPrefs.theme,
 
-            currencySelection: this.$store.state.settings.currency,
+            currencySelection: this.$store.state.userPrefs.currency,
             currencies: [
                 'USD'
             ],
@@ -55,7 +57,21 @@ export default {
     },
 
     methods: {
-        redirect(link) { this.$router.push(link) }
+        redirect(link) { this.$router.push(link) },
+
+        async savePreferences() {
+            await axios.put(`http://localhost:3000/api/user/${this.$store.state.userID}/update/preferences`, {
+                theme: this.themeSelection,
+                currency: this.currencySelection
+            })
+            .then(() => {
+                // TODO: send success notification
+                this.$store.commit('setUserPrefs', {
+                    theme: this.themeSelection,
+                    currency: this.currencySelection
+                })
+            })
+        },
     },
 
     watch: {
@@ -69,11 +85,11 @@ export default {
             else if (data == 2) {
                 this.$vuetify.theme.dark = true
             }
-            this.$store.commit('setTheme', data)
+            this.savePreferences()
         },
 
-        currencySelection(data) {
-            this.$store.commit('setCurrency', data)
+        currencySelection() {
+            this.savePreferences()
         }
     }
 }

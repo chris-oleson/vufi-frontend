@@ -28,6 +28,11 @@ export default {
     methods: {
         logOut() {
             this.$store.commit('setUserID', null)
+            this.$store.commit('setUserPrefs', {
+                theme: 0,
+                currency: 'USD'
+            })
+            this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
             this.$router.push('/')
         },
 
@@ -35,9 +40,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-.v-list-item--active::before {
-    opacity: 0 !important;
-}
-</style>

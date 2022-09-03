@@ -1,5 +1,5 @@
 <template>
-    <v-data-table :headers="headers" :items="assets" :items-per-page="-1" sort-by="value" sort-desc class="elevation-2 ma-2">
+    <v-data-table :headers="headers" :items="assets" :items-per-page="10" sort-by="value" sort-desc class="elevation-2 ma-2">
         <template v-slot:top>
             <v-toolbar flat rounded color="transparent">
 

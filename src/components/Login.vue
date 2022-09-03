@@ -23,6 +23,7 @@ export default {
             email: '',
             password: '',
             errorState: false,
+            correctInfo: false,
         }
     },
 
@@ -44,14 +45,37 @@ export default {
                 password: this.password,
             }).then(resp => {
                 this.$store.commit('setUserID', resp.data)
-                this.$router.push('/assets')
+                this.correctInfo = true
             }).catch(() => {
                 // Handles incorrect login
                 this.errorState = true
             })
+
+            if (this.correctInfo) {
+                // Set preferences for user that just logged in
+                await axios.get(`http://localhost:3000/api/user/${this.$store.state.userID}/preferences`)
+                .then((resp) => {
+                    this.$store.commit('setUserPrefs', resp.data)
+                    this.applyTheme()
+                })
+
+                this.$router.push('/assets')
+            }
         },
 
         redirect(link) { this.$router.push(link) },
+
+        applyTheme() {
+            if (this.$store.state.userPrefs.theme === 0) {
+                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+            }
+            else if (this.$store.state.userPrefs.theme === 1){
+                this.$vuetify.theme.dark = false
+            }
+            else if (this.$store.state.userPrefs.theme === 2){
+                this.$vuetify.theme.dark = true
+            }
+        }
     }
 }
 </script>

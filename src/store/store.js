@@ -9,9 +9,9 @@ export default new Vuex.Store({
 
     state: {
         userID: null,
-        settings: {
-            theme: null,
-            currency: null,
+        userPrefs: {
+            theme: 0,
+            currency: 'USD',
         },
         assets: [],
         debts: [],
@@ -28,8 +28,7 @@ export default new Vuex.Store({
     mutations: {
         setUserID(state, data) { state.userID = data },
 
-        setTheme(state, data) { state.settings.theme = data },
-        setCurrency(state, data) { state.settings.currency = data },
+        setUserPrefs(state, data) { state.userPrefs = data },
 
         setAssets(state, data) { state.assets = data },
         setDebts(state, data) { state.debts = data },

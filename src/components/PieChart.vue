@@ -45,7 +45,7 @@ export default {
                     },
                 },
                 legend: {
-                    position: 'bottom'
+                    position: 'right'
                 },
                 tooltip: {
                     fillSeriesColor: false,

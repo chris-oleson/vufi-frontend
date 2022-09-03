@@ -47,24 +47,4 @@ router.post('/create', (req, res) => {
     })
 })
 
-router.post('/update/password', (req, res) => {
-    // Search for matching email
-    db.query(`SELECT * FROM users WHERE id = '${req.body.userID}'`, (err, results) => {
-        // Check if old password matches
-        bcrypt.compare(req.body.oldPassword, results[0].password, (err, match) => {
-            if (match) {
-                // Encrypt new password
-                let salt = bcrypt.genSaltSync(10)
-                let encryptedPassword = bcrypt.hashSync(req.body.newPassword, salt)
-
-                db.query(`UPDATE users SET \`password\` = '${encryptedPassword}' WHERE id = ${req.body.userID}`)
-                res.sendStatus(200)
-            }
-            else {
-                res.sendStatus(404)
-            }
-        })
-    })
-})
-
 module.exports = router

@@ -12,7 +12,6 @@
             <AccountMenu v-if="$store.state.userID"/>
         </v-app-bar>
 
-        <!-- Sidebar navigation -->
         <NavMenu v-if="$store.state.userID && ($route.path === '/assets' || $route.path === '/debts' || $route.path === '/net-worth')" :mini="mini"/>
 
         <v-main>
@@ -24,6 +23,7 @@
 <script>
 import AccountMenu from '/src/components/AccountMenu'
 import NavMenu from '/src/components/NavMenu'
+
 export default {
     name: 'App',
 
@@ -39,16 +39,7 @@ export default {
     },
 
     created() {
-        // Check user prefs for theme
-        if (this.$store.state.settings.theme === 0) {
-            this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        }
-        else if (this.$store.state.settings.theme === 1){
-            this.$vuetify.theme.dark = false
-        }
-        else if (this.$store.state.settings.theme === 2){
-            this.$vuetify.theme.dark = true
-        }
+        this.applyTheme()
     },
 
     methods: {
@@ -60,6 +51,18 @@ export default {
             }
             else {
                 this.redirect('/')
+            }
+        },
+
+        applyTheme() {
+            if (this.$store.state.userPrefs.theme === 0) {
+                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+            }
+            else if (this.$store.state.userPrefs.theme === 1){
+                this.$vuetify.theme.dark = false
+            }
+            else if (this.$store.state.userPrefs.theme === 2){
+                this.$vuetify.theme.dark = true
             }
         }
     },
@@ -99,6 +102,7 @@ export default {
     cursor: pointer;
 }
 
+/* Turning off ripple effect globally */
 .v-ripple__container {
     display:none !important;
 }

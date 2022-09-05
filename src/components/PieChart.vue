@@ -7,7 +7,7 @@
 <script>
 export default {
     name: 'PieChart',
-    props: ['theme', 'series', 'labels'],
+    props: ['type', 'series', 'labels'],
 
     computed: {
         getTheme() {
@@ -19,13 +19,20 @@ export default {
             }
         },
 
+        getColor() {
+            if (this.type == "Asset") {
+                return "#aed581"
+            }
+            else return "#e57373"
+        },
+
         chartOptions() {
             return {
                 theme: {
                     mode: this.getTheme,
                     monochrome: {
                         enabled: true,
-                        color: this.theme,
+                        color: this.getColor,
                         shadeTo: this.getTheme,
                         shadeIntensity: 0.5,
                     },
@@ -51,12 +58,17 @@ export default {
                     fillSeriesColor: false,
                     theme: this.getTheme,
                     y: {
-                        formatter(value) {
+                        formatter(value, chart) {
                             var formatter = new Intl.NumberFormat('en-US', {
                                 style: 'currency',
                                 currency: 'USD'
-                            });
-                            return formatter.format(value);
+                            })
+                            if (chart.config.theme.monochrome.color == "#aed581") {
+                                return formatter.format(value)
+                            }
+                            else {
+                                return formatter.format(0 - value)
+                            }
                         },
                     },
                 },
@@ -68,6 +80,6 @@ export default {
                 }
             }
         }
-    }
+    },
 }
 </script>

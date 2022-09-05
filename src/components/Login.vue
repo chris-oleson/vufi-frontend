@@ -52,8 +52,10 @@ export default {
             })
 
             if (this.correctInfo) {
+                this.loadTotalValues()
+
                 // Set preferences for user that just logged in
-                await axios.get(`http://localhost:3000/api/user/${this.$store.state.userID}/preferences`)
+                await axios.get(`http://localhost:3000/api/preferences/${this.$store.state.userID}`)
                 .then((resp) => {
                     this.$store.commit('setUserPrefs', resp.data)
                     this.applyTheme()
@@ -75,6 +77,28 @@ export default {
             else if (this.$store.state.userPrefs.theme === 2){
                 this.$vuetify.theme.dark = true
             }
+        },
+
+        // This is to populate the total values in the NavMenu
+        loadTotalValues() {
+            axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}`)
+            .then((resp) => {
+                this.assetData = resp.data
+                this.totalValue = 0
+                for (let asset of this.assetData) {
+                    this.totalValue += parseFloat(asset.value)
+                }
+                this.$store.commit('setTotalAssetValue', this.totalValue)
+            })
+            axios.get(`http://localhost:3000/api/debts/${this.$store.state.userID}`)
+            .then((resp) => {
+                this.debtData = resp.data
+                this.totalValue = 0
+                for (let debt of this.debtData) {
+                    this.totalValue += parseFloat(debt.value)
+                }
+                this.$store.commit('setTotalDebtValue', this.totalValue)
+            })
         }
     }
 }

@@ -5,7 +5,9 @@ import VuexPersistence from 'vuex-persist'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    plugins: [new VuexPersistence({}).plugin],
+    plugins: [new VuexPersistence({
+        storage: window.sessionStorage
+    }).plugin],
 
     state: {
         userID: null,
@@ -13,8 +15,12 @@ export default new Vuex.Store({
             theme: 0,
             currency: 'USD',
         },
-        assets: [],
-        debts: [],
+        notification: {
+            text: '',
+            color: ''
+        },
+        totalAssetValue: null,
+        totalDebtValue: null,
     },
 
     getters: {
@@ -27,11 +33,22 @@ export default new Vuex.Store({
 
     mutations: {
         setUserID(state, data) { state.userID = data },
-
         setUserPrefs(state, data) { state.userPrefs = data },
 
-        setAssets(state, data) { state.assets = data },
-        setDebts(state, data) { state.debts = data },
+        logOut(state) {
+            state.userID = null,
+            state.userPrefs = {
+                theme: 0,
+                currency: 'USD'
+            }
+            state.totalAssetValue = null,
+            state.totalDebtValue = null
+        },
+
+        setNotification(state, data) { state.notification = data },
+
+        setTotalAssetValue(state, data) { state.totalAssetValue = data },
+        setTotalDebtValue(state, data) { state.totalDebtValue = data },
     },
 
     actions: {

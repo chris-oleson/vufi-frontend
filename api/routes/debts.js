@@ -1,32 +1,20 @@
 const { Router } = require('express')
 const router = Router()
+const db = require('../database')
 
-// Fake database
-const debts = [
-    {
-        "id": 1,
-        "firstName": "Chris",
-        "lastName": "Oleson",
-        "email": "crolesonjr@gmail.com",
-        "password": "password"
-    },
-    {
-        "id": 2,
-        "firstName": "Test",
-        "lastName": "Testerson",
-        "email": "email@email.com",
-        "password": "password"
-    }
-]
-
-router.get('/', (req, res) => {
-    res.send(debts)
+router.get('/:user_id', (req, res) => {
+    db.query(`SELECT * FROM debts WHERE user_id = ${req.params.user_id}`, (err, results) => {
+        if (results) {
+            res.send(results)
+        }
+        else {
+            res.sendStatus(404)
+        }
+    })
 })
 
-router.get('/:id', (req, res) => {
-    let id = req.params.id
-    let debt = debts.find((debt) => debt.id == id)
-    res.send(debt)
+router.post('/', (req, res) => {
+    db.query(`INSERT INTO debts VALUES (null, '${req.body.name}', '${req.body.type}', ${req.body.value}, ${req.body.user_id})`)
 })
 
 module.exports = router

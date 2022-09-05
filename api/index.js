@@ -2,25 +2,15 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-// Enables parsing cookie data
-const cookieParser = require('cookie-parser')
-app.use(cookieParser())
-
 app.use(express.json())
-
-// Enables session data
-const session = require('express-session')
-app.use(session({
-    secret: 'ABCDEFG',
-    resave: false,
-    saveUninitialized: false
-}))
 
 // Registered routes
 const auth = require('./routes/auth')
 app.use('/api/auth', auth)
 const user = require('./routes/user')
 app.use('/api/user', user)
+const preferences = require('./routes/preferences')
+app.use('/api/preferences', preferences)
 const assets = require('./routes/assets')
 app.use('/api/assets', assets)
 const debts = require('./routes/debts')

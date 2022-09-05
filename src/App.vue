@@ -16,6 +16,7 @@
 
         <v-main>
             <router-view></router-view>
+            <v-snackbar v-model="showNotification" top :color="notificationColor" transition="slide-y-transition" min-width="0" timeout="2000">{{notificationText}}</v-snackbar>
         </v-main>
     </v-app>
 </template>
@@ -34,7 +35,10 @@ export default {
 
     data() {
         return {
-            mini: this.$vuetify.breakpoint.mobile
+            mini: this.$vuetify.breakpoint.mobile,
+            showNotification: false,
+            notificationColor: '',
+            notificationText: '',
         }
     },
 
@@ -64,7 +68,7 @@ export default {
             else if (this.$store.state.userPrefs.theme === 2){
                 this.$vuetify.theme.dark = true
             }
-        }
+        },
     },
 
     watch: {
@@ -78,6 +82,12 @@ export default {
 
         '$vuetify.breakpoint.mobile'(data) {
             this.mini = data
+        },
+
+        '$store.state.notification'(data) {
+            this.notificationText = data.text
+            this.notificationColor = data.color
+            this.showNotification = true
         }
     }
 };

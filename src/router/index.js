@@ -8,6 +8,8 @@ import Debts from '/src/components/Debts'
 import NetWorth from '/src/components/NetWorth'
 import Settings from '/src/components/Settings'
 import UpdatePassword from '/src/components/UpdatePassword'
+import UpdateEmail from '/src/components/UpdateEmail'
+import DeleteAccount from '/src/components/DeleteAccount'
 import Home from '/src/components/Home'
 
 Vue.use(VueRouter)
@@ -73,6 +75,20 @@ export default new VueRouter ({
             component: UpdatePassword,
             meta: {
                 title: 'Update Password | VuFi'
+            }
+        },
+        {
+            path: '/update-email',
+            component: UpdateEmail,
+            meta: {
+                title: 'Update Email | VuFi'
+            }
+        },
+        {
+            path: '/delete-account',
+            component: DeleteAccount,
+            meta: {
+                title: 'Delete Account | VuFi'
             }
         },
         {

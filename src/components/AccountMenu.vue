@@ -27,11 +27,7 @@ export default {
 
     methods: {
         logOut() {
-            this.$store.commit('setUserID', null)
-            this.$store.commit('setUserPrefs', {
-                theme: 0,
-                currency: 'USD'
-            })
+            this.$store.commit('logOut')
             this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
             this.$router.push('/')
         },

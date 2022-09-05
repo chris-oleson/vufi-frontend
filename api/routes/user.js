@@ -3,11 +3,11 @@ const router = Router()
 const bcrypt = require('bcryptjs')
 const db = require('../database')
 
-router.patch('/:id/update/password', (req, res) => {
+router.patch('/:id/password', (req, res) => {
     // Search for user making request
     db.query(`SELECT * FROM users WHERE id = '${req.params.id}'`, (err, results) => {
         // Check if old password matches
-        bcrypt.compare(req.body.oldPassword, results[0].password, (err, match) => {
+        bcrypt.compare(req.body.password, results[0].password, (err, match) => {
             if (match) {
                 // Encrypt new password
                 let salt = bcrypt.genSaltSync(10)
@@ -23,15 +23,41 @@ router.patch('/:id/update/password', (req, res) => {
     })
 })
 
-router.put('/:id/update/preferences', (req, res) => {
-    db.query(`UPDATE user_prefs SET theme = ${req.body.theme}, currency = '${req.body.currency}' WHERE id = ${req.params.id}`, (err, results) => {
-        res.sendStatus(200)
+router.patch('/:id/email', (req, res) => {
+    // Search for user making request
+    db.query(`SELECT * FROM users WHERE id = '${req.params.id}'`, (err, results) => {
+        // Check if password matches
+        bcrypt.compare(req.body.password, results[0].password, (err, match) => {
+            if (match) {
+                db.query(`UPDATE users SET email = '${req.body.email}' WHERE id = ${req.params.id}`)
+                res.sendStatus(200)
+            }
+            else {
+                res.sendStatus(404)
+            }
+        })
     })
 })
 
-router.get('/:id/preferences', (req, res) => {
-    db.query(`SELECT * FROM user_prefs WHERE id = ${req.params.id}`, (err, results) => {
-        res.send(results[0])
+router.delete('/:id', (req, res) => {
+    // Search for user making request
+    db.query(`SELECT * FROM users WHERE id = '${req.params.id}'`, (err, results) => {
+        // Check if password matches
+        bcrypt.compare(req.query.password, results[0].password, (err, match) => {
+            if (match) {
+                db.query(`DELETE FROM users WHERE id = ${req.params.id}`, (err, results) => {
+                    if (results) {
+                        res.sendStatus(200)
+                    }
+                    else {
+                        res.sendStatus(404)
+                    }
+                })
+            }
+            else {
+                res.sendStatus(404)
+            }
+        })
     })
 })
 

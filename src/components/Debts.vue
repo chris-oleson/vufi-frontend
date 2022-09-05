@@ -1,13 +1,13 @@
 <template>
     <v-row class="ma-2">
         <v-flex xs12>
-            <LineChart theme="#e57373" :series="historicData"/>
+            <LineChart v-if="historicData.length" theme="#e57373" :series="historicData"/>
         </v-flex>
         <v-flex xs12 md6>
-            <Table title="Debt" theme="error"/>
+            <Table type="Debt" :tableData="debtData"/>
         </v-flex>
         <v-flex xs12 md6>
-            <PieChart theme="#e57373" :series="series" :labels="labels"/>
+            <PieChart type="Debt" :series="pieChartValues" :labels="pieChartLabels"/>
         </v-flex>
     </v-row>
 </template>
@@ -16,15 +16,19 @@
 import Table from '/src/components/Table.vue'
 import PieChart from '/src/components/PieChart.vue'
 import LineChart from '/src/components/LineChart.vue'
+import axios from 'axios'
 
 export default ({
-    name: 'Assets',
+    name: 'Debts',
 
     data() {
         return {
-            series: [],
-            labels: [],
-            historicData: []
+            debtData: [],
+            totalValue: null,
+            pieChartValues: [],
+            pieChartLabels: [],
+
+            historicData: [],
         }
     },
 
@@ -39,93 +43,26 @@ export default ({
             this.$router.push('/404')
         }
 
-        this.series = [1, 2, 3, 4, 5]
-        this.labels = ['One', 'Two', 'Three', 'Four', 'Five']
-        this.historicData = [{
-            name: "",
-            data: [
-                {
-                "x": "Jul 28 2022",
-                "y": 50000,
-                },
-                {
-                "x": "Jul 29 2022",
-                "y": 51000,
-                },
-                {
-                "x": "Jul 30 2022",
-                "y": 62000,
-                },
-                {
-                "x": "Jul 31 2022",
-                "y": 58000,
-                },
-                {
-                "x": "Aug 01 2022",
-                "y": 52000,
-                },
-                {
-                "x": "Aug 02 2022",
-                "y": 47000,
-                },
-                {
-                "x": "Aug 03 2022",
-                "y": 49000,
-                },
-                {
-                "x": "Aug 04 2022",
-                "y": 49000,
-                },
-                {
-                "x": "Aug 05 2022",
-                "y": 50000,
-                },
-                {
-                "x": "Aug 06 2022",
-                "y": 53000,
-                },
-                {
-                "x": "Aug 07 2022",
-                "y": 58000,
-                },
-                {
-                "x": "Aug 08 2022",
-                "y": 62500,
-                },
-                {
-                "x": "Aug 09 2022",
-                "y": 63500,
-                },
-                {
-                "x": "Aug 10 2022",
-                "y": 63500,
-                },
-                {
-                "x": "Aug 11 2022",
-                "y": 69500,
-                },
-                {
-                "x": "Aug 12 2022",
-                "y": 67500,
-                },
-                {
-                "x": "Aug 14 2022",
-                "y": 72500,
-                },
-                {
-                "x": "Aug 15 2022",
-                "y": 72500,
-                },
-                {
-                "x": "Aug 16 2022",
-                "y": 73500,
-                },
-                {
-                "x": "Aug 17 2022",
-                "y": 73500,
-                }
-            ]
-        }]
+        this.loadData()
     },
+
+    methods: {
+        async loadData() {
+            await axios.get(`http://localhost:3000/api/debts/${this.$store.state.userID}`)
+            .then((resp) => {
+                this.debtData = resp.data
+            })
+
+            this.totalValue = 0
+            this.pieChartValues = []
+            this.pieChartLabels = []
+            for (let debt of this.debtData) {
+                this.pieChartLabels.push(debt.name)
+                this.pieChartValues.push(Math.abs(parseFloat(debt.value)))
+                this.totalValue += parseFloat(debt.value)
+            }
+            this.$store.commit('setTotalDebtValue', this.totalValue)
+        }
+    }
 })
 </script>

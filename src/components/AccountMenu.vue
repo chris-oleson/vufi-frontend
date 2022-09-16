@@ -2,17 +2,13 @@
     <div>
         <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ on, attrs }">
-                <v-btn fab small v-bind="attrs" v-on="on">
-                    <v-icon>mdi-account</v-icon>
+                <v-btn plain small fab v-bind="attrs" v-on="on" @click="selection = null">
+                    <v-icon>mdi-cog-outline</v-icon>
                 </v-btn>
             </template>
+            
             <v-list class="font-weight-light" width="200">
-                <v-list-item>
-                    <v-list-item-title>{{this.$store.state.userID}}</v-list-item-title>
-                </v-list-item>
-
-                <v-list-item-group>
-                    <v-divider></v-divider>
+                <v-list-item-group v-model="selection">
                     <v-list-item @click="redirect('/settings')">Settings</v-list-item>
                     <v-list-item @click="logOut">Log out</v-list-item>
                 </v-list-item-group>
@@ -24,6 +20,12 @@
 <script>
 export default {
     name: 'AccountMenu',
+
+    data() {
+        return {
+            selection: null
+        }
+    },
 
     methods: {
         logOut() {

@@ -11,14 +11,18 @@ export default new Vuex.Store({
 
     state: {
         userID: null,
+        firstName: null,
+
         userPrefs: {
             theme: 0,
             currency: 'USD',
         },
+
         notification: {
             text: '',
             color: ''
         },
+
         totalAssetValue: null,
         totalDebtValue: null,
     },
@@ -33,10 +37,13 @@ export default new Vuex.Store({
 
     mutations: {
         setUserID(state, data) { state.userID = data },
+        setFirstName(state, data) { state.firstName = data },
+
         setUserPrefs(state, data) { state.userPrefs = data },
 
         logOut(state) {
             state.userID = null,
+            state.userFirstName = null,
             state.userPrefs = {
                 theme: 0,
                 currency: 'USD'

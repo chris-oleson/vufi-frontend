@@ -5,7 +5,7 @@
 
                 <!-- Top bar -->
                 <v-toolbar-title class="font-weight-light text-h5">{{ type }}s</v-toolbar-title>
-                <v-divider class="mx-4" inset vertical></v-divider>
+                <v-divider v-show="tableData.length" class="mx-4" inset vertical></v-divider>
                 <v-toolbar-title class="font-weight-light text-h5">{{ totalValue | toCurrency }}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-dialog v-model="dialog" max-width="400px">
@@ -78,7 +78,7 @@ import axios from 'axios'
 
 export default {
     name: 'Table',
-    props: ['type', 'tableData', 'totalValue'],
+    props: ['type', 'url', 'tableData', 'totalValue'],
 
     data: () => ({
         dialog: false,
@@ -141,6 +141,8 @@ export default {
 
         deleteItemConfirm () {
             this.tableData.splice(this.editedIndex, 1)
+            this.deleteFromDatabase(this.editedItem)
+            this.$parent.loadData()
             this.closeDelete()
         },
 
@@ -162,19 +164,20 @@ export default {
 
         save () {
             if (this.editedIndex > -1) {
+                // Editing existing
                 Object.assign(this.tableData[this.editedIndex], this.editedItem)
-                this.putDatabase(this.editedItem)
+                this.replaceInDatabase(this.editedItem)
             } else {
+                // Adding new item
                 this.tableData.push(this.editedItem)
-                this.postDatabase(this.editedItem)
+                this.addToDatabase(this.editedItem)
             }
             this.$parent.loadData()
             this.close()
         },
 
-        async postDatabase(item) {
-            let url = this.type.toLowerCase() + 's'
-            await axios.post(`http://localhost:3000/api/${url}`, {
+        async addToDatabase(item) {
+            await axios.post(`http://localhost:3000/api/${this.url}`, {
                 name: item.name,
                 type: item.type,
                 value: item.value,
@@ -182,18 +185,18 @@ export default {
             })
         },
         
-        async putDatabase(item) {
-            let url = this.type.toLowerCase() + 's'
-            await axios.put(`http://localhost:3000/api/${url}/${item.id}`, {
+        async replaceInDatabase(item) {
+            await axios.put(`http://localhost:3000/api/${this.url}/${item.id}`, {
                 name: item.name,
                 type: item.type,
                 value: item.value,
                 user_id: this.$store.state.userID,
             })
-            .then(() => {
-                console.log('edited')
-            })
         },
+
+        async deleteFromDatabase(item) {
+            await axios.delete(`http://localhost:3000/api/${this.url}/${item.id}`)
+        }
     },
 }
 </script>

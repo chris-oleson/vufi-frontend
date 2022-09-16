@@ -4,10 +4,10 @@
             <LineChart v-if="historicData.length" theme="#aed581" :series="historicData"/>
         </v-flex>
         <v-flex xs12 md6>
-            <Table type="Asset" :tableData="assetData" :totalValue="totalValue"/>
+            <Table type="Asset" url="assets" :tableData="assetData" :totalValue="totalValue"/>
         </v-flex>
         <v-flex xs12 md6>
-            <PieChart type="Asset" :series="pieChartValues" :labels="pieChartLabels"/>
+            <PieChart v-if="pieChartValues.length" type="Asset" :series="pieChartValues" :labels="pieChartLabels"/>
         </v-flex>
     </v-row>
 </template>
@@ -52,13 +52,17 @@ export default ({
                 this.assetData = resp.data
             })
 
-            this.totalValue = 0
+            this.totalValue = null
             this.pieChartValues = []
             this.pieChartLabels = []
-            for (let asset of this.assetData) {
-                this.pieChartLabels.push(asset.name)
-                this.pieChartValues.push(parseFloat(asset.value))
-                this.totalValue += parseFloat(asset.value)
+
+            if (this.assetData.length) {
+                this.totalValue = 0
+                for (let asset of this.assetData) {
+                    this.pieChartLabels.push(asset.name)
+                    this.pieChartValues.push(parseFloat(asset.value))
+                    this.totalValue += parseFloat(asset.value)
+                }
             }
             this.$store.commit('setTotalAssetValue', this.totalValue)
         }

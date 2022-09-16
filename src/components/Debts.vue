@@ -4,10 +4,10 @@
             <LineChart v-if="historicData.length" theme="#e57373" :series="historicData"/>
         </v-flex>
         <v-flex xs12 md6>
-            <Table type="Debt" :tableData="debtData"/>
+            <Table type="Debt" url="debts" :tableData="debtData" :totalValue="totalValue"/>
         </v-flex>
         <v-flex xs12 md6>
-            <PieChart type="Debt" :series="pieChartValues" :labels="pieChartLabels"/>
+            <PieChart v-if="pieChartValues.length" type="Debt" :series="pieChartValues" :labels="pieChartLabels"/>
         </v-flex>
     </v-row>
 </template>
@@ -53,13 +53,17 @@ export default ({
                 this.debtData = resp.data
             })
 
-            this.totalValue = 0
+            this.totalValue = null
             this.pieChartValues = []
             this.pieChartLabels = []
-            for (let debt of this.debtData) {
-                this.pieChartLabels.push(debt.name)
-                this.pieChartValues.push(Math.abs(parseFloat(debt.value)))
-                this.totalValue += parseFloat(debt.value)
+
+            if (this.debtData.length) {
+                this.totalValue = 0
+                for (let debt of this.debtData) {
+                    this.pieChartLabels.push(debt.name)
+                    this.pieChartValues.push(Math.abs(parseFloat(debt.value)))
+                    this.totalValue += parseFloat(debt.value)
+                }
             }
             this.$store.commit('setTotalDebtValue', this.totalValue)
         }

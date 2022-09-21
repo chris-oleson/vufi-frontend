@@ -1,14 +1,16 @@
 <template>
     <v-app>
-        <v-app-bar app clipped-left>
-            <v-app-bar-nav-icon v-if="$store.state.userID && ($route.path === '/assets' || $route.path === '/debts' || $route.path === '/net-worth')" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
+        <v-app-bar app clipped-left elevation="4">
+            <v-btn v-if="$store.state.userID && ($route.path === '/assets' || $route.path === '/debts' || $route.path === '/net-worth')" plain icon class="mr-2" @click="mini = !mini">
+                <v-icon>mdi-menu</v-icon>
+            </v-btn>
             <v-img src="./assets/logo64x64.png" max-height="50" max-width="50" class="link" @click="logoClicked"></v-img>
             <h2 class="font-weight-light pl-2 d-none d-sm-flex link" @click="logoClicked">VuFi</h2>
             
             <v-spacer></v-spacer>
 
             <v-btn v-if="$route.path == '/'" text tile class="font-weight-light" @click="redirect('/')">Home</v-btn>
-            <v-btn v-if="$route.path == '/'" text tile class="font-weight-light" @click="redirect('/pricing')">Pricing</v-btn>
+            <v-btn v-if="$route.path == '/'" text tile class="font-weight-light mx-4" @click="redirect('/pricing')">Pricing</v-btn>
             <v-btn v-if="$route.path == '/'" text tile class="font-weight-light" @click="redirect('/about')">About</v-btn>
             <v-divider v-if="$route.path == '/'" vertical inset class="mx-4"></v-divider>
 
@@ -109,11 +111,6 @@ export default {
 
 /* Turning the logo into a button */
 .link:hover {
-    cursor: pointer;
-}
-
-/* Turning off ripple effect globally */
-.v-ripple__container {
-    display:none !important;
+    cursor: pointer
 }
 </style>

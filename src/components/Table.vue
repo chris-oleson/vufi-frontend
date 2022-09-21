@@ -1,5 +1,5 @@
 <template>
-    <v-card class="ma-2 pa-2">
+    <v-card class="ma-2 pa-2" elevation="4">
         <v-data-table :headers="headers" :items="tableData" :items-per-page="5" sort-by="value" sort-desc>
             <template v-slot:top>
                 <v-toolbar flat rounded color="transparent">
@@ -69,7 +69,7 @@
 
             <!-- No data display -->
             <template v-slot:no-data>
-                <p class="my-4">No {{ type.toLowerCase() }} have been added</p>
+                <p class="my-4">No {{ type.toLowerCase() }}s have been added</p>
             </template>
         </v-data-table>
     </v-card>

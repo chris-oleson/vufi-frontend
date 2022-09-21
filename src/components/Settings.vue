@@ -5,27 +5,27 @@
         <!-- Theme Selection -->
         <v-card-text class="mt-6">Theme</v-card-text>
         <v-card-actions class="justify-center mb-6">
-            <v-btn-toggle mandatory v-model="themeSelection">
-                <v-btn small class="pa-4">System</v-btn>
-                <v-btn small class="pa-4">Light</v-btn>
-                <v-btn small class="pa-4">Dark</v-btn>
+            <v-btn-toggle tile mandatory v-model="themeSelection">
+                <v-btn small text outlined class="font-weight-light pa-4">System</v-btn>
+                <v-btn small text outlined class="font-weight-light pa-4">Light</v-btn>
+                <v-btn small text outlined class="font-weight-light pa-4">Dark</v-btn>
             </v-btn-toggle>
         </v-card-actions>
 
         <!-- Change Default Currency -->
         <v-card-text>Display</v-card-text>
-        <v-select :items="currencies" v-model="currencySelection" dense outlined label="Default Currency"></v-select>
+        <v-select :items="currencies" :menu-props="{ tile: true, nudgeBottom: 40 }" v-model="currencySelection" dense outlined class="rounded-0 mx-auto" label="Default Currency"></v-select>
 
         <v-card-text>Account</v-card-text>
 
         <!-- Change Password -->
-        <v-btn width="200" @click="redirect('/update-password')">Change Password</v-btn>
+        <v-btn outlined tile text class="font-weight-light" width="200" @click="redirect('/update-password')">Change Password</v-btn>
 
         <!-- Change Email -->
-        <v-btn width="200" class="my-4" @click="redirect('/update-email')">Change Email</v-btn>
+        <v-btn outlined tile text class="font-weight-light my-4" width="200" @click="redirect('/update-email')">Change Email</v-btn>
 
         <!-- Delete Account -->
-        <v-btn width="200" @click="redirect('/delete-account')">Delete Account</v-btn>
+        <v-btn outlined tile text class="font-weight-light" width="200" @click="redirect('/delete-account')">Delete Account</v-btn>
     </v-card>
 </template>
 
@@ -41,7 +41,7 @@ export default {
 
             currencySelection: this.$store.state.userPrefs.currency,
             currencies: [
-                'USD'
+                'USD',
             ],
         }
     },
@@ -88,3 +88,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.v-input{
+    width: 200px;
+}
+</style>

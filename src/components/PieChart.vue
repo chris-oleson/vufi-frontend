@@ -1,5 +1,5 @@
 <template>
-    <v-card class="ma-2 pa-2">
+    <v-card class="ma-2 pa-2" elevation="4">
         <apexchart type="pie" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </template>

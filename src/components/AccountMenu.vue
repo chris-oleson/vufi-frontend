@@ -1,20 +1,18 @@
 <template>
-    <div>
-        <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
-            <template v-slot:activator="{ on, attrs }">
-                <v-btn plain small fab v-bind="attrs" v-on="on" @click="selection = null">
-                    <v-icon>mdi-cog</v-icon>
-                </v-btn>
-            </template>
-            
-            <v-list class="font-weight-light" width="200">
-                <v-list-item-group v-model="selection">
-                    <v-list-item @click="redirect('/settings')">Settings</v-list-item>
-                    <v-list-item @click="logOut">Log out</v-list-item>
-                </v-list-item-group>
-            </v-list>
-        </v-menu>
-    </div>
+    <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
+        <template v-slot:activator="{ on, attrs }">
+            <v-btn plain icon v-bind="attrs" v-on="on" @click="selection = null">
+                <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+        </template>
+        
+        <v-list class="font-weight-light pa-0" width="200">
+            <v-list-item-group v-model="selection">
+                <v-list-item @click="redirect('/settings')">Settings</v-list-item>
+                <v-list-item @click="logOut">Log out</v-list-item>
+            </v-list-item-group>
+        </v-list>
+    </v-menu>
 </template>
 
 <script>

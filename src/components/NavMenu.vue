@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer app floating clipped permanent :mini-variant="mini" class="elevation-2">
+    <v-navigation-drawer app floating clipped permanent :mini-variant="mini" class="elevation-4">
         <v-list class="font-weight-light pa-0">
             <v-list-item-group mandatory :value="page">
                 <v-list-item @click="redirect('/assets')">

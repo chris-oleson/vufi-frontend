@@ -1,19 +1,19 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <v-form v-model="validForm">
+        <v-form v-model="validForm" ref="form">
             <v-img eager src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto mb-4"></v-img>
 
             <v-text-field label="First Name" v-model="firstName"></v-text-field>
             <v-text-field label="Last Name" v-model="lastName"></v-text-field>
 
             <v-text-field label="Email" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"></v-text-field>
+            <v-text-field class="mb-4" label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
+
             <v-card-text v-if="emailExists" class="error--text pa-0">This email is already registered</v-card-text>
-            <v-btn v-if="emailExists" width="200" class="error my-4">Forgot Password?</v-btn>
+            <v-btn v-if="emailExists" width="200" small tile class="error mt-4">Forgot Password?</v-btn>
 
-            <v-text-field label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
-
-            <v-btn width="200" class="primary mt-6 mb-4" @click="createAccount">Sign Up</v-btn>
-            <v-btn width="200" text @click="redirect('/login')">Log In</v-btn>
+            <v-btn width="200" tile class="primary my-4" @click="createAccount">Sign Up</v-btn>
+            <v-btn width="200" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
         </v-form>
     </v-card>
 </template>
@@ -52,6 +52,8 @@ export default {
 
     methods: {
         async createAccount() {
+            this.$refs.form.validate()
+
             // Check if fields are correct
             if (this.validForm) {
                 // Add user to the database

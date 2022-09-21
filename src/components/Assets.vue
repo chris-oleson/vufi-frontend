@@ -113,11 +113,13 @@ export default ({
                         }
                     }
                     // If the asset doesn't have an entry for a date with data, add one with the previous value.
-                    if (!asset.history.some(e => e.x == date) && asset.history.length > 1) {
-                        asset.history.push({
-                            x: date,
-                            y: parseFloat(asset.history[asset.history.length - 1].y)
-                        })
+                    if (!asset.history.some(e => e.x == date)) {
+                        if (asset.history.length) {
+                            asset.history.push({
+                                x: date,
+                                y: parseFloat(asset.history[asset.history.length - 1].y)
+                            })
+                        }
                     }
                 }
             }

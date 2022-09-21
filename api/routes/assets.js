@@ -24,17 +24,22 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     // Update the asset data
-    db.query(`UPDATE assets SET name = '${req.body.name}', type = '${req.body.type}', value = ${req.body.value}, user_id = ${req.body.user_id} WHERE id = ${req.params.id}`)
-    // Check if there is already current value data
-    db.query(`SELECT * FROM asset_history WHERE asset_id = ${req.params.id} AND date = CURRENT_DATE()`, (err, results) => {
-        // If there is, update the current value data
-        if (results.length) {
-            db.query(`UPDATE asset_history SET value = ${req.body.value} WHERE asset_id = ${req.params.id} AND date = CURRENT_DATE()`)
-        }
-        // If not, add new data for today
-        else {
-            db.query(`INSERT INTO asset_history VALUES (null, '${req.body.value}', CURRENT_DATE(), ${req.params.id})`)
-        }
+    db.query(`UPDATE assets SET name = '${req.body.name}', type = '${req.body.type}', value = ${req.body.value}, user_id = ${req.body.user_id} WHERE id = ${req.params.id}`, (err, results) => {
+        // Check if there is already current value data
+        db.query(`SELECT * FROM asset_history WHERE asset_id = ${req.params.id} AND date = CURRENT_DATE()`, (err, results) => {
+            // If there is, update the current value data
+            if (results.length) {
+                db.query(`UPDATE asset_history SET value = ${req.body.value} WHERE asset_id = ${req.params.id} AND date = CURRENT_DATE()`, (err, results) => {
+                    res.send(results)
+                })
+            }
+            // If not, add new data for today
+            else {
+                db.query(`INSERT INTO asset_history VALUES (null, '${req.body.value}', CURRENT_DATE(), ${req.params.id})`, (err, results) => {
+                    res.send(results)
+                })
+            }
+        })
     })
 })
 

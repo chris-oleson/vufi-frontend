@@ -1,17 +1,15 @@
 <template>
-    <v-card class="pa-10 mx-auto mt-10" width="330">
+    <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
         <v-img eager src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto"></v-img>
 
-        <v-text-field class="mt-6" label="Current Password" :error="incorrectPassword" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
-        <v-card-text v-if="incorrectPassword" class="error--text pa-0">Incorrect password</v-card-text>
+        <v-text-field class="mt-4" label="Current Password" :error="incorrectPassword" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
 
         <v-form v-model="validForm">
-            <v-text-field class="mt-4" label="New Password" type="password" v-model="newPassword" :rules="[rules.required]"></v-text-field>
-            <v-text-field class="mt-4" label="Confirm New Password" type="password" v-model="confirmNewPassword" :rules="[rules.match]" @keyup.enter="changePassword"></v-text-field>
+            <v-text-field class="my-4" label="New Password" type="password" v-model="newPassword" :rules="[rules.required]"></v-text-field>
+            <v-text-field class="mb-4" label="Confirm New Password" type="password" v-model="confirmNewPassword" :rules="[rules.match]" @keyup.enter="changePassword"></v-text-field>
 
-            <v-card-actions class="justify-center mt-6">
-                <v-btn color="primary" width="200" @click="changePassword">Submit</v-btn>
-            </v-card-actions>
+            <v-card-text v-if="incorrectPassword" class="error--text pa-0">Incorrect password</v-card-text>
+            <v-btn tile class="primary mt-4" width="200" @click="changePassword">Submit</v-btn>
         </v-form>
     </v-card>
 </template>

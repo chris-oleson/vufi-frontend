@@ -13,6 +13,17 @@ router.get('/:user_id', (req, res) => {
     })
 })
 
+router.get('/:user_id/history', (req, res) => {
+    db.query(`SELECT asset_history.\`value\`, asset_history.\`date\`, asset_id FROM asset_history, assets where asset_id = assets.id and user_id = ${req.params.user_id} AND asset_history.\`value\` >= 0;`, (err, results) => {
+        if (results.length) {
+            res.send(results)
+        }
+        else {
+            res.sendStatus(404)
+        }
+    })
+})
+
 router.post('/', (req, res) => {
     db.query(`INSERT INTO assets VALUES (null, '${req.body.name}', '${req.body.type}', ${req.body.value}, ${req.body.user_id})`, (err, results) => {
         db.query(`INSERT INTO asset_history VALUES (null, '${req.body.value}', CURRENT_DATE(), ${results.insertId})`)

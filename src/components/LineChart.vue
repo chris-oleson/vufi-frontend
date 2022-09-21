@@ -1,6 +1,6 @@
 <template>
     <v-card class="ma-2 pa-2" height="300">
-        <apexchart type="area" :options="chartOptions" :series="series" height="100%"></apexchart>
+        <apexchart v-if="series[0].data.length" type="area" :options="chartOptions" :series="series" height="100%"></apexchart>
     </v-card>
 </template>
 
@@ -42,10 +42,17 @@ export default {
                             return 0
                         }
                         else {
-                            return smallest * 2
+                            return smallest * 1.5
                         }
                     },
-                    max: function(biggest) { return biggest * 1.1 },
+                    max: function(biggest) {
+                        if (biggest > 0) {
+                            return biggest * 1.1
+                        }
+                        else {
+                            return 0
+                        }
+                    },
                     forceNiceScale: true,
                     tickAmount: 4
                 },

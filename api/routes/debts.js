@@ -4,7 +4,18 @@ const db = require('../database')
 
 router.get('/:user_id', (req, res) => {
     db.query(`SELECT * FROM assets WHERE user_id = ${req.params.user_id} AND value < 0`, (err, results) => {
-        if (results) {
+        if (results.length) {
+            res.send(results)
+        }
+        else {
+            res.sendStatus(404)
+        }
+    })
+})
+
+router.get('/:user_id/history', (req, res) => {
+    db.query(`SELECT asset_history.\`value\`, asset_history.\`date\`, asset_id FROM asset_history, assets where asset_id = assets.id and user_id = ${req.params.user_id} AND asset_history.\`value\` < 0;`, (err, results) => {
+        if (results.length) {
             res.send(results)
         }
         else {
@@ -37,6 +48,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     db.query(`DELETE FROM assets WHERE id = ${req.params.id}`)
+    db.query(`DELETE FROM asset_history WHERE asset_id = ${req.params.id}`)
 })
 
 module.exports = router

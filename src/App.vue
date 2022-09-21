@@ -4,11 +4,16 @@
             <v-app-bar-nav-icon v-if="$store.state.userID && ($route.path === '/assets' || $route.path === '/debts' || $route.path === '/net-worth')" class="mr-4" @click="mini = !mini"></v-app-bar-nav-icon>
             <v-img src="./assets/logo64x64.png" max-height="50" max-width="50" class="link" @click="logoClicked"></v-img>
             <h2 class="font-weight-light pl-2 d-none d-sm-flex link" @click="logoClicked">VuFi</h2>
-
+            
             <v-spacer></v-spacer>
 
-            <v-btn v-if="!$store.state.userID && $route.path == '/'" text @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="!$store.state.userID && $route.path == '/'" outlined class="ml-4" @click="redirect('/signup')">Sign Up</v-btn>
+            <v-btn v-if="$route.path == '/'" text class="font-weight-light" @click="redirect('/')">Home</v-btn>
+            <v-btn v-if="$route.path == '/'" text class="font-weight-light ml-4" @click="redirect('/pricing')">Pricing</v-btn>
+            <v-btn v-if="$route.path == '/'" text class="font-weight-light ml-4" @click="redirect('/about')">About</v-btn>
+            <v-divider v-if="$route.path == '/'" vertical inset class="mx-4"></v-divider>
+
+            <v-btn v-if="!$store.state.userID && $route.path == '/'" text class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
+            <v-btn v-if="!$store.state.userID && $route.path == '/'" class="ml-4 primary" @click="redirect('/signup')">Sign Up</v-btn>
             <AccountMenu v-if="$store.state.userID"/>
         </v-app-bar>
 

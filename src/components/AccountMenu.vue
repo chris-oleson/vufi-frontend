@@ -3,7 +3,7 @@
         <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ on, attrs }">
                 <v-btn plain small fab v-bind="attrs" v-on="on" @click="selection = null">
-                    <v-icon>mdi-cog-outline</v-icon>
+                    <v-icon>mdi-cog</v-icon>
                 </v-btn>
             </template>
             

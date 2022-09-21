@@ -53,18 +53,21 @@ export default ({
     methods: {
         async loadData() {
             this.totalValue = null
+            this.lineChartData[0].data = []
+            this.pieChartValues = []
+            this.pieChartLabels = []
 
             axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}`)
             .then(resp => {
                 this.assetData = resp.data
 
-                this.pieChartValues = []
-                this.pieChartLabels = []
-                this.totalValue = 0
-                for (let asset of this.assetData) {
-                    this.pieChartLabels.push(asset.name)
-                    this.pieChartValues.push(parseFloat(asset.value))
-                    this.totalValue += parseFloat(asset.value)
+                if (this.assetData.length) {
+                    this.totalValue = 0
+                    for (let asset of this.assetData) {
+                        this.pieChartLabels.push(asset.name)
+                        this.pieChartValues.push(Math.abs(parseFloat(asset.value)))
+                        this.totalValue += parseFloat(asset.value)
+                    }
                 }
 
                 this.$store.commit('setTotalAssetValue', this.totalValue)
@@ -99,7 +102,7 @@ export default ({
 
             // Go through every asset
             for (let asset of assets) {
-                for (let date of uniqueDates) {
+                for (let date of uniqueDates) {                    
                     // Check if there is any value for that asset on that date, add it if there is.
                     for (let entry of history) {
                         if (entry.date == date && entry.asset_id == asset.id) {
@@ -110,7 +113,7 @@ export default ({
                         }
                     }
                     // If the asset doesn't have an entry for a date with data, add one with the previous value.
-                    if (!asset.history.some(e => e.x == date)) {
+                    if (!asset.history.some(e => e.x == date) && asset.history.length > 1) {
                         asset.history.push({
                             x: date,
                             y: parseFloat(asset.history[asset.history.length - 1].y)

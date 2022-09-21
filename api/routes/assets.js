@@ -4,29 +4,21 @@ const db = require('../database')
 
 router.get('/:user_id', (req, res) => {
     db.query(`SELECT * FROM assets WHERE user_id = ${req.params.user_id} AND value >= 0`, (err, results) => {
-        if (results.length) {
-            res.send(results)
-        }
-        else {
-            res.sendStatus(404)
-        }
+        res.send(results)
     })
 })
 
 router.get('/:user_id/history', (req, res) => {
     db.query(`SELECT asset_history.\`value\`, asset_history.\`date\`, asset_id FROM asset_history, assets where asset_id = assets.id and user_id = ${req.params.user_id} AND asset_history.\`value\` >= 0;`, (err, results) => {
-        if (results.length) {
-            res.send(results)
-        }
-        else {
-            res.sendStatus(404)
-        }
+        res.send(results)
     })
 })
 
 router.post('/', (req, res) => {
     db.query(`INSERT INTO assets VALUES (null, '${req.body.name}', '${req.body.type}', ${req.body.value}, ${req.body.user_id})`, (err, results) => {
-        db.query(`INSERT INTO asset_history VALUES (null, '${req.body.value}', CURRENT_DATE(), ${results.insertId})`)
+        db.query(`INSERT INTO asset_history VALUES (null, '${req.body.value}', CURRENT_DATE(), ${results.insertId})`, (err, results) => {
+            res.send(results)
+        })
     })
 })
 
@@ -47,8 +39,11 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    db.query(`DELETE FROM assets WHERE id = ${req.params.id}`)
-    db.query(`DELETE FROM asset_history WHERE asset_id = ${req.params.id}`)
+    db.query(`DELETE FROM assets WHERE id = ${req.params.id}`, (err, results) => {
+        db.query(`DELETE FROM asset_history WHERE asset_id = ${req.params.id}`, (err, results) => {
+            res.send(results)
+        })
+    })
 })
 
 module.exports = router

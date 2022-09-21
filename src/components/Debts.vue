@@ -52,12 +52,14 @@ export default ({
 
     methods: {
         async loadData() {
+            this.totalValue = null
+            this.lineChartData[0].data = []
+            this.pieChartValues = []
+            this.pieChartLabels = []
+
             axios.get(`http://localhost:3000/api/debts/${this.$store.state.userID}`)
             .then((resp) => {
                 this.debtData = resp.data
-                this.totalValue = null
-                this.pieChartValues = []
-                this.pieChartLabels = []
 
                 if (this.debtData.length) {
                     this.totalValue = 0
@@ -67,6 +69,7 @@ export default ({
                         this.totalValue += parseFloat(debt.value)
                     }
                 }
+                
                 this.$store.commit('setTotalDebtValue', this.totalValue)
             })
 

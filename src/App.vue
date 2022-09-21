@@ -7,13 +7,13 @@
             
             <v-spacer></v-spacer>
 
-            <v-btn v-if="$route.path == '/'" text class="font-weight-light" @click="redirect('/')">Home</v-btn>
-            <v-btn v-if="$route.path == '/'" text class="font-weight-light ml-4" @click="redirect('/pricing')">Pricing</v-btn>
-            <v-btn v-if="$route.path == '/'" text class="font-weight-light ml-4" @click="redirect('/about')">About</v-btn>
+            <v-btn v-if="$route.path == '/'" text tile class="font-weight-light" @click="redirect('/')">Home</v-btn>
+            <v-btn v-if="$route.path == '/'" text tile class="font-weight-light" @click="redirect('/pricing')">Pricing</v-btn>
+            <v-btn v-if="$route.path == '/'" text tile class="font-weight-light" @click="redirect('/about')">About</v-btn>
             <v-divider v-if="$route.path == '/'" vertical inset class="mx-4"></v-divider>
 
-            <v-btn v-if="!$store.state.userID && $route.path == '/'" text class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="!$store.state.userID && $route.path == '/'" class="ml-4 primary" @click="redirect('/signup')">Sign Up</v-btn>
+            <v-btn v-if="!$store.state.userID && $route.path == '/'" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
+            <v-btn v-if="!$store.state.userID && $route.path == '/'" tile class="primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
             <AccountMenu v-if="$store.state.userID"/>
         </v-app-bar>
 
@@ -105,11 +105,6 @@ export default {
 }
 ::-moz-selection {
   background: #aed581
-}
-
-/* Adds class for non-caps buttons */
-.normal {
-    text-transform: unset !important;
 }
 
 /* Turning the logo into a button */

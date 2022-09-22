@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-app-bar app clipped-left elevation="4">
-            <v-btn v-if="$store.state.userID && ($route.path === '/assets' || $route.path === '/debts' || $route.path === '/net-worth')" plain icon class="mr-2" @click="mini = !mini">
+            <v-btn v-if="$store.state.userID && usingApp" plain icon class="mr-2" @click="mini = !mini">
                 <v-icon>mdi-menu</v-icon>
             </v-btn>
             <v-img src="./assets/logo64x64.png" max-height="50" max-width="50" class="link" @click="logoClicked"></v-img>
@@ -9,17 +9,17 @@
             
             <v-spacer></v-spacer>
 
-            <v-btn v-if="$route.path == '/'" text tile class="font-weight-light" @click="redirect('/')">Home</v-btn>
-            <v-btn v-if="$route.path == '/'" text tile class="font-weight-light mx-4" @click="redirect('/pricing')">Pricing</v-btn>
-            <v-btn v-if="$route.path == '/'" text tile class="font-weight-light" @click="redirect('/about')">About</v-btn>
-            <v-divider v-if="$route.path == '/'" vertical inset class="mx-4"></v-divider>
+            <v-btn v-if="onLandingPage" text tile class="font-weight-light" @click="redirect('/')">Home</v-btn>
+            <v-btn v-if="onLandingPage" text tile class="font-weight-light mx-4" @click="redirect('/pricing')">Pricing</v-btn>
+            <v-btn v-if="onLandingPage" text tile class="font-weight-light" @click="redirect('/about')">About</v-btn>
+            <v-divider v-if="onLandingPage" vertical inset class="mx-4"></v-divider>
 
-            <v-btn v-if="!$store.state.userID && $route.path == '/'" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="!$store.state.userID && $route.path == '/'" tile class="primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
+            <v-btn v-if="!$store.state.userID && onLandingPage" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
+            <v-btn v-if="!$store.state.userID && onLandingPage" tile class="primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
             <AccountMenu v-if="$store.state.userID"/>
         </v-app-bar>
 
-        <NavMenu v-if="$store.state.userID && ($route.path === '/assets' || $route.path === '/debts' || $route.path === '/net-worth')" :mini="mini"/>
+        <NavMenu v-if="$store.state.userID && usingApp" :mini="mini"/>
 
         <v-main>
             <router-view></router-view>
@@ -51,6 +51,22 @@ export default {
 
     created() {
         this.applyTheme()
+    },
+
+    computed: {
+        onLandingPage() {
+            if (this.$route.path == '/' || this.$route.path == '/about' || this.$route.path == '/pricing') {
+                return true
+            }
+            return false
+        },
+
+        usingApp() {
+            if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
+                return true
+            }
+            return false
+        }
     },
 
     methods: {

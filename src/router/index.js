@@ -11,6 +11,8 @@ import UpdatePassword from '/src/components/UpdatePassword'
 import UpdateEmail from '/src/components/UpdateEmail'
 import DeleteAccount from '/src/components/DeleteAccount'
 import Home from '/src/components/Home'
+import Pricing from '/src/components/Pricing'
+import About from '/src/components/About'
 
 Vue.use(VueRouter)
 
@@ -26,6 +28,20 @@ export default new VueRouter ({
             component: Home,
             meta: {
                 title: 'VuFi - Finance at a Glance'
+            }
+        },
+        {
+            path: '/pricing',
+            component: Pricing,
+            meta: {
+                title: 'Pricing | VuFi'
+            }
+        },
+        {
+            path: '/about',
+            component: About,
+            meta: {
+                title: 'About | VuFi'
             }
         },
         {

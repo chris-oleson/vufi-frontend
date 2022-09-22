@@ -1,11 +1,13 @@
 <template>
     <v-row class="ma-2">
         <v-flex xs12>
-            <LineChart theme="#e57373" :series="lineChartData"/>
+            <LineChart :theme="$vuetify.theme.themes.light.error" :series="lineChartData"/>
         </v-flex>
+
         <v-flex xs12 md6>
             <Table type="Debt" url="debts" :tableData="debtData" :totalValue="totalValue"/>
         </v-flex>
+
         <v-flex xs12 md6>
             <PieChart type="Debt" :series="pieChartValues" :labels="pieChartLabels"/>
         </v-flex>
@@ -36,7 +38,7 @@ export default ({
             pieChartLabels: [],
 
             lineChartData: [{
-                name: 'Total Value',
+                name: 'Total Debts',
                 data: []
             }],
         }

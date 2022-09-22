@@ -1,6 +1,6 @@
 <template>
     <v-card class="ma-2 pa-2" elevation="4">
-        <v-data-table :headers="headers" :items="tableData" :items-per-page="5" sort-by="value" sort-desc>
+        <v-data-table :headers="headers" :items="tableData" :items-per-page="5">
             <template v-slot:top>
                 <v-toolbar flat rounded color="transparent">
 
@@ -181,6 +181,7 @@ export default {
                 name: item.name,
                 type: item.type,
                 value: item.value,
+                is_debt: this.url == 'debts',
                 user_id: this.$store.state.userID,
             })
             .then(() => {
@@ -193,6 +194,7 @@ export default {
                 name: item.name,
                 type: item.type,
                 value: item.value,
+                is_debt: this.url == 'debts',
                 user_id: this.$store.state.userID,
             })
             .then(() => {

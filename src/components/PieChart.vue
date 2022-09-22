@@ -21,17 +21,23 @@ export default {
 
         getColor() {
             if (this.type == "Asset") {
-                return "#aed581"
+                return this.$vuetify.theme.themes.light.primary
             }
-            else return "#e57373"
+            else if (this.type == "Debt") {
+                return this.$vuetify.theme.themes.light.error
+            }
+            else {
+                return false
+            }
         },
 
         chartOptions() {
             return {
+                colors: [this.$vuetify.theme.themes.light.primary, this.$vuetify.theme.themes.light.error],
                 theme: {
                     mode: this.getTheme,
                     monochrome: {
-                        enabled: true,
+                        enabled: this.getColor,
                         color: this.getColor,
                         shadeTo: this.getTheme,
                         shadeIntensity: 0.5,
@@ -58,17 +64,12 @@ export default {
                     fillSeriesColor: false,
                     theme: this.getTheme,
                     y: {
-                        formatter(value, chart) {
+                        formatter(value) {
                             var formatter = new Intl.NumberFormat('en-US', {
                                 style: 'currency',
                                 currency: 'USD'
                             })
-                            if (chart.config.theme.monochrome.color == "#aed581") {
-                                return formatter.format(value)
-                            }
-                            else {
-                                return formatter.format(0 - value)
-                            }
+                            return formatter.format(value)
                         },
                     },
                 },

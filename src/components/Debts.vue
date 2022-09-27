@@ -73,24 +73,22 @@ export default ({
                 }
                 
                 this.$store.commit('setTotalDebtValue', this.totalValue)
-            })
 
-            axios.get(`http://localhost:3000/api/debts/${this.$store.state.userID}/history`)
-            .then(resp => {
-                this.refineAssets(resp.data)
+                axios.get(`http://localhost:3000/api/debts/${this.$store.state.userID}/history`)
+                .then(resp => {
+                    this.refineAssets(this.debtData, resp.data)
+                })
             })
         },
 
-        refineAssets(history) {
+        refineAssets(assetData, history) {
             // Get all individual assets
             let assets = []
-            for (let entry of history) {
-                if (!assets.some(e => e.id == entry.asset_id)) {
-                    assets.push({
-                        id: entry.asset_id,
-                        history: []
-                    })
-                }
+            for (let asset of assetData) {
+                assets.push({
+                    id: asset.id,
+                    history: []
+                })
             }
 
             // Get all dates that there are records for
@@ -115,7 +113,7 @@ export default ({
                         }
                     }
                     // If the asset doesn't have an entry for a date with data, add one with the previous value.
-                    if (!asset.history.some(e => e.x == date)) {
+                    if (!asset.history.some(e => e.x == date) && asset.history.length) {
                         asset.history.push({
                             x: date,
                             y: parseFloat(asset.history[asset.history.length - 1].y)

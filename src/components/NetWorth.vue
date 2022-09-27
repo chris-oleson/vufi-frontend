@@ -24,8 +24,6 @@ export default ({
 
     data() {
         return {
-            assetData: [],
-
             pieChartValues: [],
             pieChartLabels: [],
 
@@ -50,27 +48,26 @@ export default ({
             this.pieChartValues = [this.$store.state.totalAssetValue, this.$store.state.totalDebtValue],
             this.pieChartLabels = ['Total Assets', 'Total Debts'],
             
-            axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}`)
+            axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}/all`)
             .then(resp => {
-                this.assetData = resp.data
+                let assetData = resp.data
+                axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}/history/all`)
+                .then(resp => {
+                    this.refineAssets(assetData, resp.data)
+                })
             })
 
-            axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}/history`)
-            .then(resp => {
-                this.refineAssets(resp.data)
-            })
         },
 
-        refineAssets(history) {
+        refineAssets(assetData, history) {
             // Get all individual assets
             let assets = []
-            for (let entry of history) {
-                if (!assets.some(e => e.id == entry.asset_id)) {
-                    assets.push({
-                        id: entry.asset_id,
-                        history: []
-                    })
-                }
+            for (let asset of assetData) {
+                assets.push({
+                    id: asset.id,
+                    is_debt: asset.is_debt,
+                    history: []
+                })
             }
 
             // Get all dates that there are records for
@@ -110,11 +107,22 @@ export default ({
             for (let asset of assets) {
                 for (let entry of asset.history) {
                     let i = this.lineChartData[0].data.findIndex(e => e.x == entry.x)
-                    if (i < 0) {
-                        this.lineChartData[0].data.push(entry)
+                    if (asset.is_debt) {
+                        if (i < 0) {
+                            entry.y = 0 - entry.y
+                            this.lineChartData[0].data.push(entry)
+                        }
+                        else {
+                            this.lineChartData[0].data[i].y -= entry.y
+                        }
                     }
                     else {
-                        this.lineChartData[0].data[i].y += entry.y
+                        if (i < 0) {
+                            this.lineChartData[0].data.push(entry)
+                        }
+                        else {
+                            this.lineChartData[0].data[i].y += entry.y
+                        }
                     }
                 }
             }

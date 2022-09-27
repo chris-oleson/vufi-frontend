@@ -58,7 +58,7 @@
 
             <!-- Format value to currency -->
             <template v-slot:[`item.value`]="{ item }">
-                <span>{{ parseFloat(item.value) | toCurrency }}</span>
+                <span v-if="item.value">{{ parseFloat(item.value) | toCurrency }}</span>
             </template>
 
             <!-- Action buttons -->

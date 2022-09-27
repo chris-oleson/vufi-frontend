@@ -73,24 +73,22 @@ export default ({
                 }
 
                 this.$store.commit('setTotalAssetValue', this.totalValue)
-            })
 
-            axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}/history`)
-            .then(resp => {
-                this.refineAssets(resp.data)
+                axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}/history`)
+                .then(resp => {
+                    this.refineAssets(this.assetData, resp.data)
+                })
             })
         },
 
-        refineAssets(history) {
+        refineAssets(assetData, history) {
             // Get all individual assets
             let assets = []
-            for (let entry of history) {
-                if (!assets.some(e => e.id == entry.asset_id)) {
-                    assets.push({
-                        id: entry.asset_id,
-                        history: []
-                    })
-                }
+            for (let asset of assetData) {
+                assets.push({
+                    id: asset.id,
+                    history: []
+                })
             }
 
             // Get all dates that there are records for

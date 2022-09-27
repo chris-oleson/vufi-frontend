@@ -4,6 +4,20 @@
             <v-list-item-group mandatory :value="page">
                 <v-list-item @click="redirect('/assets')">
                     <v-list-item-icon class="mr-4">
+                        <v-icon>mdi-home</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Dashboard</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item @click="redirect('/assets')">
+                    <v-list-item-icon class="mr-4">
+                        <v-icon>mdi-swap-horizontal-bold</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Cash Flow</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item @click="redirect('/assets')">
+                    <v-list-item-icon class="mr-4">
                         <v-icon>mdi-cash-multiple</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>Assets</v-list-item-title>
@@ -38,13 +52,13 @@ export default {
     computed: {
         page() {
             if (this.$route.path == "/assets") {
-                return 0
+                return 2
             }
             else if (this.$route.path == "/debts") {
-                return 1
+                return 3
             }
             else if (this.$route.path == "/net-worth") {
-                return 2
+                return 4
             }
             return null
         }

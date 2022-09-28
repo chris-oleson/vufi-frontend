@@ -46,7 +46,7 @@ export default {
 
     mounted() {
         if (this.$store.state.userID) {
-            this.$router.push('/assets')
+            this.$router.push('/dashboard')
         }
     },
 

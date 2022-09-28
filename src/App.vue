@@ -62,7 +62,7 @@ export default {
         },
 
         usingApp() {
-            if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
+            if (this.$route.path == '/dashboard' || this.$route.path == '/cashflow' || this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
                 return true
             }
             return false
@@ -74,7 +74,7 @@ export default {
 
         logoClicked() {
             if (this.$store.state.userID) {
-                this.redirect('/assets')
+                this.redirect('/dashboard')
             }
             else {
                 this.redirect('/')

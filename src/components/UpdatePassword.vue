@@ -49,7 +49,7 @@ export default {
                         text: "Successfully updated password",
                         color: "primary"}
                     )
-                    this.$router.push('/assets')
+                    this.$router.push('/dashboard')
                 })
                 .catch(() => {
                     // Handles incorrect current password

@@ -5,27 +5,35 @@
         </v-flex>
 
         <v-flex xs12 md6>
-            <PieChart :series="pieChartValues" :labels="pieChartLabels"/>
+            <TreeMapChart :series="treeChartData"/>
         </v-flex>
     </v-row>
 </template>
 
 <script>
 import LineChart from '/src/components/LineChart.vue'
-import PieChart from '/src/components/PieChart.vue'
+import TreeMapChart from '/src/components/TreeMapChart.vue'
 import axios from 'axios'
 
 export default ({
     name: 'NetWorth',
     components: {
         LineChart,
-        PieChart,
+        TreeMapChart,
     },
 
     data() {
         return {
-            pieChartValues: [],
-            pieChartLabels: [],
+            treeChartData: [
+                {
+                    name: 'Assets',
+                    data: []
+                },
+                {
+                    name: 'Debts',
+                    data: []
+                }
+            ],
 
             lineChartData: [{
                 name: 'Net Worth',
@@ -45,12 +53,28 @@ export default ({
     methods: {
         async loadData() {
             this.lineChartData[0].data = []
-            this.pieChartValues = [this.$store.state.totalAssetValue, this.$store.state.totalDebtValue],
-            this.pieChartLabels = ['Total Assets', 'Total Debts'],
+            this.treeChartData[0].data = []
+            this.treeChartData[1].data = []
             
             axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}/all`)
             .then(resp => {
                 let assetData = resp.data
+
+                for (let asset of assetData) {
+                    if (asset.is_debt && !asset.is_deleted) {
+                        this.treeChartData[1].data.push({
+                            x: asset.name,
+                            y: parseFloat(asset.value)
+                        })
+                    }
+                    else if (!asset.is_deleted) {
+                        this.treeChartData[0].data.push({
+                            x: asset.name,
+                            y: parseFloat(asset.value)
+                        })
+                    }
+                }
+
                 axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}/history/all`)
                 .then(resp => {
                     this.refineAssets(assetData, resp.data)

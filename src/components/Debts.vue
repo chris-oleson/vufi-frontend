@@ -5,7 +5,7 @@
         </v-flex>
 
         <v-flex xs12 md6>
-            <Table type="Debt" url="debts" :tableData="debtData" :totalValue="totalValue"/>
+            <Table type="Debt" url="debts" :tableData="tableData" :totalValue="totalValue"/>
         </v-flex>
 
         <v-flex xs12 md6>
@@ -30,7 +30,7 @@ export default ({
 
     data() {
         return {
-            debtData: [],
+            tableData: [],
 
             totalValue: null,
 
@@ -61,14 +61,17 @@ export default ({
 
             axios.get(`http://localhost:3000/api/debts/${this.$store.state.userID}`)
             .then((resp) => {
-                this.debtData = resp.data
+                let debtData = resp.data
+                this.tableData = debtData.filter(e => e.is_deleted == 0)
 
-                if (this.debtData.length) {
+                if (debtData.length) {
                     this.totalValue = 0
-                    for (let debt of this.debtData) {
-                        this.pieChartLabels.push(debt.name)
-                        this.pieChartValues.push(Math.abs(parseFloat(debt.value)))
-                        this.totalValue += parseFloat(debt.value)
+                    for (let debt of debtData) {
+                        if (!debt.is_deleted) {
+                            this.pieChartLabels.push(debt.name)
+                            this.pieChartValues.push(Math.abs(parseFloat(debt.value)))
+                            this.totalValue += parseFloat(debt.value)
+                        }
                     }
                 }
                 
@@ -76,7 +79,7 @@ export default ({
 
                 axios.get(`http://localhost:3000/api/debts/${this.$store.state.userID}/history`)
                 .then(resp => {
-                    this.refineAssets(this.debtData, resp.data)
+                    this.refineAssets(debtData, resp.data)
                 })
             })
         },

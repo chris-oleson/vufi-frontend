@@ -30,7 +30,7 @@ export default {
 
     mounted() {
         if (this.$store.state.userID) {
-            this.$router.push('/assets')
+            this.$router.push('/dashboard')
         }
     },
     
@@ -62,7 +62,7 @@ export default {
                     this.applyTheme()
                 })
 
-                this.$router.push('/assets')
+                this.$router.push('/dashboard')
             }
         },
 

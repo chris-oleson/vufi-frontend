@@ -2,14 +2,14 @@
     <v-navigation-drawer app floating clipped permanent :mini-variant="mini" class="elevation-4">
         <v-list class="font-weight-light pa-0">
             <v-list-item-group mandatory :value="page">
-                <v-list-item @click="redirect('/assets')">
+                <v-list-item @click="redirect('/dashboard')">
                     <v-list-item-icon class="mr-4">
                         <v-icon>mdi-home</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>Dashboard</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item @click="redirect('/assets')">
+                <v-list-item @click="redirect('/cashflow')">
                     <v-list-item-icon class="mr-4">
                         <v-icon>mdi-swap-horizontal-bold</v-icon>
                     </v-list-item-icon>
@@ -51,7 +51,10 @@ export default {
 
     computed: {
         page() {
-            if (this.$route.path == "/assets") {
+            if (this.$route.path == "/dashboard") {
+                return 0
+            }
+            else if (this.$route.path == "/assets") {
                 return 2
             }
             else if (this.$route.path == "/debts") {

@@ -29,9 +29,7 @@ export default {
     },
 
     mounted() {
-        if (this.$store.state.userID) {
-            this.$router.push('/dashboard')
-        }
+
     },
     
     computed: {
@@ -44,26 +42,25 @@ export default {
             await axios.post(`http://localhost:3000/api/auth/login`, {
                 email: this.email,
                 password: this.password,
-            }).then(resp => {
-                this.$store.commit('setUserID', resp.data)
-                this.correctInfo = true
+            }).then(() => {
+                this.$router.push('/assets')
             }).catch(() => {
                 // Handles incorrect login
                 this.errorState = true
             })
 
-            if (this.correctInfo) {
-                this.loadTotalValues()
+            // if (this.correctInfo) {
+            //     this.loadTotalValues()
 
-                // Set preferences for user that just logged in
-                await axios.get(`http://localhost:3000/api/preferences/${this.$store.state.userID}`)
-                .then((resp) => {
-                    this.$store.commit('setUserPrefs', resp.data)
-                    this.applyTheme()
-                })
+            //     // Set preferences for user that just logged in
+            //     await axios.get(`http://localhost:3000/api/preferences`)
+            //     .then((resp) => {
+            //         this.$store.commit('setUserPrefs', resp.data)
+            //         this.applyTheme()
+            //     })
 
-                this.$router.push('/dashboard')
-            }
+            //     this.$router.push('/dashboard')
+            // }
         },
 
         redirect(link) { this.$router.push(link) },

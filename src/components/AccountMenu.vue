@@ -27,7 +27,6 @@ export default {
 
     methods: {
         logOut() {
-            this.$store.commit('logOut')
             this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
             this.$router.push('/')
         },

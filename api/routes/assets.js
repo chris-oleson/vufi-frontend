@@ -1,15 +1,18 @@
 const { Router } = require('express')
 const router = Router()
+const passport = require('passport')
 const db = require('../database')
 
-router.get('/:user_id', (req, res) => {
-    db.query(`SELECT * FROM assets WHERE user_id = ${req.params.user_id} AND is_debt = 0`, (err, results) => {
-        res.send(results)
-    })
+router.get('/', (req, res) => {
+    if (req.user) {
+        db.query(`SELECT * FROM assets WHERE user_id = ${req.user.id} AND is_debt = 0`, (err, results) => {
+            res.send(results)
+        })
+    }
 })
 
-router.get('/:user_id/history', (req, res) => {
-    db.query(`SELECT asset_history.\`value\`, asset_history.\`date\`, asset_id FROM asset_history, assets where asset_id = assets.id and user_id = ${req.params.user_id} AND is_debt = 0`, (err, results) => {
+router.get('/history', (req, res) => {
+    db.query(`SELECT asset_history.\`value\`, asset_history.\`date\`, asset_id FROM asset_history, assets where asset_id = assets.id and user_id = ${req.user.id} AND is_debt = 0`, (err, results) => {
         res.send(results)
     })
 })

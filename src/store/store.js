@@ -10,14 +10,6 @@ export default new Vuex.Store({
     }).plugin],
 
     state: {
-        userID: null,
-        firstName: null,
-
-        userPrefs: {
-            theme: 0,
-            currency: 'USD',
-        },
-
         notification: {
             text: '',
             color: ''

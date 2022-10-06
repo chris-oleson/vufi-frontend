@@ -45,10 +45,6 @@ export default ({
     },
 
     mounted() {
-        if (!this.$store.state.userID) {
-            this.$router.push('/404')
-        }
-
         this.loadData()
     },
 

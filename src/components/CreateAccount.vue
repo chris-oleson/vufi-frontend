@@ -45,9 +45,7 @@ export default {
     },
 
     mounted() {
-        if (this.$store.state.userID) {
-            this.$router.push('/dashboard')
-        }
+
     },
 
     methods: {

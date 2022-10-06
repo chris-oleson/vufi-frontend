@@ -2,25 +2,10 @@ const { Router } = require('express')
 const router = Router()
 const bcrypt = require('bcryptjs')
 const db = require('../database')
+const passport = require('passport')
 
-router.post('/login', (req, res) => {
-    // Search for matching email
-    db.query(`SELECT * FROM users WHERE email = '${req.body.email}'`, (err, results) => {
-        if (results.length) {
-            // Check if password matches
-            bcrypt.compare(req.body.password, results[0].password, (err, match) => {
-                if (match) {
-                    res.send(results[0].id.toString())
-                }
-                else {
-                    res.sendStatus(404)
-                }
-            })
-        }
-        else {
-            res.sendStatus(404)
-        }
-    })
+router.post('/login', passport.authenticate('local'), (req, res) => {
+    res.sendStatus(200)
 })
 
 router.post('/create', (req, res) => {

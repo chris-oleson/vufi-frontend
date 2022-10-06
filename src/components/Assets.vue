@@ -45,10 +45,6 @@ export default ({
     },
 
     mounted() {
-        if (!this.$store.state.userID) {
-            this.$router.push('/404')
-        }
-
         this.loadData()
     },
 
@@ -59,7 +55,7 @@ export default ({
             this.pieChartValues = []
             this.pieChartLabels = []
 
-            axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}`)
+            axios.get(`http://localhost:3000/api/assets`, { withCrendentials: true })
             .then(resp => {
                 let assetData = resp.data
                 this.tableData = assetData.filter(e => e.is_deleted == 0)
@@ -77,7 +73,7 @@ export default ({
 
                 this.$store.commit('setTotalAssetValue', this.totalValue)
 
-                axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}/history`)
+                axios.get(`http://localhost:3000/api/assets/history`)
                 .then(resp => {
                     this.refineAssets(assetData, resp.data)
                 })

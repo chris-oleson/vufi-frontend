@@ -14,12 +14,12 @@
             <v-btn v-if="onLandingPage" text tile class="font-weight-light" @click="redirect('/about')">About</v-btn>
             <v-divider v-if="onLandingPage" vertical inset class="mx-4"></v-divider>
 
-            <v-btn v-if="!$store.state.userID && onLandingPage" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="!$store.state.userID && onLandingPage" tile class="primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
-            <AccountMenu v-if="$store.state.userID"/>
+            <v-btn v-if="onLandingPage" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
+            <v-btn v-if="onLandingPage" tile class="primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
+            <AccountMenu/>
         </v-app-bar>
 
-        <NavMenu v-if="$store.state.userID && usingApp" :mini="mini"/>
+        <NavMenu v-if="usingApp" :mini="mini"/>
 
         <v-main>
             <router-view></router-view>

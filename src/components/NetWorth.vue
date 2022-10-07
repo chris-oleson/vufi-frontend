@@ -52,7 +52,7 @@ export default ({
             this.treeChartData[0].data = []
             this.treeChartData[1].data = []
             
-            axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}/all`)
+            axios.get(`http://localhost:3000/api/assets/all`)
             .then(resp => {
                 let assetData = resp.data
 
@@ -71,7 +71,7 @@ export default ({
                     }
                 }
 
-                axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}/history/all`)
+                axios.get(`http://localhost:3000/api/assets/history/all`)
                 .then(resp => {
                     this.refineAssets(assetData, resp.data)
                 })

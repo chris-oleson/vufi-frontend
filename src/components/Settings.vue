@@ -47,16 +47,14 @@ export default {
     },
 
     mounted() {
-        if (!this.$store.state.userID) {
-            this.$router.push('/404')
-        }
+
     },
 
     methods: {
         redirect(link) { this.$router.push(link) },
 
         savePreferences() {
-            axios.put(`http://localhost:3000/api/preferences/${this.$store.state.userID}`, {
+            axios.put(`http://localhost:3000/api/preferences`, {
                 theme: this.themeSelection,
                 currency: this.currencySelection
             })

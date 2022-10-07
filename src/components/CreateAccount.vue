@@ -61,8 +61,7 @@ export default {
                     firstName: this.firstName,
                     lastName: this.lastName,
                 })
-                .then(resp => {
-                    this.$store.commit('setUserID', resp.data)
+                .then(() => {
                     this.$router.push('/assets')
                 })
                 .catch((err) => {

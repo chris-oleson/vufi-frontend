@@ -18,21 +18,21 @@ router.get('/history', (req, res) => {
 })
 
 // Reserved for net worth calcs
-router.get('/:user_id/all', (req, res) => {
-    db.query(`SELECT * FROM assets WHERE user_id = ${req.params.user_id}`, (err, results) => {
+router.get('/all', (req, res) => {
+    db.query(`SELECT * FROM assets WHERE user_id = ${req.user.id}`, (err, results) => {
         res.send(results)
     })
 })
 
 // Reserved for net worth calcs
-router.get('/:user_id/history/all', (req, res) => {
-    db.query(`SELECT asset_history.\`value\`, asset_history.\`date\`, asset_id FROM asset_history, assets where asset_id = assets.id and user_id = ${req.params.user_id}`, (err, results) => {
+router.get('/history/all', (req, res) => {
+    db.query(`SELECT asset_history.\`value\`, asset_history.\`date\`, asset_id FROM asset_history, assets where asset_id = assets.id and user_id = ${req.user.id}`, (err, results) => {
         res.send(results)
     })
 })
 
 router.post('/', (req, res) => {
-    db.query(`INSERT INTO assets VALUES (null, '${req.body.name}', '${req.body.type}', ${req.body.value}, ${req.body.is_debt}, 0, ${req.body.user_id})`, (err, results) => {
+    db.query(`INSERT INTO assets VALUES (null, '${req.body.name}', '${req.body.type}', ${req.body.value}, ${req.body.is_debt}, 0, ${req.user.id})`, (err, results) => {
         db.query(`INSERT INTO asset_history VALUES (null, '${req.body.value}', CURRENT_DATE(), ${results.insertId})`, (err, results) => {
             res.send(results)
         })
@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     // Update the asset data
-    db.query(`UPDATE assets SET name = '${req.body.name}', type = '${req.body.type}', value = ${req.body.value}, is_debt = ${req.body.is_debt}, is_deleted = 0, user_id = ${req.body.user_id} WHERE id = ${req.params.id}`, (err, results) => {
+    db.query(`UPDATE assets SET name = '${req.body.name}', type = '${req.body.type}', value = ${req.body.value}, is_debt = ${req.body.is_debt}, is_deleted = 0, user_id = ${req.user.id} WHERE id = ${req.params.id}`, (err, results) => {
         // Check if there is already current value data
         db.query(`SELECT * FROM asset_history WHERE asset_id = ${req.params.id} AND date = CURRENT_DATE()`, (err, results) => {
             // If there is, update the current value data

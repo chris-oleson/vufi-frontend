@@ -25,7 +25,7 @@ export default {
     methods: {
         async deleteAccount () {
             // Update password in the database
-            await axios.delete(`http://localhost:3000/api/user/${this.$store.state.userID}?password=${this.password}`)
+            await axios.delete(`http://localhost:3000/api/user?password=${this.password}`)
             .then(() => {
                 this.$store.commit("setNotification", {
                     text: "Successfully deleted account",

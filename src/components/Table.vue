@@ -182,7 +182,6 @@ export default {
                 type: item.type,
                 value: item.value,
                 is_debt: this.url == 'debts',
-                user_id: this.$store.state.userID,
             })
             .then(() => {
                 this.$parent.loadData()

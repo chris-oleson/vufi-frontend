@@ -13,7 +13,6 @@ import DeleteAccount from '/src/components/DeleteAccount'
 import Home from '/src/components/Home'
 import Pricing from '/src/components/Pricing'
 import About from '/src/components/About'
-import Dashboard from '/src/components/Dashboard'
 
 Vue.use(VueRouter)
 
@@ -64,13 +63,6 @@ export default new VueRouter ({
             component: NetWorth,
             meta: {
                 title: 'Net Worth | VuFi'
-            }
-        },
-        {
-            path: '/dashboard',
-            component: Dashboard,
-            meta: {
-                title: 'Dashboard | VuFi'
             }
         },
         {

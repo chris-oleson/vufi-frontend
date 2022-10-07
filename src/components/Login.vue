@@ -79,7 +79,7 @@ export default {
 
         // This is to populate the total values in the NavMenu
         loadTotalValues() {
-            axios.get(`http://localhost:3000/api/assets/${this.$store.state.userID}`)
+            axios.get(`http://localhost:3000/api/assets`)
             .then((resp) => {
                 this.assetData = resp.data
                 this.totalValue = 0
@@ -88,7 +88,7 @@ export default {
                 }
                 this.$store.commit('setTotalAssetValue', this.totalValue)
             })
-            axios.get(`http://localhost:3000/api/debts/${this.$store.state.userID}`)
+            axios.get(`http://localhost:3000/api/debts`)
             .then((resp) => {
                 this.debtData = resp.data
                 this.totalValue = 0

@@ -31,13 +31,11 @@ passport.use(
                             done(null, results[0])
                         }
                         else {
-                            console.log('passwords do not match')
                             done(null, false)
                         }
                     })
                 }
                 else {
-                    console.log('no users with this email')
                     done(null, false)
                 }
             })

@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-app-bar app clipped-left elevation="4">
-            <v-btn v-if="$store.state.userID && usingApp" plain icon class="mr-2" @click="mini = !mini">
+            <v-btn v-if="usingApp" plain icon class="mr-2" @click="mini = !mini">
                 <v-icon>mdi-menu</v-icon>
             </v-btn>
             <v-img src="./assets/logo64x64.png" max-height="50" max-width="50" class="link" @click="logoClicked"></v-img>
@@ -73,12 +73,7 @@ export default {
         redirect(link) { this.$router.push(link) },
 
         logoClicked() {
-            if (this.$store.state.userID) {
-                this.redirect('/dashboard')
-            }
-            else {
-                this.redirect('/')
-            }
+            this.redirect('/')
         },
 
         applyTheme() {

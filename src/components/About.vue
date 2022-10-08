@@ -16,7 +16,7 @@ export default {
     name: 'About',
 
     methods: {
-        redirect(link) { this.$router.push(link) }
+
     }
 }
 </script>

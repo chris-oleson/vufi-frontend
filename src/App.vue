@@ -14,9 +14,9 @@
             <v-btn v-if="onLandingPage" text tile class="font-weight-light" @click="redirect('/about')">About</v-btn>
             <v-divider v-if="onLandingPage" vertical inset class="mx-4"></v-divider>
 
-            <v-btn v-if="onLandingPage" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="onLandingPage" tile class="primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
-            <AccountMenu/>
+            <v-btn v-if="onLandingPage && !$store.state.isLoggedIn" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
+            <v-btn v-if="onLandingPage && !$store.state.isLoggedIn" tile class="primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
+            <AccountMenu v-if="$store.state.isLoggedIn"/>
         </v-app-bar>
 
         <NavMenu v-if="usingApp" :mini="mini"/>
@@ -62,7 +62,7 @@ export default {
         },
 
         usingApp() {
-            if (this.$route.path == '/dashboard' || this.$route.path == '/cashflow' || this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
+            if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
                 return true
             }
             return false
@@ -73,7 +73,12 @@ export default {
         redirect(link) { this.$router.push(link) },
 
         logoClicked() {
-            this.redirect('/')
+            if (this.$store.state.isLoggedIn) {
+                this.redirect('/assets')
+            }
+            else {
+                this.redirect('/')
+            }
         },
 
         applyTheme() {

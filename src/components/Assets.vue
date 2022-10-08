@@ -78,6 +78,9 @@ export default ({
                     this.refineAssets(assetData, resp.data)
                 })
             })
+            .catch(() => {
+                this.$router.push('/404')
+            })
         },
 
         refineAssets(assetData, history) {

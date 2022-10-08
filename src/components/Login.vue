@@ -9,7 +9,7 @@
         <v-btn v-if="errorState" width="200" small tile class="error mt-4">Forgot Password?</v-btn>
 
         <v-btn width="200" tile class="primary my-4" @click="login">Log In</v-btn>
-        <v-btn width="200" text tile class="font-weight-light" @click="redirect('/signup')">Sign Up</v-btn>
+        <v-btn width="200" text tile class="font-weight-light" @click="$router.push('/signup')">Sign Up</v-btn>
     </v-card>
 </template>
 
@@ -43,27 +43,14 @@ export default {
                 email: this.email,
                 password: this.password,
             }).then(() => {
+                this.$store.commit('login')
+                this.loadTotalValues()
                 this.$router.push('/assets')
             }).catch(() => {
                 // Handles incorrect login
                 this.errorState = true
             })
-
-            // if (this.correctInfo) {
-            //     this.loadTotalValues()
-
-            //     // Set preferences for user that just logged in
-            //     await axios.get(`http://localhost:3000/api/preferences`)
-            //     .then((resp) => {
-            //         this.$store.commit('setUserPrefs', resp.data)
-            //         this.applyTheme()
-            //     })
-
-            //     this.$router.push('/dashboard')
-            // }
         },
-
-        redirect(link) { this.$router.push(link) },
 
         applyTheme() {
             if (this.$store.state.userPrefs.theme === 0) {

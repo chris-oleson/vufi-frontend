@@ -55,8 +55,7 @@ export default ({
             this.pieChartValues = []
             this.pieChartLabels = []
 
-            axios.get(`http://localhost:3000/api/debts`)
-            .then((resp) => {
+            axios.get(`http://localhost:3000/api/debts`).then((resp) => {
                 let debtData = resp.data
                 this.tableData = debtData.filter(e => e.is_deleted == 0)
 
@@ -73,10 +72,11 @@ export default ({
                 
                 this.$store.commit('setTotalDebtValue', this.totalValue)
 
-                axios.get(`http://localhost:3000/api/debts/history`)
-                .then(resp => {
+                axios.get(`http://localhost:3000/api/debts/history`).then(resp => {
                     this.refineAssets(debtData, resp.data)
                 })
+            }).catch(() => {
+                this.$router.push('/404')
             })
         },
 

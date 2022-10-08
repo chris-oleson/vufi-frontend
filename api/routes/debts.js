@@ -2,6 +2,16 @@ const { Router } = require('express')
 const router = Router()
 const db = require('../database')
 
+// Check if user is authenticated
+router.use((req, res, next) => {
+    if (req.isAuthenticated()) {
+        next()
+    }
+    else {
+        res.sendStatus(401)
+    }
+})
+
 router.get('/', (req, res) => {
     db.query(`SELECT * FROM assets WHERE user_id = ${req.user.id} AND is_debt = 1`, (err, results) => {
         res.send(results)

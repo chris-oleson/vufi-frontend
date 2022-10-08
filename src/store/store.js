@@ -10,6 +10,13 @@ export default new Vuex.Store({
     }).plugin],
 
     state: {
+        isLoggedIn: false,
+
+        userPrefs: {
+            theme: 0,
+            currency: 'USD'
+        },
+
         notification: {
             text: '',
             color: ''
@@ -28,18 +35,20 @@ export default new Vuex.Store({
     },
 
     mutations: {
-        setUserID(state, data) { state.userID = data },
-        setFirstName(state, data) { state.firstName = data },
+        login(state) {
+            state.isLoggedIn = true
+        },
 
         setUserPrefs(state, data) { state.userPrefs = data },
 
         logOut(state) {
-            state.userID = null,
-            state.userFirstName = null,
+            state.isLoggedIn = false
+
             state.userPrefs = {
                 theme: 0,
                 currency: 'USD'
             }
+
             state.totalAssetValue = null,
             state.totalDebtValue = null
         },

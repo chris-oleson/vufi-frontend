@@ -19,13 +19,13 @@
         <v-card-text>Account</v-card-text>
 
         <!-- Change Password -->
-        <v-btn outlined tile text class="font-weight-light" width="200" @click="redirect('/update-password')">Change Password</v-btn>
+        <v-btn outlined tile text class="font-weight-light" width="200" @click="this.$router.push('/update-password')">Change Password</v-btn>
 
         <!-- Change Email -->
-        <v-btn outlined tile text class="font-weight-light my-4" width="200" @click="redirect('/update-email')">Change Email</v-btn>
+        <v-btn outlined tile text class="font-weight-light my-4" width="200" @click="this.$router.push('/update-email')">Change Email</v-btn>
 
         <!-- Delete Account -->
-        <v-btn outlined tile text class="font-weight-light" width="200" @click="redirect('/delete-account')">Delete Account</v-btn>
+        <v-btn outlined tile text class="font-weight-light" width="200" @click="this.$router.push('/delete-account')">Delete Account</v-btn>
     </v-card>
 </template>
 
@@ -51,8 +51,6 @@ export default {
     },
 
     methods: {
-        redirect(link) { this.$router.push(link) },
-
         savePreferences() {
             axios.put(`http://localhost:3000/api/preferences`, {
                 theme: this.themeSelection,

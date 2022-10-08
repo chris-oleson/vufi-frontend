@@ -3,6 +3,16 @@ const router = Router()
 const passport = require('passport')
 const db = require('../database')
 
+// Check if user is authenticated
+router.use((req, res, next) => {
+    if (req.isAuthenticated()) {
+        next()
+    }
+    else {
+        res.sendStatus(401)
+    }
+})
+
 router.get('/', (req, res) => {
     if (req.user) {
         db.query(`SELECT * FROM assets WHERE user_id = ${req.user.id} AND is_debt = 0`, (err, results) => {

@@ -8,7 +8,7 @@
                     <v-sheet height="50"></v-sheet>
                     <v-sheet class="ma-5">
                         <h1 class="text-h2 font-weight-light">Finance at a Glance</h1>
-                        <h2 class="ma-16 font-weight-light">One, simple, intuitive platform to organize and track your assets and debts</h2>
+                        <h2 class="my-16 font-weight-light">One, simple, intuitive platform to organize and track your assets and debts</h2>
                         <v-btn class="primary" x-large tile @click="this.$router.push('/signup')">Start Free Trial</v-btn>
                     </v-sheet>
                 </v-flex>

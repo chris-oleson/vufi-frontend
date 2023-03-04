@@ -52,9 +52,9 @@ export default {
 
     methods: {
         redirect(link) {
-            setTimeout(() => {
-                this.$router.push(link)
-            }, 150)
+            this.$router.push(link)
+            // setTimeout(() => {
+            // }, 150)
         }
 
         //redirect(link) { this.$router.push(link) },

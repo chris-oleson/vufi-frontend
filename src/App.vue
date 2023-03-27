@@ -122,7 +122,7 @@ export default {
     background: #aed581
 }
 ::-moz-selection {
-  background: #aed581
+    background: #aed581
 }
 
 /* Turning the logo into a button */

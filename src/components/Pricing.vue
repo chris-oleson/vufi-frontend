@@ -1,11 +1,11 @@
 <template>
     <v-sheet class="text-center primary" height="100%">
-        <v-sheet height="100"></v-sheet>
-            <v-sheet class="px-5 mb-n16">
-                <h1 class="font-weight-light pa-4">Pricing</h1>
-                <div class="font-weight-light">Choose the plan that works best for you.</div>
-                <div class="font-weight-light mb-16">Change your plan at any time!</div>
-            </v-sheet>
+        <v-sheet class="px-5 py-12 mb-n16">
+            <h1 class="font-weight-light pa-4">Pricing</h1>
+            <div class="font-weight-light">Choose the plan that works best for you.</div>
+            <div class="font-weight-light mb-16">Change your plan at any time!</div>
+        </v-sheet>
+        
         <v-sheet height="100" class="mb-n16"></v-sheet>
 
         <v-container fluid>

@@ -1,7 +1,7 @@
 <template>
     <v-row class="ma-2">
         <v-flex xs12>
-            <LineChart theme="#aed581" :series="lineChartData"/>
+            <LineChart :theme="$vuetify.theme.themes.light.primary" :series="lineChartData"/>
         </v-flex>
 
         <v-flex xs12 md6>
@@ -15,7 +15,7 @@ import LineChart from '/src/components/LineChart.vue'
 import TreeMapChart from '/src/components/TreeMapChart.vue'
 import axios from 'axios'
 
-export default ({
+export default {
     name: 'NetWorth',
     components: {
         LineChart,
@@ -148,5 +148,5 @@ export default ({
             }
         }
     }
-})
+}
 </script>

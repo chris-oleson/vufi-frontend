@@ -19,6 +19,7 @@
     "passport-local": "^1.0.0",
     "vue": "^2.7.0",
     "vue-apexcharts": "^1.6.2",
+    "vue-plaid-link": "^0.6.1",
     "vue-router": "^3.5.4",
     "vuetify": "^2.6.10",
     "vuex": "^3.2.6",

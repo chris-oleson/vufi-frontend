@@ -1,12 +1,10 @@
 <template>
     <v-sheet>
         <!-- Above the fold -->
-        <v-sheet height="50"></v-sheet>
         <v-container fluid class="text-center">
             <v-row class="ma-5">
                 <v-flex xs12 lg5>
-                    <v-sheet height="50"></v-sheet>
-                    <v-sheet class="ma-5">
+                    <v-sheet class="ma-5 pt-16">
                         <h1 class="text-h2 font-weight-light">Finance at a Glance</h1>
                         <h2 class="my-16 font-weight-light">One, simple, intuitive platform to organize and track your assets and debts</h2>
                         <v-btn class="primary" x-large tile @click="this.$router.push('/signup')">Start Free Trial</v-btn>
@@ -24,31 +22,25 @@
 
         <!-- Below the fold -->
         <v-sheet class="primary text-center">
-            <v-sheet height="150" color="primary"></v-sheet>
-            <v-sheet class="primary mx-auto px-5" max-width="900">
-                <h3 class="font-weight-light text-h3 mb-16">Post-Budget Planning</h3>
-                <h4 class="font-weight-light text-h4 mb-10">Finally making more money than you spend? Keep an eye on your growing savings and investments with VuFi</h4>
+            <v-sheet class="primary mx-auto px-5 py-16" max-width="900">
+                <h2 class="font-weight-light text-h3 mb-16 pt-12">Post-Budget Planning</h2>
+                <h2 class="font-weight-light">Finally making more money than you spend? Keep an eye on your growing savings and investments with VuFi</h2>
             </v-sheet>
-            <v-sheet height="100" color="primary"></v-sheet>
         </v-sheet>
 
         <v-sheet class="text-center">
-            <v-sheet height="100"></v-sheet>
-            <v-sheet class="mx-auto px-5" max-width="900">
-                <h3 class="font-weight-light text-h3 mb-16">Track Everything</h3>
-                <h4 class="font-weight-light text-h4 mb-10">Have more to worry about than bank accounts, credit cards, and investment accounts? No problem.</h4>
-                <h4 class="font-weight-light text-h4">VuFi tracks the value of your real estate, vehicles, individual stocks, crypto currencies, foreign currencies, precious metals, art, and domains.</h4>
+            <v-sheet class="mx-auto px-5 py-16" max-width="900">
+                <h2 class="font-weight-light text-h3">Track Everything</h2>
+                <h2 class="font-weight-light my-16">Have more to worry about than bank accounts, credit cards, and investment accounts? No problem.</h2>
+                <h2 class="font-weight-light">VuFi tracks the value of your real estate, vehicles, individual stocks, crypto currencies, foreign currencies, precious metals, art, and domains.</h2>
             </v-sheet>
-            <v-sheet height="100"></v-sheet>
         </v-sheet>
 
         <v-sheet class="primary text-center">
-            <v-sheet height="100" color="primary"></v-sheet>
-            <v-sheet class="primary mx-auto px-5" max-width="900">
-                <h3 class="font-weight-light text-h3 mb-16">Privacy and Security</h3>
-                <h4 class="font-weight-light text-h4">You'll never see an ad when using VuFi, and your data will never be sold.</h4>
+            <v-sheet class="primary mx-auto px-5 py-16" max-width="900">
+                <h2 class="font-weight-light text-h3 mb-16">Privacy and Security</h2>
+                <h2 class="font-weight-light">You'll never see an ad when using VuFi, and your data will never be sold.</h2>
             </v-sheet>
-            <v-sheet height="100" color="primary"></v-sheet>
         </v-sheet>
     </v-sheet>
 </template>

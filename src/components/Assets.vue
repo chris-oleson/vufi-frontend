@@ -55,7 +55,7 @@ export default ({
             this.pieChartValues = []
             this.pieChartLabels = []
 
-            axios.get(`http://localhost:3000/api/assets`, { withCrendentials: true })
+            axios.get(`http://localhost:3000/api/assets`)
             .then(resp => {
                 let assetData = resp.data
                 this.tableData = assetData.filter(e => e.is_deleted == 0)

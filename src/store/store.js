@@ -23,7 +23,10 @@ export default new Vuex.Store({
         },
 
         totalAssetValue: null,
+        assetHistory: [],
+
         totalDebtValue: null,
+        assetDebtHistory: [],
     },
 
     getters: {

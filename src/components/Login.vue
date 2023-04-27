@@ -44,7 +44,8 @@ export default {
                 password: this.password,
             }).then(() => {
                 this.$store.commit('login')
-                this.loadTotalValues()
+                this.$store.dispatch('getAssetData')
+                this.$store.dispatch('getDebtData')
                 this.$router.push('/assets')
             }).catch(() => {
                 // Handles incorrect login
@@ -64,32 +65,32 @@ export default {
             }
         },
 
-        // This is to populate the total values in the NavMenu
-        loadTotalValues() {
-            axios.get(`http://localhost:3000/api/assets`)
-            .then((resp) => {
-                this.assetData = resp.data
-                this.totalValue = 0
-                for (let asset of this.assetData) {
-                    if (!asset.is_deleted) {
-                        this.totalValue += parseFloat(asset.value)
-                    }
-                }
-                this.$store.commit('setTotalAssetValue', this.totalValue)
-            })
+        // // This is to populate the total values in the NavMenu
+        // loadTotalValues() {
+        //     axios.get(`http://localhost:3000/api/assets`)
+        //     .then((resp) => {
+        //         this.assetData = resp.data
+        //         this.totalValue = 0
+        //         for (let asset of this.assetData) {
+        //             if (!asset.is_deleted) {
+        //                 this.totalValue += parseFloat(asset.value)
+        //             }
+        //         }
+        //         this.$store.commit('setTotalAssetValue', this.totalValue)
+        //     })
 
-            axios.get(`http://localhost:3000/api/debts`)
-            .then((resp) => {
-                this.debtData = resp.data
-                this.totalValue = 0
-                for (let debt of this.debtData) {
-                    if (!debt.is_deleted) {
-                        this.totalValue += parseFloat(debt.value)
-                    }
-                }
-                this.$store.commit('setTotalDebtValue', this.totalValue)
-            })
-        }
+        //     axios.get(`http://localhost:3000/api/debts`)
+        //     .then((resp) => {
+        //         this.debtData = resp.data
+        //         this.totalValue = 0
+        //         for (let debt of this.debtData) {
+        //             if (!debt.is_deleted) {
+        //                 this.totalValue += parseFloat(debt.value)
+        //             }
+        //         }
+        //         this.$store.commit('setTotalDebtValue', this.totalValue)
+        //     })
+        // }
     }
 }
 </script>

@@ -5,11 +5,11 @@
         </v-flex>
 
         <v-flex xs12 md6>
-            <Table type="Asset" url="assets" :tableData="tableData" :totalValue="totalValue"/>
+            <Table type="Asset" url="assets" :tableData="$store.state.assets.tableData" :totalValue="$store.state.assets.totalValue"/>
         </v-flex>
 
         <v-flex xs12 md6>
-            <PieChart type="Asset" :series="pieChartValues" :labels="pieChartLabels"/>
+            <PieChart type="Asset" :series="$store.state.assets.pieChartValues" :labels="$store.state.assets.pieChartLabels"/>
         </v-flex>
     </v-row>
 </template>
@@ -18,7 +18,6 @@
 import Table from '/src/components/Table.vue'
 import PieChart from '/src/components/PieChart.vue'
 import LineChart from '/src/components/LineChart.vue'
-import axios from 'axios'
 
 export default ({
     name: 'Assets',
@@ -30,13 +29,6 @@ export default ({
 
     data() {
         return {
-            tableData: [],
-
-            totalValue: null,
-
-            pieChartValues: [],
-            pieChartLabels: [],
-
             lineChartData: [{
                 name: 'Total Assets',
                 data: []
@@ -45,45 +37,11 @@ export default ({
     },
 
     mounted() {
-        this.loadData()
+        this.refineHistory(this.$store.state.assets.tabledata, this.$store.state.assets.history)
     },
 
     methods: {
-        async loadData() {
-            this.totalValue = null
-            this.lineChartData[0].data = []
-            this.pieChartValues = []
-            this.pieChartLabels = []
-
-            axios.get(`http://localhost:3000/api/assets`)
-            .then(resp => {
-                let assetData = resp.data
-                this.tableData = assetData.filter(e => e.is_deleted == 0)
-
-                if (assetData.length) {
-                    this.totalValue = 0
-                    for (let asset of assetData) {
-                        if (!asset.is_deleted) {
-                            this.pieChartLabels.push(asset.name)
-                            this.pieChartValues.push(parseFloat(asset.value))
-                            this.totalValue += parseFloat(asset.value)
-                        }
-                    }
-                }
-
-                this.$store.commit('setTotalAssetValue', this.totalValue)
-
-                axios.get(`http://localhost:3000/api/assets/history`)
-                .then(resp => {
-                    this.refineAssets(assetData, resp.data)
-                })
-            })
-            .catch(() => {
-                this.$router.push('/404')
-            })
-        },
-
-        refineAssets(assetData, history) {
+        refineHistory(assetData, history) {
             // Get all individual assets
             let assets = []
             for (let asset of assetData) {
@@ -138,7 +96,7 @@ export default ({
                     }
                 }
             }
-        }
+        },
     }
 })
 </script>

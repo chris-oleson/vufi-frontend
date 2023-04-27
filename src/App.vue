@@ -113,7 +113,7 @@ export default {
             this.showNotification = true
         }
     }
-};
+}
 </script>
 
 <style>
@@ -128,5 +128,10 @@ export default {
 /* Turning the logo into a button */
 .link:hover {
     cursor: pointer
+}
+
+/* Disable ripple effect */
+.v-ripple__container {
+  opacity: 0 !important;
 }
 </style>

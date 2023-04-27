@@ -9,6 +9,7 @@
                     <v-divider v-show="tableData.length" class="mx-4" inset vertical></v-divider>
                     <v-toolbar-title class="font-weight-light text-h5">{{ totalValue | toCurrency }}</v-toolbar-title>
                     <v-spacer></v-spacer>
+
                     <v-dialog v-model="dialog" max-width="400px">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn :color="getColor" fab small outlined v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon></v-btn>
@@ -77,10 +78,14 @@
 
 <script>
 import axios from 'axios'
+//import PlaidLink from '/src/components/PlaidLink.vue'
 
 export default {
     name: 'Table',
     props: ['type', 'url', 'tableData', 'totalValue'],
+    components: {
+        
+    },
 
     data: () => ({
         dialog: false,
@@ -141,11 +146,11 @@ export default {
             this.dialogDelete = true
         },
 
-        deleteItemConfirm () {
-            this.tableData.splice(this.editedIndex, 1)
-            this.deleteFromDatabase(this.editedItem)
-            this.closeDelete()
-        },
+        // deleteItemConfirm () {
+        //     this.tableData.splice(this.editedIndex, 1)
+        //     this.deleteFromDatabase(this.editedItem)
+        //     this.closeDelete()
+        // },
 
         close () {
             this.dialog = false
@@ -163,18 +168,18 @@ export default {
             })
         },
 
-        save () {
-            if (this.editedIndex > -1) {
-                // Editing existing
-                Object.assign(this.tableData[this.editedIndex], this.editedItem)
-                this.replaceInDatabase(this.editedItem)
-            } else {
-                // Adding new item
-                this.tableData.push(this.editedItem)
-                this.addToDatabase(this.editedItem)
-            }
-            this.close()
-        },
+        // save () {
+        //     if (this.editedIndex > -1) {
+        //         // Editing existing
+        //         Object.assign(this.tableData[this.editedIndex], this.editedItem)
+        //         this.replaceInDatabase(this.editedItem)
+        //     } else {
+        //         // Adding new item
+        //         this.tableData.push(this.editedItem)
+        //         this.addToDatabase(this.editedItem)
+        //     }
+        //     this.close()
+        // },
 
         async addToDatabase(item) {
             await axios.post(`http://localhost:3000/api/${this.url}`, {

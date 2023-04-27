@@ -23,8 +23,9 @@
         <!-- Below the fold -->
         <v-sheet class="primary text-center">
             <v-sheet class="primary mx-auto px-5 py-16" max-width="900">
-                <h2 class="font-weight-light text-h3 mb-16 pt-12">Post-Budget Planning</h2>
-                <h2 class="font-weight-light">Finally making more money than you spend? Keep an eye on your growing savings and investments with VuFi</h2>
+                <h2 class="font-weight-light text-h3 mb-16 pt-12">Unify Your Assets</h2>
+                <h2 class="font-weight-light">No more logging into 10 different accounts to keep track of your money.</h2>
+                <h2 class="font-weight-light">VuFi keeps all that data in one place, with one account.</h2>
             </v-sheet>
         </v-sheet>
 
@@ -39,7 +40,7 @@
         <v-sheet class="primary text-center">
             <v-sheet class="primary mx-auto px-5 py-16" max-width="900">
                 <h2 class="font-weight-light text-h3 mb-16">Privacy and Security</h2>
-                <h2 class="font-weight-light">You'll never see an ad when using VuFi, and your data will never be sold.</h2>
+                <h2 class="font-weight-light">All of your data is encrypted on our database, so even if we were hacked, your personal info is safe.</h2>
             </v-sheet>
         </v-sheet>
     </v-sheet>

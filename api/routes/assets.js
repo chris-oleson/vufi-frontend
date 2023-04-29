@@ -72,8 +72,20 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     db.query(`UPDATE assets SET is_deleted = 1 WHERE id = ${req.params.id}`, (err, results) => {
-        db.query(`INSERT INTO asset_history VALUES (null, 0, CURRENT_DATE(), ${req.params.id})`, (err, results) => {
-            res.send(results)
+        // Check if there is already current value data
+        db.query(`SELECT * FROM asset_history WHERE asset_id = ${req.params.id} AND date = CURRENT_DATE()`, (err, results) => {
+            // If there is, update the current value data
+            if (results.length) {
+                db.query(`UPDATE asset_history SET value = 0 WHERE asset_id = ${req.params.id} AND date = CURRENT_DATE()`, (err, results) => {
+                    res.send(results)
+                })
+            }
+            // If not, add new data for today
+            else {
+                db.query(`INSERT INTO asset_history VALUES (null, 0, CURRENT_DATE(), ${req.params.id})`, (err, results) => {
+                    res.send(results)
+                })
+            }
         })
     })
 })

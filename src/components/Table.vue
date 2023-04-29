@@ -78,7 +78,6 @@
 
 <script>
 import axios from 'axios'
-//import PlaidLink from '/src/components/PlaidLink.vue'
 
 export default {
     name: 'Table',
@@ -146,11 +145,10 @@ export default {
             this.dialogDelete = true
         },
 
-        // deleteItemConfirm () {
-        //     this.tableData.splice(this.editedIndex, 1)
-        //     this.deleteFromDatabase(this.editedItem)
-        //     this.closeDelete()
-        // },
+        deleteItemConfirm () {
+            this.deleteFromDatabase(this.editedItem)
+            this.closeDelete()
+        },
 
         close () {
             this.dialog = false
@@ -168,18 +166,17 @@ export default {
             })
         },
 
-        // save () {
-        //     if (this.editedIndex > -1) {
-        //         // Editing existing
-        //         Object.assign(this.tableData[this.editedIndex], this.editedItem)
-        //         this.replaceInDatabase(this.editedItem)
-        //     } else {
-        //         // Adding new item
-        //         this.tableData.push(this.editedItem)
-        //         this.addToDatabase(this.editedItem)
-        //     }
-        //     this.close()
-        // },
+        save () {
+            if (this.editedIndex > -1) {
+                // Editing existing
+                Object.assign(this.tableData[this.editedIndex], this.editedItem)
+                this.replaceInDatabase(this.editedItem)
+            } else {
+                // Adding new item
+                this.addToDatabase(this.editedItem)
+            }
+            this.close()
+        },
 
         async addToDatabase(item) {
             await axios.post(`http://localhost:3000/api/${this.url}`, {
@@ -189,7 +186,7 @@ export default {
                 is_debt: this.url == 'debts',
             })
             .then(() => {
-                this.$parent.loadData()
+                this.$store.dispatch('getAssetData')
             })
         },
         
@@ -202,14 +199,14 @@ export default {
                 user_id: this.$store.state.userID,
             })
             .then(() => {
-                this.$parent.loadData()
+                this.$store.dispatch('getAssetData')
             })
         },
 
         async deleteFromDatabase(item) {
             await axios.delete(`http://localhost:3000/api/${this.url}/${item.id}`)
             .then(() => {
-                this.$parent.loadData()
+                this.$store.dispatch('getAssetData')
             })
         }
     },

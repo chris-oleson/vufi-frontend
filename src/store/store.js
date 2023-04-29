@@ -24,6 +24,7 @@ export default new Vuex.Store({
         },
 
         assets: {
+            raw: [],
             totalValue: null,
             tableData: [],
             pieChartValues: [],
@@ -32,6 +33,7 @@ export default new Vuex.Store({
         },
 
         debts: {
+            raw: [],
             totalValue: null,
             tableData: [],
             pieChartValues: [],
@@ -58,14 +60,12 @@ export default new Vuex.Store({
                 theme: 0,
                 currency: 'USD'
             }
-
-            state.totalAssetValue = null,
-            state.totalDebtValue = null
         },
 
         setNotification(state, data) { state.notification = data },
 
         setAssetData(state, assets) {
+            state.assets.raw = assets.raw
             state.assets.totalValue = assets.totalValue
             state.assets.tableData = assets.tableData
             state.assets.pieChartValues = assets.pieChartValues
@@ -74,6 +74,7 @@ export default new Vuex.Store({
         },
 
         setDebtData(state, debts) {
+            state.debts.raw = debts.raw
             state.debts.totalValue = debts.totalValue
             state.debts.tableData = debts.tableData
             state.debts.pieChartValues = debts.pieChartValues
@@ -86,6 +87,7 @@ export default new Vuex.Store({
         async getAssetData() {
             // Set up object we want to return
             let assets = {
+                raw: [],
                 totalValue: 0,
                 tableData: [],
                 pieChartValues: [],
@@ -96,11 +98,11 @@ export default new Vuex.Store({
             // Get raw asset data
             axios.get(`http://localhost:3000/api/assets`)
             .then(resp => {
-                let assetData = resp.data
+                assets.raw = resp.data
                 
                 // Set total value and pie chart data
-                if (assetData.length) {
-                    for (let asset of assetData) {
+                if (assets.raw.length) {
+                    for (let asset of assets.raw) {
                         if (!asset.is_deleted) {
                             assets.pieChartLabels.push(asset.name)
                             assets.pieChartValues.push(parseFloat(asset.value))
@@ -110,14 +112,69 @@ export default new Vuex.Store({
                 }
 
                 // Filter out deleted assets in the table
-                assets.tableData = assetData.filter(e => e.is_deleted == 0)
+                assets.tableData = assets.raw.filter(e => e.is_deleted == 0)
 
                 axios.get(`http://localhost:3000/api/assets/history`)
                 .then(resp => {
-                    assets.history = resp.data
-                })
+                    let rawHistory = resp.data
 
-                this.commit('setAssetData', assets)
+                    // Get all individual assets
+                    let assetList = []
+                    for (let asset of assets.raw) {
+                        assetList.push({
+                            id: asset.id,
+                            history: []
+                        })
+                    }
+
+                    // Get all dates that there are records for
+                    let uniqueDates = []
+                    for (let entry of rawHistory) {
+                        if (!uniqueDates.includes(entry.date)) {
+                            uniqueDates.push(entry.date)
+                        }
+                    }
+                    uniqueDates = uniqueDates.sort()
+
+                    // Go through every asset
+                    for (let asset of assetList) {
+                        for (let date of uniqueDates) {                    
+                            // Check if there is any value for that asset on that date, add it if there is.
+                            for (let entry of rawHistory) {
+                                if (entry.date == date && entry.asset_id == asset.id) {
+                                    asset.history.push({
+                                        x: entry.date,
+                                        y: parseFloat(entry.value)
+                                    })
+                                }
+                            }
+                            // If the asset doesn't have an entry for a date with data, add one with the previous value.
+                            if (!asset.history.some(e => e.x == date)) {
+                                if (asset.history.length) {
+                                    asset.history.push({
+                                        x: date,
+                                        y: parseFloat(asset.history[asset.history.length - 1].y)
+                                    })
+                                }
+                            }
+                        }
+                    }
+
+                    // Turn the asset data into something the line chart can read
+                    for (let asset of assetList) {
+                        for (let entry of asset.history) {
+                            let i = assets.history.findIndex(e => e.x == entry.x)
+                            if (i < 0) {
+                                assets.history.push(entry)
+                            }
+                            else {
+                                assets.history[i].y += entry.y
+                            }
+                        }
+                    }
+
+                    this.commit('setAssetData', assets)
+                })
             })
             .catch(() => {
                 this.$router.push('/404')
@@ -137,11 +194,11 @@ export default new Vuex.Store({
             // Get raw asset data
             axios.get(`http://localhost:3000/api/debts`)
             .then(resp => {
-                let debtData = resp.data
+                debts.raw = resp.data
                 
                 // Set total value and pie chart data
-                if (debtData.length) {
-                    for (let debt of debtData) {
+                if (debts.raw.length) {
+                    for (let debt of debts.raw) {
                         if (!debt.is_deleted) {
                             debts.pieChartLabels.push(debt.name)
                             debts.pieChartValues.push(parseFloat(debt.value))
@@ -151,14 +208,14 @@ export default new Vuex.Store({
                 }
 
                 // Filter out deleted assets in the table
-                debts.tableData = debtData.filter(e => e.is_deleted == 0)
+                debts.tableData = debts.raw.filter(e => e.is_deleted == 0)
 
                 axios.get(`http://localhost:3000/api/debts/history`)
                 .then(resp => {
                     debts.history = resp.data
-                })
 
-                this.commit('setDebtData', debts)
+                    this.commit('setDebtData', debts)
+                })
             })
             .catch(() => {
                 this.$router.push('/404')

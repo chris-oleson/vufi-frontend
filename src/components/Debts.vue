@@ -29,15 +29,21 @@ export default ({
 
     data() {
         return {
-            lineChartData: [{
+
+        }
+    },
+
+    computed: {
+        lineChartData() {
+            return [{
                 name: 'Total Debts',
-                data: []
-            }],
+                data: this.$store.state.debts.history
+            }]
         }
     },
 
     mounted() {
-        this.$store.dispatch('getDebtData')
+
     },
 
     methods: {

@@ -184,6 +184,7 @@ export default new Vuex.Store({
         async getDebtData() {
             // Set up object we want to return
             let debts = {
+                raw: [],
                 totalValue: 0,
                 tableData: [],
                 pieChartValues: [],
@@ -212,7 +213,62 @@ export default new Vuex.Store({
 
                 axios.get(`http://localhost:3000/api/debts/history`)
                 .then(resp => {
-                    debts.history = resp.data
+                    let rawHistory = resp.data
+
+                    // Get all individual assets
+                    let debtList = []
+                    for (let debt of debts.raw) {
+                        debtList.push({
+                            id: debt.id,
+                            history: []
+                        })
+                    }
+
+                    // Get all dates that there are records for
+                    let uniqueDates = []
+                    for (let entry of rawHistory) {
+                        if (!uniqueDates.includes(entry.date)) {
+                            uniqueDates.push(entry.date)
+                        }
+                    }
+                    uniqueDates = uniqueDates.sort()
+
+                    // Go through every asset
+                    for (let debt of debtList) {
+                        for (let date of uniqueDates) {                    
+                            // Check if there is any value for that asset on that date, add it if there is.
+                            for (let entry of rawHistory) {
+                                if (entry.date == date && entry.asset_id == debt.id) {
+                                    debt.history.push({
+                                        x: entry.date,
+                                        y: parseFloat(entry.value)
+                                    })
+                                }
+                            }
+                            // If the asset doesn't have an entry for a date with data, add one with the previous value.
+                            if (!debt.history.some(e => e.x == date)) {
+                                if (debt.history.length) {
+                                    debt.history.push({
+                                        x: date,
+                                        y: parseFloat(debt.history[debt.history.length - 1].y)
+                                    })
+                                }
+                            }
+                        }
+                    }
+
+                    // Turn the asset data into something the line chart can read
+                    for (let debt of debtList) {
+                        for (let entry of debt.history) {
+                            let i = debts.history.findIndex(e => e.x == entry.x)
+                            if (i < 0) {
+                                debts.history.push(entry)
+                            }
+                            else {
+                                debts.history[i].y += entry.y
+                            }
+                        }
+                    }
 
                     this.commit('setDebtData', debts)
                 })

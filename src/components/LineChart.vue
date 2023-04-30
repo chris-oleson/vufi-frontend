@@ -85,9 +85,6 @@ export default {
                             zoom: false,
                         },
                     },
-                    animations: {
-                        enabled: false,
-                    },
                     background: 'none'
                 },
             }

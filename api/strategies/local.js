@@ -8,7 +8,7 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (id, done) => {
-    db.query(`SELECT * FROM users WHERE id = ${id}`, (err, results) => {
+    db.query("SELECT * FROM users WHERE id = ?", [id], (err, results) => {
         if (results.length) {
             done(null, results[0])
         }
@@ -23,7 +23,7 @@ passport.use(
         { usernameField: 'email' },
         (email, password, done) => {
             // Search for matching email
-            db.query(`SELECT * FROM users WHERE email = '${email}'`, (err, results) => {
+            db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
                 if (results.length) {
                     // Check if password matches
                     bcrypt.compare(password, results[0].password, (err, match) => {

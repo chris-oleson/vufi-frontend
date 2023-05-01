@@ -183,7 +183,6 @@ export default {
                 name: item.name,
                 type: item.type,
                 value: item.value,
-                is_debt: this.url == 'debts',
             })
             .then(() => {
                 if (this.url == 'assets'){
@@ -200,7 +199,6 @@ export default {
                 name: item.name,
                 type: item.type,
                 value: item.value,
-                is_debt: this.url == 'debts',
                 user_id: this.$store.state.userID,
             })
             .then(() => {

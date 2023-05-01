@@ -1,6 +1,6 @@
 <template>
     <v-card class="ma-2 pa-2" height="300" elevation="4">
-        <apexchart v-show="series[0].data.length" type="area" :options="chartOptions" :series="series" height="100%"></apexchart>
+        <apexchart type="area" :options="chartOptions" :series="series" height="100%"></apexchart>
     </v-card>
 </template>
 
@@ -78,7 +78,6 @@ export default {
                     mode: this.getTheme,
                 },
                 chart: {
-                    redrawOnParentResize: true,
                     toolbar: {
                         show: false,
                         tools: {
@@ -89,6 +88,6 @@ export default {
                 },
             }
         }
-    }
+    },
 }
 </script>

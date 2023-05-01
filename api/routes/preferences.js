@@ -3,7 +3,7 @@ const router = Router()
 const db = require('../database')
 
 router.get('/:id', (req, res) => {
-    db.query(`SELECT * FROM user_prefs WHERE id = ${req.params.id}`, (err, results) => {
+    db.query("SELECT * FROM user_prefs WHERE id = ?", [req.params.id], (err, results) => {
         if (results) {
             res.send(results[0])
         }
@@ -14,7 +14,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-    db.query(`UPDATE user_prefs SET theme = ${req.body.theme}, currency = '${req.body.currency}' WHERE id = ${req.params.id}`, (err, results) => {
+    db.query("UPDATE user_prefs SET theme = ?, currency = ? WHERE id = ?", [req.body.theme, req.body.currency, req.params.id], (err, results) => {
         if (results) {
             res.sendStatus(200)
         }

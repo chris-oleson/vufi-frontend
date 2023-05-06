@@ -45,9 +45,6 @@ export default {
                         show: false,
                     },
                     background: 'none',
-                    animations: {
-                        enabled: false,
-                    }
                 }
             }
         }

@@ -9,6 +9,10 @@ export default {
     name: 'LineChart',
     props: ['theme', 'series'],
 
+    mounted() {
+
+    },
+
     computed: {
         getTheme() {
             if (this.$vuetify.theme.dark) {
@@ -88,6 +92,6 @@ export default {
                 },
             }
         }
-    },
+    }
 }
 </script>

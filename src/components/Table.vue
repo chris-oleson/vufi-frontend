@@ -185,12 +185,7 @@ export default {
                 value: item.value,
             })
             .then(() => {
-                if (this.url == 'assets'){
-                    this.$store.dispatch('getAssetData')
-                }
-                else {
-                    this.$store.dispatch('getDebtData')
-                }
+                this.$store.dispatch('getAllAssetData')
             })
         },
         
@@ -202,24 +197,14 @@ export default {
                 user_id: this.$store.state.userID,
             })
             .then(() => {
-                if (this.url == 'assets'){
-                    this.$store.dispatch('getAssetData')
-                }
-                else {
-                    this.$store.dispatch('getDebtData')
-                }
+                this.$store.dispatch('getAllAssetData')
             })
         },
 
         async deleteFromDatabase(item) {
             await axios.delete(`http://localhost:3000/api/${this.url}/${item.id}`)
             .then(() => {
-                if (this.url == 'assets'){
-                    this.$store.dispatch('getAssetData')
-                }
-                else {
-                    this.$store.dispatch('getDebtData')
-                }
+                this.$store.dispatch('getAllAssetData')
             })
         }
     },

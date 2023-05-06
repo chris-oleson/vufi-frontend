@@ -72,7 +72,7 @@ export default new Vuex.Store({
     actions: {
         async getAllAssetData() {
             // Get raw asset data
-            axios.get(`http://localhost:3000/api/assets/all`)
+            axios.get(`http://localhost:3000/api/assets/`)
             .then(resp => {
                 let allAssets = resp.data
                 
@@ -97,7 +97,7 @@ export default new Vuex.Store({
                     this.commit('setAllAssets', allAssets)
                 }
 
-                axios.get(`http://localhost:3000/api/assets/history/all`)
+                axios.get(`http://localhost:3000/api/assets/history/`)
                 .then(resp => {
                     let allHistory = resp.data
                     this.commit('setAllHistory', allHistory)

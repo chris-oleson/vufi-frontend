@@ -12,29 +12,15 @@ router.use((req, res, next) => {
     }
 })
 
-// Retreive asset data
+// Get all assets
 router.get('/', (req, res) => {
-    db.query("SELECT * FROM assets WHERE user_id = ? AND is_debt = 0", [req.user.id], (err, results) => {
-        res.send(results)
-    })
-})
-
-// Retreive historic asset data
-router.get('/history', (req, res) => {
-    db.query("SELECT asset_history.\`value\`, asset_history.\`date\`, asset_id FROM asset_history, assets where asset_id = assets.id and user_id = ? AND is_debt = 0", [req.user.id], (err, results) => {
-        res.send(results)
-    })
-})
-
-// Reserved for net worth calcs
-router.get('/all', (req, res) => {
     db.query("SELECT * FROM assets WHERE user_id = ?", [req.user.id], (err, results) => {
         res.send(results)
     })
 })
 
-// Reserved for net worth calcs
-router.get('/history/all', (req, res) => {
+// Get all history
+router.get('/history', (req, res) => {
     db.query("SELECT asset_history.\`value\`, asset_history.\`date\`, asset_id FROM asset_history, assets where asset_id = assets.id and user_id = ?", [req.user.id], (err, results) => {
         res.send(results)
     })
@@ -42,7 +28,7 @@ router.get('/history/all', (req, res) => {
 
 // Adding a new asset
 router.post('/', (req, res) => {
-    db.query("INSERT INTO assets VALUES (null, ?, ?, ?, 0, 0, ?)", [req.body.name, req.body.type, req.body.value, req.user.id], (err, results) => {
+    db.query("INSERT INTO assets VALUES (null, ?, ?, ?, ?, 0, ?)", [req.body.name, req.body.type, req.body.value, req.body.is_debt, req.user.id], (err, results) => {
         db.query("INSERT INTO asset_history VALUES (null, ?, CURRENT_DATE(), ?)", [req.body.value, results.insertId], (err, results) => {
             res.send(results)
         })
@@ -53,7 +39,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
 
     // Update the asset data
-    db.query("UPDATE assets SET name = ?, type = ?, value = ?, is_debt = 0, is_deleted = 0, user_id = ? WHERE id = ?", [req.body.name, req.body.type, req.body.value, req.user.id, req.params.id], (err, results) => {
+    db.query("UPDATE assets SET name = ?, type = ?, value = ?, is_debt = ?, is_deleted = 0, user_id = ? WHERE id = ?", [req.body.name, req.body.type, req.body.value, req.body.is_debt, req.user.id, req.params.id], (err, results) => {
 
         // Check if there is already current history data
         db.query("SELECT * FROM asset_history WHERE asset_id = ? AND date = CURRENT_DATE()", [req.params.id], (err, results) => {

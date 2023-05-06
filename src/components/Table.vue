@@ -179,10 +179,11 @@ export default {
         },
 
         async addToDatabase(item) {
-            await axios.post(`http://localhost:3000/api/${this.url}`, {
+            await axios.post(`http://localhost:3000/api/assets`, {
                 name: item.name,
                 type: item.type,
                 value: item.value,
+                is_debt: this.url == 'debts' ? 1 : 0
             })
             .then(() => {
                 this.$store.dispatch('getAllAssetData')
@@ -190,10 +191,11 @@ export default {
         },
         
         async replaceInDatabase(item) {
-            await axios.put(`http://localhost:3000/api/${this.url}/${item.id}`, {
+            await axios.put(`http://localhost:3000/api/assets/${item.id}`, {
                 name: item.name,
                 type: item.type,
                 value: item.value,
+                is_debt: this.url == 'debts' ? 1 : 0,
                 user_id: this.$store.state.userID,
             })
             .then(() => {
@@ -202,7 +204,7 @@ export default {
         },
 
         async deleteFromDatabase(item) {
-            await axios.delete(`http://localhost:3000/api/${this.url}/${item.id}`)
+            await axios.delete(`http://localhost:3000/api/assets/${item.id}`)
             .then(() => {
                 this.$store.dispatch('getAllAssetData')
             })

@@ -39,8 +39,6 @@ const preferences = require('./routes/preferences')
 app.use('/api/preferences', preferences)
 const assets = require('./routes/assets')
 app.use('/api/assets', assets)
-const debts = require('./routes/debts')
-app.use('/api/debts', debts)
 
 app.listen(port, () => {
     console.log('Listening on port ' + port)

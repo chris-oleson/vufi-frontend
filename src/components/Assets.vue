@@ -32,28 +32,47 @@ export default ({
             tableData: [],
             pieChartLabels: [],
             pieChartValues: [],
-            lineChartData: [{
+        }
+    },
+
+    created() {
+        this.formatData()
+    },
+
+    watch: {
+        '$store.state.allAssets': function() {
+            this.formatData()
+        }
+    },
+
+    computed: {
+        lineChartData() {
+            return[{
                 name: 'Total Assets',
                 data: this.refineHistory(this.$store.state.allAssets, this.$store.state.allHistory)
             }]
         }
     },
 
-    created() {
-        // Set pie chart & table data
-        if (this.$store.state.allAssets.length) {
-            for (let asset of this.$store.state.allAssets) {
-                if (!asset.is_deleted && !asset.is_debt) {
-                    this.pieChartLabels.push(asset.name)
-                    this.pieChartValues.push(parseFloat(asset.value))
-                    this.tableData.push(asset)
+    methods: {
+        formatData() {
+            // Clear current data
+            this.pieChartLabels = []
+            this.pieChartValues = []
+            this.tableData = []
+
+            // Set pie chart & table data
+            if (this.$store.state.allAssets.length) {
+                for (let asset of this.$store.state.allAssets) {
+                    if (!asset.is_deleted && !asset.is_debt) {
+                        this.pieChartLabels.push(asset.name)
+                        this.pieChartValues.push(parseFloat(asset.value))
+                        this.tableData.push(asset)
+                    }
                 }
             }
+        },
 
-        }
-    },
-
-    methods: {
         refineHistory(assets, history) {
             // Remove negative assets
             assets = assets.filter(e => e.is_debt == 0)

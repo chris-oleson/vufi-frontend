@@ -40,7 +40,7 @@
         <v-sheet class="primary text-center">
             <v-sheet class="primary mx-auto px-5 py-16" max-width="900">
                 <h2 class="font-weight-light text-h3 mb-16">Privacy and Security</h2>
-                <h2 class="font-weight-light">All of your data is encrypted on our database, so even if we were hacked, your personal info is safe.</h2>
+                <h2 class="font-weight-light">All of your data is encrypted on our database, so your personal data is always safe.</h2>
             </v-sheet>
         </v-sheet>
     </v-sheet>

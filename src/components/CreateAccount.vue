@@ -69,6 +69,9 @@ export default {
                     if (err.response.status == 409) {
                         this.emailExists = true
                     }
+                    if (err.response.status == 404) {
+                        console.log(err.response)
+                    }
                 })
             }
         },

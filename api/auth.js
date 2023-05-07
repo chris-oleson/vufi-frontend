@@ -4,14 +4,9 @@ const mysql = require('mysql2')
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
 const { Strategy } = require('passport-local')
-const session = require('express-session')
-const memoryStore = new session.MemoryStore()
-const cookieParser = require('cookie-parser')
 const connection = mysql.createConnection(process.env.DATABASE_URL)
 
 // Parsing data
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser())
 app.use(express.json())
 
 // Passport functions
@@ -58,16 +53,15 @@ passport.use(
 // Set up session data
 app.use(
     session({
-        secret: 'mysecret',
+        secret: process.env.SESSION,
         resave: false,
         saveUninitialized: false,
-        store: memoryStore,
-        cookie: {
-            secure: false,
-            sameSite: 'strict',
-        },
     })
 )
+
+// Initialize Passport and restore authentication state, if any, from the session
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Log In
 app.post('/login', passport.authenticate('local'), (req, res) => {

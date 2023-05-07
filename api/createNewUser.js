@@ -1,10 +1,17 @@
 const { Router } = require('express')
 const router = Router()
 const bcrypt = require('bcryptjs')
-const db = require('./database')
+const mysql = require('mysql2')
+
+mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+})
 
 // Create new user
-router.post('/create', (req, res) => {
+router.post('/', (req, res) => {
     // Check if there is a matching existing email
     db.query("SELECT * FROM users WHERE email = ?", [req.body.email], (err, results) => {
         if (results.length) {

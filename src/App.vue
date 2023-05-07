@@ -52,11 +52,6 @@ export default {
 
     created() {
         this.applyTheme()
-
-        axios.get('/api/test')
-        .then(resp => {
-            console.log(resp.data)
-        })
     },
 
     computed: {

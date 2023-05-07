@@ -72,4 +72,35 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
     res.sendStatus(200)
 })
 
+// Log Out
+app.get('/logout', (req, res) => {
+    req.logout(() =>{
+        res.sendStatus(200)
+    })
+})
+
+// Create new user
+app.post('/create', (req, res) => {
+    // Check if there is a matching existing email
+    connection.query("SELECT * FROM users WHERE email = ?", [req.body.email], (err, results) => {
+        if (results.length) {
+            res.sendStatus(409)
+        }
+        else {
+            // Encrypt new password
+            let salt = bcrypt.genSaltSync(10)
+            let encryptedPassword = bcrypt.hashSync(req.body.password, salt)
+            
+            // Add user data
+            connection.query("INSERT INTO users VALUES (null, ?, ?, ?, ?)", [req.body.email, encryptedPassword, req.body.firstName, req.body.lastName], (err, results) => {
+                    res.send(results.insertId.toString())
+
+                    // Add default user prefs
+                    connection.query("INSERT INTO user_prefs VALUES (null, 0, 'USD', ?)", [results.insertId])
+                }
+            )
+        }
+    })
+})
+
 module.exports = app;

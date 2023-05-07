@@ -3,10 +3,15 @@ const app = express();
 const mysql = require('mysql2')
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
+const session = require('express-session')
+const memoryStore = new session.MemoryStore()
+const cookieParser = require('cookie-parser')
 const { Strategy } = require('passport-local')
 const connection = mysql.createConnection(process.env.DATABASE_URL)
 
 // Parsing data
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
 app.use(express.json())
 
 // Passport functions
@@ -64,19 +69,19 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Log In
-app.post('/login', passport.authenticate('local'), (req, res) => {
+app.post('/api/auth/login', passport.authenticate('local'), (req, res) => {
     res.sendStatus(200)
 })
 
 // Log Out
-app.get('/logout', (req, res) => {
+app.get('/api/auth/logout', (req, res) => {
     req.logout(() =>{
         res.sendStatus(200)
     })
 })
 
 // Create new user
-app.post('/create', (req, res) => {
+app.post('/api/auth/create', (req, res) => {
     // Check if there is a matching existing email
     connection.query("SELECT * FROM users WHERE email = ?", [req.body.email], (err, results) => {
         if (results.length) {

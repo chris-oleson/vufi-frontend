@@ -7,7 +7,7 @@
             <v-text-field label="Last Name" v-model="lastName"></v-text-field>
 
             <v-text-field label="Email" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"></v-text-field>
-            <v-text-field class="mb-4" label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
+            <v-text-field class="mb-4" label="Password" type="password" v-model="password" :rules="[rules.required]" @keyup.enter="createAccount"></v-text-field>
 
             <v-card-text v-if="emailExists" class="error--text pa-0">This email is already registered</v-card-text>
             <v-btn v-if="emailExists" width="200" small tile class="error mt-4">Forgot Password?</v-btn>

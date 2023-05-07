@@ -31,7 +31,6 @@
 <script>
 import AccountMenu from '/src/components/AccountMenu'
 import NavMenu from '/src/components/NavMenu'
-import axios from 'axios'
 
 export default {
     name: 'App',

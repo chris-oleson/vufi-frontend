@@ -15,7 +15,7 @@ app.use(express.json())
 // Set up session data
 app.use(
     session({
-        secret: 'mysecret',
+        secret: process.env.SESSION,
         resave: false,
         saveUninitialized: false,
         store: memoryStore,

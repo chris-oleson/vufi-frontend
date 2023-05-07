@@ -61,6 +61,11 @@ app.use(
         secret: process.env.SESSION,
         resave: false,
         saveUninitialized: false,
+        store: memoryStore,
+        cookie: {
+            secure: false,
+            sameSite: 'strict',
+        },
     })
 )
 
@@ -82,6 +87,9 @@ app.get('/api/auth/logout', (req, res) => {
 
 // Create new user
 app.post('/api/auth/create', (req, res) => {
+
+    console.log('Got a request to create a new user');
+
     // Check if there is a matching existing email
     connection.query("SELECT * FROM users WHERE email = ?", [req.body.email], (err, results) => {
         if (results.length) {

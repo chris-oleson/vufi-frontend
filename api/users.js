@@ -1,8 +1,7 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql2')
-
-mysql.createConnection({
+const db = mysql.createConnection({
     host: process.env.PLANETSCALE_DB_HOST,
     user: process.env.PLANETSCALE_DB_USERNAME,
     password: process.env.PLANETSCALE_DB_PASSWORD,

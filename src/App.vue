@@ -31,6 +31,7 @@
 <script>
 import AccountMenu from '/src/components/AccountMenu'
 import NavMenu from '/src/components/NavMenu'
+import axios from 'axios'
 
 export default {
     name: 'App',
@@ -51,6 +52,11 @@ export default {
 
     created() {
         this.applyTheme()
+
+        axios.get('/api/test')
+        .then(resp => {
+            console.log(resp.data)
+        })
     },
 
     computed: {

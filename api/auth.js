@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql2')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 const { Strategy } = require('passport-local')
 const session = require('express-session')
+const memoryStore = new session.MemoryStore()
 const cookieParser = require('cookie-parser')
 const connection = mysql.createConnection(process.env.DATABASE_URL)
 

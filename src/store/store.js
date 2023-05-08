@@ -72,7 +72,7 @@ export default new Vuex.Store({
     actions: {
         async getAllAssetData() {
             // Get raw asset data
-            axios.get(`http://localhost:3000/api/assets/`)
+            axios.get('http://localhost:3000/api/assets/')
             .then(resp => {
                 let allAssets = resp.data
                 

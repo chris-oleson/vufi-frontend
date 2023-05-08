@@ -3,6 +3,7 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const passport = require('passport')
 require('./strategies/local')
+require('dotenv').config()
 const app = express()
 const port = 3000
 const memoryStore = new session.MemoryStore()
@@ -15,7 +16,7 @@ app.use(express.json())
 // Set up session data
 app.use(
     session({
-        secret: process.env.SESSION,
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         store: memoryStore,

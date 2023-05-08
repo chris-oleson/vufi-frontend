@@ -39,7 +39,7 @@ export default {
     methods: {
         async login() {
             // Send login data to backend for validation
-            await axios.post(`https://vufi.app/api/auth/login`, {
+            await axios.post('http://localhost:3000/api/auth/login', {
                 email: this.email,
                 password: this.password,
             }).then(() => {

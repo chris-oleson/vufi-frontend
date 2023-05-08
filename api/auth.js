@@ -88,28 +88,28 @@ app.get('/api/auth/logout', (req, res) => {
 // Create new user
 app.post('/api/auth/create', (req, res) => {
 
-    console.log('Got a request to create a new user');
+    res.status(200).send('Got a request to create a new user')
 
-    // Check if there is a matching existing email
-    connection.query("SELECT * FROM users WHERE email = ?", [req.body.email], (err, results) => {
-        if (results.length) {
-            res.sendStatus(409)
-        }
-        else {
-            // Encrypt new password
-            let salt = bcrypt.genSaltSync(10)
-            let encryptedPassword = bcrypt.hashSync(req.body.password, salt)
+    // // Check if there is a matching existing email
+    // connection.query("SELECT * FROM users WHERE email = ?", [req.body.email], (err, results) => {
+    //     if (results.length) {
+    //         res.sendStatus(409)
+    //     }
+    //     else {
+    //         // Encrypt new password
+    //         let salt = bcrypt.genSaltSync(10)
+    //         let encryptedPassword = bcrypt.hashSync(req.body.password, salt)
             
-            // Add user data
-            connection.query("INSERT INTO users VALUES (null, ?, ?, ?, ?)", [req.body.email, encryptedPassword, req.body.firstName, req.body.lastName], (err, results) => {
-                    res.send(results.insertId.toString())
+    //         // Add user data
+    //         connection.query("INSERT INTO users VALUES (null, ?, ?, ?, ?)", [req.body.email, encryptedPassword, req.body.firstName, req.body.lastName], (err, results) => {
+    //                 res.send(results.insertId.toString())
 
-                    // Add default user prefs
-                    connection.query("INSERT INTO user_prefs VALUES (null, 0, 'USD', ?)", [results.insertId])
-                }
-            )
-        }
-    })
+    //                 // Add default user prefs
+    //                 connection.query("INSERT INTO user_prefs VALUES (null, 0, 'USD', ?)", [results.insertId])
+    //             }
+    //         )
+    //     }
+    // })
 })
 
 module.exports = app;

@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "serve dist -s -n -L -p $PORT"
   },
   "dependencies": {
     "apexcharts": "^3.35.4",

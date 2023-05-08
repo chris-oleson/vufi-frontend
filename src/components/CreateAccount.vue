@@ -13,7 +13,7 @@
             <v-btn v-if="emailExists" width="200" small tile class="error mt-4">Forgot Password?</v-btn>
 
             <v-btn width="200" tile class="primary my-4" @click="createAccount">Sign Up</v-btn>
-            <v-btn width="200" text tile class="font-weight-light" @click="this.$router.push('/login')">Log In</v-btn>
+            <v-btn width="200" text tile class="font-weight-light" @click="$router.push('/login')">Log In</v-btn>
         </v-form>
     </v-card>
 </template>

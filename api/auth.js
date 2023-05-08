@@ -58,7 +58,7 @@ passport.use(
 // Set up session data
 app.use(
     session({
-        secret: process.env.SESSION,
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         store: memoryStore,
@@ -73,20 +73,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Log In
-app.post('/api/auth/login', passport.authenticate('local'), (req, res) => {
-    res.sendStatus(200)
-})
-
-// Log Out
-app.get('/api/auth/logout', (req, res) => {
-    req.logout(() =>{
-        res.sendStatus(200)
-    })
-})
-
 // Create new user
-app.post('/api/auth/create', (req, res) => {
+app.get('/api/auth/create', (req, res) => {
 
     res.status(200).send('Got a request to create a new user')
 

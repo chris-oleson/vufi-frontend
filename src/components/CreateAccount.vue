@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios' 
 
 export default {
     name: 'CreateAccount',
@@ -45,7 +45,7 @@ export default {
     },
 
     mounted() {
-
+        console.log(process.env.VUE_APP_PRODUCTION_URL)
     },
 
     methods: {

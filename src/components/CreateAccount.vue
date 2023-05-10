@@ -45,7 +45,7 @@ export default {
     },
 
     mounted() {
-        console.log(process.env.VUE_APP_PRODUCTION_URL)
+
     },
 
     methods: {
@@ -55,7 +55,7 @@ export default {
             // Check if fields are correct
             if (this.validForm) {
                 // Add user to the database
-                await axios.post(process.env.PRODUCTION_URL + 'auth/create', {
+                await axios.post(process.env.VUE_APP_PRODUCTION_URL + 'auth/create', {
                     email: this.email,
                     password: this.password,
                     firstName: this.firstName,

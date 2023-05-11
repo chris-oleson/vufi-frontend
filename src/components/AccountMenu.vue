@@ -28,7 +28,7 @@ export default {
 
     methods: {
         logOut() {
-            axios.get(`http://localhost:3000/api/auth/logout`).then(() => {
+            axios.get(process.env.VUE_APP_URL + 'auth/logout').then(() => {
                 this.$store.commit('logOut')
                 this.$router.push('/')
             })

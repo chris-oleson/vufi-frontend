@@ -14,7 +14,7 @@
                     <v-sheet elevation="4" width="330" class="py-16 mx-auto secondary">
                         <h1 class="font-weight-light">$9<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
                         <p class="font-weight-light mt-4 mb-10">Cancel any time!</p>
-                        <v-btn class="primary" width="200" large tile @click="this.$router.push('/signup')">Start Free Trial</v-btn>
+                        <v-btn class="primary" width="200" large tile @click="$router.push('/signup')">Start Free Trial</v-btn>
                     </v-sheet>
                 </v-flex>
 
@@ -22,7 +22,7 @@
                     <v-sheet elevation="4" width="330" class="py-16 mx-auto secondary">
                         <h1 class="font-weight-light">$90<p class="font-weight-light text-subtitle-1 d-inline">/year</p></h1>
                         <p class="font-weight-light mt-4 mb-10">Two months free!</p>
-                        <v-btn class="primary" width="200" large tile @click="this.$router.push('/signup')">Start Free Trial</v-btn>
+                        <v-btn class="primary" width="200" large tile @click="$router.push('/signup')">Start Free Trial</v-btn>
                     </v-sheet>
                 </v-flex>
             </v-row>

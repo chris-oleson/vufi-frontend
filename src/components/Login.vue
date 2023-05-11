@@ -39,7 +39,7 @@ export default {
     methods: {
         async login() {
             // Send login data to backend for validation
-            await axios.post(process.env.VUE_APP_URL + 'api/auth/login', {
+            await axios.post(process.env.VUE_APP_URL + 'auth/login', {
                 email: this.email,
                 password: this.password,
             }).then(() => {

@@ -56,7 +56,9 @@ export default {
 
     methods: {
         redirect(link) {
-            this.$router.push(link)
+            if (this.$route.path != link) {
+                this.$router.push(link)
+            }
         }
     }
 }

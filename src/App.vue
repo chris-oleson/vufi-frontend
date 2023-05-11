@@ -23,7 +23,7 @@
 
         <v-main>
             <router-view></router-view>
-            <v-snackbar v-model="showNotification" top :color="notificationColor" transition="slide-y-transition" min-width="0" timeout="2000">{{notificationText}}</v-snackbar>
+            <v-snackbar v-model="showNotification" :color="notificationColor" app transition="slide-y-transition" class="pa-0" content-class="text-center ml-2" timeout="2000">{{notificationText}}</v-snackbar>
         </v-main>
     </v-app>
 </template>
@@ -70,7 +70,11 @@ export default {
     },
 
     methods: {
-        redirect(link) { this.$router.push(link) },
+        redirect(link) {
+            if (this.$route.path != link) {
+                this.$router.push(link)
+            }
+        },
 
         logoClicked() {
             if (this.$store.state.isLoggedIn) {

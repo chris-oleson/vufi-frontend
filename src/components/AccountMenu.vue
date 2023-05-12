@@ -30,8 +30,14 @@ export default {
         logOut() {
             axios.get(process.env.VUE_APP_URL + 'auth/logout').then(() => {
                 this.$store.commit('logOut')
-                this.$router.push('/')
+                this.redirect('/')
             })
+        },
+
+        redirect(link) {
+            if (this.$route.path != link) {
+                this.$router.push(link)
+            }
         },
     },
 }

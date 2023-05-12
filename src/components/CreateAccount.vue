@@ -3,11 +3,12 @@
         <v-form v-model="validForm" ref="form">
             <v-img eager src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto mb-4"></v-img>
 
-            <v-text-field label="First Name" v-model="firstName"></v-text-field>
-            <v-text-field label="Last Name" v-model="lastName"></v-text-field>
+            <!-- <v-text-field label="First Name" v-model="firstName"></v-text-field>
+            <v-text-field label="Last Name" v-model="lastName"></v-text-field> -->
 
             <v-text-field label="Email" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"></v-text-field>
-            <v-text-field class="mb-4" label="Password" type="password" v-model="password" :rules="[rules.required]" @keyup.enter="createAccount"></v-text-field>
+            <v-text-field label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
+            <v-text-field class="mb-4" label="Confirm Password" type="password" v-model="confirmPassword" :rules="[rules.required, rules.match]" @keyup.enter="createAccount"></v-text-field>
 
             <v-card-text v-if="emailExists" class="error--text pa-0">This email is already registered</v-card-text>
             <v-btn v-if="emailExists" width="200" small tile class="error mt-4">Forgot Password?</v-btn>
@@ -33,6 +34,7 @@ export default {
             lastName: '',
             email: '',
             password: '',
+            confirmPassword: '',
 
             rules: {
                 required: value => !!value || 'Required field',
@@ -40,6 +42,7 @@ export default {
                     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                     return pattern.test(value) || 'Invalid e-mail'
                 },
+                match: value => (value === this.password) || 'Passwords do not match'
             },
         }
     },
@@ -58,8 +61,8 @@ export default {
                 await axios.post(process.env.VUE_APP_URL + 'auth/create', {
                     email: this.email,
                     password: this.password,
-                    firstName: this.firstName,
-                    lastName: this.lastName,
+                    firstName: '',
+                    lastName: '',
                 })
                 .then(() => {
                     this.$router.push('/assets')

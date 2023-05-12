@@ -6,7 +6,7 @@
 
                     <!-- Top bar -->
                     <v-toolbar-title class="font-weight-light text-h5">{{ type }}s</v-toolbar-title>
-                    <v-divider v-show="tableData.length" class="mx-4" inset vertical></v-divider>
+                    <v-divider class="mx-4" inset vertical></v-divider>
                     <v-toolbar-title class="font-weight-light text-h5">{{ totalValue | toCurrency }}</v-toolbar-title>
                     <v-spacer></v-spacer>
 
@@ -52,11 +52,6 @@
                 </v-toolbar>
             </template>
 
-            <!-- Format cost to currency -->
-            <template v-slot:[`item.cost`]="{ item }">
-                <span>{{ item.cost | toCurrency }}</span>
-            </template>
-
             <!-- Format value to currency -->
             <template v-slot:[`item.value`]="{ item }">
                 <span v-if="item.value">{{ parseFloat(item.value) | toCurrency }}</span>
@@ -82,9 +77,6 @@ import axios from 'axios'
 export default {
     name: 'Table',
     props: ['type', 'url', 'tableData', 'totalValue'],
-    components: {
-        
-    },
 
     data: () => ({
         dialog: false,
@@ -179,7 +171,7 @@ export default {
         },
 
         async addToDatabase(item) {
-            await axios.post(`http://localhost:3000/api/assets`, {
+            await axios.post(process.env.VUE_APP_URL + 'assets', {
                 name: item.name,
                 type: item.type,
                 value: item.value,
@@ -191,7 +183,7 @@ export default {
         },
         
         async replaceInDatabase(item) {
-            await axios.put(`http://localhost:3000/api/assets/${item.id}`, {
+            await axios.put(process.env.VUE_APP_URL + 'assets/' + item.id, {
                 name: item.name,
                 type: item.type,
                 value: item.value,
@@ -204,7 +196,7 @@ export default {
         },
 
         async deleteFromDatabase(item) {
-            await axios.delete(`http://localhost:3000/api/assets/${item.id}`)
+            await axios.delete(process.env.VUE_APP_URL + 'assets/' + item.id)
             .then(() => {
                 this.$store.dispatch('getAllAssetData')
             })

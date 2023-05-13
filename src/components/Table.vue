@@ -174,8 +174,7 @@ export default {
             await axios.post(process.env.VUE_APP_URL + 'assets', {
                 name: item.name,
                 type: item.type,
-                value: item.value,
-                is_debt: this.url == 'debts' ? 1 : 0
+                value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
             })
             .then(() => {
                 this.$store.dispatch('getAllAssetData')
@@ -186,8 +185,7 @@ export default {
             await axios.put(process.env.VUE_APP_URL + 'assets/' + item.id, {
                 name: item.name,
                 type: item.type,
-                value: item.value,
-                is_debt: this.url == 'debts' ? 1 : 0,
+                value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
                 user_id: this.$store.state.userID,
             })
             .then(() => {

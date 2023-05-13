@@ -1,6 +1,6 @@
 <template>
     <v-card class="ma-2 pl-6" elevation="4">
-        <apexchart v-if="series[0].data.length && series[1].data.length" type="treemap" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="treemap" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </template>
 

@@ -17,13 +17,13 @@
 
             <v-menu v-if="this.$vuetify.breakpoint.xs && !usingApp" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn plain icon large v-bind="attrs" v-on="on">
+                    <v-btn class="mr-1" plain icon large v-bind="attrs" v-on="on" @click="selection = null">
                         <v-icon>mdi-menu</v-icon>
                     </v-btn>
                 </template>
                 
                 <v-list class="font-weight-light" width="200">
-                    <v-list-item-group>
+                    <v-list-item-group v-model="selection">
                         <v-list-item text tile class="font-weight-light" @click="redirect('/')">Home</v-list-item>
                         <v-list-item text tile class="font-weight-light" @click="redirect('/pricing')">Pricing</v-list-item>
                         <v-list-item text tile class="font-weight-light" @click="redirect('/about')">About</v-list-item>
@@ -64,6 +64,7 @@ export default {
             showNotification: false,
             notificationColor: '',
             notificationText: '',
+            selection: null
         }
     },
 
@@ -72,13 +73,6 @@ export default {
     },
 
     computed: {
-        // onLandingPage() {
-        //     if (this.$route.path == '/' || this.$route.path == '/about' || this.$route.path == '/pricing') {
-        //         return true
-        //     }
-        //     return false
-        // },
-
         usingApp() {
             if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
                 return true

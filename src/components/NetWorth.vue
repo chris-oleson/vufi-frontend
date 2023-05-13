@@ -41,12 +41,12 @@ export default {
         }
     },
 
-    mounted() {
+    created() {
         for (let asset of this.$store.state.allAssets) {
-            if (asset.is_debt && !asset.is_deleted) {
+            if (asset.value < 0 && !asset.is_deleted) {
                 this.treeChartData[1].data.push({
                     x: asset.name,
-                    y: parseFloat(asset.value)
+                    y: 0 - parseFloat(asset.value)
                 })
             }
             else if (!asset.is_deleted) {
@@ -65,7 +65,6 @@ export default {
             for (let asset of assets) {
                 assetList.push({
                     id: asset.id,
-                    is_debt: asset.is_debt,
                     history: []
                 })
             }
@@ -84,13 +83,13 @@ export default {
                 for (let date of uniqueDates) {
                     // Check if there is any value for that asset on that date, add it if there is.
                     for (let entry of history) {
-                        if (entry.date == date && entry.asset_id == asset.id && asset.is_debt) {
+                        if (entry.date == date && entry.asset_id == asset.id && asset.value < 0) {
                             asset.history.push({
                                 x: entry.date,
-                                y: 0 - parseFloat(entry.value)
+                                y: parseFloat(entry.value)
                             })
                         }
-                        else if (entry.date == date && entry.asset_id == asset.id && !asset.is_debt) {
+                        else if (entry.date == date && entry.asset_id == asset.id) {
                             asset.history.push({
                                 x: entry.date,
                                 y: parseFloat(entry.value)

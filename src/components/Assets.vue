@@ -64,7 +64,7 @@ export default ({
             // Set pie chart & table data
             if (this.$store.state.allAssets.length) {
                 for (let asset of this.$store.state.allAssets) {
-                    if (!asset.is_deleted && !asset.is_debt) {
+                    if (!asset.is_deleted && asset.value >= 0) {
                         this.pieChartLabels.push(asset.name)
                         this.pieChartValues.push(parseFloat(asset.value))
                         this.tableData.push(asset)
@@ -75,7 +75,7 @@ export default ({
 
         refineHistory(assets, history) {
             // Remove negative assets
-            assets = assets.filter(e => e.is_debt == 0)
+            assets = assets.filter(e => e.value >= 0)
 
             // Get all individual assets
             let assetList = []

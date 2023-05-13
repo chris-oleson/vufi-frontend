@@ -15,7 +15,7 @@
                         <v-icon>mdi-credit-card-multiple</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>Debts</v-list-item-title>
-                    <v-list-item-subtitle class="text-right">{{(0 - $store.state.totalNegativeAssets) | toCurrency }}</v-list-item-subtitle>
+                    <v-list-item-subtitle class="text-right">{{($store.state.totalNegativeAssets) | toCurrency }}</v-list-item-subtitle>
                 </v-list-item>
 
                 <v-list-item @click="redirect('/net-worth')">
@@ -23,7 +23,7 @@
                         <v-icon>mdi-sigma</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>Net Worth</v-list-item-title>
-                    <v-list-item-subtitle class="text-right">{{ ($store.state.totalPositiveAssets - $store.state.totalNegativeAssets) | toCurrency }}</v-list-item-subtitle>
+                    <v-list-item-subtitle class="text-right">{{ ($store.state.totalPositiveAssets + $store.state.totalNegativeAssets) | toCurrency }}</v-list-item-subtitle>
                 </v-list-item>
             </v-list-item-group>
         </v-list>

@@ -70,7 +70,6 @@ export default new Vuex.Store({
     },
 
     actions: {
-
         async getAllAssetData() {
             // Get raw asset data
             axios.get(process.env.VUE_APP_URL + 'assets/').then(resp => {
@@ -83,7 +82,7 @@ export default new Vuex.Store({
 
                     for (let asset of allAssets) {
                         if (!asset.is_deleted) {
-                            if (asset.is_debt) {
+                            if (asset.value < 0) {
                                 totalNegativeAssets += parseFloat(asset.value)
                             }
                             else {

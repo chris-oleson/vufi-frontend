@@ -2,7 +2,7 @@
     <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
         <template v-slot:activator="{ on, attrs }">
             <v-btn plain icon v-bind="attrs" v-on="on" @click="selection = null">
-                <v-icon>mdi-dots-vertical</v-icon>
+                <v-icon>mdi-menu</v-icon>
             </v-btn>
         </template>
         

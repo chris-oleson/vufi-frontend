@@ -58,20 +58,14 @@ export default new Vuex.Store({
 
         setNotification(state, data) { state.notification = data },
 
-        setAllAssets(state, data) {
-            state.allAssets = data
+        setAssetData(state, data) {
+            state.allAssets = data.allAssets
+            state.totalPositiveAssets = data.totalPositiveAssets
+            state.totalNegativeAssets = data.totalNegativeAssets
         },
 
         setAllHistory(state, data) {
             state.allHistory = data
-        },
-
-        setTotalPositiveAssets(state, data) {
-            state.totalPositiveAssets = data
-        },
-
-        setTotalNegativeAssets(state, data) {
-            state.totalNegativeAssets = data
         },
     },
 
@@ -98,9 +92,7 @@ export default new Vuex.Store({
                         }
                     }
                     
-                    this.commit('setTotalPositiveAssets', totalPositiveAssets)
-                    this.commit('setTotalNegativeAssets', totalNegativeAssets)
-                    this.commit('setAllAssets', allAssets)
+                    this.commit('setAssetData', {allAssets, totalPositiveAssets, totalNegativeAssets})
                 }
 
                 axios.get(process.env.VUE_APP_URL + 'assets/history/').then(resp => {

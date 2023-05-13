@@ -1,21 +1,39 @@
 <template>
     <v-app>
         <v-app-bar app clipped-left elevation="4">
-            <v-btn v-if="usingApp" plain icon class="mr-2" @click="mini = !mini">
-                <v-icon>mdi-menu</v-icon>
-            </v-btn>
             <v-img src="./assets/logo64x64.png" max-height="50" max-width="50" class="link" @click="logoClicked"></v-img>
-            <h2 class="font-weight-light pl-2 d-none d-sm-flex link" @click="logoClicked">VuFi</h2>
+            <h2 class="font-weight-light pl-2 link" @click="logoClicked">VuFi</h2>
             
             <v-spacer></v-spacer>
 
-            <v-btn v-if="onLandingPage" text tile class="font-weight-light" @click="redirect('/')">Home</v-btn>
-            <v-btn v-if="onLandingPage" text tile class="font-weight-light mx-4" @click="redirect('/pricing')">Pricing</v-btn>
-            <v-btn v-if="onLandingPage" text tile class="font-weight-light" @click="redirect('/about')">About</v-btn>
-            <v-divider v-if="onLandingPage" vertical inset class="mx-4"></v-divider>
+            <template v-if="!this.$vuetify.breakpoint.xs && !usingApp">
+                <v-btn text tile class="font-weight-light" @click="redirect('/')">Home</v-btn>
+                <v-btn text tile class="font-weight-light mx-4" @click="redirect('/pricing')">Pricing</v-btn>
+                <v-btn text tile class="font-weight-light" @click="redirect('/about')">About</v-btn>
+                <v-divider vertical inset class="mx-4"></v-divider>
+                <v-btn v-if="!$store.state.isLoggedIn" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
+                <v-btn v-if="!$store.state.isLoggedIn" tile class="primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
+            </template>
 
-            <v-btn v-if="onLandingPage && !$store.state.isLoggedIn" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="onLandingPage && !$store.state.isLoggedIn" tile class="primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
+            <v-menu v-if="this.$vuetify.breakpoint.xs && !usingApp" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn plain icon large v-bind="attrs" v-on="on">
+                        <v-icon>mdi-menu</v-icon>
+                    </v-btn>
+                </template>
+                
+                <v-list class="font-weight-light" width="200">
+                    <v-list-item-group>
+                        <v-list-item text tile class="font-weight-light" @click="redirect('/')">Home</v-list-item>
+                        <v-list-item text tile class="font-weight-light" @click="redirect('/pricing')">Pricing</v-list-item>
+                        <v-list-item text tile class="font-weight-light" @click="redirect('/about')">About</v-list-item>
+                        <v-divider class="mx-2"></v-divider>
+                        <v-list-item text tile class="font-weight-light" @click="redirect('/login')">Log In</v-list-item>
+                        <v-list-item text tile class="font-weight-light primary--text" @click="redirect('/signup')">Sign Up</v-list-item>
+                    </v-list-item-group>
+                </v-list>
+            </v-menu>
+
             <AccountMenu v-if="$store.state.isLoggedIn"/>
         </v-app-bar>
 
@@ -54,12 +72,12 @@ export default {
     },
 
     computed: {
-        onLandingPage() {
-            if (this.$route.path == '/' || this.$route.path == '/about' || this.$route.path == '/pricing') {
-                return true
-            }
-            return false
-        },
+        // onLandingPage() {
+        //     if (this.$route.path == '/' || this.$route.path == '/about' || this.$route.path == '/pricing') {
+        //         return true
+        //     }
+        //     return false
+        // },
 
         usingApp() {
             if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {

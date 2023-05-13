@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer app floating clipped permanent :mini-variant="mini" class="elevation-4">
+    <v-navigation-drawer v-if="usingApp" app floating clipped permanent :mini-variant="mini" class="elevation-4">
         <v-list class="font-weight-light pa-0">
             <v-list-item-group mandatory :value="page">
                 <v-list-item @click="redirect('/assets')">
@@ -33,13 +33,24 @@
 <script>
 export default {
     name: 'NavMenu',
-    props: ['mini'],
 
-    mounted() {
-
+    data() {
+        return {
+            mini: this.$vuetify.breakpoint.mobile,
+            showNotification: false,
+            notificationColor: '',
+            notificationText: '',
+        }
     },
 
     computed: {
+        usingApp() {
+            if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
+                return true
+            }
+            return false
+        },
+
         page() {
             if (this.$route.path == "/assets") {
                 return 0
@@ -60,6 +71,12 @@ export default {
                 this.$router.push(link)
             }
         }
+    },
+
+    watch: {
+        '$vuetify.breakpoint.mobile'(data) {
+            this.mini = data
+        },
     }
 }
 </script>

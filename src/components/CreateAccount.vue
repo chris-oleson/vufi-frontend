@@ -3,9 +3,6 @@
         <v-form v-model="validForm" ref="form">
             <v-img eager src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto mb-4"></v-img>
 
-            <!-- <v-text-field label="First Name" v-model="firstName"></v-text-field>
-            <v-text-field label="Last Name" v-model="lastName"></v-text-field> -->
-
             <v-text-field label="Email" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"></v-text-field>
             <v-text-field label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
             <v-text-field class="mb-4" label="Confirm Password" type="password" v-model="confirmPassword" :rules="[rules.required, rules.match]" @keyup.enter="createAccount"></v-text-field>
@@ -61,8 +58,8 @@ export default {
                 await axios.post(process.env.VUE_APP_URL + 'auth/create', {
                     email: this.email,
                     password: this.password,
-                    firstName: '',
-                    lastName: '',
+                    firstName: this.firstName,
+                    lastName: this.lastName,
                 })
                 .then(() => {
                     this.$router.push('/assets')
@@ -72,7 +69,7 @@ export default {
                     if (err.response.status == 409) {
                         this.emailExists = true
                     }
-                    if (err.response.status == 404) {
+                    else if (err.response.status == 404) {
                         console.log(err.response)
                     }
                 })

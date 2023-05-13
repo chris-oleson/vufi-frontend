@@ -15,7 +15,6 @@
 
 <script>
 import axios from 'axios'
-
 export default {
     name: 'Login',
 
@@ -42,8 +41,9 @@ export default {
             await axios.post(process.env.VUE_APP_URL + 'auth/login', {
                 email: this.email,
                 password: this.password,
-            }).then(() => {
-                this.$store.commit('login')
+            }).then(resp => {
+                this.$store.commit('logIn', resp.data[0])
+                this.applyTheme()
                 this.$store.dispatch('getAllAssetData')
                 this.$router.push('/assets')
             }).catch(() => {

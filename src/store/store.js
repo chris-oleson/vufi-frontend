@@ -35,7 +35,10 @@ export default new Vuex.Store({
     },
 
     mutations: {
-        login(state) {
+        logIn(state, data) {
+            state.userPrefs.theme = data.theme,
+            state.userPrefs.currency = data.currency
+
             state.isLoggedIn = true
         },
 
@@ -48,6 +51,9 @@ export default new Vuex.Store({
                 theme: 0,
                 currency: 'USD'
             }
+
+            state.allAssets.length = 0
+            state.allHistory.length = 0
         },
 
         setNotification(state, data) { state.notification = data },
@@ -70,6 +76,7 @@ export default new Vuex.Store({
     },
 
     actions: {
+
         async getAllAssetData() {
             // Get raw asset data
             axios.get(process.env.VUE_APP_URL + 'assets/').then(resp => {

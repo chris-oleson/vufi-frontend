@@ -52,10 +52,17 @@ export default {
 
     methods: {
         savePreferences() {
-            axios.put(`http://localhost:3000/api/preferences`, {
+            axios.put(process.env.VUE_APP_URL + 'preferences', {
                 theme: this.themeSelection,
                 currency: this.currencySelection
             })
+            .catch((err) => {
+                console.log(err.message)
+            })
+
+            // axios.get(process.env.VUE_APP_URL + 'test').then((resp) => {
+            //     console.log(resp.data)
+            // })
 
             this.$store.commit('setUserPrefs', {
                 theme: this.themeSelection,

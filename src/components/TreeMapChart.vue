@@ -1,5 +1,5 @@
 <template>
-    <v-card class="ma-2 pl-6" elevation="4">
+    <v-card class="ma-2 pl-3" elevation="4">
         <apexchart type="treemap" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </template>
@@ -24,9 +24,6 @@ export default {
                 colors: this.colors,
                 theme: {
                     mode: this.getTheme,
-                },
-                legend: {
-                    position: 'right'
                 },
                 tooltip: {
                     theme: this.getTheme,

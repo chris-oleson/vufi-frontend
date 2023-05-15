@@ -1,5 +1,5 @@
 <template>
-    <v-sheet class="text-center primary" height="100%">
+    <v-sheet class="text-center accent" height="100%">
         <v-sheet class="px-5 py-12 mb-n16">
             <h1 class="font-weight-light pa-4">Pricing</h1>
             <div class="font-weight-light">Choose the plan that works best for you.</div>

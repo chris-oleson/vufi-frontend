@@ -1,6 +1,6 @@
 <template>
     <v-app-bar app clipped-left elevation="4">
-        <v-img src="../assets/logo64x64.png" max-height="50" max-width="50" class="link" @click="redirect('/')"></v-img>
+        <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="link" @click="redirect('/')"></v-img>
         <h2 class="font-weight-light pl-2 link" @click="redirect('/')">VuFi</h2>
         
         <v-spacer></v-spacer>

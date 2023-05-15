@@ -40,7 +40,7 @@ export default {
                         enabled: this.color,
                         color: this.color,
                         shadeTo: this.getTheme,
-                        shadeIntensity: 0.5,
+                        shadeIntensity: 0.7,
                     },
                 },
                 labels: this.labels,
@@ -58,7 +58,7 @@ export default {
                     },
                 },
                 legend: {
-                    position: 'bottom'
+                    position: 'right'
                 },
                 tooltip: {
                     fillSeriesColor: false,

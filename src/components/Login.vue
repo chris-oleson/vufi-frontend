@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <v-img eager src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto"></v-img>
+        <v-img eager src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto"></v-img>
 
         <v-text-field class="mt-4" label="Email" v-model="email" :error="errorState"></v-text-field>
         <v-text-field class="mb-4" label="Password" type="password" v-model="password" :error="errorState" @keyup.enter="login"></v-text-field>

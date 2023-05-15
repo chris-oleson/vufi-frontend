@@ -21,8 +21,8 @@
         </v-container>
 
         <!-- Below the fold -->
-        <v-sheet class="primary text-center">
-            <v-sheet class="primary mx-auto px-5 py-16" max-width="900">
+        <v-sheet class="accent text-center">
+            <v-sheet class="accent mx-auto px-5 py-16" max-width="900">
                 <h2 class="font-weight-light text-h3 mb-16 pt-12">Unify Your Assets</h2>
                 <h2 class="font-weight-light">No more logging into 10 different accounts to keep track of your money.</h2>
                 <h2 class="font-weight-light">VuFi keeps all that data in one place, with one account.</h2>
@@ -37,8 +37,8 @@
             </v-sheet>
         </v-sheet>
 
-        <v-sheet class="primary text-center">
-            <v-sheet class="primary mx-auto px-5 py-16" max-width="900">
+        <v-sheet class="accent text-center">
+            <v-sheet class="accent mx-auto px-5 py-16" max-width="900">
                 <h2 class="font-weight-light text-h3 mb-16">Privacy and Security</h2>
                 <h2 class="font-weight-light">All of your data is encrypted on our database, so your personal data is always safe.</h2>
             </v-sheet>

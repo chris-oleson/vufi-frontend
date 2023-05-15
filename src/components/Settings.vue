@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <v-img eager src="../assets/logo64x64.png" max-height="50" max-width="50" class="mx-auto"></v-img>
+        <v-img eager :src="$store.state.logo" max-height="50" max-width="50" class="mx-auto"></v-img>
 
         <!-- Theme Selection -->
         <v-card-text class="mt-6">Theme</v-card-text>
@@ -25,7 +25,7 @@
         <v-btn outlined tile text class="font-weight-light my-4" width="200" @click="this.$router.push('/update-email')">Change Email</v-btn>
 
         <!-- Delete Account -->
-        <v-btn outlined tile text class="font-weight-light" width="200" @click="this.$router.push('/delete-account')">Delete Account</v-btn>
+        <v-btn outlined tile text class="font-weight-light error--text" width="200" @click="this.$router.push('/delete-account')">Delete Account</v-btn>
     </v-card>
 </template>
 
@@ -46,10 +46,6 @@ export default {
         }
     },
 
-    mounted() {
-
-    },
-
     methods: {
         savePreferences() {
             axios.put(process.env.VUE_APP_URL + 'preferences', {
@@ -59,10 +55,6 @@ export default {
             .catch((err) => {
                 console.log(err.message)
             })
-
-            // axios.get(process.env.VUE_APP_URL + 'test').then((resp) => {
-            //     console.log(resp.data)
-            // })
 
             this.$store.commit('setUserPrefs', {
                 theme: this.themeSelection,

@@ -1,7 +1,7 @@
 <template>
     <v-app-bar app clipped-left elevation="4">
-        <v-img src="../assets/logo64x64.png" max-height="50" max-width="50" class="link" @click="logoClicked"></v-img>
-        <h2 class="font-weight-light pl-2 link" @click="logoClicked">VuFi</h2>
+        <v-img src="../assets/logo64x64.png" max-height="50" max-width="50" class="link" @click="redirect('/')"></v-img>
+        <h2 class="font-weight-light pl-2 link" @click="redirect('/')">VuFi</h2>
         
         <v-spacer></v-spacer>
 
@@ -21,7 +21,7 @@
                 </v-btn>
             </template>
             
-            <v-list class="font-weight-light" width="200">
+            <v-list nav class="font-weight-light" width="200">
                 <v-list-item-group v-model="selection">
                     <v-list-item text tile class="font-weight-light" @click="redirect('/')">Home</v-list-item>
                     <v-list-item text tile class="font-weight-light" @click="redirect('/pricing')">Pricing</v-list-item>
@@ -64,15 +64,6 @@ export default {
         redirect(link) {
             if (this.$route.path != link) {
                 this.$router.push(link)
-            }
-        },
-
-        logoClicked() {
-            if (this.$store.state.isLoggedIn) {
-                this.redirect('/assets')
-            }
-            else {
-                this.redirect('/')
             }
         },
     }

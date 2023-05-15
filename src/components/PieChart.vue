@@ -7,7 +7,7 @@
 <script>
 export default {
     name: 'PieChart',
-    props: ['type', 'series', 'labels'],
+    props: ['color', 'series', 'labels'],
 
     computed: {
         getTheme() {
@@ -37,8 +37,8 @@ export default {
                 theme: {
                     mode: this.getTheme,
                     monochrome: {
-                        enabled: this.getColor,
-                        color: this.getColor,
+                        enabled: this.color,
+                        color: this.color,
                         shadeTo: this.getTheme,
                         shadeIntensity: 0.5,
                     },

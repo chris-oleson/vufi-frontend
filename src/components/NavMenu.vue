@@ -37,9 +37,6 @@ export default {
     data() {
         return {
             mini: this.$vuetify.breakpoint.mobile,
-            showNotification: false,
-            notificationColor: '',
-            notificationText: '',
         }
     },
 

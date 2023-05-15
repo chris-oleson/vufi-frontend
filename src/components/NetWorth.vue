@@ -1,11 +1,11 @@
 <template>
     <v-row class="ma-2">
         <v-flex xs12>
-            <LineChart :theme="$vuetify.theme.themes.light.primary" :series="lineChartData"/>
+            <LineChart :color="getThemeColor" :series="lineChartData"/>
         </v-flex>
 
         <v-flex xs12 md6>
-            <TreeMapChart :series="treeChartData"/>
+            <TreeMapChart :series="treeChartData" :colors="getThemeColors"/>
         </v-flex>
     </v-row>
 </template>
@@ -62,6 +62,21 @@ export default {
         }
         if (charts[1].data.length) {
             this.treeChartData.push(charts[1])
+        }
+    },
+
+    computed: {
+        getThemeColor() {
+            return this.$vuetify.theme.dark ? this.$vuetify.theme.themes.dark.primary : this.$vuetify.theme.themes.light.primary
+        },
+
+        getThemeColors() {
+            if (this.$vuetify.theme.dark) {
+                return [this.$vuetify.theme.themes.dark.primary, this.$vuetify.theme.themes.dark.error]
+            }
+            else {
+                return [this.$vuetify.theme.themes.light.primary, this.$vuetify.theme.themes.light.error]
+            }
         }
     },
 

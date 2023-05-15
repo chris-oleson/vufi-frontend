@@ -7,11 +7,7 @@
 <script>
 export default {
     name: 'LineChart',
-    props: ['theme', 'series'],
-
-    mounted() {
-
-    },
+    props: ['color', 'series'],
 
     computed: {
         getTheme() {
@@ -74,7 +70,7 @@ export default {
                         opacityTo: 0,
                     }
                 },
-                colors: [this.theme],
+                colors: [this.color],
                 tooltip: {
                     theme: this.getTheme
                 },

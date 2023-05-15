@@ -7,7 +7,7 @@
 <script>
 export default {
     name: 'TreeMapChart',
-    props: ['series'],
+    props: ['series', 'colors'],
 
     computed: {
         getTheme() {
@@ -21,7 +21,7 @@ export default {
 
         chartOptions() {
             return {
-                colors: [this.$vuetify.theme.themes.light.primary, this.$vuetify.theme.themes.light.error],
+                colors: this.colors,
                 theme: {
                     mode: this.getTheme,
                 },

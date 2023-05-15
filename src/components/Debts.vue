@@ -1,7 +1,7 @@
 <template>
     <v-row class="ma-2">
         <v-flex xs12>
-            <LineChart :theme="$vuetify.theme.themes.light.error" :series="lineChartData"/>
+            <LineChart :color="getThemeColor" :series="lineChartData"/>
         </v-flex>
 
         <v-flex xs12 md6>
@@ -9,7 +9,7 @@
         </v-flex>
 
         <v-flex xs12 md6>
-            <PieChart type="Debt" :series="pieChartValues" :labels="pieChartLabels"/>
+            <PieChart :color="getThemeColor" :series="pieChartValues" :labels="pieChartLabels"/>
         </v-flex>
     </v-row>
 </template>
@@ -51,6 +51,10 @@ export default ({
                 name: 'Total Debts',
                 data: this.refineHistory(this.$store.state.allAssets, this.$store.state.allHistory)
             }]
+        },
+
+        getThemeColor() {
+            return this.$vuetify.theme.dark ? this.$vuetify.theme.themes.dark.error : this.$vuetify.theme.themes.light.error
         }
     },
 
@@ -74,8 +78,9 @@ export default ({
         },
 
         refineHistory(assets, history) {
-            // Remove negative assets
+            // Remove positive assets
             assets = assets.filter(e => e.value < 0)
+            history = history.filter(e => e.value < 0)
 
             // Get all individual assets
             let assetList = []

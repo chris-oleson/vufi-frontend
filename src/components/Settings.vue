@@ -46,6 +46,12 @@ export default {
         }
     },
 
+    mounted() {
+        if (!this.$store.state.isLoggedIn) {
+            this.$router.push('/login')
+        }
+    },
+
     methods: {
         savePreferences() {
             axios.put(process.env.VUE_APP_URL + 'preferences', {

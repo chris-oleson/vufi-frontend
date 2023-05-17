@@ -38,17 +38,7 @@ export default new Vuex.Store({
 
         setUserPrefs(state, data) { state.userPrefs = data },
 
-        logOut(state) {
-            state.isLoggedIn = false
-
-            state.userPrefs = {
-                theme: 0,
-                currency: 'USD'
-            }
-
-            state.allAssets.length = 0
-            state.allHistory.length = 0
-        },
+        logOut(state) { state.isLoggedIn = false },
 
         setNotification(state, data) { state.notification = data },
 

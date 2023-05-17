@@ -10,6 +10,7 @@
             <v-btn text tile class="font-weight-light mx-4" @click="redirect('/pricing')">Pricing</v-btn>
             <v-btn text tile class="font-weight-light" @click="redirect('/about')">About</v-btn>
             <v-divider vertical inset class="mx-4"></v-divider>
+            <v-btn v-if="$store.state.isLoggedIn" text tile class="font-weight-light" @click="redirect('/assets')">Dashboard</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" tile class="primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
         </template>
@@ -27,8 +28,9 @@
                     <v-list-item text tile class="font-weight-light" @click="redirect('/pricing')">Pricing</v-list-item>
                     <v-list-item text tile class="font-weight-light" @click="redirect('/about')">About</v-list-item>
                     <v-divider class="mx-2"></v-divider>
-                    <v-list-item text tile class="font-weight-light" @click="redirect('/login')">Log In</v-list-item>
-                    <v-list-item text tile class="font-weight-light primary--text" @click="redirect('/signup')">Sign Up</v-list-item>
+                    <v-list-item v-if="$store.state.isLoggedIn" text tile class="font-weight-light" @click="redirect('/assets')">Dashboard</v-list-item>
+                    <v-list-item v-if="!$store.state.isLoggedIn" text tile class="font-weight-light" @click="redirect('/login')">Log In</v-list-item>
+                    <v-list-item v-if="!$store.state.isLoggedIn" text tile class="font-weight-light primary--text" @click="redirect('/signup')">Sign Up</v-list-item>
                 </v-list-item-group>
             </v-list>
         </v-menu>

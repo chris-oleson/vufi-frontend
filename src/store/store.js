@@ -30,15 +30,9 @@ export default new Vuex.Store({
         totalNegativeAssets: 0,
     },
 
-    getters: {
-
-    },
-
     mutations: {
         logIn(state, data) {
-            state.userPrefs.theme = data.theme,
-            state.userPrefs.currency = data.currency
-
+            state.userPrefs = data
             state.isLoggedIn = true
         },
 

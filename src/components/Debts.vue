@@ -36,6 +36,10 @@ export default ({
     },
 
     created() {
+        if (!this.$store.state.isLoggedIn) {
+            this.$router.push('/404')
+        }
+
         this.formatData()
     },
 

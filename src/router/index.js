@@ -20,8 +20,12 @@ export default new VueRouter ({
     mode: 'history',
     routes: [
         {
-            path: '*',
-            redirect: '/404',
+            path: '/404',
+            alias: '*',
+            component: PageNotFound,
+            meta: {
+                title: '404 | VuFi'
+            }
         },
         {
             path: '/',
@@ -105,13 +109,6 @@ export default new VueRouter ({
             component: DeleteAccount,
             meta: {
                 title: 'Delete Account | VuFi'
-            }
-        },
-        {
-            path: '/404',
-            component: PageNotFound,
-            meta: {
-                title: '404'
             }
         },
     ]

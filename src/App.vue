@@ -2,7 +2,7 @@
     <v-app>
         <TopBar/>
 
-        <NavMenu/>
+        <SideBar/>
 
         <v-main>
             <router-view></router-view>
@@ -13,14 +13,14 @@
 
 <script>
 import TopBar from '/src/components/TopBar'
-import NavMenu from '/src/components/NavMenu'
+import SideBar from '/src/components/SideBar'
 
 export default {
     name: 'App',
 
     components: {
         TopBar,
-        NavMenu
+        SideBar
     },
 
     data() {

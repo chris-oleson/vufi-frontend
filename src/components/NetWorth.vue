@@ -33,36 +33,11 @@ export default {
     },
 
     created() {
-        let charts = [{
-            name: 'Assets',
-            data: []
-        },
-        {
-            name: 'Debts',
-            data: []
-        }]
-        
-        for (let asset of this.$store.state.allAssets) {
-            if (asset.value < 0 && !asset.is_deleted) {
-                charts[1].data.push({
-                    x: asset.name,
-                    y: 0 - parseFloat(asset.value)
-                })
-            }
-            else if (!asset.is_deleted) {
-                charts[0].data.push({
-                    x: asset.name,
-                    y: parseFloat(asset.value)
-                })
-            }
+        if (!this.$store.state.isLoggedIn) {
+            this.$router.push('/404')
         }
 
-        if (charts[0].data.length) {
-            this.treeChartData.push(charts[0])
-        }
-        if (charts[1].data.length) {
-            this.treeChartData.push(charts[1])
-        }
+        this.formatData()
     },
 
     computed: {
@@ -81,6 +56,39 @@ export default {
     },
 
     methods: {
+        formatData() {
+            let charts = [{
+                name: 'Assets',
+                data: []
+            },
+            {
+                name: 'Debts',
+                data: []
+            }]
+            
+            for (let asset of this.$store.state.allAssets) {
+                if (asset.value < 0 && !asset.is_deleted) {
+                    charts[1].data.push({
+                        x: asset.name,
+                        y: 0 - parseFloat(asset.value)
+                    })
+                }
+                else if (!asset.is_deleted) {
+                    charts[0].data.push({
+                        x: asset.name,
+                        y: parseFloat(asset.value)
+                    })
+                }
+            }
+
+            if (charts[0].data.length) {
+                this.treeChartData.push(charts[0])
+            }
+            if (charts[1].data.length) {
+                this.treeChartData.push(charts[1])
+            }
+        },
+
         refineHistory(assets, history) {
             // Get all individual assets
             let assetList = []

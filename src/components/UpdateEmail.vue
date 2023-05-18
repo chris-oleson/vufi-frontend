@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <v-img eager src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto"></v-img>
+        <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto"></v-img>
 
         <v-text-field class="mt-4" label="Current Password" :error="incorrectPassword" type="password" v-model="password"></v-text-field>
         <v-card-text v-if="incorrectPassword" class="error--text pa-0">Incorrect password</v-card-text>
@@ -40,7 +40,7 @@ export default {
             // Check if fields are correct
             if (this.validForm) {
                 // Update email in the database
-                await axios.patch(`http://localhost:3000/api/user/${this.$store.state.userID}/email`, {
+                await axios.patch(process.env.VUE_APP_URL + 'user/email', {
                     password: this.password,
                     email: this.newEmail
                 })

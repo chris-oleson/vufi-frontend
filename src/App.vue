@@ -32,11 +32,11 @@ export default {
     },
 
     created() {
-        if (!this.$store.state.isLoggedIn) {
-            this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (this.$store.state.isLoggedIn) {
+            this.applyTheme()
         }
         else {
-            this.applyTheme()
+            this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         }
     },
 

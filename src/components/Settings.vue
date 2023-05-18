@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <v-img eager :src="$store.state.logo" max-height="50" max-width="50" class="mx-auto"></v-img>
+        <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto"></v-img>
 
         <!-- Theme Selection -->
         <v-card-text class="mt-6">Theme</v-card-text>
@@ -19,13 +19,13 @@
         <v-card-text>Account</v-card-text>
 
         <!-- Change Password -->
-        <v-btn outlined tile text class="font-weight-light" width="200" @click="this.$router.push('/update-password')">Change Password</v-btn>
+        <v-btn outlined tile text class="font-weight-light" width="200" @click="redirect('/update-password')">Change Password</v-btn>
 
         <!-- Change Email -->
-        <v-btn outlined tile text class="font-weight-light my-4" width="200" @click="this.$router.push('/update-email')">Change Email</v-btn>
+        <v-btn outlined tile text class="font-weight-light my-4" width="200" @click="redirect('/update-email')">Change Email</v-btn>
 
         <!-- Delete Account -->
-        <v-btn outlined tile text class="font-weight-light error--text" width="200" @click="this.$router.push('/delete-account')">Delete Account</v-btn>
+        <v-btn outlined tile text class="font-weight-light error--text" width="200" @click="redirect('/delete-account')">Delete Account</v-btn>
     </v-card>
 </template>
 
@@ -48,7 +48,7 @@ export default {
 
     mounted() {
         if (!this.$store.state.isLoggedIn) {
-            this.$router.push('/login')
+            this.redirect('/login')
         }
     },
 
@@ -67,6 +67,12 @@ export default {
                 currency: this.currencySelection
             })
         },
+
+        redirect(link) {
+            if (this.$route.path != link) {
+                this.$router.push(link)
+            }
+        }
     },
 
     watch: {

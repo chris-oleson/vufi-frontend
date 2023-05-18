@@ -1,7 +1,7 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
         <v-form v-model="validForm" ref="form">
-            <v-img eager src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto mb-4"></v-img>
+            <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto mb-4"></v-img>
 
             <v-text-field label="Email" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"></v-text-field>
             <v-text-field label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>

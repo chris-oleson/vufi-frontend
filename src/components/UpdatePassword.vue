@@ -49,7 +49,7 @@ export default {
                         text: "Successfully updated password",
                         color: "primary"}
                     )
-                    this.$router.push('/dashboard')
+                    this.$router.push('/assets')
                 })
                 .catch((err) => {
                     console.log(err.message)

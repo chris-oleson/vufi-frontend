@@ -58,12 +58,13 @@ export default new Vuex.Store({
             // Get raw asset data
             axios.get(process.env.VUE_APP_URL + 'assets/').then(resp => {
                 let allAssets = resp.data
-                
+                let totalPositiveAssets = 0
+                let totalNegativeAssets = 0
+
                 // Set total values
                 if (allAssets.length) {
-                    let totalPositiveAssets = 0
-                    let totalNegativeAssets = 0
 
+                    // Calculate positive and negative asset totals
                     for (let asset of allAssets) {
                         if (!asset.is_deleted) {
                             if (asset.value < 0) {
@@ -73,10 +74,10 @@ export default new Vuex.Store({
                                 totalPositiveAssets += parseFloat(asset.value)
                             }
                         }
-                    }
-                    
-                    this.commit('setAssetData', {allAssets, totalPositiveAssets, totalNegativeAssets})
+                    }    
                 }
+                
+                this.commit('setAssetData', {allAssets, totalPositiveAssets, totalNegativeAssets})
 
                 axios.get(process.env.VUE_APP_URL + 'assets/history/').then(resp => {
                     let allHistory = resp.data

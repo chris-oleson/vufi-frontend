@@ -40,7 +40,6 @@ export default {
                         enabled: this.color,
                         color: this.color,
                         shadeTo: this.getTheme,
-                        shadeIntensity: 0.7,
                     },
                 },
                 labels: this.labels,

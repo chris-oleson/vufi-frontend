@@ -1,5 +1,5 @@
 <template>
-    <v-card class="ma-2 pl-3" elevation="4">
+    <v-card class="ma-2 pl-4" elevation="4">
         <apexchart type="treemap" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </template>

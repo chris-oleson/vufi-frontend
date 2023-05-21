@@ -73,6 +73,9 @@ export default {
                     },
                 },
                 chart: {
+                    animations: {
+                        enabled: false
+                    },
                     background: 'none',
                 }
             }

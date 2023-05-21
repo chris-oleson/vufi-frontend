@@ -26,10 +26,6 @@ export default {
             correctInfo: false,
         }
     },
-
-    mounted() {
-
-    },
     
     computed: {
         userData() { return this.$store.state.userData },
@@ -43,26 +39,19 @@ export default {
                 password: this.password,
             }).then(resp => {
                 this.$store.commit('logIn', resp.data[0])
-                this.applyTheme()
                 this.$store.dispatch('getAllAssetData')
-                this.$router.push('/assets')
+                this.redirect('/assets')
             }).catch(() => {
                 // Handles incorrect login
                 this.errorState = true
             })
         },
 
-        applyTheme() {
-            if (this.$store.state.userPrefs.theme === 0) {
-                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        redirect(link) {
+            if (this.$route.path != link) {
+                this.$router.push(link)
             }
-            else if (this.$store.state.userPrefs.theme === 1){
-                this.$vuetify.theme.dark = false
-            }
-            else if (this.$store.state.userPrefs.theme === 2){
-                this.$vuetify.theme.dark = true
-            }
-        },
+        }
     }
 }
 </script>

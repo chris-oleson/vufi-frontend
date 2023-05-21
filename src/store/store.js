@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     plugins: [new VuexPersistence({
-        storage: window.sessionStorage
+        storage: window.localStorage
     }).plugin],
 
     state: {
@@ -38,7 +38,17 @@ export default new Vuex.Store({
 
         setUserPrefs(state, data) { state.userPrefs = data },
 
-        logOut(state) { state.isLoggedIn = false },
+        logOut(state) {
+            state.isLoggedIn = false
+            state.allAssets = []
+            state.allHistory = []
+            state.totalPositiveAssets = 0
+            state.totalNegativeAssets = 0
+            state.userPrefs = {
+                theme: 0,
+                currency: 'USD'
+            }
+        },
 
         setNotification(state, data) { state.notification = data },
 
@@ -76,7 +86,7 @@ export default new Vuex.Store({
                         }
                     }    
                 }
-                
+
                 this.commit('setAssetData', {allAssets, totalPositiveAssets, totalNegativeAssets})
 
                 axios.get(process.env.VUE_APP_URL + 'assets/history/').then(resp => {

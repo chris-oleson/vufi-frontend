@@ -14,6 +14,7 @@
 <script>
 import TopBar from '/src/components/TopBar'
 import SideBar from '/src/components/SideBar'
+// import axios from 'axios'
 
 export default {
     name: 'App',
@@ -32,12 +33,7 @@ export default {
     },
 
     created() {
-        if (this.$store.state.isLoggedIn) {
-            this.applyTheme()
-        }
-        else {
-            this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        }
+        this.applyTheme()
     },
 
     methods: {
@@ -67,6 +63,18 @@ export default {
             this.notificationText = data.text
             this.notificationColor = data.color
             this.showNotification = true
+        },
+
+        '$store.state.userPrefs.theme'(data) {
+            if (data === 0) {
+                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+            }
+            else if (data === 1){
+                this.$vuetify.theme.dark = false
+            }
+            else if (data === 2){
+                this.$vuetify.theme.dark = true
+            }
         }
     }
 }

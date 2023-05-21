@@ -28,9 +28,8 @@ export default {
 
     methods: {
         logOut() {
-            axios.get(process.env.VUE_APP_URL + 'auth/logout').then(() => {
+            axios.post(process.env.VUE_APP_URL + 'auth/logout').then(() => {
                 this.$store.commit('logOut')
-                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
                 this.redirect('/')
             })
         },

@@ -38,7 +38,6 @@ export default {
     data() {
         return {
             themeSelection: this.$store.state.userPrefs.theme,
-
             currencySelection: this.$store.state.userPrefs.currency,
             currencies: [
                 'USD',
@@ -54,6 +53,8 @@ export default {
 
     methods: {
         savePreferences() {
+
+            // Update database preferences
             axios.put(process.env.VUE_APP_URL + 'preferences', {
                 theme: this.themeSelection,
                 currency: this.currencySelection
@@ -62,6 +63,7 @@ export default {
                 console.log(err.message)
             })
 
+            // Set client side data
             this.$store.commit('setUserPrefs', {
                 theme: this.themeSelection,
                 currency: this.currencySelection
@@ -76,16 +78,7 @@ export default {
     },
 
     watch: {
-        themeSelection(data) {
-            if (data == 0) {
-                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-            }
-            else if (data == 1) {
-                this.$vuetify.theme.dark = false
-            }
-            else if (data == 2) {
-                this.$vuetify.theme.dark = true
-            }
+        themeSelection() {
             this.savePreferences()
         },
 

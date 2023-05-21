@@ -38,6 +38,9 @@ export default {
                     },
                 },
                 chart: {
+                    animations: {
+                        enabled: false
+                    },
                     toolbar: {
                         show: false,
                     },

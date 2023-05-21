@@ -78,6 +78,9 @@ export default {
                     mode: this.getTheme,
                 },
                 chart: {
+                    animations: {
+                        enabled: false
+                    },
                     toolbar: {
                         show: false,
                         tools: {

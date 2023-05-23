@@ -13,8 +13,8 @@
         </v-card-actions>
 
         <!-- Change Default Currency -->
-        <v-card-text>Display</v-card-text>
-        <v-select :items="currencies" :menu-props="{ tile: true, nudgeBottom: 40 }" v-model="currencySelection" dense outlined class="rounded-0 mx-auto" label="Default Currency"></v-select>
+        <v-card-text>Currency</v-card-text>
+        <v-select :items="currencies" :menu-props="{ tile: true, nudgeBottom: 40 }" v-model="currencySelection" dense outlined class="rounded-0 mx-auto"></v-select>
 
         <v-card-text>Account</v-card-text>
 

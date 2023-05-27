@@ -14,7 +14,7 @@
 <script>
 import TopBar from '/src/components/TopBar'
 import SideBar from '/src/components/SideBar'
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
     name: 'App',
@@ -34,6 +34,16 @@ export default {
 
     created() {
         this.applyTheme()
+
+        if (this.$store.state.isLoggedIn) {
+            axios.get(process.env.VUE_APP_URL + 'auth/checkSession')
+            .catch(() => {
+                axios.post(process.env.VUE_APP_URL + 'auth/logout').then(() => {
+                    this.$store.commit('logOut')
+                    this.redirect('/')
+                })
+            })
+        }
     },
 
     methods: {
@@ -48,6 +58,12 @@ export default {
                 this.$vuetify.theme.dark = true
             }
         },
+
+        redirect(link) {
+            if (this.$route.path != link) {
+                this.$router.push(link)
+            }
+        }
     },
 
     watch: {

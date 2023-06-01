@@ -40,7 +40,7 @@ export default {
             .catch(() => {
                 axios.post(process.env.VUE_APP_URL + 'auth/logout').then(() => {
                     this.$store.commit('logOut')
-                    this.redirect('/')
+                    this.redirect('/login')
                 })
             })
         }

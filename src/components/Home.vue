@@ -7,14 +7,14 @@
                     <v-sheet class="ma-5 pt-16">
                         <h1 class="text-h2 font-weight-light">Finance at a Glance</h1>
                         <h2 class="my-16 font-weight-light">One, simple, intuitive platform to organize and track your assets and debts</h2>
-                        <v-btn class="bg-primary" x-large rounded="0" @click="$router.push('/signup')">Start Free Trial</v-btn>
+                        <v-btn class="bg-primary" size="x-large" rounded="0" @click="$router.push('/signup')">Start Free Trial</v-btn>
                     </v-sheet>
                 </v-col>
 
                 <v-col cols="12" lg="7">
                     <v-sheet class="ma-5 mb-n16" elevation="10">
-                        <v-img v-if="$vuetify.theme.dark" eager :src="require('../assets/landingPage4.png')"></v-img>
-                        <v-img v-else eager src="../assets/landingPage3.png"></v-img>
+                        <v-img v-if="$vuetify.theme.current.dark" eager :src="require('../assets/landingPage4.png')"/>
+                        <v-img v-else eager src="../assets/landingPage3.png"/>
                     </v-sheet>
                 </v-col>
             </v-row>

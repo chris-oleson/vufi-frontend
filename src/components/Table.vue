@@ -72,8 +72,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
     name: 'Table',
     props: ['type', 'url', 'tableData', 'totalValue'],
@@ -171,7 +169,7 @@ export default {
         },
 
         async addToDatabase(item) {
-            await axios.post(process.env.VUE_APP_URL + 'assets', {
+            await this.$axios.post(process.env.VUE_APP_URL + 'assets', {
                 name: item.name,
                 type: item.type,
                 value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
@@ -182,7 +180,7 @@ export default {
         },
         
         async replaceInDatabase(item) {
-            await axios.put(process.env.VUE_APP_URL + 'assets/' + item.id, {
+            await this.$axios.put(process.env.VUE_APP_URL + 'assets/' + item.id, {
                 name: item.name,
                 type: item.type,
                 value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
@@ -194,7 +192,7 @@ export default {
         },
 
         async deleteFromDatabase(item) {
-            await axios.delete(process.env.VUE_APP_URL + 'assets/' + item.id)
+            await this.$axios.delete(process.env.VUE_APP_URL + 'assets/' + item.id)
             .then(() => {
                 this.$store.dispatch('getAllAssetData')
             })

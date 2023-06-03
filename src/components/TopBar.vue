@@ -1,6 +1,6 @@
 <template>
-    <v-app-bar elevation="4">
-        <img :src="require('../assets/logo.svg')" width="50" height="50" class="link ml-4" @click="redirect('/')"/>
+    <v-app-bar>
+        <v-img src="../assets/logo.svg" max-width="50" max-height="50" class="link ml-4" @click="redirect('/')"/>
         <h2 class="font-weight-light link px-2" @click="redirect('/')">VuFi</h2>
         
         <v-spacer></v-spacer>
@@ -12,7 +12,7 @@
             <v-divider vertical inset class="mx-4"></v-divider>
             <v-btn v-if="$store.state.isLoggedIn" rounded="0" class="font-weight-light" @click="redirect('/assets')">Dashboard</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="font-weight-light" @click="redirect('/login')">Log In</v-btn>
-            <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="bg-primary ml-4" @click="redirect('/signup')">Sign Up</v-btn>
+            <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="bg-primary mx-4" @click="redirect('/signup')">Sign Up</v-btn>
         </template>
 
         <v-menu v-if="$vuetify.display.xs && !usingApp" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
@@ -23,9 +23,9 @@
             </template>
             
             <v-list nav class="font-weight-light" width="200">
-                <v-list-item text tile class="font-weight-light" @click="redirect('/')">Home</v-list-item>
-                <v-list-item text tile class="font-weight-light" @click="redirect('/pricing')">Pricing</v-list-item>
-                <v-list-item text tile class="font-weight-light" @click="redirect('/about')">About</v-list-item>
+                <v-list-item rounded="0" class="font-weight-light" @click="redirect('/')">Home</v-list-item>
+                <v-list-item rounded="0" class="font-weight-light" @click="redirect('/pricing')">Pricing</v-list-item>
+                <v-list-item rounded="0" class="font-weight-light" @click="redirect('/about')">About</v-list-item>
                 <v-divider class="mx-2"></v-divider>
                 <v-list-item v-if="$store.state.isLoggedIn" class="font-weight-light" @click="redirect('/assets')">Dashboard</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light" @click="redirect('/login')">Log In</v-list-item>
@@ -43,12 +43,6 @@ export default {
     name: 'TopBar',
     components: {
         AccountMenu
-    },
-    
-    data() {
-        return {
-
-        }
     },
 
     computed: {

@@ -13,6 +13,7 @@ app.use(router)
 
 // Vuetify
 import vuetify from './vuetify'
+app.config.globalProperties.$vuetify = vuetify
 app.use(vuetify)
 
 // ApexCharts

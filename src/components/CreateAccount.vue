@@ -1,24 +1,22 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
         <v-form v-model="validForm" ref="form">
-            <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto mb-4"></v-img>
+            <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto mb-4"/>
 
-            <v-text-field label="Email" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"></v-text-field>
-            <v-text-field label="Password" type="password" v-model="password" :rules="[rules.required]"></v-text-field>
-            <v-text-field class="mb-4" label="Confirm Password" type="password" v-model="confirmPassword" :rules="[rules.required, rules.match]" @keyup.enter="createAccount"></v-text-field>
+            <v-text-field variant="underlined" label="Email" v-model="email" :error="emailExists" :rules="[rules.required, rules.email]"/>
+            <v-text-field variant="underlined" label="Password" type="password" v-model="password" :rules="[rules.required]"/>
+            <v-text-field variant="underlined" class="mb-4" label="Confirm Password" type="password" v-model="confirmPassword" :rules="[rules.required, rules.match]" @keyup.enter="createAccount"/>
 
-            <v-card-text v-if="emailExists" class="error--text pa-0">This email is already registered</v-card-text>
-            <v-btn v-if="emailExists" width="200" small tile class="error mt-4">Forgot Password?</v-btn>
+            <v-card-text v-if="emailExists" class="text-error pa-0">This email is already registered</v-card-text>
+            <v-btn v-if="emailExists" width="200" size="small" rounded="0" class="bg-error mt-4">Forgot Password?</v-btn>
 
-            <v-btn width="200" tile class="primary my-4" @click="createAccount">Sign Up</v-btn>
-            <v-btn width="200" text tile class="font-weight-light" @click="$router.push('/login')">Log In</v-btn>
+            <v-btn width="200" rounded="0" class="bg-primary my-4" @click="createAccount">Sign Up</v-btn>
+            <v-btn width="200" variant="text" rounded="0" class="font-weight-light" @click="$router.push('/login')">Log In</v-btn>
         </v-form>
     </v-card>
 </template>
 
 <script>
-import axios from 'axios' 
-
 export default {
     name: 'CreateAccount',
 
@@ -55,7 +53,7 @@ export default {
             // Check if fields are correct
             if (this.validForm) {
                 // Add user to the database
-                await axios.post(process.env.VUE_APP_URL + 'auth/create', {
+                await this.$axios.post(process.env.VUE_APP_URL + 'auth/create', {
                     email: this.email,
                     password: this.password,
                     firstName: this.firstName,

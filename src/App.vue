@@ -5,7 +5,7 @@
         <SideBar/>
 
         <v-main>
-            <router-view></router-view>
+            <router-view/>
             <v-snackbar v-model="showNotification" :color="notificationColor" app transition="slide-y-transition" class="pa-0" content-class="text-center ml-2" timeout="2000">{{ notificationText }}</v-snackbar>
         </v-main>
     </v-app>
@@ -46,10 +46,10 @@ export default {
     computed: {
         getTheme() {
             if (this.$store.state.userPrefs.theme === 1) {
-                return 'vufiLight'
+                return 'light'
             }
             else if (this.$store.state.userPrefs.theme === 2) {
-                return 'vufiDark'
+                return 'dark'
             }
             else {
                 return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'

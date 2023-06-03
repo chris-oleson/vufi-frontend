@@ -1,5 +1,5 @@
 <template>
-    <v-sheet class="text-center accent" height="100%">
+    <v-sheet class="text-center bg-accent" height="100%">
         <v-sheet class="px-5 py-12 mb-n16">
             <h1 class="font-weight-light pa-4">Pricing</h1>
             <div class="font-weight-light">Choose the plan that works best for you.</div>
@@ -10,19 +10,19 @@
 
         <v-container fluid>
             <v-row justify="center">
-                <v-col xs12 md4 lg3 class="ma-5">
-                    <v-sheet elevation="4" width="330" class="py-16 mx-auto secondary">
+                <v-col cols="12" md="4" lg="3" class="ma-5">
+                    <v-sheet elevation="4" width="330" class="py-16 mx-auto bg-secondary">
                         <h1 class="font-weight-light">$9<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
                         <p class="font-weight-light mt-4 mb-10">Cancel any time!</p>
-                        <v-btn class="primary" width="200" large tile @click="$router.push('/signup')">Start Free Trial</v-btn>
+                        <v-btn class="bg-primary" width="200" size="large" rounded="0" @click="$router.push('/signup')">Start Free Trial</v-btn>
                     </v-sheet>
                 </v-col>
 
-                <v-col xs12 md4 lg3 class="ma-5">
-                    <v-sheet elevation="4" width="330" class="py-16 mx-auto secondary">
+                <v-col cols="12" md="4" lg="3" class="ma-5">
+                    <v-sheet elevation="4" width="330" class="py-16 mx-auto bg-secondary">
                         <h1 class="font-weight-light">$90<p class="font-weight-light text-subtitle-1 d-inline">/year</p></h1>
                         <p class="font-weight-light mt-4 mb-10">Two months free!</p>
-                        <v-btn class="primary" width="200" large tile @click="$router.push('/signup')">Start Free Trial</v-btn>
+                        <v-btn class="bg-primary" width="200" size="large" rounded="0" @click="$router.push('/signup')">Start Free Trial</v-btn>
                     </v-sheet>
                 </v-col>
             </v-row>

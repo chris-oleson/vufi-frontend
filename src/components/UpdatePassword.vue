@@ -9,14 +9,12 @@
             <v-text-field class="mb-4" label="Confirm New Password" type="password" v-model="confirmNewPassword" :rules="[rules.match]" @keyup.enter="changePassword"></v-text-field>
 
             <v-card-text v-if="incorrectPassword" class="error--text pa-0">Incorrect password</v-card-text>
-            <v-btn tile class="primary mt-4" width="200" @click="changePassword">Submit</v-btn>
+            <v-btn rounded="0" class="bg-primarymt-4" width="200" @click="changePassword">Submit</v-btn>
         </v-form>
     </v-card>
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
     name: 'UpdatePassword',
 
@@ -40,7 +38,7 @@ export default {
             // Check if fields are correct
             if (this.validForm) {
                 // Update password in the database
-                await axios.patch(process.env.VUE_APP_URL + 'user/password', {
+                await this.$axios.patch(process.env.VUE_APP_URL + 'user/password', {
                     password: this.password,
                     newPassword: this.newPassword
                 })

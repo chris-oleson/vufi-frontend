@@ -14,19 +14,12 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
     name: 'AccountMenu',
 
-    data() {
-        return {
-
-        }
-    },
-
     methods: {
         logOut() {
-            axios.post(process.env.VUE_APP_URL + 'auth/logout').then(() => {
+            this.$axios.post(process.env.VUE_APP_URL + 'auth/logout').then(() => {
                 this.$store.commit('logOut')
                 this.redirect('/')
             })

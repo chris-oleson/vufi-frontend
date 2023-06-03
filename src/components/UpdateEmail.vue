@@ -9,14 +9,12 @@
             <v-text-field class="my-4" label="New Email" v-model="newEmail" :rules="[rules.required]"></v-text-field>
             <v-text-field class="mb-4" label="Confirm New Email" v-model="confirmNewEmail" :rules="[rules.match]" @keyup.enter="changeEmail"></v-text-field>
 
-            <v-btn tile class="primary mt-4" width="200" @click="changeEmail">Submit</v-btn>
+            <v-btn rounded="0" class="bg-primarymt-4" width="200" @click="changeEmail">Submit</v-btn>
         </v-form>
     </v-card>
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
     name: 'UpdateEmail',
 
@@ -40,7 +38,7 @@ export default {
             // Check if fields are correct
             if (this.validForm) {
                 // Update email in the database
-                await axios.patch(process.env.VUE_APP_URL + 'user/email', {
+                await this.$axios.patch(process.env.VUE_APP_URL + 'user/email', {
                     password: this.password,
                     email: this.newEmail
                 })

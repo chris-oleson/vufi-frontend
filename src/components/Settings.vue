@@ -5,7 +5,7 @@
         <!-- Theme Selection -->
         <v-card-text class="mt-6">Theme</v-card-text>
         <v-card-actions class="justify-center mb-6">
-            <v-btn-toggle tile mandatory v-model="themeSelection">
+            <v-btn-toggle rounded="0" mandatory v-model="themeSelection">
                 <v-btn small text outlined class="font-weight-light pa-4">System</v-btn>
                 <v-btn small text outlined class="font-weight-light pa-4">Light</v-btn>
                 <v-btn small text outlined class="font-weight-light pa-4">Dark</v-btn>
@@ -19,19 +19,17 @@
         <v-card-text>Account</v-card-text>
 
         <!-- Change Password -->
-        <v-btn outlined tile text class="font-weight-light" width="200" @click="redirect('/update-password')">Change Password</v-btn>
+        <v-btn outlined rounded="0" text class="font-weight-light" width="200" @click="redirect('/update-password')">Change Password</v-btn>
 
         <!-- Change Email -->
-        <v-btn outlined tile text class="font-weight-light my-4" width="200" @click="redirect('/update-email')">Change Email</v-btn>
+        <v-btn outlined rounded="0" text class="font-weight-light my-4" width="200" @click="redirect('/update-email')">Change Email</v-btn>
 
         <!-- Delete Account -->
-        <v-btn outlined tile text class="font-weight-light error--text" width="200" @click="redirect('/delete-account')">Delete Account</v-btn>
+        <v-btn outlined rounded="0" text class="font-weight-light error--text" width="200" @click="redirect('/delete-account')">Delete Account</v-btn>
     </v-card>
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
     name: 'Settings',
 
@@ -55,7 +53,7 @@ export default {
         savePreferences() {
 
             // Update database preferences
-            axios.put(process.env.VUE_APP_URL + 'preferences', {
+            this.$axios.put(process.env.VUE_APP_URL + 'preferences', {
                 theme: this.themeSelection,
                 currency: this.currencySelection
             })

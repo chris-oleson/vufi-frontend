@@ -1,11 +1,8 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 import VuexPersistence from 'vuex-persist'
 import axios from 'axios'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default createStore({
     plugins: [new VuexPersistence({
         storage: window.localStorage
     }).plugin],

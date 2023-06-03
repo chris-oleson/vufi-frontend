@@ -1,12 +1,12 @@
 <template>
     <v-row class="ma-2">
-        <v-flex xs12>
+        <v-col cols="12">
             <LineChart :color="getThemeColor" :series="lineChartData"/>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 md6>
+        <v-col cols="12" md="6">
             <TreeMapChart :series="treeChartData" :colors="getThemeColors"/>
-        </v-flex>
+        </v-col>
     </v-row>
 </template>
 

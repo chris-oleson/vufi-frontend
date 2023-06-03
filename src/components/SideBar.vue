@@ -1,48 +1,44 @@
 <template>
-    <v-navigation-drawer v-if="usingApp" app floating clipped permanent :mini-variant="mini" class="elevation-4">
-        <v-list class="font-weight-light pa-0">
-            <v-list-item-group mandatory :value="page">
-                <v-list-item @click="redirect('/assets')">
-                    <v-list-item-icon class="mr-4">
-                        <v-icon>mdi-cash-multiple</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title>Assets</v-list-item-title>
-                    <v-list-item-subtitle class="text-right">{{ $store.state.totalPositiveAssets | toCurrency }}</v-list-item-subtitle>
-                </v-list-item>
-                
-                <v-list-item @click="redirect('/debts')">
-                    <v-list-item-icon class="mr-4">
-                        <v-icon>mdi-credit-card-multiple</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title>Debts</v-list-item-title>
-                    <v-list-item-subtitle class="text-right">{{($store.state.totalNegativeAssets) | toCurrency }}</v-list-item-subtitle>
-                </v-list-item>
+    <v-navigation-drawer v-if="usingApp" floating permanent :mini-variant="mini" class="elevation-4">
+        <v-list class="font-weight-light pa-0" :value="page">
+            <v-list-item @click="redirect('/assets')">
+                <v-icon>mdi-cash-multiple</v-icon>
+                <v-list-item-title>Assets</v-list-item-title>
+                <v-list-item-subtitle class="text-right">{{ $store.state.totalPositiveAssets }}</v-list-item-subtitle>
+            </v-list-item>
+            
+            <v-list-item @click="redirect('/debts')">
+                <v-icon>mdi-credit-card-multiple</v-icon>
+                <v-list-item-title>Debts</v-list-item-title>
+                <v-list-item-subtitle class="text-right">{{ $store.state.totalNegativeAssets }}</v-list-item-subtitle>
+            </v-list-item>
 
-                <v-list-item @click="redirect('/net-worth')">
-                    <v-list-item-icon class="mr-4">
-                        <v-icon>mdi-sigma</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title>Net Worth</v-list-item-title>
-                    <v-list-item-subtitle class="text-right">{{ ($store.state.totalPositiveAssets + $store.state.totalNegativeAssets) | toCurrency }}</v-list-item-subtitle>
-                </v-list-item>
-            </v-list-item-group>
+            <v-list-item @click="redirect('/net-worth')">
+                <v-icon>mdi-sigma</v-icon>
+                <v-list-item-title>Net Worth</v-list-item-title>
+                <v-list-item-subtitle class="text-right">{{ $store.state.totalPositiveAssets + $store.state.totalNegativeAssets }}</v-list-item-subtitle>
+            </v-list-item>
         </v-list>
     </v-navigation-drawer>
 </template>
 
 <script>
 export default {
-    name: 'NavMenu',
+    name: 'SideBar',
 
     data() {
         return {
-            mini: this.$vuetify.breakpoint.mobile,
+
         }
     },
 
     computed: {
+        mini() {
+            return this.$vuetify.display.mobile
+        },
+
         usingApp() {
-            if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
+            if (this.$route == '/assets' || this.$route == '/debts' || this.$route == '/net-worth') {
                 return true
             }
             return false

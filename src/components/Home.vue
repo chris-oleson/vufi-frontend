@@ -3,26 +3,26 @@
         <!-- Above the fold -->
         <v-container fluid class="text-center">
             <v-row class="ma-5">
-                <v-flex xs12 lg5>
+                <v-col cols="12" lg="5">
                     <v-sheet class="ma-5 pt-16">
                         <h1 class="text-h2 font-weight-light">Finance at a Glance</h1>
                         <h2 class="my-16 font-weight-light">One, simple, intuitive platform to organize and track your assets and debts</h2>
-                        <v-btn class="primary" x-large tile @click="$router.push('/signup')">Start Free Trial</v-btn>
+                        <v-btn class="bg-primary" x-large rounded="0" @click="$router.push('/signup')">Start Free Trial</v-btn>
                     </v-sheet>
-                </v-flex>
+                </v-col>
 
-                <v-flex xs12 lg7>
+                <v-col cols="12" lg="7">
                     <v-sheet class="ma-5 mb-n16" elevation="10">
-                        <v-img v-if="$vuetify.theme.dark" eager src="../assets/landingPage4.png"></v-img>
+                        <v-img v-if="$vuetify.theme.dark" eager :src="require('../assets/landingPage4.png')"></v-img>
                         <v-img v-else eager src="../assets/landingPage3.png"></v-img>
                     </v-sheet>
-                </v-flex>
+                </v-col>
             </v-row>
         </v-container>
 
         <!-- Below the fold -->
-        <v-sheet class="accent text-center">
-            <v-sheet class="accent mx-auto px-5 py-16" max-width="900">
+        <v-sheet class="bg-accent text-center">
+            <v-sheet class="bg-accent mx-auto px-5 py-16" max-width="900">
                 <h2 class="font-weight-light text-h3 mb-16 pt-12">Unify Your Assets</h2>
                 <h2 class="font-weight-light">No more logging into 10 different accounts to keep track of your money.</h2>
                 <h2 class="font-weight-light">VuFi keeps all that data in one place, with one account.</h2>
@@ -37,8 +37,8 @@
             </v-sheet>
         </v-sheet>
 
-        <v-sheet class="accent text-center">
-            <v-sheet class="accent mx-auto px-5 py-16" max-width="900">
+        <v-sheet class="bg-accent text-center">
+            <v-sheet class="bg-accent mx-auto px-5 py-16" max-width="900">
                 <h2 class="font-weight-light text-h3 mb-16">Privacy and Security</h2>
                 <h2 class="font-weight-light">All of your data is encrypted on our database, so your personal data is always safe.</h2>
             </v-sheet>

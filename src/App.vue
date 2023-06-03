@@ -1,12 +1,12 @@
 <template>
-    <v-app>
+    <v-app :theme=getTheme>
         <TopBar/>
 
         <SideBar/>
 
         <v-main>
             <router-view></router-view>
-            <v-snackbar v-model="showNotification" :color="notificationColor" app transition="slide-y-transition" class="pa-0" content-class="text-center ml-2" timeout="2000">{{notificationText}}</v-snackbar>
+            <v-snackbar v-model="showNotification" :color="notificationColor" app transition="slide-y-transition" class="pa-0" content-class="text-center ml-2" timeout="2000">{{ notificationText }}</v-snackbar>
         </v-main>
     </v-app>
 </template>
@@ -14,7 +14,6 @@
 <script>
 import TopBar from '/src/components/TopBar'
 import SideBar from '/src/components/SideBar'
-import axios from 'axios'
 
 export default {
     name: 'App',
@@ -33,12 +32,10 @@ export default {
     },
 
     created() {
-        this.applyTheme()
-
         if (this.$store.state.isLoggedIn) {
-            axios.get(process.env.VUE_APP_URL + 'auth/checkSession')
+            this.$axios.get(process.env.VUE_APP_URL + 'auth/checkSession')
             .catch(() => {
-                axios.post(process.env.VUE_APP_URL + 'auth/logout').then(() => {
+                this.$axios.post(process.env.VUE_APP_URL + 'auth/logout').then(() => {
                     this.$store.commit('logOut')
                     this.redirect('/login')
                 })
@@ -46,19 +43,21 @@ export default {
         }
     },
 
-    methods: {
-        applyTheme() {
-            if (this.$store.state.userPrefs.theme === 0) {
-                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    computed: {
+        getTheme() {
+            if (this.$store.state.userPrefs.theme === 1) {
+                return 'vufiLight'
             }
-            else if (this.$store.state.userPrefs.theme === 1){
-                this.$vuetify.theme.dark = false
+            else if (this.$store.state.userPrefs.theme === 2) {
+                return 'vufiDark'
             }
-            else if (this.$store.state.userPrefs.theme === 2){
-                this.$vuetify.theme.dark = true
+            else {
+                return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
             }
-        },
+        }
+    },
 
+    methods: {
         redirect(link) {
             if (this.$route.path != link) {
                 this.$router.push(link)
@@ -69,7 +68,6 @@ export default {
     watch: {
         // Update tab text when the page changes
         $route: {
-            immediate: true,
             handler(newRoute) {
                 document.title = newRoute.meta.title;
             }

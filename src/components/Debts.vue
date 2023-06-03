@@ -1,16 +1,16 @@
 <template>
     <v-row class="ma-2">
-        <v-flex xs12>
+        <v-col cols="12">
             <LineChart :color="getThemeColor" :series="lineChartData"/>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 md6>
+        <v-col cols="12" md="6">
             <Table type="Debt" url="debts" :tableData="tableData" :totalValue="$store.state.totalNegativeAssets"/>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 md6>
+        <v-col cols="12" md="6">
             <PieChart :color="getThemeColor" :series="pieChartValues" :labels="pieChartLabels"/>
-        </v-flex>
+        </v-col>
     </v-row>
 </template>
 

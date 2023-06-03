@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Login from '/src/components/Login'
 import PageNotFound from '/src/components/PageNotFound'
 import CreateAccount from '/src/components/CreateAccount'
@@ -14,14 +13,12 @@ import Home from '/src/components/Home'
 import Pricing from '/src/components/Pricing'
 import About from '/src/components/About'
 
-Vue.use(VueRouter)
-
-export default new VueRouter ({
-    mode: 'history',
+export default createRouter({
+    history: createWebHistory(),
     routes: [
         {
             path: '/404',
-            alias: '*',
+            alias: '/:pathMatch(.*)*',
             component: PageNotFound,
             meta: {
                 title: '404 | VuFi'

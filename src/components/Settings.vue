@@ -4,28 +4,26 @@
 
         <!-- Theme Selection -->
         <v-card-text class="mt-6">Theme</v-card-text>
-        <v-card-actions class="justify-center mb-6">
-            <v-btn-toggle rounded="0" mandatory v-model="themeSelection">
-                <v-btn small text outlined class="font-weight-light pa-4">System</v-btn>
-                <v-btn small text outlined class="font-weight-light pa-4">Light</v-btn>
-                <v-btn small text outlined class="font-weight-light pa-4">Dark</v-btn>
-            </v-btn-toggle>
-        </v-card-actions>
+        <v-btn-toggle v-model="themeSelection" variant="outlined" density="compact" class="mb-4">
+            <v-btn class="font-weight-light" size="small">System</v-btn>
+            <v-btn class="font-weight-light" size="small">Light</v-btn>
+            <v-btn class="font-weight-light" size="small">Dark</v-btn>
+        </v-btn-toggle>
 
         <!-- Change Default Currency -->
         <v-card-text>Currency</v-card-text>
-        <v-select :items="currencies" :menu-props="{ tile: true, nudgeBottom: 40 }" v-model="currencySelection" dense outlined class="rounded-0 mx-auto"></v-select>
+        <v-select :items="currencies" v-model="currencySelection" variant="outlined" density="compact" class="mx-6"></v-select>
 
         <v-card-text>Account</v-card-text>
 
         <!-- Change Password -->
-        <v-btn outlined rounded="0" text class="font-weight-light" width="200" @click="redirect('/update-password')">Change Password</v-btn>
+        <v-btn rounded="0" variant="outlined" class="font-weight-light" width="200" @click="redirect('/update-password')">Change Password</v-btn>
 
         <!-- Change Email -->
-        <v-btn outlined rounded="0" text class="font-weight-light my-4" width="200" @click="redirect('/update-email')">Change Email</v-btn>
+        <v-btn rounded="0" variant="outlined" class="font-weight-light my-4" width="200" @click="redirect('/update-email')">Change Email</v-btn>
 
         <!-- Delete Account -->
-        <v-btn outlined rounded="0" text class="font-weight-light error--text" width="200" @click="redirect('/delete-account')">Delete Account</v-btn>
+        <v-btn rounded="0" variant="outlined" class="font-weight-light text-error" width="200" @click="redirect('/delete-account')">Delete Account</v-btn>
     </v-card>
 </template>
 
@@ -51,9 +49,8 @@ export default {
 
     methods: {
         savePreferences() {
-
             // Update database preferences
-            this.$axios.put(process.env.VUE_APP_URL + 'preferences', {
+            this.$axios.put('preferences', {
                 theme: this.themeSelection,
                 currency: this.currencySelection
             })
@@ -86,9 +83,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.v-input{
-    width: 200px;
-}
-</style>

@@ -33,9 +33,9 @@ export default {
 
     created() {
         if (this.$store.state.isLoggedIn) {
-            this.$axios.get(process.env.VUE_APP_URL + 'auth/checkSession')
+            this.$axios.get('auth/checkSession')
             .catch(() => {
-                this.$axios.post(process.env.VUE_APP_URL + 'auth/logout').then(() => {
+                this.$axios.post('auth/logout').then(() => {
                     this.$store.commit('logOut')
                     this.redirect('/login')
                 })

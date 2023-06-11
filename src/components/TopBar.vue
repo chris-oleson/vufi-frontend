@@ -3,7 +3,7 @@
         <v-img src="../assets/logo.svg" max-width="50" max-height="50" class="link ml-4" @click="redirect('/')"/>
         <h2 class="font-weight-light link px-2" @click="redirect('/')">VuFi</h2>
         
-        <v-spacer></v-spacer>
+        <v-spacer/>
 
         <template v-if="!$vuetify.display.xs && !usingApp">
             <v-btn rounded="0" class="font-weight-light" @click="redirect('/')">Home</v-btn>
@@ -16,13 +16,11 @@
         </template>
 
         <v-menu v-if="$vuetify.display.xs && !usingApp" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
-            <template v-slot:activator="{ on, attrs }">
-                <v-btn class="mr-1" plain icon large v-bind="attrs" v-on="on">
-                    <v-icon>mdi-menu</v-icon>
-                </v-btn>
+            <template v-slot:activator="{ props }">
+                <v-btn icon="mdi-menu" class="mr-1" variant="plain" size="large" v-bind="props"/>
             </template>
             
-            <v-list nav class="font-weight-light" width="200">
+            <v-list class="font-weight-light" width="200">
                 <v-list-item rounded="0" class="font-weight-light" @click="redirect('/')">Home</v-list-item>
                 <v-list-item rounded="0" class="font-weight-light" @click="redirect('/pricing')">Pricing</v-list-item>
                 <v-list-item rounded="0" class="font-weight-light" @click="redirect('/about')">About</v-list-item>
@@ -47,7 +45,7 @@ export default {
 
     computed: {
         usingApp() {
-            if (this.$route == '/assets' || this.$route == '/debts' || this.$route == '/net-worth') {
+            if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
                 return true
             }
             return false

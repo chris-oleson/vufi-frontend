@@ -23,5 +23,15 @@ app.use(VueApexCharts)
 // Axios
 import axios from 'axios'
 app.config.globalProperties.$axios = axios
+axios.defaults.baseURL = process.env.VUE_APP_URL
+axios.interceptors.request.use(
+    function(config) {
+        config.withCredentials = true
+        return config
+    },
+    function(error) {
+        return Promise.reject(error)
+    }
+)
 
 app.mount('#app')

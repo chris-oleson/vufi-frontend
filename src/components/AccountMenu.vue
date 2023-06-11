@@ -1,14 +1,12 @@
 <template>
     <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
-        <template v-slot:activator="{ on, attrs }">
-            <v-btn class="mr-1" plain icon large v-bind="attrs" v-on="on">
-                <v-icon>mdi-cog</v-icon>
-            </v-btn>
+        <template v-slot:activator="{ props }">
+            <v-btn icon="mdi-cog" variant="plain" size="large" class="mr-1" v-bind="props"/>
         </template>
         
-        <v-list nav class="font-weight-light" width="200">
-            <v-list-item @click="redirect('/settings')"><v-icon class="mr-4">mdi-cog</v-icon>Settings</v-list-item>
-            <v-list-item @click="logOut"><v-icon class="mr-4">mdi-logout</v-icon>Log out</v-list-item>
+        <v-list class="font-weight-light" width="200">
+            <v-list-item prepend-icon="mdi-cog" variant="plain" @click="redirect('/settings')">Settings</v-list-item>
+            <v-list-item prepend-icon="mdi-logout" variant="plain" @click="logOut">Log out</v-list-item>
         </v-list>
     </v-menu>
 </template>
@@ -19,7 +17,7 @@ export default {
 
     methods: {
         logOut() {
-            this.$axios.post(process.env.VUE_APP_URL + 'auth/logout').then(() => {
+            this.$axios.post('auth/logout').then(() => {
                 this.$store.commit('logOut')
                 this.redirect('/')
             })

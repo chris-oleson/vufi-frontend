@@ -1,22 +1,25 @@
 <template>
-    <v-navigation-drawer v-if="usingApp" floating permanent :mini-variant="mini" class="elevation-4">
+    <v-navigation-drawer v-if="usingApp" permanent :mini-variant="mini" class="elevation-4">
         <v-list class="font-weight-light pa-0" :value="page">
-            <v-list-item @click="redirect('/assets')">
-                <v-icon>mdi-cash-multiple</v-icon>
-                <v-list-item-title>Assets</v-list-item-title>
-                <v-list-item-subtitle class="text-right">{{ $store.state.totalPositiveAssets }}</v-list-item-subtitle>
-            </v-list-item>
-            
-            <v-list-item @click="redirect('/debts')">
-                <v-icon>mdi-credit-card-multiple</v-icon>
-                <v-list-item-title>Debts</v-list-item-title>
-                <v-list-item-subtitle class="text-right">{{ $store.state.totalNegativeAssets }}</v-list-item-subtitle>
+            <v-list-item prepend-icon="mdi-cash-multiple" class="py-4" to="/assets">
+                <div class="d-flex justify-space-between">
+                    <div class="d-inline">Assets</div>
+                    <div class="d-inline">{{ $store.state.totalPositiveAssets }}</div>
+                </div>
             </v-list-item>
 
-            <v-list-item @click="redirect('/net-worth')">
-                <v-icon>mdi-sigma</v-icon>
-                <v-list-item-title>Net Worth</v-list-item-title>
-                <v-list-item-subtitle class="text-right">{{ $store.state.totalPositiveAssets + $store.state.totalNegativeAssets }}</v-list-item-subtitle>
+            <v-list-item prepend-icon="mdi-credit-card-multiple" class="py-4" to="/debts">
+                <div class="d-flex justify-space-between">
+                    <div class="d-inline">Debts</div>
+                    <div class="d-inline">{{ $store.state.totalNegativeAssets }}</div>
+                </div>
+            </v-list-item>
+
+            <v-list-item prepend-icon="mdi-sigma" class="py-4" to="/net-worth">
+                <div class="d-flex justify-space-between">
+                    <div class="d-inline">Net Worth</div>
+                    <div class="d-inline">{{ $store.state.totalPositiveAssets + $store.state.totalNegativeAssets }}</div>
+                </div>
             </v-list-item>
         </v-list>
     </v-navigation-drawer>
@@ -38,7 +41,7 @@ export default {
         },
 
         usingApp() {
-            if (this.$route == '/assets' || this.$route == '/debts' || this.$route == '/net-worth') {
+            if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
                 return true
             }
             return false
@@ -55,14 +58,6 @@ export default {
                 return 2
             }
             return null
-        }
-    },
-
-    methods: {
-        redirect(link) {
-            if (this.$route.path != link) {
-                this.$router.push(link)
-            }
         }
     },
 

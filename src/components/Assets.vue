@@ -1,30 +1,30 @@
 <template>
     <v-row class="ma-2">
         <v-col cols="12">
-            <LineChart :color="getThemeColor" :series="lineChartData"/>
+            <!-- <LineChart :color="getThemeColor" :series="lineChartData"/> -->
         </v-col>
 
         <v-col cols="12" md="6">
-            <Table type="Asset" url="assets" :tableData="tableData" :totalValue="$store.state.totalPositiveAssets"/>
+            <DataTable type="Asset" url="assets" :tableData="tableData" :totalValue="$store.state.totalPositiveAssets"/>
         </v-col>
 
         <v-col cols="12" md="6">
-            <PieChart :color="getThemeColor" :series="pieChartValues" :labels="pieChartLabels"/>
+            <!-- <PieChart :color="getThemeColor" :series="pieChartValues" :labels="pieChartLabels"/> -->
         </v-col>
     </v-row>
 </template>
 
 <script>
-import Table from '/src/components/Table.vue'
-import PieChart from '/src/components/PieChart.vue'
-import LineChart from '/src/components/LineChart.vue'
+import DataTable from '/src/components/DataTable.vue'
+// import PieChart from '/src/components/PieChart.vue'
+// import LineChart from '/src/components/LineChart.vue'
 
 export default ({
     name: 'Assets',
     components: {
-        Table,
-        PieChart,
-        LineChart,
+        DataTable,
+        // PieChart,
+        // LineChart,
     },
 
     data() {

@@ -33,7 +33,7 @@ export default {
     methods: {
         async login() {
             // Send login data to backend for validation
-            await this.$axios.post(process.env.VUE_APP_URL + 'auth/login', {
+            await this.$axios.post('auth/login', {
                 email: this.email,
                 password: this.password,
             }).then(resp => {

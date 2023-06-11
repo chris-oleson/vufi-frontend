@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import VuexPersistence from 'vuex-persist'
+import axios from 'axios'
 
 export default createStore({
     plugins: [new VuexPersistence({
@@ -62,7 +63,7 @@ export default createStore({
     actions: {
         async getAllAssetData() {
             // Get raw asset data
-            this.$axios.get(process.env.VUE_APP_URL + 'assets/').then(resp => {
+            axios.get(process.env.VUE_APP_URL + 'assets/').then(resp => {
                 let allAssets = resp.data
                 let totalPositiveAssets = 0
                 let totalNegativeAssets = 0
@@ -85,13 +86,13 @@ export default createStore({
 
                 this.commit('setAssetData', {allAssets, totalPositiveAssets, totalNegativeAssets})
 
-                this.$axios.get(process.env.VUE_APP_URL + 'assets/history/').then(resp => {
+                axios.get(process.env.VUE_APP_URL + 'assets/history/').then(resp => {
                     let allHistory = resp.data
                     this.commit('setAllHistory', allHistory)
                 })
             })
-            .catch((err) => {
-                console.log(err.message)
+            .catch(() => {
+                console.log("couldn't get asset data")
             })
         },
     }

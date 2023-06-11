@@ -53,7 +53,7 @@ export default {
             // Check if fields are correct
             if (this.validForm) {
                 // Add user to the database
-                await this.$axios.post(process.env.VUE_APP_URL + 'auth/create', {
+                await this.$axios.post('auth/create', {
                     email: this.email,
                     password: this.password,
                     firstName: this.firstName,

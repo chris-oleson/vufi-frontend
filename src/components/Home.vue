@@ -13,7 +13,7 @@
 
                 <v-col cols="12" lg="7">
                     <v-sheet class="ma-5 mb-n16" elevation="10">
-                        <v-img v-if="$vuetify.theme.current.dark" eager :src="require('../assets/landingPage4.png')"/>
+                        <v-img v-if="$vuetify.theme.name == 'dark'" eager src="../assets/landingPage4.png"/>
                         <v-img v-else eager src="../assets/landingPage3.png"/>
                     </v-sheet>
                 </v-col>

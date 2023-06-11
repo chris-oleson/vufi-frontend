@@ -2,14 +2,14 @@
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
         <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto"></v-img>
 
-        <v-text-field class="mt-4" label="Current Password" :error="incorrectPassword" type="password" v-model="password"></v-text-field>
-        <v-card-text v-if="incorrectPassword" class="error--text pa-0">Incorrect password</v-card-text>
+        <v-text-field variant="underlined" class="mt-4" label="Current Password" :error="incorrectPassword" type="password" v-model="password"></v-text-field>
+        <v-card-text v-if="incorrectPassword" class="text-error pa-0">Incorrect password</v-card-text>
 
         <v-form v-model="validForm">
-            <v-text-field class="my-4" label="New Email" v-model="newEmail" :rules="[rules.required]"></v-text-field>
-            <v-text-field class="mb-4" label="Confirm New Email" v-model="confirmNewEmail" :rules="[rules.match]" @keyup.enter="changeEmail"></v-text-field>
+            <v-text-field variant="underlined" class="my-4" label="New Email" v-model="newEmail" :rules="[rules.required]"></v-text-field>
+            <v-text-field variant="underlined" class="mb-4" label="Confirm New Email" v-model="confirmNewEmail" :rules="[rules.match]" @keyup.enter="changeEmail"></v-text-field>
 
-            <v-btn rounded="0" class="bg-primarymt-4" width="200" @click="changeEmail">Submit</v-btn>
+            <v-btn rounded="0" class="bg-primary mt-4" width="200" @click="changeEmail">Submit</v-btn>
         </v-form>
     </v-card>
 </template>
@@ -38,7 +38,7 @@ export default {
             // Check if fields are correct
             if (this.validForm) {
                 // Update email in the database
-                await this.$axios.patch(process.env.VUE_APP_URL + 'user/email', {
+                await this.$axios.patch('user/email', {
                     password: this.password,
                     email: this.newEmail
                 })

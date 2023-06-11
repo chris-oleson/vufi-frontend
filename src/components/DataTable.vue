@@ -1,18 +1,18 @@
 <template>
     <v-card class="ma-2 pa-2" elevation="4">
-        <v-data-table :headers="headers" :items="tableData" :items-per-page="5">
+        <v-data-table :items-per-page="5" :headers="headers" :items="tableData" item-value="name">
             <template v-slot:top>
                 <v-toolbar flat rounded color="transparent">
 
                     <!-- Top bar -->
-                    <v-toolbar-title class="font-weight-light text-h5">{{ type }}s</v-toolbar-title>
-                    <v-divider class="mx-4" inset vertical></v-divider>
-                    <v-toolbar-title class="font-weight-light text-h5">{{ totalValue | toCurrency }}</v-toolbar-title>
+                    <div class="font-weight-light text-h5 mx-4">{{ type }}s</div>
+                    <v-divider inset vertical></v-divider>
+                    <div class="font-weight-light text-h5 mx-4">{{ totalValue }}</div>
                     <v-spacer></v-spacer>
 
                     <v-dialog v-model="dialog" max-width="400px">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn :color="getColor" fab small outlined v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon></v-btn>
+                        <template v-slot:activator="{ props }">
+                            <v-btn :color="getColor" size="small" variant="outlined" icon="mdi-plus" v-bind="props"/>
                         </template>
 
                         <!-- Add or edit asset dialog -->
@@ -52,20 +52,9 @@
                 </v-toolbar>
             </template>
 
-            <!-- Format value to currency -->
-            <template v-slot:[`item.value`]="{ item }">
-                <span v-if="item.value">{{ parseFloat(item.value) | toCurrency }}</span>
-            </template>
-
-            <!-- Action buttons -->
             <template v-slot:[`item.actions`]="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-                <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
-            </template>
-
-            <!-- No data display -->
-            <template v-slot:no-data>
-                <p class="my-4">No {{ type.toLowerCase() }}s have been added</p>
+                <v-icon size="small" class="mr-2" @click="editItem(item.raw)">mdi-pencil</v-icon>
+                <v-icon size="small" @click="deleteItem(item.raw)">mdi-delete</v-icon>
             </template>
         </v-data-table>
     </v-card>
@@ -81,22 +70,11 @@ export default {
             dialog: false,
             dialogDelete: false,
             headers: [
-                { text: 'Name', value: 'name' },
-                { text: 'Type', value: 'type' },
-                { text: 'Value', value: 'value', align: 'right' },
-                { text: 'Actions', value: 'actions', sortable: false, align: 'right' },
+                { title: 'Name', align: 'start', key: 'name' },
+                { title: 'Type', align: 'start', key: 'type' },
+                { title: 'Value', align: 'end', key: 'value' },
+                { title: 'Actions', align: 'end', key: 'actions', sortable: false },
             ],
-            editedIndex: -1,
-            editedItem: {
-                name: '',
-                type: '',
-                value: null,
-            },
-            defaultItem: {
-                name: '',
-                type: '',
-                value: null,
-            },
         }
     },
 
@@ -115,30 +93,21 @@ export default {
         }
     },
 
-    watch: {
-        dialog (val) {
-            val || this.close()
-        },
-        dialogDelete (val) {
-            val || this.closeDelete()
-        },
-    },
-
     methods: {
         editItem (item) {
-            this.editedIndex = this.tableData.indexOf(item)
+            this.editedIndex = this.desserts.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
 
         deleteItem (item) {
-            this.editedIndex = this.tableData.indexOf(item)
+            this.editedIndex = this.desserts.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialogDelete = true
         },
 
         deleteItemConfirm () {
-            this.deleteFromDatabase(this.editedItem)
+            this.desserts.splice(this.editedIndex, 1)
             this.closeDelete()
         },
 
@@ -160,45 +129,12 @@ export default {
 
         save () {
             if (this.editedIndex > -1) {
-                // Editing existing
-                Object.assign(this.tableData[this.editedIndex], this.editedItem)
-                this.replaceInDatabase(this.editedItem)
+                Object.assign(this.desserts[this.editedIndex], this.editedItem)
             } else {
-                // Adding new item
-                this.addToDatabase(this.editedItem)
+                this.desserts.push(this.editedItem)
             }
             this.close()
         },
-
-        async addToDatabase(item) {
-            await this.$axios.post('assets', {
-                name: item.name,
-                type: item.type,
-                value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
-            })
-            .then(() => {
-                this.$store.dispatch('getAllAssetData')
-            })
-        },
-        
-        async replaceInDatabase(item) {
-            await this.$axios.put('assets/' + item.id, {
-                name: item.name,
-                type: item.type,
-                value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
-                user_id: this.$store.state.userID,
-            })
-            .then(() => {
-                this.$store.dispatch('getAllAssetData')
-            })
-        },
-
-        async deleteFromDatabase(item) {
-            await this.$axios.delete('assets/' + item.id)
-            .then(() => {
-                this.$store.dispatch('getAllAssetData')
-            })
-        }
-    },
+    }
 }
 </script>

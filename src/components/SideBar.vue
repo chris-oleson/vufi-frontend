@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-if="usingApp" permanent :mini-variant="mini" class="elevation-4">
+    <v-navigation-drawer v-if="usingApp" permanent :rail="rail" class="elevation-4">
         <v-list class="font-weight-light pa-0" :value="page">
             <v-list-item prepend-icon="mdi-cash-multiple" class="py-4" to="/assets">
                 <div class="d-flex justify-space-between">
@@ -29,14 +29,8 @@
 export default {
     name: 'SideBar',
 
-    data() {
-        return {
-
-        }
-    },
-
     computed: {
-        mini() {
+        rail() {
             return this.$vuetify.display.mobile
         },
 

@@ -1,5 +1,5 @@
 <template>
-    <v-card class="ma-2 pa-2" elevation="4">
+    <v-card class="pa-2" elevation="4">
         <apexchart type="pie" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </template>
@@ -10,36 +10,14 @@ export default {
     props: ['color', 'series', 'labels'],
 
     computed: {
-        getTheme() {
-            if (this.$vuetify.theme.dark) {
-                return 'dark'
-            }
-            else {
-                return 'light'
-            }
-        },
-
-        getColor() {
-            if (this.type == "Asset") {
-                return this.$vuetify.theme.themes.light.primary
-            }
-            else if (this.type == "Debt") {
-                return this.$vuetify.theme.themes.light.error
-            }
-            else {
-                return false
-            }
-        },
-
         chartOptions() {
             return {
-                colors: [this.$vuetify.theme.themes.light.primary, this.$vuetify.theme.themes.light.error],
                 theme: {
-                    mode: this.getTheme,
+                    mode: this.$vuetify.theme.name,
                     monochrome: {
                         enabled: this.color,
                         color: this.color,
-                        shadeTo: this.getTheme,
+                        shadeTo: this.$vuetify.theme.name,
                     },
                 },
                 labels: this.labels,
@@ -61,7 +39,7 @@ export default {
                 },
                 tooltip: {
                     fillSeriesColor: false,
-                    theme: this.getTheme,
+                    theme: this.$vuetify.theme.name,
                     y: {
                         formatter(value) {
                             var formatter = new Intl.NumberFormat('en-US', {

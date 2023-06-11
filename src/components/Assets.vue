@@ -5,25 +5,25 @@
         </v-col>
 
         <v-col cols="12" md="6">
-            <DataTable type="Asset" url="assets" :tableData="tableData" :totalValue="$store.state.totalPositiveAssets"/>
+            <DataTable type="Asset" url="assets" :color="$vuetify.theme.current.colors.primary" :tableData="tableData" :totalValue="$store.state.totalPositiveAssets"/>
         </v-col>
 
         <v-col cols="12" md="6">
-            <!-- <PieChart :color="getThemeColor" :series="pieChartValues" :labels="pieChartLabels"/> -->
+            <PieChart :color="$vuetify.theme.current.colors.primary" :series="pieChartValues" :labels="pieChartLabels"/>
         </v-col>
     </v-row>
 </template>
 
 <script>
 import DataTable from '/src/components/DataTable.vue'
-// import PieChart from '/src/components/PieChart.vue'
+import PieChart from '/src/components/PieChart.vue'
 // import LineChart from '/src/components/LineChart.vue'
 
 export default ({
     name: 'Assets',
     components: {
         DataTable,
-        // PieChart,
+        PieChart,
         // LineChart,
     },
 
@@ -56,10 +56,6 @@ export default ({
                 data: this.refineHistory(this.$store.state.allAssets, this.$store.state.allHistory)
             }]
         },
-
-        getThemeColor() {
-            return this.$vuetify.theme.dark ? this.$vuetify.theme.themes.dark.primary : this.$vuetify.theme.themes.light.primary
-        }
     },
 
     methods: {

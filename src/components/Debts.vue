@@ -1,30 +1,30 @@
 <template>
     <v-row class="ma-2">
         <v-col cols="12">
-            <LineChart :color="getThemeColor" :series="lineChartData"/>
+            <!-- <LineChart :color="getThemeColor" :series="lineChartData"/> -->
         </v-col>
 
         <v-col cols="12" md="6">
-            <Table type="Debt" url="debts" :tableData="tableData" :totalValue="$store.state.totalNegativeAssets"/>
+            <DataTable type="Debt" url="debts" :color="$vuetify.theme.current.colors.error" :tableData="tableData" :totalValue="$store.state.totalNegativeAssets"/>
         </v-col>
 
         <v-col cols="12" md="6">
-            <PieChart :color="getThemeColor" :series="pieChartValues" :labels="pieChartLabels"/>
+            <PieChart :color="$vuetify.theme.current.colors.error" :series="pieChartValues" :labels="pieChartLabels"/>
         </v-col>
     </v-row>
 </template>
 
 <script>
-import Table from '/src/components/Table.vue'
+import DataTable from '/src/components/DataTable.vue'
 import PieChart from '/src/components/PieChart.vue'
-import LineChart from '/src/components/LineChart.vue'
+// import LineChart from '/src/components/LineChart.vue'
 
 export default ({
     name: 'Debts',
     components: {
-        Table,
+        DataTable,
         PieChart,
-        LineChart,
+        // LineChart,
     },
 
     data() {
@@ -56,10 +56,6 @@ export default ({
                 data: this.refineHistory(this.$store.state.allAssets, this.$store.state.allHistory)
             }]
         },
-
-        getThemeColor() {
-            return this.$vuetify.theme.dark ? this.$vuetify.theme.themes.dark.error : this.$vuetify.theme.themes.light.error
-        }
     },
 
     methods: {

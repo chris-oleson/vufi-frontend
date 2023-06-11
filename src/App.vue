@@ -1,5 +1,5 @@
 <template>
-    <v-app :theme=getTheme>
+    <v-app>
         <TopBar/>
 
         <SideBar/>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { useTheme } from 'vuetify'
 import TopBar from '/src/components/TopBar'
 import SideBar from '/src/components/SideBar'
 
@@ -32,28 +33,13 @@ export default {
     },
 
     created() {
-        if (this.$store.state.isLoggedIn) {
-            this.$axios.get('auth/checkSession')
-            .catch(() => {
-                this.$axios.post('auth/logout').then(() => {
-                    this.$store.commit('logOut')
-                    this.redirect('/login')
-                })
-            })
-        }
+        this.setTheme()
+        this.checkSession()
     },
 
     computed: {
-        getTheme() {
-            if (this.$store.state.userPrefs.theme === 1) {
-                return 'light'
-            }
-            else if (this.$store.state.userPrefs.theme === 2) {
-                return 'dark'
-            }
-            else {
-                return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-            }
+        theme() {
+            return useTheme()
         }
     },
 
@@ -62,6 +48,30 @@ export default {
             if (this.$route.path != link) {
                 this.$router.push(link)
             }
+        },
+
+        setTheme() {
+            if (this.$store.state.userPrefs.theme === 1) {
+                this.theme.global.name.value = 'light'
+            }
+            else if (this.$store.state.userPrefs.theme === 2) {
+                this.theme.global.name.value = 'dark'
+            }
+            else {
+                return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+            }
+        },
+
+        checkSession() {
+            if (this.$store.state.isLoggedIn) {
+            this.$axios.get('auth/checkSession')
+            .catch(() => {
+                this.$axios.post('auth/logout').then(() => {
+                    this.$store.commit('logOut')
+                    this.redirect('/login')
+                })
+            })
+        }
         }
     },
 
@@ -73,22 +83,15 @@ export default {
             }
         },
 
+        // Notification data
         '$store.state.notification'(data) {
             this.notificationText = data.text
             this.notificationColor = data.color
             this.showNotification = true
         },
 
-        '$store.state.userPrefs.theme'(data) {
-            if (data === 0) {
-                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-            }
-            else if (data === 1){
-                this.$vuetify.theme.dark = false
-            }
-            else if (data === 2){
-                this.$vuetify.theme.dark = true
-            }
+        '$store.state.userPrefs.theme'() {
+            this.setTheme()
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <v-card class="ma-2 pa-2" elevation="4">
+    <v-card class="pa-2 font" elevation="4">
         <v-data-table :items-per-page="5" :headers="headers" :items="tableData" item-value="name">
             <template v-slot:top>
                 <v-toolbar flat rounded color="transparent">
@@ -12,7 +12,7 @@
 
                     <v-dialog v-model="dialog" max-width="400px">
                         <template v-slot:activator="{ props }">
-                            <v-btn :color="getColor" size="small" variant="outlined" icon="mdi-plus" v-bind="props"/>
+                            <v-btn :color="color" size="small" variant="outlined" icon="mdi-plus" v-bind="props"/>
                         </template>
 
                         <!-- Add or edit asset dialog -->
@@ -63,7 +63,7 @@
 <script>
 export default {
     name: 'Table',
-    props: ['type', 'url', 'tableData', 'totalValue'],
+    props: ['color', 'type', 'url', 'tableData', 'totalValue'],
 
     data() {
         return {
@@ -75,6 +75,17 @@ export default {
                 { title: 'Value', align: 'end', key: 'value' },
                 { title: 'Actions', align: 'end', key: 'actions', sortable: false },
             ],
+            editedIndex: -1,
+            editedItem: {
+                name: '',
+                type: '',
+                value: null,
+            },
+            defaultItem: {
+                name: '',
+                type: '',
+                value: null,
+            },
         }
     },
 
@@ -82,32 +93,23 @@ export default {
         formTitle () {
             return this.editedIndex === -1 ? 'New ' + this.type : 'Edit ' + this.type
         },
-
-        getColor() {
-            if (this.type == 'Asset') {
-                return 'primary'
-            }
-            else {
-                return 'error'
-            }
-        }
     },
 
     methods: {
         editItem (item) {
-            this.editedIndex = this.desserts.indexOf(item)
+            this.editedIndex = this.tableData.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
 
         deleteItem (item) {
-            this.editedIndex = this.desserts.indexOf(item)
+            this.editedIndex = this.tableData.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialogDelete = true
         },
 
         deleteItemConfirm () {
-            this.desserts.splice(this.editedIndex, 1)
+            this.deleteFromDatabase(this.editedItem)
             this.closeDelete()
         },
 
@@ -129,12 +131,45 @@ export default {
 
         save () {
             if (this.editedIndex > -1) {
-                Object.assign(this.desserts[this.editedIndex], this.editedItem)
+                // Editing existing
+                Object.assign(this.tableData[this.editedIndex], this.editedItem)
+                this.replaceInDatabase(this.editedItem)
             } else {
-                this.desserts.push(this.editedItem)
+                // Adding new item
+                this.addToDatabase(this.editedItem)
             }
             this.close()
         },
+
+        async addToDatabase(item) {
+            await this.$axios.post('assets', {
+                name: item.name,
+                type: item.type,
+                value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
+            })
+            .then(() => {
+                this.$store.dispatch('getAllAssetData')
+            })
+        },
+        
+        async replaceInDatabase(item) {
+            await this.$axios.put('assets/' + item.id, {
+                name: item.name,
+                type: item.type,
+                value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
+                user_id: this.$store.state.userID,
+            })
+            .then(() => {
+                this.$store.dispatch('getAllAssetData')
+            })
+        },
+
+        async deleteFromDatabase(item) {
+            await this.$axios.delete('assets/' + item.id)
+            .then(() => {
+                this.$store.dispatch('getAllAssetData')
+            })
+        }
     }
 }
 </script>

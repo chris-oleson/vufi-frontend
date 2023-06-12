@@ -7,26 +7,17 @@
 <script>
 export default {
     name: 'TreeMapChart',
-    props: ['series', 'colors'],
+    props: ['series'],
 
     computed: {
-        getTheme() {
-            if (this.$vuetify.theme.dark) {
-                return 'dark'
-            }
-            else {
-                return 'light'
-            }
-        },
-
         chartOptions() {
             return {
-                colors: this.colors,
+                colors: [this.$vuetify.theme.current.colors.primary, this.$vuetify.theme.current.colors.error],
                 theme: {
-                    mode: this.getTheme,
+                    mode: this.$vuetify.theme.name,
                 },
                 tooltip: {
-                    theme: this.getTheme,
+                    theme: this.$vuetify.theme.name,
                     y: {
                         formatter(value) {
                             var formatter = new Intl.NumberFormat('en-US', {

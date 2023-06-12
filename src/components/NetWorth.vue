@@ -5,7 +5,7 @@
         </v-col>
 
         <v-col cols="12" md="6">
-            <TreeMapChart :series="treeChartData" :colors="[$vuetify.theme.current.colors.primary, $vuetify.theme.current.colors.error]"/>
+            <TreeMapChart :series="treeChartData"/>
         </v-col>
     </v-row>
 </template>

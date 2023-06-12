@@ -4,7 +4,7 @@
 
         <!-- Theme Selection -->
         <v-card-text class="mt-6">Theme</v-card-text>
-        <v-btn-toggle v-model="themeSelection" variant="outlined" density="compact" class="mb-4">
+        <v-btn-toggle v-model="themeSelection" mandatory variant="outlined" density="compact" class="mb-4">
             <v-btn class="font-weight-light" size="small">System</v-btn>
             <v-btn class="font-weight-light" size="small">Light</v-btn>
             <v-btn class="font-weight-light" size="small">Dark</v-btn>

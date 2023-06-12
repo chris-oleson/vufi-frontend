@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import { useTheme } from 'vuetify'
 import TopBar from '/src/components/TopBar'
 import SideBar from '/src/components/SideBar'
 
@@ -37,12 +36,6 @@ export default {
         this.checkSession()
     },
 
-    computed: {
-        theme() {
-            return useTheme()
-        }
-    },
-
     methods: {
         redirect(link) {
             if (this.$route.path != link) {
@@ -51,14 +44,17 @@ export default {
         },
 
         setTheme() {
-            if (this.$store.state.userPrefs.theme === 1) {
-                this.theme.global.name.value = 'light'
+            if (this.$store.state.userPrefs.theme == 1) {
+                this.$vuetify.theme.global.name = 'light'
             }
-            else if (this.$store.state.userPrefs.theme === 2) {
-                this.theme.global.name.value = 'dark'
+            else if (this.$store.state.userPrefs.theme == 2) {
+                this.$vuetify.theme.global.name = 'dark'
+            }
+            else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                this.$vuetify.theme.global.name = 'dark'
             }
             else {
-                return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+                this.$vuetify.theme.global.name = 'light'
             }
         },
 

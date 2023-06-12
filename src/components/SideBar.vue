@@ -4,21 +4,21 @@
             <v-list-item prepend-icon="mdi-cash-multiple" class="py-4" to="/assets">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline">Assets</div>
-                    <div class="d-inline">{{ $store.state.totalPositiveAssets }}</div>
+                    <div class="d-inline">{{ formatCurrency($store.state.totalPositiveAssets) }}</div>
                 </div>
             </v-list-item>
 
             <v-list-item prepend-icon="mdi-credit-card-multiple" class="py-4" to="/debts">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline">Debts</div>
-                    <div class="d-inline">{{ $store.state.totalNegativeAssets }}</div>
+                    <div class="d-inline">{{ formatCurrency($store.state.totalNegativeAssets) }}</div>
                 </div>
             </v-list-item>
 
             <v-list-item prepend-icon="mdi-sigma" class="py-4" to="/net-worth">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline">Net Worth</div>
-                    <div class="d-inline">{{ $store.state.totalPositiveAssets + $store.state.totalNegativeAssets }}</div>
+                    <div class="d-inline">{{ formatCurrency($store.state.totalPositiveAssets + $store.state.totalNegativeAssets) }}</div>
                 </div>
             </v-list-item>
         </v-list>
@@ -28,6 +28,19 @@
 <script>
 export default {
     name: 'SideBar',
+
+    methods: {
+        formatCurrency(value) {
+            if (typeof value !== "number") {
+                return value
+            }
+            var formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            })
+            return formatter.format(value);
+        }
+    },
 
     computed: {
         rail() {

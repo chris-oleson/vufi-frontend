@@ -7,15 +7,15 @@
                     <!-- Top bar -->
                     <div class="font-weight-light text-h5 mx-4">{{ type }}s</div>
                     <v-divider inset vertical></v-divider>
-                    <div class="font-weight-light text-h5 mx-4">{{ totalValue }}</div>
+                    <div class="font-weight-light text-h5 mx-4">{{ formatCurrency(totalValue) }}</div>
                     <v-spacer></v-spacer>
 
+                    <!-- Add or edit asset dialog -->
                     <v-dialog v-model="dialog" max-width="400px">
                         <template v-slot:activator="{ props }">
                             <v-btn :color="color" size="small" variant="outlined" icon="mdi-plus" v-bind="props"/>
                         </template>
 
-                        <!-- Add or edit asset dialog -->
                         <v-card>
                             <v-card-title>
                                 <span class="text-h5 font-weight-light">{{ formTitle }}</span>
@@ -50,6 +50,10 @@
                         </v-card>
                     </v-dialog>
                 </v-toolbar>
+            </template>
+
+            <template v-slot:[`item.value`]="{ item }">
+                <span v-if="item.raw.value">{{ formatCurrency(parseFloat(item.raw.value)) }}</span>
             </template>
 
             <template v-slot:[`item.actions`]="{ item }">
@@ -96,6 +100,17 @@ export default {
     },
 
     methods: {
+        formatCurrency(value) {
+            if (typeof value !== "number") {
+                return value
+            }
+            var formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            })
+            return formatter.format(value);
+        },
+
         editItem (item) {
             this.editedIndex = this.tableData.indexOf(item)
             this.editedItem = Object.assign({}, item)

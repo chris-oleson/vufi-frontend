@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-2 font" elevation="4">
-        <v-data-table :items-per-page="5" :headers="headers" :items="tableData" item-value="name">
+        <v-data-table :headers="headers" :items="tableData" item-value="name">
             <template v-slot:top>
                 <v-toolbar flat rounded color="transparent">
 
@@ -11,7 +11,7 @@
                     <v-spacer></v-spacer>
 
                     <!-- Add or edit asset dialog -->
-                    <v-dialog v-model="dialog" max-width="400px">
+                    <v-dialog v-if="!$vuetify.display.xs" v-model="dialog" max-width="400px">
                         <template v-slot:activator="{ props }">
                             <v-btn :color="color" size="small" variant="outlined" icon="mdi-plus" v-bind="props"/>
                         </template>
@@ -60,6 +60,8 @@
                 <v-icon size="small" class="mr-2" @click="editItem(item.raw)">mdi-pencil</v-icon>
                 <v-icon size="small" @click="deleteItem(item.raw)">mdi-delete</v-icon>
             </template>
+
+            <template v-slot:bottom></template>
         </v-data-table>
     </v-card>
 </template>
@@ -73,12 +75,6 @@ export default {
         return {
             dialog: false,
             dialogDelete: false,
-            headers: [
-                { title: 'Name', align: 'start', key: 'name' },
-                { title: 'Type', align: 'start', key: 'type' },
-                { title: 'Value', align: 'end', key: 'value' },
-                { title: 'Actions', align: 'end', key: 'actions', sortable: false },
-            ],
             editedIndex: -1,
             editedItem: {
                 name: '',
@@ -97,6 +93,23 @@ export default {
         formTitle () {
             return this.editedIndex === -1 ? 'New ' + this.type : 'Edit ' + this.type
         },
+
+        headers() {
+            if (this.$vuetify.display.xs) {
+                return [
+                    { title: 'Name', align: 'start', key: 'name' },
+                    { title: 'Value', align: 'end', key: 'value' },
+                ]
+            }
+            else {
+                return [
+                    { title: 'Name', align: 'start', key: 'name' },
+                    { title: 'Type', align: 'start', key: 'type' },
+                    { title: 'Value', align: 'end', key: 'value' },
+                    { title: 'Actions', align: 'end', key: 'actions', sortable: false },
+                ]
+            }
+        }
     },
 
     methods: {

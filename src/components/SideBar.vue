@@ -1,21 +1,30 @@
 <template>
     <v-navigation-drawer v-if="usingApp" permanent :rail="rail" class="elevation-4">
         <v-list class="font-weight-light pa-0" :value="page">
-            <v-list-item prepend-icon="mdi-cash-multiple" class="py-4" to="/assets">
+            <v-list-item class="py-4" to="/assets">
+                <template v-slot:prepend>
+                        <v-icon class="mr-4">mdi-cash-multiple</v-icon>
+                </template>
                 <div class="d-flex justify-space-between">
                     <div class="d-inline">Assets</div>
                     <div class="d-inline">{{ formatCurrency($store.state.totalPositiveAssets) }}</div>
                 </div>
             </v-list-item>
 
-            <v-list-item prepend-icon="mdi-credit-card-multiple" class="py-4" to="/debts">
+            <v-list-item class="py-4" to="/debts">
+                <template v-slot:prepend>
+                        <v-icon class="mr-4">mdi-credit-card-multiple</v-icon>
+                </template>
                 <div class="d-flex justify-space-between">
                     <div class="d-inline">Debts</div>
                     <div class="d-inline">{{ formatCurrency($store.state.totalNegativeAssets) }}</div>
                 </div>
             </v-list-item>
 
-            <v-list-item prepend-icon="mdi-sigma" class="py-4" to="/net-worth">
+            <v-list-item class="py-4" to="/net-worth">
+                <template v-slot:prepend>
+                        <v-icon class="mr-4">mdi-sigma</v-icon>
+                </template>
                 <div class="d-flex justify-space-between">
                     <div class="d-inline">Net Worth</div>
                     <div class="d-inline">{{ formatCurrency($store.state.totalPositiveAssets + $store.state.totalNegativeAssets) }}</div>

@@ -35,6 +35,7 @@ export default {
                     },
                 },
                 legend: {
+                    show: true,
                     position: 'right'
                 },
                 tooltip: {

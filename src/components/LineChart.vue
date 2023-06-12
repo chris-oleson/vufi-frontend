@@ -19,6 +19,7 @@ export default {
                     width: 1
                 },
                 yaxis: {
+                    show: !this.$vuetify.display.xs,
                     labels: {
                         formatter: function (value) {
                             var formatter = new Intl.NumberFormat('en-US', {

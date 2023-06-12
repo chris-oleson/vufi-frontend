@@ -1,11 +1,11 @@
 <template>
     <v-row class="ma-2">
         <v-col cols="12">
-            <LineChart :color="getThemeColor" :series="lineChartData"/>
+            <LineChart :color="$vuetify.theme.current.colors.primary" :series="lineChartData"/>
         </v-col>
 
         <v-col cols="12" md="6">
-            <TreeMapChart :series="treeChartData" :colors="getThemeColors"/>
+            <TreeMapChart :series="treeChartData" :colors="[$vuetify.theme.current.colors.primary, $vuetify.theme.current.colors.error]"/>
         </v-col>
     </v-row>
 </template>
@@ -38,21 +38,6 @@ export default {
         }
 
         this.formatData()
-    },
-
-    computed: {
-        getThemeColor() {
-            return this.$vuetify.theme.dark ? this.$vuetify.theme.themes.dark.primary : this.$vuetify.theme.themes.light.primary
-        },
-
-        getThemeColors() {
-            if (this.$vuetify.theme.dark) {
-                return [this.$vuetify.theme.themes.dark.primary, this.$vuetify.theme.themes.dark.error]
-            }
-            else {
-                return [this.$vuetify.theme.themes.light.primary, this.$vuetify.theme.themes.light.error]
-            }
-        }
     },
 
     methods: {

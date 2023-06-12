@@ -23,16 +23,16 @@
 
                             <v-card-text>
                                 <v-container>
-                                    <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
-                                    <v-text-field v-model="editedItem.type" label="Type"></v-text-field>
-                                    <v-text-field v-model="editedItem.value" label="Value"></v-text-field>
+                                    <v-text-field v-model="editedItem.name" variant="underlined" label="Name"></v-text-field>
+                                    <v-text-field v-model="editedItem.type" variant="underlined" label="Type"></v-text-field>
+                                    <v-text-field v-model="editedItem.value" variant="underlined" label="Value"></v-text-field>
                                 </v-container>
                             </v-card-text>
 
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn text @click="close">Cancel</v-btn>
-                                <v-btn color="primary" text @click="save">Save</v-btn>
+                                <v-btn rounded="0" text @click="close">Cancel</v-btn>
+                                <v-btn rounded="0" color="primary" @click="save">Save</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -43,8 +43,8 @@
                             <v-card-title class="text-h5 font-weight-light">Are you sure you want to delete this {{ type.toLowerCase() }}?</v-card-title>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn text @click="closeDelete">Cancel</v-btn>
-                                <v-btn color="error" text @click="deleteItemConfirm">OK</v-btn>
+                                <v-btn rounded="0" text @click="closeDelete">Cancel</v-btn>
+                                <v-btn rounded="0" text color="error" @click="deleteItemConfirm">OK</v-btn>
                                 <v-spacer></v-spacer>
                             </v-card-actions>
                         </v-card>

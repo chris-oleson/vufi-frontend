@@ -1,7 +1,7 @@
 <template>
     <v-row class="ma-2">
         <v-col cols="12">
-            <!-- <LineChart :color="getThemeColor" :series="lineChartData"/> -->
+            <LineChart :color="$vuetify.theme.current.colors.primary" :series="lineChartData"/>
         </v-col>
 
         <v-col cols="12" md="6">
@@ -17,14 +17,14 @@
 <script>
 import DataTable from '/src/components/DataTable.vue'
 import PieChart from '/src/components/PieChart.vue'
-// import LineChart from '/src/components/LineChart.vue'
+import LineChart from '/src/components/LineChart.vue'
 
 export default ({
     name: 'Assets',
     components: {
         DataTable,
         PieChart,
-        // LineChart,
+        LineChart,
     },
 
     data() {

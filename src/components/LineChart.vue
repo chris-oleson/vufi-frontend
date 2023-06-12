@@ -10,15 +10,6 @@ export default {
     props: ['color', 'series'],
 
     computed: {
-        getTheme() {
-            if (this.$vuetify.theme.dark) {
-                return 'dark'
-            }
-            else {
-                return 'light'
-            }
-        },
-
         chartOptions() {
             return {
                 dataLabels: {
@@ -72,10 +63,10 @@ export default {
                 },
                 colors: [this.color],
                 tooltip: {
-                    theme: this.getTheme
+                    theme: this.$vuetify.theme.name
                 },
                 theme: {
-                    mode: this.getTheme,
+                    mode: this.$vuetify.theme.name
                 },
                 chart: {
                     animations: {

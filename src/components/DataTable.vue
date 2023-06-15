@@ -13,10 +13,10 @@
                     <!-- Add or edit asset dialog -->
                     <v-dialog v-if="!$vuetify.display.xs" v-model="dialog" max-width="400px">
                         <template v-slot:activator="{ props }">
-                            <v-btn :color="color" size="small" variant="outlined" icon="mdi-plus" v-bind="props"/>
+                            <v-btn :color="color" variant="tonal" icon="mdi-plus" v-bind="props"/>
                         </template>
 
-                        <v-card>
+                        <v-card class="pa-2">
                             <v-card-title>
                                 <span class="text-h5 font-weight-light">{{ formTitle }}</span>
                             </v-card-title>
@@ -32,19 +32,19 @@
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn rounded="0" text @click="close">Cancel</v-btn>
-                                <v-btn rounded="0" color="primary" @click="save">Save</v-btn>
+                                <v-btn rounded="0" class="bg-primary" @click="save">Save</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
 
                     <!-- Delete asset dialog -->
                     <v-dialog v-model="dialogDelete" max-width="500px">
-                        <v-card>
+                        <v-card class="pa-2">
                             <v-card-title class="text-h5 font-weight-light">Are you sure you want to delete this {{ type.toLowerCase() }}?</v-card-title>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn rounded="0" text @click="closeDelete">Cancel</v-btn>
-                                <v-btn rounded="0" text color="error" @click="deleteItemConfirm">OK</v-btn>
+                                <v-btn rounded="0" class="bg-error" @click="deleteItemConfirm">Yes</v-btn>
                                 <v-spacer></v-spacer>
                             </v-card-actions>
                         </v-card>

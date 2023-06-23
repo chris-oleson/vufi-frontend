@@ -61,7 +61,7 @@ export default {
                 })
                 .then(() => {
                     this.$store.commit('logIn')
-                    this.$router.push('/assets')
+                    this.$router.push('/pricing')
                 })
                 .catch((err) => {
                     // Handles pre-existing email

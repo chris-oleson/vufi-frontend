@@ -29,7 +29,10 @@ export default createStore({
 
     mutations: {
         logIn(state, data) {
-            state.userPrefs = data
+            if (data) {
+                state.userPrefs = data
+            }
+            
             state.isLoggedIn = true
         },
 

@@ -23,7 +23,7 @@ export default {
     methods: {
         async deleteAccount () {
             // Update password in the database
-            await this.axios.delete('user', {data: {password: this.password}})
+            await this.$axios.delete('user', {data: {password: this.password}})
             .then(() => {
                 this.$store.commit("setNotification", {
                     text: "Successfully deleted account",

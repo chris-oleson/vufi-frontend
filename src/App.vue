@@ -64,7 +64,7 @@ export default {
             .catch(() => {
                 this.$axios.post('auth/logout').then(() => {
                     this.$store.commit('logOut')
-                    this.redirect('/login')
+                    this.redirect('/')
                 })
             })
         }

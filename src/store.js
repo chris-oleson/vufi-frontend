@@ -9,6 +9,7 @@ export default createStore({
 
     state: {
         isLoggedIn: false,
+        isPaying: false,
 
         userPrefs: {
             theme: 0,
@@ -32,7 +33,7 @@ export default createStore({
             if (data) {
                 state.userPrefs = data
             }
-            
+
             state.isLoggedIn = true
         },
 

@@ -14,7 +14,7 @@
                     <v-sheet elevation="4" width="330" class="py-16 mx-auto bg-secondary">
                         <h1 class="font-weight-light">$9<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
                         <p class="font-weight-light mt-4 mb-10">Cancel any time!</p>
-                        <v-btn class="bg-primary" width="200" size="large" rounded="0" href="https://buy.stripe.com/aEUaHo1gVaNh4mI144">Start Free Trial</v-btn>
+                        <v-btn class="bg-primary" width="200" size="large" rounded="0" @click="redirect('year')">Start Free Trial</v-btn>
                     </v-sheet>
                 </v-col>
 
@@ -22,10 +22,33 @@
                     <v-sheet elevation="4" width="330" class="py-16 mx-auto bg-secondary">
                         <h1 class="font-weight-light">$90<p class="font-weight-light text-subtitle-1 d-inline">/year</p></h1>
                         <p class="font-weight-light mt-4 mb-10">Two months free!</p>
-                        <v-btn class="bg-primary" width="200" size="large" rounded="0" href="https://buy.stripe.com/5kA5n43p32gL06s145">Start Free Trial</v-btn>
+                        <v-btn class="bg-primary" width="200" size="large" rounded="0" @click="redirect('year')">Start Free Trial</v-btn>
                     </v-sheet>
                 </v-col>
             </v-row>
         </v-container>
     </v-sheet>
 </template>
+
+<script>
+export default {
+    name: 'Pricing',
+
+    methods: {
+        redirect(time) {
+            if (!this.$store.state.isLoggedIn) {
+                this.$router.push('/signup')
+            }
+            else if (this.$store.state.isPaying) {
+                this.$router.push('/assets')
+            }
+            else if (time == 'month') {
+                window.location.href = 'https://buy.stripe.com/aEUaHo1gVaNh4mI144'
+            }
+            else if (time == 'year') {
+                window.location.href = 'https://buy.stripe.com/5kA5n43p32gL06s145'
+            }
+        }
+    }
+}
+</script>

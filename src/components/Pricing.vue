@@ -12,15 +12,15 @@
             <v-row justify="center">
                 <v-col cols="12" md="4" lg="3" class="ma-5">
                     <v-sheet elevation="4" width="330" class="py-16 mx-auto bg-secondary">
-                        <h1 class="font-weight-light">$9<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
+                        <h1 class="font-weight-light">$9.99<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
                         <p class="font-weight-light mt-4 mb-10">Cancel any time!</p>
-                        <v-btn class="bg-primary" width="200" size="large" rounded="0" @click="redirect('year')">Start Free Trial</v-btn>
+                        <v-btn class="bg-primary" width="200" size="large" rounded="0" @click="redirect('month')">Start Free Trial</v-btn>
                     </v-sheet>
                 </v-col>
 
                 <v-col cols="12" md="4" lg="3" class="ma-5">
                     <v-sheet elevation="4" width="330" class="py-16 mx-auto bg-secondary">
-                        <h1 class="font-weight-light">$90<p class="font-weight-light text-subtitle-1 d-inline">/year</p></h1>
+                        <h1 class="font-weight-light">$99.99<p class="font-weight-light text-subtitle-1 d-inline">/year</p></h1>
                         <p class="font-weight-light mt-4 mb-10">Two months free!</p>
                         <v-btn class="bg-primary" width="200" size="large" rounded="0" @click="redirect('year')">Start Free Trial</v-btn>
                     </v-sheet>

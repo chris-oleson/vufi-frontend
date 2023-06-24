@@ -27,7 +27,7 @@ export default {
     
     mounted() {
         if (this.$store.state.isLoggedIn) {
-            this.redirect('/assets')
+            this.$router.push('/assets')
         }
     },
 
@@ -40,17 +40,11 @@ export default {
             }).then(resp => {
                 this.$store.commit('logIn', resp.data[0])
                 this.$store.dispatch('getAllAssetData')
-                this.redirect('/assets')
+                this.$router.push('/assets')
             }).catch(() => {
                 this.errorState = true
             })
         },
-
-        redirect(link) {
-            if (this.$route.path != link) {
-                this.$router.push(link)
-            }
-        }
     }
 }
 </script>

@@ -37,12 +37,6 @@ export default {
     },
 
     methods: {
-        redirect(link) {
-            if (this.$route.path != link) {
-                this.$router.push(link)
-            }
-        },
-
         setTheme() {
             if (this.$store.state.userPrefs.theme == 1) {
                 this.$vuetify.theme.global.name = 'light'
@@ -64,7 +58,7 @@ export default {
             .catch(() => {
                 this.$axios.post('auth/logout').then(() => {
                     this.$store.commit('logOut')
-                    this.redirect('/')
+                    this.$router.push('/')
                 })
             })
         }

@@ -7,7 +7,7 @@
                     <v-sheet class="ma-5 pt-16">
                         <h1 class="text-h2 font-weight-light">Finance at a Glance</h1>
                         <h2 class="my-16 font-weight-light">One, simple, intuitive platform to organize and track your assets and debts</h2>
-                        <v-btn class="bg-primary" size="x-large" rounded="0" @click="$router.push('/signup')">Start Free Trial</v-btn>
+                        <v-btn class="bg-primary" size="x-large" rounded="0" @click="redirect()">Start Free Trial</v-btn>
                     </v-sheet>
                 </v-col>
 
@@ -49,5 +49,19 @@
 <script>
 export default {
     name: 'Home',
+
+    methods: {
+        redirect() {
+            if (!this.$store.state.isLoggedIn) {
+                this.$router.push('/signup')
+            }
+            else if (this.$store.state.isPaying) {
+                this.$router.push('/assets')
+            }
+            else {
+                this.$router.push('/pricing')
+            }
+        }
+    }
 }
 </script>

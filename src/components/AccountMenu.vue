@@ -5,7 +5,7 @@
         </template>
         
         <v-list class="font-weight-light" width="200">
-            <v-list-item prepend-icon="mdi-cog" variant="plain" @click="redirect('/settings')">Settings</v-list-item>
+            <v-list-item prepend-icon="mdi-cog" variant="plain" to="/settings">Settings</v-list-item>
             <v-list-item prepend-icon="mdi-logout" variant="plain" @click="logOut">Log out</v-list-item>
         </v-list>
     </v-menu>
@@ -19,15 +19,9 @@ export default {
         logOut() {
             this.$axios.post('auth/logout').then(() => {
                 this.$store.commit('logOut')
-                this.redirect('/')
+                this.$router.push('/')
             })
-        },
-
-        redirect(link) {
-            if (this.$route.path != link) {
-                this.$router.push(link)
-            }
-        },
+        }
     },
 }
 </script>

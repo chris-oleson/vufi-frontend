@@ -17,13 +17,13 @@
         <v-card-text>Account</v-card-text>
 
         <!-- Change Password -->
-        <v-btn rounded="0" variant="outlined" class="font-weight-light" width="200" @click="redirect('/update-password')">Change Password</v-btn>
+        <v-btn rounded="0" variant="outlined" class="font-weight-light" width="200" @click="$router.push('/update-password')">Change Password</v-btn>
 
         <!-- Change Email -->
-        <v-btn rounded="0" variant="outlined" class="font-weight-light my-4" width="200" @click="redirect('/update-email')">Change Email</v-btn>
+        <v-btn rounded="0" variant="outlined" class="font-weight-light my-4" width="200" @click="$router.push('/update-email')">Change Email</v-btn>
 
         <!-- Delete Account -->
-        <v-btn rounded="0" variant="outlined" class="font-weight-light text-error" width="200" @click="redirect('/delete-account')">Delete Account</v-btn>
+        <v-btn rounded="0" variant="outlined" class="font-weight-light text-error" width="200" @click="$router.push('/delete-account')">Delete Account</v-btn>
     </v-card>
 </template>
 
@@ -43,7 +43,7 @@ export default {
 
     mounted() {
         if (!this.$store.state.isLoggedIn) {
-            this.redirect('/login')
+            this.$router.push('/login')
         }
     },
 
@@ -63,12 +63,6 @@ export default {
                 theme: this.themeSelection,
                 currency: this.currencySelection
             })
-        },
-
-        redirect(link) {
-            if (this.$route.path != link) {
-                this.$router.push(link)
-            }
         }
     },
 

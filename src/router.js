@@ -4,6 +4,7 @@ import PageNotFound from '/src/components/PageNotFound'
 import CreateAccount from '/src/components/CreateAccount'
 import Assets from '/src/components/Assets'
 import Debts from '/src/components/Debts'
+import Contact from '/src/components/Contact'
 import NetWorth from '/src/components/NetWorth'
 import Settings from '/src/components/Settings'
 import UpdatePassword from '/src/components/UpdatePassword'
@@ -43,6 +44,13 @@ export default createRouter({
             component: About,
             meta: {
                 title: 'About | VuFi'
+            }
+        },
+        {
+            path: '/contact',
+            component: Contact,
+            meta: {
+                title: 'Contact | VuFi'
             }
         },
         {

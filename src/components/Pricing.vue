@@ -6,8 +6,6 @@
             <div class="font-weight-light mb-16">Change your plan at any time!</div>
         </v-sheet>
 
-        <v-sheet height="100" class="mb-n16"></v-sheet>
-
         <v-container fluid>
             <v-row justify="center">
                 <v-col cols="12" md="4" lg="3" class="ma-5">

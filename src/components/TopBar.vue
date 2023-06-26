@@ -40,6 +40,7 @@
             
             <v-list class="font-weight-light" width="200">
                 <v-list-item prepend-icon="mdi-cog" variant="plain" to="/settings">Settings</v-list-item>
+                <v-list-item prepend-icon="mdi-email-outline" variant="plain" to="/contact">Support</v-list-item>
                 <v-list-item prepend-icon="mdi-logout" variant="plain" @click="logOut">Log out</v-list-item>
             </v-list>
         </v-menu>

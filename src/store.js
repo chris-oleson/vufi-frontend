@@ -31,7 +31,14 @@ export default createStore({
     mutations: {
         logIn(state, data) {
             if (data) {
-                state.userPrefs = data
+                state.userPrefs.theme = data.theme
+                state.userPrefs.currency = data.currency
+
+                let today = new Date()
+                let expiration = new Date(data.expiration_date)
+                if (expiration && expiration > today) {
+                    state.isPaying = true
+                }
             }
 
             state.isLoggedIn = true

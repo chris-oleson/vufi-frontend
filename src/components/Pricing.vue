@@ -30,7 +30,7 @@
 
 <script>
 export default {
-    name: 'Pricing',
+    name: 'vufi-pricing',
 
     methods: {
         redirect(time) {

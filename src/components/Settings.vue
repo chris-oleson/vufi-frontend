@@ -29,7 +29,7 @@
 
 <script>
 export default {
-    name: 'Settings',
+    name: 'vufi-settings',
 
     data() {
         return {

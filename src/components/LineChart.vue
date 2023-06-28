@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'LineChart',
+    name: 'vufi-linechart',
     props: ['color', 'series'],
 
     computed: {

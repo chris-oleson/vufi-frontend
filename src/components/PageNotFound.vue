@@ -8,6 +8,6 @@
 
 <script>
 export default {
-    name: 'PageNotFound',
+    name: 'vufi-page-not-found',
 }
 </script>

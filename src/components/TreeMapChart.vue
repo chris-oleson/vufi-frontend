@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'TreeMapChart',
+    name: 'vufi-tree-map-chart',
     props: ['series'],
 
     computed: {

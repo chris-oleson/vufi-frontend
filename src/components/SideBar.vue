@@ -36,7 +36,7 @@
 
 <script>
 export default {
-    name: 'SideBar',
+    name: 'vufi-side-bar',
 
     methods: {
         formatCurrency(value) {

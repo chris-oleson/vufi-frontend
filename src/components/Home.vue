@@ -48,7 +48,7 @@
 
 <script>
 export default {
-    name: 'Home',
+    name: 'vufi-home',
 
     methods: {
         redirect() {

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '/src/components/Login'
 import PageNotFound from '/src/components/PageNotFound'
-import CreateAccount from '/src/components/CreateAccount'
+import SignUp from '/src/components/SignUp'
 import Assets from '/src/components/Assets'
 import Debts from '/src/components/Debts'
 import Contact from '/src/components/Contact'
@@ -83,7 +83,7 @@ export default createRouter({
         },
         {
             path: '/signup',
-            component: CreateAccount,
+            component: SignUp,
             meta: {
                 title: 'Sign Up | VuFi'
             }

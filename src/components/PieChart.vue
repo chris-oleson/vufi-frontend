@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'PieChart',
+    name: 'vufi-pie-chart',
     props: ['color', 'series', 'labels'],
 
     computed: {

@@ -20,7 +20,7 @@ import PieChart from '/src/components/PieChart.vue'
 import LineChart from '/src/components/LineChart.vue'
 
 export default ({
-    name: 'Debts',
+    name: 'vufi-debts',
     components: {
         DataTable,
         PieChart,

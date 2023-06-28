@@ -1,5 +1,5 @@
 <template>
-    <v-card class="pa-10 mx-auto my-10 text-center" width="330">
+    <v-card class="pa-10 mx-auto my-10 text-center" width="330" elevation="4">
         <v-form ref="form" v-model="isValid">
             <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto mb-4"/>
 
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-    name: 'CreateAccount',
+    name: 'vufi-sign-up',
 
     data() {
         return {

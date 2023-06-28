@@ -49,7 +49,7 @@
 
 <script>
 export default {
-    name: 'TopBar',
+    name: 'vufi-top-bar',
 
     computed: {
         usingApp() {

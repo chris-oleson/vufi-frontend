@@ -15,7 +15,7 @@ import LineChart from '/src/components/LineChart.vue'
 import TreeMapChart from '/src/components/TreeMapChart.vue'
 
 export default {
-    name: 'NetWorth',
+    name: 'vufi-net-worth',
     components: {
         LineChart,
         TreeMapChart,

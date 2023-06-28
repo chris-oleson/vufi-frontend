@@ -68,7 +68,7 @@
 
 <script>
 export default {
-    name: 'Table',
+    name: 'vufi-data-table',
     props: ['color', 'type', 'url', 'tableData', 'totalValue'],
 
     data() {

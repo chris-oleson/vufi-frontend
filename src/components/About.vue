@@ -19,6 +19,6 @@
 
 <script>
 export default {
-    name: 'About',
+    name: 'vufi-about',
 }
 </script>

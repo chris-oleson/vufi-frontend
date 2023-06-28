@@ -1,5 +1,5 @@
 <template>
-    <v-card class="pa-10 mx-auto my-10 text-center" width="330">
+    <v-card class="pa-10 mx-auto my-10 text-center" width="330" elevation="4">
         <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto"/>
 
         <v-text-field class="mt-4" variant="underlined" label="Email" v-model="email" :error="errorState"/>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    name: 'Login',
+    name: 'vufi-login',
 
     data() {
         return {

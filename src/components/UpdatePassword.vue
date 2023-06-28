@@ -16,7 +16,7 @@
 
 <script>
 export default {
-    name: 'UpdatePassword',
+    name: 'vufi-update-password',
 
     data() {
         return {

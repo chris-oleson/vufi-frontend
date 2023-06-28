@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    name: 'UpdateEmail',
+    name: 'vufi-update-email',
 
     data() {
         return {

@@ -1,6 +1,6 @@
 <template>
     <v-row class="ma-2">
-        <v-col cols="12">
+        <v-col v-if="lineChartData[0].data.length" cols="12">
             <LineChart :color="$vuetify.theme.current.colors.primary" :series="lineChartData"/>
         </v-col>
 
@@ -8,7 +8,7 @@
             <DataTable type="Asset" url="assets" :color="$vuetify.theme.current.colors.primary" :tableData="tableData" :totalValue="$store.state.totalPositiveAssets"/>
         </v-col>
 
-        <v-col cols="12" md="6">
+        <v-col v-if="pieChartValues.length" cols="12" md="6">
             <PieChart :color="$vuetify.theme.current.colors.primary" :series="pieChartValues" :labels="pieChartLabels"/>
         </v-col>
     </v-row>

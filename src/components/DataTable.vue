@@ -61,6 +61,10 @@
                 <v-icon size="small" @click="deleteItem(item.raw)">mdi-delete</v-icon>
             </template>
 
+            <template v-slot:[`no-data`]>
+                <div>{{ `No ${url} have been added` }}</div>
+            </template>
+
             <template v-slot:bottom></template>
         </v-data-table>
     </v-card>

@@ -1,5 +1,5 @@
 <template>
-    <v-row class="ma-2">
+    <v-row v-if="$store.state.allAssets.length" class="ma-2">
         <v-col cols="12">
             <LineChart :color="$vuetify.theme.current.colors.primary" :series="lineChartData"/>
         </v-col>
@@ -8,6 +8,7 @@
             <TreeMapChart :series="treeChartData"/>
         </v-col>
     </v-row>
+    <div v-else class="font-weight-light ma-4 text-disabled">You have not added any assets or debts to track</div>
 </template>
 
 <script>

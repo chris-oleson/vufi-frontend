@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    name: 'vufi-update-email',
+    name: 'vufi-delete-account',
 
     data() {
         return {

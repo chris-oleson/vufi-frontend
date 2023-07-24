@@ -62,7 +62,7 @@
             </template>
 
             <template v-slot:[`no-data`]>
-                <div>{{ `No ${url} have been added` }}</div>
+                <div class="font-weight-light text-disabled">No {{ url }} have been added</div>
             </template>
 
             <template v-slot:bottom></template>

@@ -39,6 +39,9 @@ export default createStore({
                 if (expiration && expiration > today) {
                     state.isPaying = true
                 }
+                else {
+                    state.isPaying = false
+                }
             }
 
             state.isLoggedIn = true

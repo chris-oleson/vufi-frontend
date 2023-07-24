@@ -24,12 +24,6 @@ export default {
             correctInfo: false,
         }
     },
-    
-    mounted() {
-        if (this.$store.state.isLoggedIn) {
-            this.$router.push('/assets')
-        }
-    },
 
     methods: {
         async login() {
@@ -39,8 +33,14 @@ export default {
                 password: this.password,
             }).then(resp => {
                 this.$store.commit('logIn', resp.data[0])
-                this.$store.dispatch('getAllAssetData')
-                this.$router.push('/assets')
+
+                if (this.$store.state.isPaying) {
+                    this.$store.dispatch('getAllAssetData')
+                    this.$router.push('/assets')
+                }
+                else {
+                    this.$router.push('/pricing')
+                }
             }).catch(() => {
                 this.errorState = true
             })

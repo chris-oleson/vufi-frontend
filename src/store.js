@@ -100,7 +100,7 @@ export default createStore({
 
                 this.commit('setAssetData', {allAssets, totalPositiveAssets, totalNegativeAssets})
 
-                axios.get(process.env.VUE_APP_URL + 'assets/history/').then(resp => {
+                axios.get(import.meta.env.VITE_URL + 'assets/history/').then(resp => {
                     let allHistory = resp.data
                     this.commit('setAllHistory', allHistory)
                 })

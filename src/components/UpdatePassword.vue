@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <v-img src="src/assets/logo.svg" max-height="50" max-width="50" class="mx-auto"></v-img>
+        <img src="logo.svg" eager height="50" width="50" class="mx-auto"/>
 
         <v-text-field variant="underlined" class="mt-4" label="Current Password" :error="incorrectPassword" type="password" v-model="password"></v-text-field>
 

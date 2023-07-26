@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto"></v-img>
+        <img src="logo.svg" eager height="50" width="50" class="mx-auto"/>
 
         <!-- Theme Selection -->
         <v-card-text class="mt-6">Theme</v-card-text>

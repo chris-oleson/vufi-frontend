@@ -1,7 +1,7 @@
 <template>
     <v-card class="pa-10 mx-auto my-10 text-center" width="330" elevation="4">
         <v-form ref="form" v-model="isValid">
-            <v-img src="../assets/logo.svg" max-height="50" max-width="50" class="mx-auto mb-4"/>
+            <img src="logo.svg" eager height="50" width="50" class="mx-auto"/>
 
             <v-text-field variant="underlined" label="First Name" v-model="firstName" :rules="[rules.required]"></v-text-field>
             <v-text-field variant="underlined" label="Last Name" v-model="lastName" :rules="[rules.required]"></v-text-field>

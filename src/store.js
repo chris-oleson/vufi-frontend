@@ -77,7 +77,7 @@ export default createStore({
     actions: {
         async getAllAssetData() {
             // Get raw asset data
-            axios.get(process.env.VUE_APP_URL + 'assets/').then(resp => {
+            axios.get(import.meta.env.VITE_URL + 'assets/').then(resp => {
                 let allAssets = resp.data
                 let totalPositiveAssets = 0
                 let totalNegativeAssets = 0

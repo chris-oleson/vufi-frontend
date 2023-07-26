@@ -19,7 +19,7 @@ import DataTable from '/src/components/DataTable.vue'
 import PieChart from '/src/components/PieChart.vue'
 import LineChart from '/src/components/LineChart.vue'
 
-export default ({
+export default {
     name: 'vufi-debts',
     components: {
         DataTable,
@@ -143,5 +143,5 @@ export default ({
             return refinedHistory
         }
     }
-})
+}
 </script>

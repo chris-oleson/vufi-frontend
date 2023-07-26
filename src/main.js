@@ -23,7 +23,7 @@ app.use(VueApexCharts)
 // Axios
 import axios from 'axios'
 app.config.globalProperties.$axios = axios
-axios.defaults.baseURL = process.env.VUE_APP_URL
+axios.defaults.baseURL = import.meta.env.VITE_URL
 axios.interceptors.request.use(
     function(config) {
         config.withCredentials = true

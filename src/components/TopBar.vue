@@ -1,6 +1,6 @@
 <template>
     <v-app-bar>
-        <v-img src="../assets/logo.svg" max-width="50" max-height="50" class="link ml-4" @click="$router.push('/')"/>
+        <v-img src="src/assets/logo.svg" max-width="50" max-height="50" class="link ml-4" @click="$router.push('/')"/>
         <h2 class="font-weight-light link px-2" @click="$router.push('/')">VuFi</h2>
 
         <v-spacer/>

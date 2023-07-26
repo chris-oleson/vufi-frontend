@@ -41,10 +41,10 @@ export default {
                 this.$router.push('/assets')
             }
             else if (time == 'month') {
-                window.location.href = process.env.VUE_APP_MONTHLY_PRODUCT
+                window.location.href = import.meta.env.VITE_MONTHLY_PRODUCT
             }
             else if (time == 'year') {
-                window.location.href = process.env.VUE_APP_YEARLY_PRODUCT
+                window.location.href = import.meta.env.VITE_YEARLY_PRODUCT
             }
         }
     }

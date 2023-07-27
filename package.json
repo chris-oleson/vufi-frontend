@@ -10,7 +10,6 @@
   "dependencies": {
     "apexcharts": "^3.41.0",
     "axios": "^1.4.0",
-    "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
     "vue3-apexcharts": "^1.4.4",

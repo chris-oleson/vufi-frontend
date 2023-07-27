@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <img src="/public/logo.svg" eager height="50" width="50" class="mx-auto"/>
+        <img src="/public/logo.svg" height="50" width="50" class="mx-auto"/>
 
         <v-text-field variant="underlined" class="my-4" label="Current Password" :error="incorrectPassword" type="password" v-model="password" @keyup.enter="deleteAccount"></v-text-field>
         <v-card-text v-if="incorrectPassword" class="text-error pa-0">Incorrect password</v-card-text>

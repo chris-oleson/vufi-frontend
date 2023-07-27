@@ -13,8 +13,8 @@
 
                 <v-col cols="12" lg="7">
                     <v-sheet class="ma-5 mb-n16" elevation="10">
-                        <v-img v-if="$vuetify.theme.name == 'dark'" eager src="/public/landingPage4.png"/>
-                        <v-img v-else eager src="/public/landingPage3.png"/>
+                        <v-img v-show="$vuetify.theme.name == 'dark'" eager src="/public/landingPage4.png"/>
+                        <v-img v-show="$vuetify.theme.name == 'light'" eager src="/public/landingPage3.png"/>
                     </v-sheet>
                 </v-col>
             </v-row>

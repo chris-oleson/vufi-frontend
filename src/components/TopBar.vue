@@ -1,18 +1,18 @@
 <template>
     <v-app-bar>
-        <img src="/public/logo.svg" eager height="50" width="50" class="link ml-4" @click="$router.push('/')"/>
+        <img src="/public/logo.svg" height="50" width="50" class="link ml-4" @click="$router.push('/')"/>
         <h2 class="font-weight-light link px-2" @click="$router.push('/')">VuFi</h2>
 
         <v-spacer/>
 
         <template v-if="!$vuetify.display.xs && !usingApp">
-            <v-btn rounded="0" class="font-weight-light mr-4" @click="$router.push('/')">Home</v-btn>
-            <v-btn rounded="0" class="font-weight-light mr-4" @click="$router.push('/pricing')">Pricing</v-btn>
-            <v-btn rounded="0" class="font-weight-light mr-4" @click="$router.push('/about')">About</v-btn>
-            <v-btn rounded="0" class="font-weight-light mr-4" @click="$router.push('/contact')">Contact</v-btn>
+            <v-btn rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/')">Home</v-btn>
+            <v-btn rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/pricing')">Pricing</v-btn>
+            <v-btn rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/about')">About</v-btn>
+            <v-btn rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/contact')">Contact</v-btn>
             <v-divider vertical inset class="mr-4"></v-divider>
-            <v-btn v-if="$store.state.isLoggedIn" rounded="0" class="font-weight-light" @click="$router.push('/assets')">Dashboard</v-btn>
-            <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="font-weight-light" @click="$router.push('/login')">Log In</v-btn>
+            <v-btn v-if="$store.state.isLoggedIn" rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/assets')">Dashboard</v-btn>
+            <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/login')">Log In</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="bg-primary mx-4" @click="$router.push('/signup')">Sign Up</v-btn>
         </template>
 
@@ -22,10 +22,10 @@
             </template>
             
             <v-list class="font-weight-light" width="200">
-                <v-list-item rounded="0" class="font-weight-light" @click="$router.push('/')">Home</v-list-item>
-                <v-list-item rounded="0" class="font-weight-light" @click="$router.push('/pricing')">Pricing</v-list-item>
-                <v-list-item rounded="0" class="font-weight-light" @click="$router.push('/about')">About</v-list-item>
-                <v-list-item rounded="0" class="font-weight-light" @click="$router.push('/contact')">Contact</v-list-item>
+                <v-list-item rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/')">Home</v-list-item>
+                <v-list-item rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/pricing')">Pricing</v-list-item>
+                <v-list-item rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/about')">About</v-list-item>
+                <v-list-item rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/contact')">Contact</v-list-item>
                 <v-divider class="mx-2"></v-divider>
                 <v-list-item v-if="$store.state.isLoggedIn" class="font-weight-light" @click="$router.push('/assets')">Dashboard</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light" @click="$router.push('/login')">Log In</v-list-item>
@@ -48,8 +48,15 @@
 </template>
 
 <script>
+
 export default {
     name: 'vufi-top-bar',
+
+    data() {
+        return {
+
+        }
+    },
 
     computed: {
         usingApp() {

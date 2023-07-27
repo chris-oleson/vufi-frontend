@@ -9,8 +9,5 @@ export default defineConfig({
             template: { transformAssetUrls }
         }),
         vuetify(),
-    ],
-    server: {
-        port: 8080,
-    },
+    ]
 })

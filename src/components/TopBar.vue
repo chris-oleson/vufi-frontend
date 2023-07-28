@@ -1,10 +1,11 @@
 <template>
     <v-app-bar>
-        <img src="/public/logo.svg" height="50" width="50" class="link ml-4" @click="$router.push('/')"/>
+        <img src="/logo.svg" height="50" width="50" class="link ml-4" @click="$router.push('/')"/>
         <h2 class="font-weight-light link px-2" @click="$router.push('/')">VuFi</h2>
 
         <v-spacer/>
 
+        <!-- Monitor display -->
         <template v-if="!$vuetify.display.xs && !usingApp">
             <v-btn rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/')">Home</v-btn>
             <v-btn rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/pricing')">Pricing</v-btn>
@@ -16,9 +17,10 @@
             <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="bg-primary mx-4" @click="$router.push('/signup')">Sign Up</v-btn>
         </template>
 
+        <!-- Mobile display -->
         <v-menu v-if="$vuetify.display.xs && !usingApp" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ props }">
-                <v-btn icon="mdi-menu" class="mr-1" variant="plain" size="large" v-bind="props"/>
+                <v-btn icon="mdi-menu" class="mr-1" variant="plain" size="x-large" v-bind="props"/>
             </template>
             
             <v-list class="font-weight-light" width="200">
@@ -35,7 +37,7 @@
 
         <v-menu v-if="$store.state.isLoggedIn" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ props }">
-                <v-btn icon="mdi-cog" variant="plain" size="large" class="mr-1" v-bind="props"/>
+                <v-btn icon="mdi-cog" variant="plain" size="x-large" class="mr-1" v-bind="props"/>
             </template>
             
             <v-list class="font-weight-light" width="200">

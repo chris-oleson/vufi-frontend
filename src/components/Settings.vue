@@ -4,7 +4,7 @@
 
         <!-- Theme Selection -->
         <v-card-text class="mt-6">Theme</v-card-text>
-        <v-btn-toggle v-model="themeSelection" mandatory variant="outlined" density="compact" class="mb-4">
+        <v-btn-toggle v-model="themeSelection" mandatory variant="outlined" density="compact" rounded="0" class="mb-4">
             <v-btn class="font-weight-light" size="small">System</v-btn>
             <v-btn class="font-weight-light" size="small">Light</v-btn>
             <v-btn class="font-weight-light" size="small">Dark</v-btn>
@@ -12,7 +12,7 @@
 
         <!-- Change Default Currency -->
         <v-card-text>Currency</v-card-text>
-        <v-select :items="currencies" v-model="currencySelection" variant="outlined" density="compact" class="mx-6"></v-select>
+        <v-select :items="currencies" v-model="currencySelection" variant="outlined" density="compact" class="mx-6" rounded="0"></v-select>
 
         <v-card-text>Account</v-card-text>
 

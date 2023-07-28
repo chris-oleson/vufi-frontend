@@ -8,7 +8,7 @@
             <TreeMapChart :series="treeChartData"/>
         </v-col>
     </v-row>
-    <div v-else class="font-weight-light ma-4 text-disabled">You have not added any assets or debts to track</div>
+    <div v-else class="font-weight-light ma-4 text-disabled">No assets or debts have been added</div>
 </template>
 
 <script>

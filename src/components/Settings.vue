@@ -1,10 +1,10 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <img src="/public/logo.svg" height="50" width="50" class="mx-auto"/>
+        <img src="/logo.svg" height="50" width="50" class="mx-auto"/>
 
         <!-- Theme Selection -->
-        <v-card-text class="mt-6">Theme</v-card-text>
-        <v-btn-toggle v-model="themeSelection" mandatory variant="outlined" density="compact" rounded="0" class="mb-4">
+        <v-card-text class="mt-4">Theme</v-card-text>
+        <v-btn-toggle v-model="themeSelection" mandatory variant="tonal" density="compact" rounded="0" class="mb-4">
             <v-btn class="font-weight-light" size="small">System</v-btn>
             <v-btn class="font-weight-light" size="small">Light</v-btn>
             <v-btn class="font-weight-light" size="small">Dark</v-btn>
@@ -17,13 +17,13 @@
         <v-card-text>Account</v-card-text>
 
         <!-- Change Password -->
-        <v-btn rounded="0" variant="outlined" class="font-weight-light" width="200" @click="$router.push('/update-password')">Change Password</v-btn>
+        <v-btn rounded="0" variant="tonal" class="font-weight-light" width="200" @click="$router.push('/update-password')">Change Password</v-btn>
 
         <!-- Change Email -->
-        <v-btn rounded="0" variant="outlined" class="font-weight-light my-4" width="200" @click="$router.push('/update-email')">Change Email</v-btn>
+        <v-btn rounded="0" variant="tonal" class="font-weight-light my-4" width="200" @click="$router.push('/update-email')">Change Email</v-btn>
 
         <!-- Delete Account -->
-        <v-btn rounded="0" variant="outlined" class="font-weight-light text-error" width="200" @click="$router.push('/delete-account')">Delete Account</v-btn>
+        <v-btn rounded="0" variant="tonal" class="font-weight-light text-error" width="200" @click="$router.push('/delete-account')">Delete Account</v-btn>
     </v-card>
 </template>
 

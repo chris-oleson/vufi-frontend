@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto my-10 text-center" width="330" elevation="4">
-        <img src="/public/logo.svg" height="50" width="50" class="mx-auto"/>
+        <img src="/logo.svg" height="50" width="50" class="mx-auto"/>
 
         <v-text-field class="mt-4" variant="underlined" label="Email" v-model="email" :error="errorState"/>
         <v-text-field class="mb-4" variant="underlined" label="Password" type="password" v-model="password" :error="errorState" @keyup.enter="login"/>

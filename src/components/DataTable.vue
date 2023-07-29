@@ -31,7 +31,7 @@
 
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn rounded="0" text @click="close">Cancel</v-btn>
+                                <v-btn rounded="0" class="font-weight-light" variant="plain" @click="close">Cancel</v-btn>
                                 <v-btn rounded="0" class="bg-primary" @click="save">Save</v-btn>
                             </v-card-actions>
                         </v-card>

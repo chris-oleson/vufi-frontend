@@ -25,6 +25,17 @@ export default {
         }
     },
 
+    created() {
+        if (this.$store.state.isLoggedIn) {
+            if (this.$store.state.isPaying) {
+                this.$router.push('/assets')
+            }
+            else {
+                this.$router.push('/pricing')
+            }
+        }
+    },
+
     methods: {
         async login() {
             // Send login data to backend for validation

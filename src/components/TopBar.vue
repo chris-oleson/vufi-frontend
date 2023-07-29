@@ -14,7 +14,7 @@
             <v-divider vertical inset class="mr-4"></v-divider>
             <v-btn v-if="$store.state.isLoggedIn" rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/assets')">Dashboard</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/login')">Log In</v-btn>
-            <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="bg-primary mx-4" @click="$router.push('/signup')">Sign Up</v-btn>
+            <!-- <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="bg-primary mx-4" @click="$router.push('/signup')">Sign Up</v-btn> -->
         </template>
 
         <!-- Mobile display -->
@@ -31,7 +31,7 @@
                 <v-divider class="mx-2"></v-divider>
                 <v-list-item v-if="$store.state.isLoggedIn" class="font-weight-light" @click="$router.push('/assets')">Dashboard</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light" @click="$router.push('/login')">Log In</v-list-item>
-                <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light text-primary" @click="$router.push('/signup')">Sign Up</v-list-item>
+                <!-- <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light text-primary" @click="$router.push('/signup')">Sign Up</v-list-item> -->
             </v-list>
         </v-menu>
 
@@ -53,12 +53,6 @@
 
 export default {
     name: 'vufi-top-bar',
-
-    data() {
-        return {
-
-        }
-    },
 
     computed: {
         usingApp() {

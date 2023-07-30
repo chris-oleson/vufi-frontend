@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar>
+    <v-app-bar floating>
         <img src="/logo.svg" height="50" width="50" class="link ml-4" @click="$router.push('/')"/>
         <h2 class="font-weight-light link px-2" @click="$router.push('/')">VuFi</h2>
 
@@ -14,13 +14,13 @@
             <v-divider vertical inset class="mr-4"></v-divider>
             <v-btn v-if="$store.state.isLoggedIn" rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/assets')">Dashboard</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/login')">Log In</v-btn>
-            <!-- <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="bg-primary mx-4" @click="$router.push('/signup')">Sign Up</v-btn> -->
+            <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="bg-primary ml-4" @click="$router.push('/signup')">Sign Up</v-btn>
         </template>
 
         <!-- Mobile display -->
         <v-menu v-if="$vuetify.display.xs && !usingApp" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ props }">
-                <v-btn icon="mdi-menu" class="mr-1" variant="plain" size="x-large" v-bind="props"/>
+                <v-btn icon="mdi-menu" variant="plain" class="ma-0" size="x-large" v-bind="props"/>
             </template>
             
             <v-list class="font-weight-light" width="200">
@@ -31,7 +31,7 @@
                 <v-divider class="mx-2"></v-divider>
                 <v-list-item v-if="$store.state.isLoggedIn" class="font-weight-light" @click="$router.push('/assets')">Dashboard</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light" @click="$router.push('/login')">Log In</v-list-item>
-                <!-- <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light text-primary" @click="$router.push('/signup')">Sign Up</v-list-item> -->
+                <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light text-primary" @click="$router.push('/signup')">Sign Up</v-list-item>
             </v-list>
         </v-menu>
 

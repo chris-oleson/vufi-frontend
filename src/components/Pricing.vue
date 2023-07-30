@@ -1,15 +1,15 @@
 <template>
-    <v-container fluid>
+    <v-container fluid class="pa-0 text-center">
         <v-row>
-            <v-col cols="12" lg="6" class="mx-auto my-16 pb-16 text-center">            
+            <v-col cols="12" lg="6" class="mx-auto my-16 pb-16">
                 <h1 class="font-weight-light">Pricing</h1>
                 <div class="font-weight-light mt-8">Choose the plan that works best for you.</div>
                 <div class="font-weight-light">Change your plan at any time!</div>
             </v-col>
         </v-row>
 
-        <v-row class="bg-accent text-center justify-center">
-            <v-col cols="12" md="4" lg="3" class="mb-16 mx-4 mt-n16">
+        <v-row class="justify-center bg-accent">
+            <v-col cols="12" md="4" lg="3" class="mx-4 mb-16 mt-n16">
                 <v-card elevation="10" width="330" class="py-16 mx-auto bg-secondary">
                     <h1 class="font-weight-light">$9<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
                     <p class="font-weight-light mt-4 mb-10">Cancel any time!</p>
@@ -17,7 +17,7 @@
                 </v-card>
             </v-col>
 
-            <v-col cols="12" md="4" lg="3" class="mb-16 mx-4 mt-n16">
+            <v-col cols="12" md="4" lg="3" class="mx-4 mb-16 mt-n16">
                 <v-card elevation="10" width="330" class="py-16 mx-auto bg-secondary">
                     <h1 class="font-weight-light">$99<p class="font-weight-light text-subtitle-1 d-inline">/year</p></h1>
                     <p class="font-weight-light mt-4 mb-10">Two months free!</p>

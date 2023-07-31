@@ -1,24 +1,24 @@
 <template>
-    <v-app-bar floating>
+    <v-app-bar elevation="4">
         <img src="/logo.svg" height="50" width="50" class="link ml-4" @click="$router.push('/')"/>
-        <h2 class="font-weight-light link px-2" @click="$router.push('/')">VuFi</h2>
+        <h2 class="font-weight-light link ml-2" @click="$router.push('/')">VuFi</h2>
 
         <v-spacer/>
 
-        <!-- Monitor display -->
-        <template v-if="!$vuetify.display.xs && !usingApp">
+        <!-- Desktop display -->
+        <template v-if="$vuetify.display.mdAndUp && !usingApp">
             <v-btn rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/')">Home</v-btn>
             <v-btn rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/pricing')">Pricing</v-btn>
             <v-btn rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/about')">About</v-btn>
             <v-btn rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/contact')">Contact</v-btn>
             <v-divider vertical inset class="mr-4"></v-divider>
-            <v-btn v-if="$store.state.isLoggedIn" rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/assets')">Dashboard</v-btn>
-            <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/login')">Log In</v-btn>
-            <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="bg-primary ml-4" @click="$router.push('/signup')">Sign Up</v-btn>
+            <v-btn v-if="$store.state.isLoggedIn" rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/assets')">Dashboard</v-btn>
+            <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="font-weight-light mr-4" variant="plain" @click="$router.push('/login')">Log In</v-btn>
+            <v-btn v-if="!$store.state.isLoggedIn" rounded="0" class="bg-primary mr-4" @click="$router.push('/signup')">Sign Up</v-btn>
         </template>
 
         <!-- Mobile display -->
-        <v-menu v-if="$vuetify.display.xs && !usingApp" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
+        <v-menu v-if="$vuetify.display.smAndDown && !usingApp" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ props }">
                 <v-btn icon="mdi-menu" variant="plain" class="ma-0" size="x-large" v-bind="props"/>
             </template>

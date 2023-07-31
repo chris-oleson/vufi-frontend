@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-if="usingApp" permanent floating :rail="rail" class="elevation-4">
+    <v-navigation-drawer v-if="usingApp" permanent floating :rail="rail" elevation="4">
         <v-list class="font-weight-light pa-0" :value="page">
             <v-list-item class="py-4" to="/assets">
                 <template v-slot:prepend>

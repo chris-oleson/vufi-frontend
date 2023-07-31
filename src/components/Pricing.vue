@@ -1,14 +1,14 @@
 <template>
-    <v-container fluid class="text-center pa-0">
-        <v-row class="ma-0">
-            <v-col cols="12" lg="6" class="mx-auto my-16 pb-16">
+    <v-sheet class="bg-accent text-center fill-height">
+        <v-row class="ma-0 bg-background">
+            <v-col cols="12" lg="6" class="mx-auto py-16">
                 <h1 class="font-weight-light mb-8">Pricing</h1>
                 <div class="font-weight-light">Choose the plan that works best for you.</div>
-                <div class="font-weight-light">Change your plan at any time!</div>
+                <div class="font-weight-light pb-10">Change your plan at any time!</div>
             </v-col>
         </v-row>
 
-        <v-row class="justify-center bg-accent ma-0">
+        <v-row class="justify-center ma-0">
             <v-col cols="12" md="4" lg="3" class="mx-4 mb-16 mt-n16">
                 <v-card elevation="10" width="330" class="py-16 mx-auto bg-secondary">
                     <h1 class="font-weight-light">$9<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
@@ -25,7 +25,7 @@
                 </v-card>
             </v-col>
         </v-row>
-    </v-container>
+    </v-sheet>
 </template>
 
 <script>

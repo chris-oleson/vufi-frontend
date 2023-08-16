@@ -1,7 +1,7 @@
 <template>
     <v-app-bar elevation="4">
         <img src="/logo.svg" height="50" width="50" class="link ml-4" @click="$router.push('/')"/>
-        <h2 class="font-weight-light link ml-2" @click="$router.push('/')">VuFi</h2>
+        <h2 class="font-weight-light link pl-2" @click="$router.push('/')">VuFi</h2>
 
         <v-spacer/>
 

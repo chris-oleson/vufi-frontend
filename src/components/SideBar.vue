@@ -3,7 +3,7 @@
         <v-list class="font-weight-light pa-0" :value="page">
             <v-list-item class="py-4" to="/assets">
                 <template v-slot:prepend>
-                    <v-icon class="mr-4">mdi-cash-multiple</v-icon>
+                    <v-icon class="mr-n4">mdi-cash-multiple</v-icon>
                 </template>
                 <div class="d-flex justify-space-between">
                     <div class="text-no-wrap">Assets</div>
@@ -13,7 +13,7 @@
 
             <v-list-item class="py-4" to="/debts">
                 <template v-slot:prepend>
-                    <v-icon class="mr-4">mdi-credit-card-multiple</v-icon>
+                    <v-icon class="mr-n4">mdi-credit-card-multiple</v-icon>
                 </template>
                 <div class="d-flex justify-space-between">
                     <div class="text-no-wrap">Debts</div>
@@ -23,7 +23,7 @@
 
             <v-list-item class="py-4" to="/net-worth">
                 <template v-slot:prepend>
-                    <v-icon class="mr-4">mdi-sigma</v-icon>
+                    <v-icon class="mr-n4">mdi-sigma</v-icon>
                 </template>
                 <div class="d-flex justify-space-between">
                     <div class="text-no-wrap">Net Worth</div>

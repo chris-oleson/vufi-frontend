@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-if="usingApp" permanent floating :rail="rail" elevation="4">
+    <v-navigation-drawer permanent floating :rail="rail" elevation="4">
         <v-list class="font-weight-light pa-0" :value="page">
             <v-list-item class="py-4" to="/assets">
                 <template v-slot:prepend>
@@ -54,13 +54,6 @@ export default {
     computed: {
         rail() {
             return this.$vuetify.display.mobile
-        },
-
-        usingApp() {
-            if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
-                return true
-            }
-            return false
         },
 
         page() {

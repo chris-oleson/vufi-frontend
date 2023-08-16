@@ -8,7 +8,7 @@
         </v-row>
     
         <v-row class="ma-0">
-            <v-col cols="12" lg="6" class="pt-16 px-8 mx-auto">
+            <v-col cols="12" lg="6" class="py-16 px-8 mx-auto">
                 <h1 class="font-weight-light mb-8">Why use VuFi?</h1>
                 <h2 class="font-weight-light">Time Saving</h2>
                 <div class="font-weight-light mb-8">You don't need to log into 10 different accounts and manually track their data in a spreadsheet that could easily have its data lost.</div>

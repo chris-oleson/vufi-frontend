@@ -29,8 +29,8 @@
                 <v-list-item rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/about')">About</v-list-item>
                 <v-list-item rounded="0" class="font-weight-light" variant="plain" @click="$router.push('/contact')">Contact</v-list-item>
                 <v-divider class="mx-2"></v-divider>
-                <v-list-item v-if="$store.state.isLoggedIn" class="font-weight-light" @click="$router.push('/assets')">Dashboard</v-list-item>
-                <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light" @click="$router.push('/login')">Log In</v-list-item>
+                <v-list-item v-if="$store.state.isLoggedIn" class="font-weight-light" variant="plain" @click="$router.push('/assets')">Dashboard</v-list-item>
+                <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light" variant="plain" @click="$router.push('/login')">Log In</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light text-primary" @click="$router.push('/signup')">Sign Up</v-list-item>
             </v-list>
         </v-menu>

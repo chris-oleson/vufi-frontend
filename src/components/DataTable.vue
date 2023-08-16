@@ -180,6 +180,7 @@ export default {
                 value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
             })
             .then(() => {
+                console.log('refreshing')
                 this.$store.dispatch('getAllAssetData')
             })
         },

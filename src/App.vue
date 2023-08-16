@@ -2,7 +2,7 @@
     <v-app>
         <TopBar/>
 
-        <SideBar/>
+        <SideBar v-if="usingApp"/>
 
         <v-main>
             <router-view/>
@@ -65,6 +65,17 @@ export default {
         }
     },
 
+    computed: {
+        usingApp() {
+            if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+    },
+
     watch: {
         // Update tab text when the page changes
         $route: {
@@ -90,10 +101,10 @@ export default {
 <style>
 /* Text selection color */
 ::selection {
-    background: #aed581
+    background: #83af50
 }
 ::-moz-selection {
-    background: #aed581
+    background: #83af50
 }
 
 /* Turning the logo into a button */

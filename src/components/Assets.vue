@@ -44,7 +44,7 @@ export default {
     },
 
     watch: {
-        '$store.state.allAssets': () => {
+        '$store.state.allAssets'() {
             this.formatData()
         }
     },

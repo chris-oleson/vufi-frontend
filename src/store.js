@@ -36,7 +36,7 @@ export default createStore({
 
                 let today = new Date()
                 let expiration = new Date(data.expiration_date)
-                if (expiration && expiration > today) {
+                if (expiration != null && expiration > today) {
                     state.isPaying = true
                 }
                 else {

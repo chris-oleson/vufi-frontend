@@ -107,13 +107,12 @@ export default {
     background: #83af50
 }
 
-/* Turning the logo into a button */
-.link:hover {
-    cursor: pointer
-}
-
 /* Disable ripple effect */
 .v-ripple__container {
   opacity: 0 !important;
+}
+
+a {
+    text-decoration: none;
 }
 </style>

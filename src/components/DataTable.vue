@@ -52,16 +52,16 @@
                 </v-toolbar>
             </template>
 
-            <template v-slot:[`item.value`]="{ item }">
-                <span v-if="item.raw.value">{{ formatCurrency(parseFloat(item.raw.value)) }}</span>
+            <template v-slot:item.value="{ item }">
+                <span v-if="item">{{ formatCurrency(parseFloat(item.value)) }}</span>
             </template>
 
-            <template v-slot:[`item.actions`]="{ item }">
-                <v-icon size="small" class="mr-2" @click="editItem(item.raw)">mdi-pencil</v-icon>
-                <v-icon size="small" @click="deleteItem(item.raw)">mdi-delete</v-icon>
+            <template v-slot:item.actions="{ item }">
+                <v-icon size="small" class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+                <v-icon size="small" @click="deleteItem(item)">mdi-delete</v-icon>
             </template>
 
-            <template v-slot:[`no-data`]>
+            <template v-slot:no-data>
                 <div class="font-weight-light text-disabled">No {{ url }} have been added</div>
             </template>
 

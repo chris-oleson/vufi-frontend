@@ -1,6 +1,6 @@
 <template>
     <v-app-bar elevation="4">
-        <router-link class="text-white d-inline-flex align-center mx-4" to="/">
+        <router-link class="d-inline-flex align-center mx-4" to="/">
             <img src="/logo.svg" height="50"/>
             <h2 class="font-weight-light ml-2">VuFi</h2>
         </router-link>
@@ -9,10 +9,10 @@
 
         <!-- Desktop display -->
         <template v-if="$vuetify.display.mdAndUp && !usingApp">
-            <v-btn class="text-white font-weight-light mr-4" variant="plain" to="/">Home</v-btn>
-            <v-btn class="text-white font-weight-light mr-4" variant="plain" to="/pricing">Pricing</v-btn>
-            <v-btn class="text-white font-weight-light mr-4" variant="plain" to="/about">About</v-btn>
-            <v-btn class="text-white font-weight-light mr-4" variant="plain" to="/contact">Contact</v-btn>
+            <v-btn class="font-weight-light mr-4" variant="plain" to="/">Home</v-btn>
+            <v-btn class="font-weight-light mr-4" variant="plain" to="/pricing">Pricing</v-btn>
+            <v-btn class="font-weight-light mr-4" variant="plain" to="/about">About</v-btn>
+            <v-btn class="font-weight-light mr-4" variant="plain" to="/contact">Contact</v-btn>
 
             <v-divider vertical inset class="mr-4"></v-divider>
 

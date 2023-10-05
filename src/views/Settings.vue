@@ -17,13 +17,13 @@
         <v-card-text>Account</v-card-text>
 
         <!-- Change Password -->
-        <v-btn rounded="0" variant="tonal" class="font-weight-light" width="200" @click="$router.push('/update-password')">Change Password</v-btn>
+        <v-btn rounded="0" variant="tonal" class="font-weight-light" width="200" to="/update-password">Change Password</v-btn>
 
         <!-- Change Email -->
-        <v-btn rounded="0" variant="tonal" class="font-weight-light my-4" width="200" @click="$router.push('/update-email')">Change Email</v-btn>
+        <v-btn rounded="0" variant="tonal" class="font-weight-light my-4" width="200" to="/update-email">Change Email</v-btn>
 
         <!-- Delete Account -->
-        <v-btn rounded="0" variant="tonal" class="font-weight-light text-error" width="200" @click="$router.push('/delete-account')">Delete Account</v-btn>
+        <v-btn rounded="0" variant="tonal" class="font-weight-light text-error" width="200" to="/delete-account">Delete Account</v-btn>
     </v-card>
 </template>
 

@@ -109,11 +109,12 @@ export default {
 
 /* Disable ripple effect */
 .v-ripple__container {
-  opacity: 0 !important;
+    opacity: 0 !important;
 }
 
+/* Removing default link styling */
 a {
     color: inherit;
-    text-decoration: none;
+    text-decoration: inherit;
 }
 </style>

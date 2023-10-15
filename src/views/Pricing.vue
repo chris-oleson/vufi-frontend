@@ -41,10 +41,10 @@ export default {
                 this.$router.push('/assets')
             }
             else if (time == 'month') {
-                window.location.href = import.meta.env.VITE_MONTHLY_PRODUCT
+                window.location.href = "https://buy.stripe.com/test_8wM3gi3Nr3DN9oI6or"
             }
             else if (time == 'year') {
-                window.location.href = import.meta.env.VITE_YEARLY_PRODUCT
+                window.location.href = "https://buy.stripe.com/test_00g9EGgAd4HRcAUbIM"
             }
         }
     }

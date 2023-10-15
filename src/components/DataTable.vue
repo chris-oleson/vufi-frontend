@@ -12,8 +12,12 @@
 
                     <!-- Add or edit asset dialog -->
                     <v-dialog v-if="!$vuetify.display.xs" v-model="dialog" max-width="400px">
-                        <template v-slot:activator="{ props }">
-                            <v-btn :color="color" variant="tonal" icon="mdi-plus" v-bind="props"/>
+                        <template v-slot:activator="{ props:dialog }">
+                            <v-tooltip :text="'Add ' + type">
+                                <template v-slot:activator="{ props:tooltip }">
+                                    <v-btn :color="color" variant="tonal" icon="mdi-plus" v-bind="mergeProps(dialog, tooltip)"/>
+                                </template>
+                            </v-tooltip>
                         </template>
 
                         <v-card class="pa-2">
@@ -71,6 +75,7 @@
 </template>
 
 <script>
+import { mergeProps } from 'vue'
 export default {
     name: 'vufi-data-table',
     props: ['color', 'type', 'url', 'tableData', 'totalValue'],
@@ -117,6 +122,8 @@ export default {
     },
 
     methods: {
+        mergeProps,
+
         formatCurrency(value) {
             if (typeof value !== "number") {
                 return value

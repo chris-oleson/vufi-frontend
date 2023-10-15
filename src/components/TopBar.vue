@@ -16,7 +16,7 @@
 
             <v-divider vertical inset class="mr-4"></v-divider>
 
-            <v-btn v-if="$store.state.isLoggedIn" class="font-weight-light mr-4" variant="plain" to="/assets">Dashboard</v-btn>
+            <v-btn v-if="$store.state.isLoggedIn" class="font-weight-light mr-4" variant="plain" @click="redirect()">Dashboard</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" class="font-weight-light mr-4" variant="plain" to="/login">Log In</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" class="bg-primary mr-4" rounded="0" to="/signup">Sign Up</v-btn>
         </template>
@@ -35,7 +35,7 @@
 
                 <v-divider class="mx-2"></v-divider>
 
-                <v-list-item v-if="$store.state.isLoggedIn" class="font-weight-light" variant="plain" to="/assets">Dashboard</v-list-item>
+                <v-list-item v-if="$store.state.isLoggedIn" class="font-weight-light" variant="plain" @click="redirect()">Dashboard</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light" variant="plain" to="/login">Log In</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light text-primary" to="/signup">Sign Up</v-list-item>
             </v-list>
@@ -70,6 +70,16 @@ export default {
     },
 
     methods: {
+        redirect() {
+            if (this.$store.state.isPaying) {
+                this.$router.push('/assets')
+            }
+            else {
+                console.log('asdf')
+                this.$router.push('/pricing')
+            }
+        },
+
         logOut() {
             this.$axios.post('auth/logout').then(() => {
                 this.$store.commit('logOut')

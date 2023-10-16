@@ -105,8 +105,8 @@ export default createStore({
                     this.commit('setAllHistory', allHistory)
                 })
             })
-            .catch(() => {
-                console.log("couldn't get asset data")
+            .catch((err) => {
+                console.log(err.message)
             })
         },
     }

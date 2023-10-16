@@ -22,7 +22,7 @@ export default createRouter({
             alias: '/:pathMatch(.*)*',
             component: PageNotFound,
             meta: {
-                title: '404 | VuFi'
+                title: '404 - VuFi'
             }
         },
         {
@@ -36,84 +36,84 @@ export default createRouter({
             path: '/pricing',
             component: Pricing,
             meta: {
-                title: 'Pricing | VuFi'
+                title: 'Pricing - VuFi'
             }
         },
         {
             path: '/about',
             component: About,
             meta: {
-                title: 'About | VuFi'
+                title: 'About - VuFi'
             }
         },
         {
             path: '/contact',
             component: Contact,
             meta: {
-                title: 'Contact | VuFi'
+                title: 'Contact - VuFi'
             }
         },
         {
             path: '/assets',
             component: Assets,
             meta: {
-                title: 'Assets | VuFi'
+                title: 'Assets - VuFi'
             }
         },
         {
             path: '/debts',
             component: Debts,
             meta: {
-                title: 'Debts | VuFi'
+                title: 'Debts - VuFi'
             }
         },
         {
             path: '/net-worth',
             component: NetWorth,
             meta: {
-                title: 'Net Worth | VuFi'
+                title: 'Net Worth - VuFi'
             }
         },
         {
             path: '/login',
             component: Login,
             meta: {
-                title: 'Login | VuFi'
+                title: 'Login - VuFi'
             }
         },
         {
             path: '/signup',
             component: SignUp,
             meta: {
-                title: 'Sign Up | VuFi'
+                title: 'Sign Up - VuFi'
             }
         },
         {
             path: '/settings',
             component: Settings,
             meta: {
-                title: 'Settings | VuFi'
+                title: 'Settings - VuFi'
             }
         },
         {
             path: '/update-password',
             component: UpdatePassword,
             meta: {
-                title: 'Update Password | VuFi'
+                title: 'Update Password - VuFi'
             }
         },
         {
             path: '/update-email',
             component: UpdateEmail,
             meta: {
-                title: 'Update Email | VuFi'
+                title: 'Update Email - VuFi'
             }
         },
         {
             path: '/delete-account',
             component: DeleteAccount,
             meta: {
-                title: 'Delete Account | VuFi'
+                title: 'Delete Account - VuFi'
             }
         },
     ]

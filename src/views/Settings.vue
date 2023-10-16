@@ -1,5 +1,5 @@
 <template>
-    <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
+    <v-card class="pa-10 mx-auto ma-10 text-center" width="330">
         <img src="/logo.svg" height="50" width="50" class="mx-auto"/>
 
         <!-- Theme Selection -->
@@ -17,10 +17,13 @@
         <v-card-text>Account</v-card-text>
 
         <!-- Change Password -->
-        <v-btn rounded="0" variant="tonal" class="font-weight-light" width="200" to="/update-password">Change Password</v-btn>
+        <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/update-password">Change Password</v-btn>
 
         <!-- Change Email -->
-        <v-btn rounded="0" variant="tonal" class="font-weight-light my-4" width="200" to="/update-email">Change Email</v-btn>
+        <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/update-email">Change Email</v-btn>
+
+        <!-- Unsubscribe -->
+        <v-btn v-if="$store.state.isPaying" rounded="0" variant="tonal" class="font-weight-light mb-4 text-error" width="200" to="/delete-account">Unsubscribe</v-btn>
 
         <!-- Delete Account -->
         <v-btn rounded="0" variant="tonal" class="font-weight-light text-error" width="200" to="/delete-account">Delete Account</v-btn>
@@ -50,7 +53,7 @@ export default {
     methods: {
         savePreferences() {
             // Update database preferences
-            this.$axios.put('preferences', {
+            this.$axios.put('user/prefs', {
                 theme: this.themeSelection,
                 currency: this.currencySelection
             })

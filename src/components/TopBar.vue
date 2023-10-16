@@ -4,6 +4,7 @@
             <img src="/logo.svg" height="50"/>
             <h2 class="font-weight-light ml-2">VuFi</h2>
         </router-link>
+        <v-card class="font-weight-light text-error px-2" variant="outlined">alpha</v-card>
 
         <v-spacer/>
 
@@ -18,7 +19,7 @@
 
             <v-btn v-if="$store.state.isLoggedIn" class="font-weight-light mr-4" variant="plain" @click="redirect()">Dashboard</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" class="font-weight-light mr-4" variant="plain" to="/login">Log In</v-btn>
-            <v-btn v-if="!$store.state.isLoggedIn" class="bg-primary mr-4" rounded="0" to="/signup">Sign Up</v-btn>
+            <!-- <v-btn v-if="!$store.state.isLoggedIn" class="bg-primary mr-4" rounded="0" to="/signup">Sign Up</v-btn> -->
         </template>
 
         <!-- Mobile display -->
@@ -37,7 +38,7 @@
 
                 <v-list-item v-if="$store.state.isLoggedIn" class="font-weight-light" variant="plain" @click="redirect()">Dashboard</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light" variant="plain" to="/login">Log In</v-list-item>
-                <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light text-primary" to="/signup">Sign Up</v-list-item>
+                <!-- <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light text-primary" to="/signup">Sign Up</v-list-item> -->
             </v-list>
         </v-menu>
 
@@ -75,7 +76,6 @@ export default {
                 this.$router.push('/assets')
             }
             else {
-                console.log('asdf')
                 this.$router.push('/pricing')
             }
         },

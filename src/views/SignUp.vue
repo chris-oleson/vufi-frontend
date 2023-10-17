@@ -60,8 +60,7 @@ export default {
                     lastName: this.lastName,
                 })
                 .then(() => {
-                    this.$store.commit('logIn')
-                    this.$router.push('/pricing')
+                    this.login()
                 })
                 .catch((err) => {
                     // Handles pre-existing email
@@ -71,6 +70,19 @@ export default {
                     }
                 })
             }
+        },
+
+        async login() {
+            // Send login data to backend for validation
+            await this.$axios.post('auth/login', {
+                email: this.email,
+                password: this.password,
+            }).then(resp => {
+                this.$store.commit('logIn', resp.data[0])
+                this.$router.push('/pricing')
+            }).catch((err) => {
+                console.log(err.message)
+            })
         },
     },
 }

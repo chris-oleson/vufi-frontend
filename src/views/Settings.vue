@@ -23,7 +23,7 @@
         <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/update-email">Change Email</v-btn>
 
         <!-- Unsubscribe -->
-        <v-btn v-if="$store.state.isPaying" rounded="0" variant="tonal" class="font-weight-light mb-4 text-error" width="200" to="/delete-account">Unsubscribe</v-btn>
+        <v-btn v-if="$store.state.subscriptionStatus = 'active'" rounded="0" variant="tonal" class="font-weight-light mb-4 text-error" width="200" to="/delete-account">Unsubscribe</v-btn>
 
         <!-- Delete Account -->
         <v-btn rounded="0" variant="tonal" class="font-weight-light text-error" width="200" to="/delete-account">Delete Account</v-btn>

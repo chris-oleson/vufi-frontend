@@ -9,7 +9,7 @@ export default createStore({
 
     state: {
         isLoggedIn: false,
-        isPaying: false,
+        subscriptionStatus: null,
 
         userPrefs: {
             theme: 0,
@@ -33,15 +33,7 @@ export default createStore({
             if (data) {
                 state.userPrefs.theme = data.theme
                 state.userPrefs.currency = data.currency
-
-                let today = new Date()
-                let expiration = new Date(data.expiration_date)
-                if (expiration != null && expiration > today) {
-                    state.isPaying = true
-                }
-                else {
-                    state.isPaying = false
-                }
+                state.subscriptionStatus = data.subscription_status
             }
 
             state.isLoggedIn = true
@@ -95,7 +87,7 @@ export default createStore({
                                 totalPositiveAssets += parseFloat(asset.value)
                             }
                         }
-                    }    
+                    }
                 }
 
                 this.commit('setAssetData', {allAssets, totalPositiveAssets, totalNegativeAssets})

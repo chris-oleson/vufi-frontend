@@ -72,7 +72,7 @@ export default {
 
     methods: {
         redirect() {
-            if (this.$store.state.isPaying) {
+            if (this.$store.state.subscriptionStatus = "active") {
                 this.$router.push('/assets')
             }
             else {

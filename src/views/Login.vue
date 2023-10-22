@@ -44,7 +44,7 @@ export default {
                 password: this.password,
             }).then(resp => {
                 this.$store.commit('logIn', resp.data[0])
-                if (this.$store.state.subscriptionStatus = "active") {
+                if (this.$store.state.subscriptionStatus == "active") {
                     this.$store.dispatch('getAllAssetData')
                     this.$router.push('/assets')
                 }

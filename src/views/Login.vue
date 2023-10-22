@@ -27,7 +27,7 @@ export default {
 
     created() {
         if (this.$store.state.isLoggedIn) {
-            if (this.$store.state.subscriptionStatus = "active") {
+            if (this.$store.state.subscriptionStatus == "active") {
                 this.$router.push('/assets')
             }
             else {

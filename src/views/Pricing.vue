@@ -37,7 +37,7 @@ export default {
             if (!this.$store.state.isLoggedIn) {
                 this.$router.push('/signup')
             }
-            else if (this.$store.state.subscriptionStatus = "active") {
+            else if (this.$store.state.subscriptionStatus == "active") {
                 this.$router.push('/assets')
             }
             else if (time == 'month') {

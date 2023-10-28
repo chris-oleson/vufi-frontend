@@ -54,14 +54,14 @@ export default {
 
         checkSession() {
             if (this.$store.state.isLoggedIn) {
-            this.$axios.get('auth/checkSession')
-            .catch(() => {
-                this.$axios.post('auth/logout').then(() => {
-                    this.$store.commit('logOut')
-                    this.$router.push('/')
+                this.$axios.get('auth/checkSession')
+                .catch(() => {
+                    this.$axios.post('auth/logout').then(() => {
+                        this.$store.commit('logOut')
+                        this.$router.push('/')
+                    })
                 })
-            })
-        }
+            }
         }
     },
 

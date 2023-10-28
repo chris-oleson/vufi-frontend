@@ -3,8 +3,7 @@
         <v-form ref="form" v-model="isValid">
             <img src="/logo.svg" height="50" width="50" class="mx-auto"/>
 
-            <v-text-field variant="underlined" label="First Name" v-model="firstName" :rules="[rules.required]"></v-text-field>
-            <v-text-field variant="underlined" label="Last Name" v-model="lastName" :rules="[rules.required]"></v-text-field>
+            <v-text-field variant="underlined" label="Name" v-model="name" :rules="[rules.required]"></v-text-field>
 
             <v-text-field variant="underlined" label="Email" v-model="email" :rules="[rules.required, rules.email, rules.notRegistered]"/>
 
@@ -27,8 +26,7 @@ export default {
             emailExists: false,
             isValid: false,
 
-            firstName: '',
-            lastName: '',
+            name: '',
             email: '',
             password: '',
             confirmPassword: '',
@@ -56,8 +54,7 @@ export default {
                 await this.$axios.post('auth/create', {
                     email: this.email,
                     password: this.password,
-                    firstName: this.firstName,
-                    lastName: this.lastName,
+                    name: this.name,
                 })
                 .then(() => {
                     this.login()

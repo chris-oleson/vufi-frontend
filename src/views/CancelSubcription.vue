@@ -5,7 +5,7 @@
         <v-text-field variant="underlined" class="my-4" label="Current Password" :error="incorrectPassword" type="password" v-model="password" @keyup.enter="deleteAccount"></v-text-field>
         <v-card-text v-if="incorrectPassword" class="text-error pa-0">Incorrect password</v-card-text>
 
-        <v-btn rounded="0" class="bg-error mt-4" width="200" @click="deleteAccount">Delete Account</v-btn>
+        <v-btn rounded="0" class="bg-error mt-4" width="200" @click="cancelSubscription">Cancel Subscription</v-btn>
     </v-card>
 </template>
 
@@ -21,19 +21,14 @@ export default {
     },
 
     methods: {
-        async deleteAccount () {
+        async cancelSubscription () {
             // Update password in the database
-            await this.$axios.delete('user', {data: {password: this.password}})
+            await this.$axios.delete('billing', {data: {password: this.password}})
             .then(() => {
                 this.$store.commit("setNotification", {
-                    text: "Successfully deleted account",
+                    text: "Successfully cancelled subscription",
                     color: "primary"
                 })
-
-                // Clear localStorage data
-                this.$store.commit('logOut')
-                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-                this.$router.push('/')
             })
             .catch(() => {
                 // Handles incorrect password

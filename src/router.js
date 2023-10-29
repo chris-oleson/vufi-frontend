@@ -13,6 +13,7 @@ import DeleteAccount from '/src/views/DeleteAccount.vue'
 import Home from '/src/views/Home.vue'
 import Pricing from '/src/views/Pricing.vue'
 import About from '/src/views/About.vue'
+import CancelSubscription from '/src/views/CancelSubscription.vue'
 
 export default createRouter({
     history: createWebHistory(),
@@ -107,6 +108,13 @@ export default createRouter({
             component: UpdateEmail,
             meta: {
                 title: 'Update Email - VuFi'
+            }
+        },
+        {
+            path: '/cancel-subscription',
+            component: CancelSubscription,
+            meta: {
+                title: 'Cancel Subscription - VuFi'
             }
         },
         {

@@ -9,37 +9,36 @@
     </v-card>
 </template>
 
-<script>
-export default {
-    name: 'vufi-delete-account',
+<script setup>
+    import axios from 'axios'
+    import { useStore } from 'vuex'
+    const store = useStore()
+    import { useTheme } from 'vuetify'
+    const theme = useTheme()
+    import { useRouter } from 'vue-router'
+    const router = useRouter()
+    import { ref } from 'vue'
 
-    data() {
-        return {
-            password: null,
-            incorrectPassword: false,
-        }
-    },
+    let password = ref()
+    let incorrectPassword = ref(false)
 
-    methods: {
-        async deleteAccount () {
-            // Update password in the database
-            await this.$axios.delete('user', {data: {password: this.password}})
-            .then(() => {
-                this.$store.commit("setNotification", {
-                    text: "Successfully deleted account",
-                    color: "primary"
-                })
-
-                // Clear localStorage data
-                this.$store.commit('logOut')
-                this.$vuetify.theme.dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-                this.$router.push('/')
+    async function deleteAccount () {
+        // Update password in the database
+        await axios.delete('user', {data: {password: password.value}})
+        .then(() => {
+            store.commit("setNotification", {
+                text: "Successfully deleted account",
+                color: "primary"
             })
-            .catch(() => {
-                // Handles incorrect password
-                this.incorrectPassword = true
-            })
-        }
-    },
-}
+
+            // Clear localStorage data
+            store.commit('logOut')
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? theme.global.name.value = 'dark' : 'light'
+            router.push('/')
+        })
+        .catch(() => {
+            // Handles incorrect password
+            incorrectPassword.value = true
+        })
+    }
 </script>

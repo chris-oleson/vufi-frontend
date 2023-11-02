@@ -33,11 +33,15 @@
 
             // Clear localStorage data
             store.commit('logOut')
-            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? theme.global.name.value = 'dark' : 'light'
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                theme.global.name.value = 'dark'
+            }
+            else {
+                theme.global.name.value = 'light'
+            }
             router.push('/')
         })
         .catch(() => {
-            // Handles incorrect password
             incorrectPassword.value = true
         })
     }

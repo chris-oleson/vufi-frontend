@@ -10,39 +10,39 @@
 </template>
 
 <script setup>
-    import axios from 'axios'
-    import { useStore } from 'vuex'
-    const store = useStore()
-    import { useTheme } from 'vuetify'
-    const theme = useTheme()
-    import { useRouter } from 'vue-router'
-    const router = useRouter()
-    import { ref } from 'vue'
+import axios from 'axios'
+import { useStore } from 'vuex'
+const store = useStore()
+import { useTheme } from 'vuetify'
+const theme = useTheme()
+import { useRouter } from 'vue-router'
+const router = useRouter()
+import { ref } from 'vue'
 
-    let password = ref()
-    let incorrectPassword = ref(false)
+let password = ref()
+let incorrectPassword = ref(false)
 
-    async function deleteAccount () {
-        // Update password in the database
-        await axios.delete('user', {data: {password: password.value}})
-        .then(() => {
-            store.commit("setNotification", {
-                text: "Successfully deleted account",
-                color: "primary"
-            })
-
-            // Clear localStorage data
-            store.commit('logOut')
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                theme.global.name.value = 'dark'
-            }
-            else {
-                theme.global.name.value = 'light'
-            }
-            router.push('/')
+async function deleteAccount () {
+    // Update password in the database
+    await axios.delete('user', {data: {password: password.value}})
+    .then(() => {
+        store.commit("setNotification", {
+            text: "Successfully deleted account",
+            color: "primary"
         })
-        .catch(() => {
-            incorrectPassword.value = true
-        })
-    }
+
+        // Clear localStorage data
+        store.commit('logOut')
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            theme.global.name.value = 'dark'
+        }
+        else {
+            theme.global.name.value = 'light'
+        }
+        router.push('/')
+    })
+    .catch(() => {
+        incorrectPassword.value = true
+    })
+}
 </script>

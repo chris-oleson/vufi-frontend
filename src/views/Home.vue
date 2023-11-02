@@ -9,8 +9,8 @@
 
             <v-col cols="12" lg="7">
                 <v-card class="ma-5 mb-n16 elevation-10">
-                    <v-img v-show="$vuetify.theme.name == 'dark'" transition="none" eager src="/landingPage4.png"/>
-                    <v-img v-show="$vuetify.theme.name == 'light'" transition="none" eager src="/landingPage3.png"/>
+                    <v-img v-show="theme.global.name.value == 'dark'" transition="none" eager src="/landingPage4.png"/>
+                    <v-img v-show="theme.global.name.value == 'light'" transition="none" eager src="/landingPage3.png"/>
                 </v-card>
             </v-col>
         </v-row>
@@ -40,22 +40,23 @@
     </v-sheet>
 </template>
 
-<script>
-export default {
-    name: 'vufi-home',
+<script setup>
+import { useStore } from 'vuex'
+const store = useStore()
+import { useRouter } from 'vue-router'
+const router = useRouter()
+import { useTheme } from 'vuetify'
+const theme = useTheme()
 
-    methods: {
-        redirect() {
-            if (!this.$store.state.isLoggedIn) {
-                this.$router.push('/signup')
-            }
-            else if (this.$store.state.subscriptionStatus == "active") {
-                this.$router.push('/assets')
-            }
-            else {
-                this.$router.push('/pricing')
-            }
-        }
+function redirect() {
+    if (!store.state.isLoggedIn) {
+        router.push('/signup')
+    }
+    else if (store.state.subscriptionStatus == "active") {
+        router.push('/assets')
+    }
+    else {
+        router.push('/pricing')
     }
 }
 </script>

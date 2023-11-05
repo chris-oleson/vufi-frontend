@@ -1,9 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
         <img src="/logo.svg" height="50" width="50" class="mx-auto"/>
-
-        <v-text-field variant="underlined" class="mt-4" label="Current Password" :error="incorrectPassword" type="password" v-model="password"></v-text-field>
-
         <v-form v-model="validForm">
             <v-text-field variant="underlined" class="my-4" label="New Password" type="password" v-model="newPassword" :rules="[rules.required]"></v-text-field>
             <v-text-field variant="underlined" class="mb-4" label="Confirm New Password" type="password" v-model="confirmNewPassword" :rules="[rules.match]" @keyup.enter="changePassword"></v-text-field>
@@ -16,8 +13,6 @@
 
 <script>
 export default {
-    name: 'vufi-update-password',
-
     data() {
         return {
             password: null,
@@ -35,7 +30,6 @@ export default {
 
     methods: {
         async changePassword() {
-            // Check if fields are correct
             if (this.validForm) {
                 // Update password in the database
                 await this.$axios.patch('user/password', {

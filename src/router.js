@@ -7,8 +7,9 @@ import Debts from '/src/views/Debts.vue'
 import Contact from '/src/views/Contact.vue'
 import NetWorth from '/src/views/NetWorth.vue'
 import Settings from '/src/views/Settings.vue'
-import UpdatePassword from '/src/views/UpdatePassword.vue'
-import UpdateEmail from '/src/views/UpdateEmail.vue'
+import ForgotPassword from '/src/views/ForgotPassword.vue'
+import ChangePassword from '/src/views/ChangePassword.vue'
+import ChangeEmail from '/src/views/ChangeEmail.vue'
 import DeleteAccount from '/src/views/DeleteAccount.vue'
 import Home from '/src/views/Home.vue'
 import Pricing from '/src/views/Pricing.vue'
@@ -97,17 +98,24 @@ export default createRouter({
             }
         },
         {
-            path: '/update-password',
-            component: UpdatePassword,
+            path: '/forgot-password',
+            component: ForgotPassword,
             meta: {
-                title: 'Update Password - VuFi'
+                title: 'Forgot Password - VuFi'
             }
         },
         {
-            path: '/update-email',
-            component: UpdateEmail,
+            path: '/change-password',
+            component: ChangePassword,
             meta: {
-                title: 'Update Email - VuFi'
+                title: 'Change Password - VuFi'
+            }
+        },
+        {
+            path: '/change-email',
+            component: ChangeEmail,
+            meta: {
+                title: 'Change Email - VuFi'
             }
         },
         {

@@ -6,9 +6,9 @@
         <v-text-field class="mb-4" variant="underlined" label="Password" type="password" v-model="password" :error="errorState" @keyup.enter="login"/>
 
         <v-card-text v-if="errorState" class="text-error pa-0">Incorrect email or password</v-card-text>
-        <v-btn v-if="errorState" width="200" size="small" rounded="0" class="bg-error mt-4">Forgot Password?</v-btn>
-
-        <v-btn width="200" rounded="0" class="bg-primary my-4" @click="login">Log In</v-btn>
+        
+        <v-btn width="200" rounded="0" class="bg-primary mt-4" @click="login">Log In</v-btn>
+        <v-btn width="200" size="small" variant="plain" class="my-4 font-weight-light" to="/forgot-password">Forgot Password</v-btn>
     </v-card>
 </template>
 

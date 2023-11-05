@@ -10,6 +10,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import axios from 'axios'
 import { useStore } from 'vuex'
 const store = useStore()
@@ -17,9 +18,8 @@ import { useTheme } from 'vuetify'
 const theme = useTheme()
 import { useRouter } from 'vue-router'
 const router = useRouter()
-import { ref } from 'vue'
 
-let password = ref()
+let password = ref("")
 let incorrectPassword = ref(false)
 
 async function deleteAccount () {

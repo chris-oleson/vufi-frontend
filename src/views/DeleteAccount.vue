@@ -19,8 +19,8 @@ const theme = useTheme()
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-let password = ref("")
-let incorrectPassword = ref(false)
+const password = ref("")
+const incorrectPassword = ref(false)
 
 async function deleteAccount () {
     // Update password in the database

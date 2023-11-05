@@ -112,6 +112,14 @@ export default {
     opacity: 0 !important;
 }
 
+.v-btn__overlay {
+    display: none;
+}
+
+.v-btn--disabled {
+    opacity: .26 !important
+}
+
 /* Removing default link styling */
 a {
     color: inherit;

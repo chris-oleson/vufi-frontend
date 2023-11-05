@@ -19,7 +19,7 @@
 
             <v-btn v-if="$store.state.isLoggedIn" class="font-weight-light mr-4" variant="plain" @click="redirect()">Dashboard</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" class="font-weight-light mr-4" variant="plain" to="/login">Log In</v-btn>
-            <!-- <v-btn v-if="!$store.state.isLoggedIn" class="bg-primary mr-4" rounded="0" to="/signup">Sign Up</v-btn> -->
+            <v-btn v-if="!$store.state.isLoggedIn" class="bg-primary mr-4" disabled rounded="0" to="/signup">Sign Up</v-btn>
         </template>
 
         <!-- Mobile display -->
@@ -38,7 +38,7 @@
 
                 <v-list-item v-if="$store.state.isLoggedIn" class="font-weight-light" variant="plain" @click="redirect()">Dashboard</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light" variant="plain" to="/login">Log In</v-list-item>
-                <!-- <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light text-primary" to="/signup">Sign Up</v-list-item> -->
+                <v-list-item v-if="!$store.state.isLoggedIn" disabled class="font-weight-light text-primary" to="/signup">Sign Up</v-list-item>
             </v-list>
         </v-menu>
 

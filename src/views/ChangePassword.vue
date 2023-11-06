@@ -3,7 +3,7 @@
         <img src="/logo.svg" height="50" width="50" class="mx-auto"/>
         <v-text-field variant="underlined" class="mt-4" label="New Password" type="password" v-model="newPassword"></v-text-field>
         <v-text-field variant="underlined" label="Confirm New Password" type="password" v-model="confirmNewPassword" @keyup.enter="changePassword"></v-text-field>
-        <v-card-text v-if="error" class="text-error pa-0 mt-4">Passwords do not match</v-card-text>
+        <v-card-text v-if="errorMessage" class="text-error pa-0 mt-4">{{ errorMessage }}</v-card-text>
         <v-btn rounded="0" class="bg-primary mt-4" width="200" @click="changePassword">Submit</v-btn>
     </v-card>
 </template>
@@ -19,12 +19,9 @@ const router = useRouter()
 
 const newPassword = ref("")
 const confirmNewPassword = ref("")
-const error = ref(false)
+const errorMessage = ref("")
 
-if (route.query.t) {
-    validateToken()
-}
-else {
+if (!route.query.t) {
     router.push('/404')
 }
 
@@ -40,7 +37,7 @@ async function changePassword() {
         )
         router.push('/assets')
     }).catch((err) => {
-        console.log(err.message)
+        errorMessage.value = err.response.data
     })
 }
 </script>

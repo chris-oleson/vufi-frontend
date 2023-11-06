@@ -14,6 +14,10 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import { useStore } from 'vuex'
+const store = useStore()
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const name = ref("")
 const email = ref("")
@@ -41,12 +45,12 @@ async function createAccount() {
 
 async function login() {
     // Send login data to backend for validation
-    await this.$axios.post('auth/login', {
-        email: this.email,
-        password: this.password,
+    await axios.post('auth/login', {
+        email: email.value,
+        password: password.value,
     }).then(resp => {
-        this.$store.commit('logIn', resp.data[0])
-        this.$router.push('/pricing')
+        store.commit('logIn')
+        router.push('/pricing')
     }).catch((err) => {
         console.log(err.message)
     })

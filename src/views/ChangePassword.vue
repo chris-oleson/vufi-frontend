@@ -28,6 +28,7 @@ if (!route.query.t) {
 async function changePassword() {
     await axios.patch('auth/change-password', {
         token: route.query.t,
+        email: route.query.e,
         newPassword: newPassword.value,
         confirmNewPassword: confirmNewPassword.value
     }).then(() => {

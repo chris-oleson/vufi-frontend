@@ -18,7 +18,7 @@
             <v-divider vertical inset></v-divider>
 
             <v-btn v-if="$store.state.isLoggedIn && $store.state.isPaying" class="font-weight-light mx-4" variant="plain" to="/assets">Dashboard</v-btn>
-            <v-btn v-if="!$store.state.isLoggedIn" class="font-weight-light mr-4" variant="plain" to="/login">Log In</v-btn>
+            <v-btn v-if="!$store.state.isLoggedIn" class="font-weight-light mx-4" variant="plain" to="/login">Log In</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" class="bg-primary mr-4" disabled rounded="0" to="/signup">Sign Up</v-btn>
         </template>
 

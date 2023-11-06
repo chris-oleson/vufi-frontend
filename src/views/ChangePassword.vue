@@ -13,30 +13,34 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { useStore } from 'vuex'
 const store = useStore()
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+const route = useRoute()
 const router = useRouter()
 
 const newPassword = ref("")
 const confirmNewPassword = ref("")
 const error = ref(false)
 
+if (route.query.t) {
+    validateToken()
+}
+else {
+    router.push('/404')
+}
+
 async function changePassword() {
-    // Update password in the database
     await axios.patch('auth/change-password', {
+        token: route.query.t,
         newPassword: newPassword.value,
         confirmNewPassword: confirmNewPassword.value
-    })
-    .then(() => {
+    }).then(() => {
         store.commit("setNotification", {
             text: "Successfully updated password",
             color: "primary"}
         )
         router.push('/assets')
-    })
-    .catch((err) => {
+    }).catch((err) => {
         console.log(err.message)
-        // Handles incorrect current password
-        error.value = true
     })
 }
 </script>

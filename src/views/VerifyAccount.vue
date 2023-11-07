@@ -1,10 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
         <img src="/logo.svg" height="50" width="50" class="mx-auto"/>
-        <v-text-field variant="underlined" class="mt-4" label="New Password" type="password" :error="error" v-model="newPassword"></v-text-field>
-        <v-text-field variant="underlined" label="Confirm New Password" type="password" :error="error" v-model="confirmNewPassword" @keyup.enter="changePassword"></v-text-field>
-        <v-card-text v-if="error" class="text-error pa-0 mt-4">{{ errorMessage }}</v-card-text>
-        <v-btn rounded="0" class="bg-primary mt-4" width="200" @click="changePassword">Submit</v-btn>
     </v-card>
 </template>
 
@@ -26,15 +22,13 @@ if (!route.query.t) {
     router.push('/404')
 }
 
-async function changePassword() {
-    await axios.patch('auth/change-password', {
+async function verifyAccount() {
+    await axios.patch('auth/verify-account', {
         token: route.query.t,
         email: route.query.e,
-        newPassword: newPassword.value,
-        confirmNewPassword: confirmNewPassword.value
     }).then(() => {
         store.commit("setNotification", {
-            text: "Successfully updated password",
+            text: "Successfully verified account!",
             color: "primary"
         })
         router.push('/login')

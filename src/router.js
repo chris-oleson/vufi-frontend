@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '/src/views/Login.vue'
 import PageNotFound from '/src/views/PageNotFound.vue'
 import SignUp from '/src/views/SignUp.vue'
+import VerifyAccount from '/src/views/VerifyAccount.vue'
 import Assets from '/src/views/Assets.vue'
 import Debts from '/src/views/Debts.vue'
 import Contact from '/src/views/Contact.vue'
@@ -88,6 +89,13 @@ export default createRouter({
             component: SignUp,
             meta: {
                 title: 'Sign Up - VuFi'
+            }
+        },
+        {
+            path: '/verify-account',
+            component: VerifyAccount,
+            meta: {
+                title: 'Verify Account - VuFi'
             }
         },
         {

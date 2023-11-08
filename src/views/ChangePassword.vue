@@ -22,7 +22,7 @@ const confirmNewPassword = ref("")
 const error = ref(false)
 const errorMessage = ref("")
 
-if (!route.query.t) {
+if (!route.query.t || !route.query.e) {
     router.push('/404')
 }
 

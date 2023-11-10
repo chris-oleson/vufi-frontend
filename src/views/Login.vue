@@ -31,13 +31,8 @@ async function login() {
         password: password.value
     }).then(resp => {
         store.commit('logIn', resp.data[0])
-        if (store.state.subscriptionStatus == "active") {
-            store.dispatch('getAllAssetData')
-            router.push('/assets')
-        }
-        else {
-            router.push('/pricing')
-        }
+        store.dispatch('getAllAssetData')
+        router.push('/assets')
     }).catch(() => {
         error.value = true
     })

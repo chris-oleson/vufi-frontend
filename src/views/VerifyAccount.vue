@@ -9,19 +9,13 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 const route = useRoute()
-const router = useRouter()
 
 const verified = ref(false)
 const error = ref(false)
 
-if (route.query.t && route.query.e) {
-    verifyAccount()
-}
-else {
-    router.push('/404')
-}
+verifyAccount()
 
 async function verifyAccount() {
     await axios.patch('auth/verify-account', {

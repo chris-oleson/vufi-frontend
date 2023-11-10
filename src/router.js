@@ -16,6 +16,7 @@ import Home from '/src/views/Home.vue'
 import Pricing from '/src/views/Pricing.vue'
 import About from '/src/views/About.vue'
 import CancelSubscription from '/src/views/CancelSubscription.vue'
+import store from './store'
 
 export default createRouter({
     history: createWebHistory(),
@@ -58,6 +59,7 @@ export default createRouter({
         },
         {
             path: '/assets',
+            beforeEnter: [rejectUnauthorized, rejectNoSubscription],
             component: Assets,
             meta: {
                 title: 'Assets - VuFi'
@@ -65,6 +67,7 @@ export default createRouter({
         },
         {
             path: '/debts',
+            beforeEnter: [rejectUnauthorized, rejectNoSubscription],
             component: Debts,
             meta: {
                 title: 'Debts - VuFi'
@@ -72,6 +75,7 @@ export default createRouter({
         },
         {
             path: '/net-worth',
+            beforeEnter: [rejectUnauthorized, rejectNoSubscription],
             component: NetWorth,
             meta: {
                 title: 'Net Worth - VuFi'
@@ -79,6 +83,16 @@ export default createRouter({
         },
         {
             path: '/login',
+            beforeEnter: () => {
+                if (store.state.isLoggedIn) {
+                    if (store.state.subscriptionStatus == 'active') {
+                        return { path: '/assets' }
+                    }
+                    else {
+                        return { path: '/pricing' }
+                    }
+                }
+            },
             component: Login,
             meta: {
                 title: 'Login - VuFi'
@@ -93,6 +107,7 @@ export default createRouter({
         },
         {
             path: '/verify-account',
+            beforeEnter: rejectNoParams,
             component: VerifyAccount,
             meta: {
                 title: 'Verify Account - VuFi'
@@ -100,6 +115,7 @@ export default createRouter({
         },
         {
             path: '/settings',
+            beforeEnter: rejectUnauthorized,
             component: Settings,
             meta: {
                 title: 'Settings - VuFi'
@@ -114,6 +130,7 @@ export default createRouter({
         },
         {
             path: '/change-password',
+            beforeEnter: rejectNoParams,
             component: ChangePassword,
             meta: {
                 title: 'Change Password - VuFi'
@@ -121,6 +138,7 @@ export default createRouter({
         },
         {
             path: '/change-email',
+            beforeEnter: rejectUnauthorized,
             component: ChangeEmail,
             meta: {
                 title: 'Change Email - VuFi'
@@ -128,6 +146,7 @@ export default createRouter({
         },
         {
             path: '/cancel-subscription',
+            beforeEnter: rejectUnauthorized,
             component: CancelSubscription,
             meta: {
                 title: 'Cancel Subscription - VuFi'
@@ -135,6 +154,7 @@ export default createRouter({
         },
         {
             path: '/delete-account',
+            beforeEnter: rejectUnauthorized,
             component: DeleteAccount,
             meta: {
                 title: 'Delete Account - VuFi'
@@ -142,3 +162,21 @@ export default createRouter({
         },
     ]
 })
+
+function rejectUnauthorized() {
+    if (!store.state.isLoggedIn) {
+        return { path: '/login' }
+    }
+}
+
+function rejectNoSubscription() {
+    if (!store.state.subscriptionStatus == 'active') {
+        return { path: '/pricing' }
+    }
+}
+
+function rejectNoParams(to) {
+    if (!Object.keys(to.query).length) {
+        return { path: '/404' }
+    }
+}

@@ -22,10 +22,6 @@ const confirmNewPassword = ref("")
 const error = ref(false)
 const errorMessage = ref("")
 
-if (!route.query.t || !route.query.e) {
-    router.push('/404')
-}
-
 async function changePassword() {
     await axios.patch('auth/change-password', {
         token: route.query.t,

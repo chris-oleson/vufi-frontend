@@ -17,7 +17,7 @@
 
             <v-divider vertical inset></v-divider>
 
-            <v-btn v-if="$store.state.isLoggedIn && $store.state.isPaying" class="font-weight-light mx-4" variant="plain" to="/assets">Dashboard</v-btn>
+            <v-btn v-if="$store.state.isLoggedIn && $store.state.subscriptionStatus" class="font-weight-light ml-4" variant="plain" to="/assets">Dashboard</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" class="font-weight-light mx-4" variant="plain" to="/login">Log In</v-btn>
             <v-btn v-if="!$store.state.isLoggedIn" class="bg-primary mr-4" disabled rounded="0" to="/signup">Sign Up</v-btn>
         </template>
@@ -36,7 +36,7 @@
 
                 <v-divider class="mx-2"></v-divider>
 
-                <v-list-item v-if="$store.state.isLoggedIn && $store.state.isPaying" class="font-weight-light" variant="plain" to="/assets">Dashboard</v-list-item>
+                <v-list-item v-if="$store.state.isLoggedIn && $store.state.subscriptionStatus == 'active'" class="font-weight-light" variant="plain" to="/assets">Dashboard</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" class="font-weight-light" variant="plain" to="/login">Log In</v-list-item>
                 <v-list-item v-if="!$store.state.isLoggedIn" disabled class="font-weight-light text-primary" to="/signup">Sign Up</v-list-item>
             </v-list>

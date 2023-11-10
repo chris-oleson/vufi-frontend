@@ -5,9 +5,3 @@
         <v-btn rounded="0" class="mt-10 bg-primary" to="/">Return to home page</v-btn>
     </div>
 </template>
-
-<script>
-export default {
-    name: 'vufi-page-not-found',
-}
-</script>

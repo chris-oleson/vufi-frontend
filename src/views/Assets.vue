@@ -36,10 +36,6 @@ export default {
     },
 
     created() {
-        if (!this.$store.state.isLoggedIn) {
-            this.$router.push('/login')
-        }
-
         this.formatData()
     },
 

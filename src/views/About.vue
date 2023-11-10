@@ -18,9 +18,3 @@
         </v-row>
     </v-sheet>
 </template>
-
-<script>
-export default {
-    name: 'vufi-about',
-}
-</script>

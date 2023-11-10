@@ -9,32 +9,27 @@
     </v-card>
 </template>
 
-<script>
-export default {
-    name: 'vufi-cancel-subscription',
+<script setup>
+import { ref } from 'vue'
+import axios from 'axios'
+import { useStore } from 'vuex'
+const store = useStore()
 
-    data() {
-        return {
-            password: null,
-            incorrectPassword: false,
-        }
-    },
+const password = ref('')
+const incorrectPassword = ref(false)
 
-    methods: {
-        async cancelSubscription () {
-            // Update password in the database
-            await this.$axios.delete('billing', {data: {password: this.password}})
-            .then(() => {
-                this.$store.commit("setNotification", {
-                    text: "Successfully cancelled subscription",
-                    color: "primary"
-                })
-            })
-            .catch(() => {
-                // Handles incorrect password
-                this.incorrectPassword = true
-            })
-        }
-    },
+async function cancelSubscription () {
+    // Update password in the database
+    await axios.delete('billing', {data: {password: password.value}})
+    .then(() => {
+        store.commit("setNotification", {
+            text: "Successfully cancelled subscription",
+            color: "success"
+        })
+    })
+    .catch(() => {
+        // Handles incorrect password
+        incorrectPassword.value = true
+    })
 }
 </script>

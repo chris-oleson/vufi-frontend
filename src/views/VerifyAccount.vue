@@ -29,7 +29,7 @@ async function verifyAccount() {
         email: route.query.e,
     }).then(() => {
         verified.value = true
-    }).catch((err) => {
+    }).catch(() => {
         error.value = true
     })
 }

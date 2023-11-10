@@ -1,60 +1,45 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
         <img src="/logo.svg" height="50" width="50" class="mx-auto"/>
-
-        <v-text-field variant="underlined" class="mt-4" label="Current Password" :error="incorrectPassword" type="password" v-model="password"></v-text-field>
-        <v-card-text v-if="incorrectPassword" class="text-error pa-0">Incorrect password</v-card-text>
-
-        <v-form v-model="validForm">
-            <v-text-field variant="underlined" class="my-4" label="New Email" v-model="newEmail" :rules="[rules.required]"></v-text-field>
-            <v-text-field variant="underlined" class="mb-4" label="Confirm New Email" v-model="confirmNewEmail" :rules="[rules.match]" @keyup.enter="changeEmail"></v-text-field>
-
-            <v-btn rounded="0" class="bg-primary mt-4" width="200" @click="changeEmail">Submit</v-btn>
-        </v-form>
+        <v-text-field variant="underlined" class="mt-4" label="Current Password" :error="error" type="password" v-model="password"></v-text-field>
+        <v-text-field variant="underlined" class="my-4" label="New Email" v-model="newEmail" :error="error"></v-text-field>
+        <v-text-field variant="underlined" class="mb-4" label="Confirm New Email" v-model="confirmNewEmail" :error="error" @keyup.enter="changeEmail"></v-text-field>
+        <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>
+        <v-btn rounded="0" class="bg-primary mt-4" width="200" @click="changeEmail">Submit</v-btn>
     </v-card>
 </template>
 
-<script>
-export default {
-    name: 'vufi-update-email',
+<script setup>
+import { ref } from 'vue'
+import axios from 'axios'
+import { useStore } from 'vuex'
+const store = useStore()
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-    data() {
-        return {
-            password: null,
-            newEmail: null,
-            confirmNewEmail: null,
+const password = ref('')
+const newEmail = ref('')
+const confirmNewEmail = ref('')
+const error = ref(false)
+const errorMessage = ref('')
 
-            incorrectPassword: false,
-            validForm: false,
-            rules: {
-                required: value => !!value || 'Required field',
-                match: value => value === this.newEmail || 'Emails do not match'
-            },
-        }
-    },
-
-    methods: {
-        async changeEmail () {
-            // Check if fields are correct
-            if (this.validForm) {
-                // Update email in the database
-                await this.$axios.patch('user/email', {
-                    password: this.password,
-                    email: this.newEmail
-                })
-                .then(() => {
-                    this.$store.commit("setNotification", {
-                        text: "Successfully updated email",
-                        color: "primary"}
-                    )
-                    this.$router.push('/assets')
-                })
-                .catch(() => {
-                    // Handles incorrect password
-                    this.incorrectPassword = true
-                })
-            }
-        }
-    },
+async function changeEmail () {
+    // Update email in the database
+    await axios.patch('user/email', {
+        password: password.value,
+        email: newEmail.value,
+        confirmNewEmail: confirmNewEmail.value
+    })
+    .then(() => {
+        store.commit("setNotification", {
+            text: "Successfully updated email",
+            color: "primary"}
+        )
+        router.push('/assets')
+    })
+    .catch((err) => {
+        error.value = true
+        errorMessage.value = err.response.data
+    })
 }
 </script>

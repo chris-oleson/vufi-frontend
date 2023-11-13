@@ -10,6 +10,11 @@ export default createVuetify({
         ...components,
         ...labsComponents,
     },
+    defaults: {
+        global: {
+          ripple: false,
+        },
+    },
     directives,
     theme: {
         themes: {

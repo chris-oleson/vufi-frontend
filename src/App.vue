@@ -1,9 +1,7 @@
 <template>
     <v-app>
         <TopBar/>
-
         <SideBar v-if="usingApp"/>
-
         <v-main>
             <router-view/>
             <v-snackbar v-model="showNotification" :color="notificationColor" app transition="slide-y-transition" class="pa-0" content-class="text-center ml-2" timeout="2000">{{ notificationText }}</v-snackbar>
@@ -54,7 +52,7 @@ export default {
 
         checkSession() {
             if (this.$store.state.isLoggedIn) {
-                this.$axios.get('auth/checkSession')
+                this.$axios.get('auth/check-session')
                 .catch(() => {
                     this.$axios.post('auth/logout').then(() => {
                         this.$store.commit('logOut')
@@ -105,11 +103,6 @@ export default {
 }
 ::-moz-selection {
     background: #83af50
-}
-
-/* Disable ripple effect */
-.v-ripple__container {
-    opacity: 0 !important;
 }
 
 /* Removing default link styling */

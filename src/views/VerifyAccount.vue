@@ -15,12 +15,13 @@ const route = useRoute()
 const verified = ref(false)
 const error = ref(false)
 
-verifyAccount()
+if (route.query.t) {
+    verifyAccount()
+}
 
 async function verifyAccount() {
     await axios.patch('auth/verify-account', {
         token: route.query.t,
-        email: route.query.e,
     }).then(() => {
         verified.value = true
     }).catch(() => {

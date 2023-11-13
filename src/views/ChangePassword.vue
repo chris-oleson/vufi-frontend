@@ -25,7 +25,6 @@ const errorMessage = ref("")
 async function changePassword() {
     await axios.patch('auth/change-password', {
         token: route.query.t,
-        email: route.query.e,
         newPassword: newPassword.value,
         confirmNewPassword: confirmNewPassword.value
     }).then(() => {
@@ -33,6 +32,7 @@ async function changePassword() {
             text: "Successfully updated password",
             color: "primary"
         })
+        // TODO: change this to an actual login request
         router.push('/login')
     }).catch((err) => {
         error.value = true

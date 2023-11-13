@@ -130,7 +130,6 @@ export default createRouter({
         },
         {
             path: '/change-password',
-            beforeEnter: rejectNoParams,
             component: ChangePassword,
             meta: {
                 title: 'Change Password - VuFi'

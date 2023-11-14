@@ -33,7 +33,7 @@ watch(route, (newRoute) => {
     document.title = newRoute.meta.title;
 })
 
-watch(() => store.state.userPrefs, () => {
+watch(() => store.state.userPrefs.theme, () => {
     setTheme()
 })
 

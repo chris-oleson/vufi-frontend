@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <TopBar/>
-        <SideBar v-if="usingApp"/>
+        <SideBar v-if="route.path == '/assets' || route.path == '/debts' || route.path == '/net-worth'"/>
         <v-main>
             <router-view/>
             <v-snackbar v-model="showNotification" :color="notificationColor" app transition="slide-y-transition" class="pa-0" content-class="text-center ml-2" timeout="2000">{{ notificationText }}</v-snackbar>
@@ -9,89 +9,64 @@
     </v-app>
 </template>
 
-<script>
+<script setup>
+import { ref, watch } from 'vue'
+import axios from 'axios'
+import { useStore } from 'vuex'
+const store = useStore()
+import { useTheme } from 'vuetify'
+const theme = useTheme()
+import { useRouter, useRoute } from 'vue-router'
+const route = useRoute()
+const router = useRouter()
 import TopBar from '/src/components/TopBar.vue'
 import SideBar from '/src/components/SideBar.vue'
 
-export default {
-    name: 'App',
+const showNotification = ref(false)
+const notificationColor = ref('')
+const notificationText = ref('')
 
-    components: {
-        TopBar,
-        SideBar
-    },
+setTheme()
+checkSession()
 
-    data() {
-        return {
-            showNotification: false,
-            notificationColor: '',
-            notificationText: '',
-        }
-    },
+watch(route, (newRoute) => {
+    document.title = newRoute.meta.title;
+})
 
-    created() {
-        this.setTheme()
-        this.checkSession()
-    },
+watch(() => store.state.userPrefs, () => {
+    setTheme()
+})
 
-    methods: {
-        setTheme() {
-            if (this.$store.state.userPrefs.theme == 1) {
-                this.$vuetify.theme.global.name = 'light'
-            }
-            else if (this.$store.state.userPrefs.theme == 2) {
-                this.$vuetify.theme.global.name = 'dark'
-            }
-            else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                this.$vuetify.theme.global.name = 'dark'
-            }
-            else {
-                this.$vuetify.theme.global.name = 'light'
-            }
-        },
+watch(() => store.state.notification, (newNotification) => {
+    notificationText.value = newNotification.text
+    notificationColor.value = newNotification.color
+    showNotification.value = true
+})
 
-        checkSession() {
-            if (this.$store.state.isLoggedIn) {
-                this.$axios.get('auth/check-session')
-                .catch(() => {
-                    this.$axios.post('auth/logout').then(() => {
-                        this.$store.commit('logOut')
-                        this.$router.push('/')
-                    })
-                })
-            }
-        }
-    },
+function setTheme() {
+    if (store.state.userPrefs.theme == 1) {
+        theme.global.name.value = 'light'
+    }
+    else if (store.state.userPrefs.theme == 2) {
+        theme.global.name.value = 'dark'
+    }
+    else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme.global.name.value = 'dark'
+    }
+    else {
+        theme.global.name.value = 'light'
+    }
+}
 
-    computed: {
-        usingApp() {
-            if (this.$route.path == '/assets' || this.$route.path == '/debts' || this.$route.path == '/net-worth') {
-                return true
-            }
-            else {
-                return false
-            }
-        }
-    },
-
-    watch: {
-        // Update tab text when the page changes
-        $route: {
-            handler(newRoute) {
-                document.title = newRoute.meta.title;
-            }
-        },
-
-        // Notification data
-        '$store.state.notification'(data) {
-            this.notificationText = data.text
-            this.notificationColor = data.color
-            this.showNotification = true
-        },
-
-        '$store.state.userPrefs.theme'() {
-            this.setTheme()
-        }
+function checkSession() {
+    if (store.state.isLoggedIn) {
+        axios.get('auth/check-session')
+        .catch(() => {
+            axios.post('auth/logout').then(() => {
+                store.commit('logOut')
+                router.push('/')
+            })
+        })
     }
 }
 </script>

@@ -19,8 +19,8 @@ const errorMessage = ref('')
 const error = ref(false)
 const success = ref(false)
 
-async function sendEmail() {
-    await axios.post('auth/forgot-password', {
+function sendEmail() {
+    axios.post('auth/forgot-password', {
         email: email.value
     })
     .then(() => {

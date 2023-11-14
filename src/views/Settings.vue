@@ -14,7 +14,7 @@
 
         <v-card-text>Account</v-card-text>
         <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/change-password">Change Password</v-btn>
-        <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200">Change Email</v-btn>
+        <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/change-email">Change Email</v-btn>
         <v-btn v-if="store.state.subscriptionStatus == 'active'" rounded="0" variant="tonal" class="font-weight-light mb-4 text-error" width="200" to="/cancel-subscription">Unsubscribe</v-btn>
         <v-btn rounded="0" variant="tonal" class="font-weight-light text-error" width="200" to="/delete-account">Delete Account</v-btn>
     </v-card>
@@ -30,19 +30,15 @@ const selectedTheme = ref(store.state.userPrefs.theme)
 const selectedCurrency = ref(store.state.userPrefs.currency)
 const currencies = ref(['USD'])
 
-async function savePreferences() {
-    // Update client
+function savePreferences() {
     store.commit('setUserPrefs', {
         theme: selectedTheme.value,
         currency: selectedCurrency.value
     })
-    // Update database
-    axios.put('user/prefs', {
+
+    axios.patch('user/prefs', {
         theme: selectedTheme.value,
         currency: selectedCurrency.value
-    })
-    .catch((err) => {
-        console.log(err.message)
     })
 }
 </script>

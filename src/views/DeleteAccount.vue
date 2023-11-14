@@ -22,9 +22,9 @@ const router = useRouter()
 const password = ref("")
 const incorrectPassword = ref(false)
 
-async function deleteAccount () {
+function deleteAccount () {
     // Update password in the database
-    await axios.delete('user', {data: {password: password.value}})
+    axios.delete('user', {data: {password: password.value}})
     .then(() => {
         store.commit("setNotification", {
             text: "Successfully deleted account",

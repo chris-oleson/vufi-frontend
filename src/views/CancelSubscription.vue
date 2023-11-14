@@ -18,9 +18,9 @@ const store = useStore()
 const password = ref('')
 const incorrectPassword = ref(false)
 
-async function cancelSubscription () {
+function cancelSubscription () {
     // Update password in the database
-    await axios.delete('billing', {data: {password: password.value}})
+    axios.delete('billing', {data: {password: password.value}})
     .then(() => {
         store.commit("setNotification", {
             text: "Successfully cancelled subscription",

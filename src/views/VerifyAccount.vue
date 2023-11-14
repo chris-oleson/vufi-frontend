@@ -2,7 +2,7 @@
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
         <img src="/logo.svg" height="50" width="50" class="mx-auto"/>
         <v-card-text v-if="verified" class="pa-0 font-weight-light">Successfully verified your email! You can now log into your account.</v-card-text>
-        <v-card-text v-if="error" class="pa-0 font-weight-light text-error">Sorry, we were unable to verify your account.</v-card-text>
+        <v-card-text v-if="error" class="pa-0 text-error">Sorry, we were unable to verify your account.</v-card-text>
     </v-card>
 </template>
 
@@ -19,8 +19,8 @@ if (route.query.t) {
     verifyAccount()
 }
 
-async function verifyAccount() {
-    await axios.patch('auth/verify-account', {
+function verifyAccount() {
+    axios.patch('auth/verify-account', {
         token: route.query.t,
     }).then(() => {
         verified.value = true

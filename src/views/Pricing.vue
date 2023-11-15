@@ -28,25 +28,24 @@
     </v-sheet>
 </template>
 
-<script>
-export default {
-    name: 'vufi-pricing',
+<script setup>
+import { useStore } from 'vuex'
+const store = useStore()
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-    methods: {
-        redirect(time) {
-            if (!this.$store.state.isLoggedIn) {
-                this.$router.push('/signup')
-            }
-            else if (this.$store.state.subscriptionStatus == "active") {
-                this.$router.push('/assets')
-            }
-            else if (time == 'month') {
-                window.location.href = "https://buy.stripe.com/test_8wM3gi3Nr3DN9oI6or"
-            }
-            else if (time == 'year') {
-                window.location.href = "https://buy.stripe.com/test_00g9EGgAd4HRcAUbIM"
-            }
-        }
+function redirect(time) {
+    if (!store.state.isLoggedIn) {
+        router.push('/signup')
+    }
+    else if (store.state.subscriptionStatus == "active") {
+        router.push('/assets')
+    }
+    else if (time == 'month') {
+        window.location.href = "https://buy.stripe.com/test_8wM3gi3Nr3DN9oI6or"
+    }
+    else if (time == 'year') {
+        window.location.href = "https://buy.stripe.com/test_00g9EGgAd4HRcAUbIM"
     }
 }
 </script>

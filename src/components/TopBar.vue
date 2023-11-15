@@ -9,7 +9,7 @@
         <v-spacer/>
 
         <!-- Desktop display -->
-        <template v-if="!smAndDown && !usingApp">
+        <template v-if="!smAndDown && !dashboard">
             <v-btn class="font-weight-light mr-4" variant="plain" to="/">Home</v-btn>
             <v-btn class="font-weight-light mr-4" variant="plain" to="/pricing">Pricing</v-btn>
             <v-btn class="font-weight-light mr-4" variant="plain" to="/about">About</v-btn>
@@ -21,7 +21,7 @@
         </template>
 
         <!-- Mobile display -->
-        <v-menu v-if="smAndDown && !usingApp" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
+        <v-menu v-if="smAndDown && !dashboard" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ props }">
                 <v-btn icon="mdi-menu" variant="plain" class="ma-0" size="x-large" v-bind="props"/>
             </template>
@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
 import axios from 'axios'
 import { useStore } from 'vuex'
 const store = useStore()
@@ -61,13 +61,14 @@ import { useRouter, useRoute } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
 
-const usingApp = ref(false)
-if (route.path == '/assets' || route.path == '/debts' || route.path == '/net-worth') {
-    usingApp.value = true
-}
-else {
-    usingApp.value = false
-}
+const dashboard = computed(() => {
+    if (route.path == '/assets' || route.path == '/debts' || route.path == '/net-worth') {
+        return true
+    }
+    else {
+        return false
+    }
+})
 
 function logOut() {
     axios.post('auth/logout').then(() => {

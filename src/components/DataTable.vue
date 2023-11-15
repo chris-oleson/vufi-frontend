@@ -3,8 +3,6 @@
         <v-data-table :headers="headers" :items="tableData" item-value="name">
             <template v-slot:top>
                 <v-toolbar flat rounded color="transparent">
-
-                    <!-- Top bar -->
                     <div class="font-weight-light text-h5 mx-4">{{ type }}s</div>
                     <v-divider inset vertical></v-divider>
                     <div class="font-weight-light text-h5 mx-4">{{ formatCurrency(totalValue) }}</div>

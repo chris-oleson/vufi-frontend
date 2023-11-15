@@ -4,61 +4,57 @@
     </v-card>
 </template>
 
-<script>
-export default {
-    name: 'vufi-pie-chart',
-    props: ['color', 'series', 'labels'],
+<script setup>
+import { ref } from 'vue'
+import { useTheme } from 'vuetify'
+const theme = useTheme()
+const props = defineProps(['color', 'series', 'labels'])
 
-    computed: {
-        chartOptions() {
-            return {
-                theme: {
-                    mode: this.$vuetify.theme.name,
-                    monochrome: {
-                        enabled: this.color,
-                        color: this.color,
-                        shadeTo: this.$vuetify.theme.name,
-                    },
-                },
-                labels: this.labels,
-                plotOptions: {
-                    pie: {
-                        expandOnClick: false,
-                        dataLabels: {
-                            offset: -10
-                        },
-                    }
-                },
-                dataLabels: {
-                    formatter(val) {
-                        return [val.toFixed(1) + '%']
-                    },
-                },
-                legend: {
-                    show: true,
-                    position: 'right'
-                },
-                tooltip: {
-                    fillSeriesColor: false,
-                    theme: this.$vuetify.theme.name,
-                    y: {
-                        formatter(value) {
-                            var formatter = new Intl.NumberFormat('en-US', {
-                                style: 'currency',
-                                currency: 'USD'
-                            })
-                            return formatter.format(value)
-                        },
-                    },
-                },
-                chart: {
-                    animations: {
-                        enabled: false
-                    },
-                    background: 'none',
-                }
-            }
+const chartOptions = ref({
+    theme: {
+        mode: theme.name.value,
+        monochrome: {
+            enabled: props.color,
+            color: props.color,
+            shadeTo: theme.name.value,
+        },
+    },
+    labels: props.labels,
+    plotOptions: {
+        pie: {
+            expandOnClick: false,
+            dataLabels: {
+                offset: -10
+            },
         }
     },
-}
+    dataLabels: {
+        formatter(val) {
+            return [val.toFixed(1) + '%']
+        },
+    },
+    legend: {
+        show: true,
+        position: 'right'
+    },
+    tooltip: {
+        fillSeriesColor: false,
+        theme: theme.name.value,
+        y: {
+            formatter(value) {
+                var formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                })
+                return formatter.format(value)
+            },
+        },
+    },
+    chart: {
+        animations: {
+            enabled: false
+        },
+        background: 'none',
+    }
+})
 </script>

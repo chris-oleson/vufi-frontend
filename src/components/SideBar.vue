@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer permanent floating :rail="rail" elevation="4">
+    <v-navigation-drawer permanent floating :rail="mobile" elevation="4">
         <v-list class="font-weight-light pa-0" :value="page">
             <v-list-item class="py-4" to="/assets">
                 <template v-slot:prepend>
@@ -7,7 +7,7 @@
                 </template>
                 <div class="d-flex justify-space-between">
                     <div class="text-no-wrap">Assets</div>
-                    <div class="d-inline">{{ formatCurrency($store.state.totalPositiveAssets) }}</div>
+                    <div class="d-inline">{{ formatCurrency(store.state.totalPositiveAssets) }}</div>
                 </div>
             </v-list-item>
 
@@ -17,7 +17,7 @@
                 </template>
                 <div class="d-flex justify-space-between">
                     <div class="text-no-wrap">Debts</div>
-                    <div class="d-inline">{{ formatCurrency($store.state.totalNegativeAssets) }}</div>
+                    <div class="d-inline">{{ formatCurrency(store.state.totalNegativeAssets) }}</div>
                 </div>
             </v-list-item>
 
@@ -27,53 +27,41 @@
                 </template>
                 <div class="d-flex justify-space-between">
                     <div class="text-no-wrap">Net Worth</div>
-                    <div class="d-inline">{{ formatCurrency($store.state.totalPositiveAssets + $store.state.totalNegativeAssets) }}</div>
+                    <div class="d-inline">{{ formatCurrency(store.state.totalPositiveAssets + store.state.totalNegativeAssets) }}</div>
                 </div>
             </v-list-item>
         </v-list>
     </v-navigation-drawer>
 </template>
 
-<script>
-export default {
-    name: 'vufi-side-bar',
+<script setup>
+import { useStore } from 'vuex'
+const store = useStore()
+import { useDisplay } from 'vuetify'
+const { mobile } = useDisplay()
+import { useRoute } from 'vue-router'
+const route = useRoute()
 
-    methods: {
-        formatCurrency(value) {
-            if (typeof value !== "number") {
-                return value
-            }
-            var formatter = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD'
-            })
-            return formatter.format(value);
-        }
-    },
+function formatCurrency(value) {
+    if (typeof value !== "number") {
+        return value
+    }
+    var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    })
+    return formatter.format(value);
+}
 
-    computed: {
-        rail() {
-            return this.$vuetify.display.mobile
-        },
-
-        page() {
-            if (this.$route.path == "/assets") {
-                return 0
-            }
-            else if (this.$route.path == "/debts") {
-                return 1
-            }
-            else if (this.$route.path == "/net-worth") {
-                return 2
-            }
-            return null
-        }
-    },
-
-    watch: {
-        '$vuetify.breakpoint.mobile'(data) {
-            this.mini = data
-        },
+function page() {
+    if (route.path == "/assets") {
+        return 0
+    }
+    else if (route.path == "/debts") {
+        return 1
+    }
+    else if (route.path == "/net-worth") {
+        return 2
     }
 }
 </script>

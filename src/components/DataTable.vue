@@ -1,27 +1,25 @@
 <template>
     <v-card class="pa-2 font" elevation="4">
-        <v-data-table :headers="headers" :items="tableData" item-value="name">
+        <v-data-table :headers="headers" :items="props.tableData" item-value="name">
             <template v-slot:top>
                 <v-toolbar flat rounded color="transparent">
-                    <div class="font-weight-light text-h5 mx-4">{{ type }}s</div>
+                    <div class="font-weight-light text-h5 mx-4">{{ props.type }}s</div>
                     <v-divider inset vertical></v-divider>
-                    <div class="font-weight-light text-h5 mx-4">{{ formatCurrency(totalValue) }}</div>
+                    <div class="font-weight-light text-h5 mx-4">{{ formatCurrency(props.totalValue) }}</div>
                     <v-spacer></v-spacer>
 
                     <!-- Add or edit asset dialog -->
-                    <v-dialog v-if="!$vuetify.display.xs" v-model="dialog" max-width="400px">
+                    <v-dialog v-if="!display.xs.value" v-model="dialog" max-width="400px">
                         <template v-slot:activator="{ props:dialog }">
-                            <v-tooltip :text="'Add ' + type">
+                            <v-tooltip :text="'Add ' + props.type">
                                 <template v-slot:activator="{ props:tooltip }">
-                                    <v-btn :color="color" variant="tonal" icon="mdi-plus" v-bind="mergeProps(dialog, tooltip)"/>
+                                    <v-btn :color="color" variant="tonal" icon="mdi-plus" v-bind="mergeProps(dialog, tooltip)" @click="clearFields"/>
                                 </template>
                             </v-tooltip>
                         </template>
 
-                        <v-card class="pa-2">
-                            <v-card-title>
-                                <span class="text-h5 font-weight-light">{{ formTitle }}</span>
-                            </v-card-title>
+                        <v-card class="pa-4 text-center mx-auto" width="330">
+                            <v-card-title class="font-weight-light text-center">{{ formTitle }}</v-card-title>
 
                             <v-card-text>
                                 <v-container>
@@ -31,24 +29,17 @@
                                 </v-container>
                             </v-card-text>
 
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn rounded="0" class="font-weight-light" variant="plain" @click="close">Cancel</v-btn>
-                                <v-btn rounded="0" class="bg-primary" @click="save">Save</v-btn>
-                            </v-card-actions>
+                            <v-btn rounded="0" width="200" class="mx-auto bg-primary" @click="save">Save</v-btn>
+                            <v-btn rounded="0" width="200" class="mx-auto font-weight-light" variant="plain" @click="dialog = false">Cancel</v-btn>
                         </v-card>
                     </v-dialog>
 
                     <!-- Delete asset dialog -->
                     <v-dialog v-model="dialogDelete" max-width="500px">
-                        <v-card class="pa-2">
-                            <v-card-title class="text-h5 font-weight-light">Are you sure you want to delete this {{ type.toLowerCase() }}?</v-card-title>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn rounded="0" text @click="closeDelete">Cancel</v-btn>
-                                <v-btn rounded="0" class="bg-error" @click="deleteItemConfirm">Yes</v-btn>
-                                <v-spacer></v-spacer>
-                            </v-card-actions>
+                        <v-card class="pa-4 text-center mx-auto" width="330">
+                            <v-card-text class="font-weight-light mb-4">Are you sure you want to delete this {{ props.type.toLowerCase() }}?</v-card-text>
+                            <v-btn rounded="0" width="200" class="mx-auto bg-error" @click="deleteItemConfirm">Yes</v-btn>
+                            <v-btn rounded="0" width="200" variant="plain" class="mx-auto" @click="closeDelete">Cancel</v-btn>
                         </v-card>
                     </v-dialog>
                 </v-toolbar>
@@ -64,7 +55,7 @@
             </template>
 
             <template v-slot:no-data>
-                <div class="font-weight-light text-disabled">No {{ url }} have been added</div>
+                <div class="font-weight-light text-disabled">No {{ props.url }} have been added</div>
             </template>
 
             <template v-slot:bottom></template>
@@ -72,141 +63,128 @@
     </v-card>
 </template>
 
-<script>
-import { mergeProps } from 'vue'
-export default {
-    name: 'vufi-data-table',
-    props: ['color', 'type', 'url', 'tableData', 'totalValue'],
+<script setup>
+import axios from 'axios'
+import { mergeProps, ref, computed, nextTick } from 'vue'
+import { useStore } from 'vuex'
+const store = useStore()
+import { useDisplay } from 'vuetify'
+const display = useDisplay()
+const props = defineProps(['color', 'type', 'url', 'tableData', 'totalValue'])
+const dialog = ref(false)
+const dialogDelete = ref (false)
+const editedIndex = ref(-1)
+const editedItem = ref({
+    name: '',
+    type: '',
+    value: null,
+})
+const defaultItem = {
+    name: '',
+    type: '',
+    value: null,
+}
 
-    data() {
-        return {
-            dialog: false,
-            dialogDelete: false,
-            editedIndex: -1,
-            editedItem: {
-                name: '',
-                type: '',
-                value: null,
-            },
-            defaultItem: {
-                name: '',
-                type: '',
-                value: null,
-            },
-        }
-    },
+const formTitle = computed(() => {
+    return editedIndex.value === -1 ? 'New ' + props.type : 'Edit ' + props.type
+})
 
-    computed: {
-        formTitle () {
-            return this.editedIndex === -1 ? 'New ' + this.type : 'Edit ' + this.type
-        },
+function clearFields() {
+    editedItem.value = Object.assign(defaultItem)
+    editedIndex.value = -1
+}
 
-        headers() {
-            if (this.$vuetify.display.xs) {
-                return [
-                    { title: 'Name', align: 'start', key: 'name' },
-                    { title: 'Value', align: 'end', key: 'value' },
-                ]
-            }
-            else {
-                return [
-                    { title: 'Name', align: 'start', key: 'name' },
-                    { title: 'Type', align: 'start', key: 'type' },
-                    { title: 'Value', align: 'end', key: 'value' },
-                    { title: 'Actions', align: 'end', key: 'actions', sortable: false },
-                ]
-            }
-        }
-    },
-
-    methods: {
-        mergeProps,
-
-        formatCurrency(value) {
-            if (typeof value !== "number") {
-                return value
-            }
-            var formatter = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD'
-            })
-            return formatter.format(value);
-        },
-
-        editItem (item) {
-            this.editedIndex = this.tableData.indexOf(item)
-            this.editedItem = Object.assign({}, item)
-            this.dialog = true
-        },
-
-        deleteItem (item) {
-            this.editedIndex = this.tableData.indexOf(item)
-            this.editedItem = Object.assign({}, item)
-            this.dialogDelete = true
-        },
-
-        deleteItemConfirm () {
-            this.deleteFromDatabase(this.editedItem)
-            this.closeDelete()
-        },
-
-        close () {
-            this.dialog = false
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            })
-        },
-
-        closeDelete () {
-            this.dialogDelete = false
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            })
-        },
-
-        save () {
-            if (this.editedIndex > -1) {
-                // Editing existing
-                Object.assign(this.tableData[this.editedIndex], this.editedItem)
-                this.replaceInDatabase(this.editedItem)
-            } else {
-                // Adding new item
-                this.addToDatabase(this.editedItem)
-            }
-            this.close()
-        },
-
-        async addToDatabase(item) {
-            await this.$axios.post('assets', {
-                name: item.name,
-                type: item.type,
-                value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
-            })
-            .then(() => {
-                this.$store.dispatch('getAllAssetData')
-            })
-        },
-        
-        async replaceInDatabase(item) {
-            await this.$axios.put('assets/' + item.id, {
-                name: item.name,
-                type: item.type,
-                value: this.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
-                user_id: this.$store.state.userID,
-            })
-            .then(() => {
-                this.$store.dispatch('getAllAssetData')
-            })
-        },
-
-        async deleteFromDatabase(item) {
-            await this.$axios.delete('assets/' + item.id)
-            .then(() => {
-                this.$store.dispatch('getAllAssetData')
-            })
-        }
+const headers = computed(() => {
+    if (display.xs.value) {
+        return [
+            { title: 'Name', align: 'start', key: 'name' },
+            { title: 'Value', align: 'end', key: 'value' },
+        ]
     }
+    else {
+        return [
+            { title: 'Name', align: 'start', key: 'name' },
+            { title: 'Type', align: 'start', key: 'type' },
+            { title: 'Value', align: 'end', key: 'value' },
+            { title: 'Actions', align: 'end', key: 'actions', sortable: false },
+        ]
+    }
+})
+
+function formatCurrency(value) {
+    if (typeof value !== "number") {
+        return value
+    }
+    var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    })
+    return formatter.format(value);
+}
+
+function editItem (item) {
+    editedIndex.value = props.tableData.indexOf(item)
+    editedItem.value = Object.assign({}, item)
+    dialog.value = true
+}
+
+function deleteItem (item) {
+    editedIndex.value = props.tableData.indexOf(item)
+    editedItem.value = Object.assign({}, item)
+    dialogDelete.value = true
+}
+
+function deleteItemConfirm () {
+    deleteFromDatabase(editedItem.value)
+    closeDelete()
+}
+
+function closeDelete () {
+    dialogDelete.value = false
+    nextTick(() => {
+        editedItem.value = Object.assign({}, defaultItem.value)
+        editedIndex.value = -1
+    })
+}
+
+function save () {
+    if (editedIndex.value > -1) {
+        // Editing existing
+        replaceInDatabase(editedItem.value)
+    } else {
+        // Adding new item
+        addToDatabase(editedItem.value)
+    }
+    dialog.value = false
+}
+
+async function addToDatabase(item) {
+    await axios.post('assets', {
+        name: item.name,
+        type: item.type,
+        value: props.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
+    })
+    .then(() => {
+        store.dispatch('getAllAssetData')
+    })
+}
+
+async function replaceInDatabase(item) {
+    await axios.put('assets/' + item.id, {
+        name: item.name,
+        type: item.type,
+        value: props.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
+        user_id: store.state.userID,
+    })
+    .then(() => {
+        store.dispatch('getAllAssetData')
+    })
+}
+
+async function deleteFromDatabase(item) {
+    await axios.delete('assets/' + item.id)
+    .then(() => {
+        store.dispatch('getAllAssetData')
+    })
 }
 </script>

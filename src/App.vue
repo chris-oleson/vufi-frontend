@@ -30,7 +30,7 @@ setTheme()
 checkSession()
 
 watch(route, (newRoute) => {
-    document.title = newRoute.meta.title;
+    document.title = newRoute.meta.title
 })
 
 watch(() => store.state.userPrefs.theme, () => {
@@ -60,8 +60,7 @@ function setTheme() {
 
 function checkSession() {
     if (store.state.isLoggedIn) {
-        axios.get('auth/check-session')
-        .catch(() => {
+        axios.get('auth/check-session').catch(() => {
             axios.post('auth/logout').then(() => {
                 store.commit('logOut')
                 router.push('/')

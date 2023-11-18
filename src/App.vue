@@ -4,7 +4,11 @@
         <SideBar v-if="route.path == '/assets' || route.path == '/debts' || route.path == '/net-worth'"/>
         <v-main>
             <router-view/>
-            <v-snackbar v-model="showNotification" :color="notificationColor" app transition="slide-y-transition" class="pa-0" content-class="text-center ml-2" timeout="2000">{{ notificationText }}</v-snackbar>
+            <v-snackbar v-model="showNotification" :color="notificationColor" app transition="slide-y-transition" timeout="3000">
+                <template v-slot:text>
+                    <div class="text-center">{{ notificationText }}</div>
+                </template>
+            </v-snackbar>
         </v-main>
     </v-app>
 </template>

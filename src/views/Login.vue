@@ -5,6 +5,7 @@
         <v-text-field variant="underlined" label="Password" type="password" v-model="password" :error="error" @keyup.enter="login"/>
         <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>
         <v-btn width="200" rounded="0" class="bg-primary mt-4" @click="login">Log In</v-btn>
+        <v-btn v-if="errorMessage == 'This account has not been verified'" width="200" size="small" variant="plain" class="font-weight-light mt-4" @click="resend">Resend Verification</v-btn>
         <v-btn width="200" size="small" variant="plain" class="mt-4 font-weight-light" to="/forgot-password">Forgot Password</v-btn>
     </v-card>
 </template>
@@ -23,17 +24,29 @@ const error = ref(false)
 const errorMessage = ref('')
 
 function login() {
-    // Send login data to backend for validation
     axios.post('auth/login', {
         email: email.value,
         password: password.value
     }).then(resp => {
-        store.commit('logIn', resp.data)
         store.dispatch('getAllAssetData')
+        store.commit('logIn', resp.data)
         router.push('/assets')
     }).catch((err) => {
         error.value = true
         errorMessage.value = err.response.data
     })
 }
+
+function resend() {
+    axios.post('auth/resend', {
+        email: email.value
+    }).then(() => {
+        store.commit("setNotification", {
+            text: "Resent email verification",
+            color: "primary"
+        })
+    }).catch((err) => {
+        error.value = true
+        errorMessage.value = err.response.data
+    })}
 </script>

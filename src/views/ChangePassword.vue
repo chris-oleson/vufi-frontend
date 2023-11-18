@@ -21,7 +21,7 @@ const error = ref(false)
 const errorMessage = ref("")
 
 function changePassword() {
-    axios.patch('auth/change-password', {
+    axios.patch('auth/password', {
         token: route.query.t,
         newPassword: newPassword.value,
     }).then(() => {

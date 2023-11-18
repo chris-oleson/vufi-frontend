@@ -20,7 +20,7 @@ if (route.query.t) {
 }
 
 function verifyAccount() {
-    axios.patch('auth/verify-account', {
+    axios.patch('auth/verify', {
         token: route.query.t,
     }).then(() => {
         verified.value = true

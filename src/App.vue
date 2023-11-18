@@ -60,11 +60,9 @@ function setTheme() {
 
 function checkSession() {
     if (store.state.isLoggedIn) {
-        axios.get('auth/check-session').catch(() => {
-            axios.post('auth/logout').then(() => {
-                store.commit('logOut')
-                router.push('/')
-            })
+        axios.post('auth/check-session').catch(() => {
+            store.commit('logOut')
+            router.push('/')
         })
     }
 }

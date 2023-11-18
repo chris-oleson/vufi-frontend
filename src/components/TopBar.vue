@@ -71,7 +71,7 @@ const dashboard = computed(() => {
 })
 
 function logOut() {
-    axios.post('auth/logout').then(() => {
+    axios.post('user/logout').then(() => {
         store.commit('logOut')
         router.push('/')
     })

@@ -15,8 +15,13 @@
         <v-card-text>Account</v-card-text>
         <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/change-password">Change Password</v-btn>
         <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/change-email">Change Email</v-btn>
-        <v-btn v-if="store.state.subscriptionStatus == 'active'" rounded="0" variant="tonal" class="font-weight-light mb-4 text-error" width="200" to="/cancel-subscription">Unsubscribe</v-btn>
-        <v-btn rounded="0" variant="tonal" class="font-weight-light text-error" width="200" to="/delete-account">Delete Account</v-btn>
+        <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4 text-error" width="200" to="/delete-account">Delete Account</v-btn>
+        
+        <template v-if="store.state.subscriptionStatus == 'active'">
+            <v-card-text>Subscription</v-card-text>
+            <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/pricing">Change Subscription</v-btn>
+            <v-btn rounded="0" variant="tonal" class="font-weight-light text-error mb-4" width="200" to="/cancel-subscription">Unsubscribe</v-btn>
+        </template>
     </v-card>
 </template>
 

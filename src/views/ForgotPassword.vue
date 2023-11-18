@@ -20,7 +20,7 @@ const error = ref(false)
 const success = ref(false)
 
 function sendEmail() {
-    axios.post('auth/forgot-password', {
+    axios.post('auth/forgot', {
         email: email.value
     })
     .then(() => {

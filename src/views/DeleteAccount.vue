@@ -11,7 +11,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -23,10 +23,10 @@ const errorMessage = ref('')
 function deleteAccount () {
     axios.delete('user', {data: {password: password.value}})
     .then(() => {
-        store.commit("setNotification", {
+        store.notification = {
             text: "Successfully deleted account",
             color: "primary"
-        })
+        }
         store.commit('logOut')
         router.push('/')
     })

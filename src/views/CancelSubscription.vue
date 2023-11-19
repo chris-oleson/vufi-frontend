@@ -11,7 +11,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -22,10 +22,10 @@ const errorMessage = ref('')
 
 function cancelSubscription () {
     axios.delete('billing', {data: {password: password.value}}).then(() => {
-        store.commit('setNotification', {
+        store.notification = {
             text: 'Successfully cancelled subscription',
             color: 'success'
-        })
+        }
         router.push('/')
     }).catch((err) => {
         error.value = true

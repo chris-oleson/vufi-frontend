@@ -15,9 +15,9 @@
             <v-btn class="font-weight-light mr-4" variant="plain" to="/about">About</v-btn>
             <v-btn class="font-weight-light mr-4" variant="plain" to="/contact">Contact</v-btn>
             <v-divider vertical inset></v-divider>
-            <v-btn v-if="store.state.isLoggedIn && store.state.subscriptionStatus == 'active'" class="font-weight-light ml-4" variant="plain" to="/assets">Dashboard</v-btn>
-            <v-btn v-if="!store.state.isLoggedIn" class="font-weight-light mx-4" variant="plain" to="/login">Log In</v-btn>
-            <v-btn v-if="!store.state.isLoggedIn" class="bg-primary mr-4" disabled rounded="0" to="/signup">Sign Up</v-btn>
+            <v-btn v-if="store.isLoggedIn && store.subscriptionStatus == 'active'" class="font-weight-light ml-4" variant="plain" to="/assets">Dashboard</v-btn>
+            <v-btn v-if="!store.isLoggedIn" class="font-weight-light mx-4" variant="plain" to="/login">Log In</v-btn>
+            <v-btn v-if="!store.isLoggedIn" class="bg-primary mr-4" disabled rounded="0" to="/signup">Sign Up</v-btn>
         </template>
 
         <!-- Mobile display -->
@@ -31,13 +31,13 @@
                 <v-list-item class="font-weight-light" variant="plain" to="/about">About</v-list-item>
                 <v-list-item class="font-weight-light" variant="plain" to="/contact">Contact</v-list-item>
                 <v-divider class="mx-2"></v-divider>
-                <v-list-item v-if="store.state.isLoggedIn && store.state.subscriptionStatus == 'active'" class="font-weight-light" variant="plain" to="/assets">Dashboard</v-list-item>
-                <v-list-item v-if="!store.state.isLoggedIn" class="font-weight-light" variant="plain" to="/login">Log In</v-list-item>
-                <v-list-item v-if="!store.state.isLoggedIn" disabled class="font-weight-light text-primary" to="/signup">Sign Up</v-list-item>
+                <v-list-item v-if="store.isLoggedIn && store.subscriptionStatus == 'active'" class="font-weight-light" variant="plain" to="/assets">Dashboard</v-list-item>
+                <v-list-item v-if="!store.isLoggedIn" class="font-weight-light" variant="plain" to="/login">Log In</v-list-item>
+                <v-list-item v-if="!store.isLoggedIn" disabled class="font-weight-light text-primary" to="/signup">Sign Up</v-list-item>
             </v-list>
         </v-menu>
 
-        <v-menu v-if="store.state.isLoggedIn" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
+        <v-menu v-if="store.isLoggedIn" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ props }">
                 <v-btn icon="mdi-cog" variant="plain" size="x-large" class="mr-1" v-bind="props"/>
             </template>
@@ -53,7 +53,7 @@
 <script setup>
 import { computed } from 'vue'
 import axios from 'axios'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useDisplay } from 'vuetify'
 const { smAndDown } = useDisplay()
@@ -72,7 +72,7 @@ const dashboard = computed(() => {
 
 function logOut() {
     axios.post('user/logout').then(() => {
-        store.commit('logOut')
+        store.logOut()
         router.push('/')
     })
 }

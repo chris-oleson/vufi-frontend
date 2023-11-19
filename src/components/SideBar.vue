@@ -7,7 +7,7 @@
                 </template>
                 <div class="d-flex justify-space-between">
                     <div class="text-no-wrap">Assets</div>
-                    <div class="d-inline">{{ formatCurrency(store.state.totalPositiveAssets) }}</div>
+                    <div class="d-inline">{{ formatCurrency(store.totalPositiveAssets) }}</div>
                 </div>
             </v-list-item>
 
@@ -17,7 +17,7 @@
                 </template>
                 <div class="d-flex justify-space-between">
                     <div class="text-no-wrap">Debts</div>
-                    <div class="d-inline">{{ formatCurrency(store.state.totalNegativeAssets) }}</div>
+                    <div class="d-inline">{{ formatCurrency(store.totalNegativeAssets) }}</div>
                 </div>
             </v-list-item>
 
@@ -27,7 +27,7 @@
                 </template>
                 <div class="d-flex justify-space-between">
                     <div class="text-no-wrap">Net Worth</div>
-                    <div class="d-inline">{{ formatCurrency(store.state.totalPositiveAssets + store.state.totalNegativeAssets) }}</div>
+                    <div class="d-inline">{{ formatCurrency(store.totalPositiveAssets + store.totalNegativeAssets) }}</div>
                 </div>
             </v-list-item>
         </v-list>
@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useDisplay } from 'vuetify'
 const { mobile } = useDisplay()

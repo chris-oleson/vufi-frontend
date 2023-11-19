@@ -12,7 +12,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -30,10 +30,10 @@ function changeEmail () {
         confirmEmail: confirmEmail.value
     })
     .then(() => {
-        store.commit("setNotification", {
+        store.notification = {
             text: "Successfully updated email",
-            color: "primary"}
-        )
+            color: "primary"
+        }
         router.push('/assets')
     })
     .catch((err) => {

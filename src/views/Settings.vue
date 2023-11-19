@@ -17,7 +17,7 @@
         <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/change-email">Change Email</v-btn>
         <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4 text-error" width="200" to="/delete-account">Delete Account</v-btn>
         
-        <template v-if="store.state.subscriptionStatus == 'active'">
+        <template v-if="store.subscriptionStatus == 'active'">
             <v-card-text>Subscription</v-card-text>
             <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/pricing">Change Subscription</v-btn>
             <v-btn rounded="0" variant="tonal" class="font-weight-light text-error mb-4" width="200" to="/cancel-subscription">Unsubscribe</v-btn>
@@ -28,18 +28,16 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 
-const selectedTheme = ref(store.state.userPrefs.theme)
-const selectedCurrency = ref(store.state.userPrefs.currency)
+const selectedTheme = ref(store.theme)
+const selectedCurrency = ref(store.currency)
 const currencies = ref(['USD'])
 
 function savePreferences() {
-    store.commit('setUserPrefs', {
-        theme: selectedTheme.value,
-        currency: selectedCurrency.value
-    })
+    store.theme = selectedTheme.value,
+    store.currency = selectedCurrency.value
 
     axios.patch('user/prefs', {
         theme: selectedTheme.value,

@@ -5,7 +5,7 @@
         </v-col>
 
         <v-col cols="12" md="6">
-            <DataTable type="Asset" url="assets" :color="theme.current.value.colors.primary" :tableData="tableData" :totalValue="store.state.totalPositiveAssets"/>
+            <DataTable type="Asset" url="assets" :color="theme.current.value.colors.primary" :tableData="tableData" :totalValue="store.totalPositiveAssets"/>
         </v-col>
 
         <v-col v-if="pieChartValues.length" cols="12" md="6">
@@ -16,7 +16,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useTheme } from 'vuetify'
 const theme = useTheme()
@@ -30,7 +30,7 @@ const pieChartValues = ref([])
 
 formatData()
 
-watch(() => store.state.allAssets, () => {
+watch(() => store.allAssets, () => {
     formatData()
 })
 
@@ -38,8 +38,8 @@ function formatData() {
     pieChartLabels.value = []
     pieChartValues.value = []
     tableData.value = []
-    if (store.state.allAssets.length) {
-        for (let asset of store.state.allAssets) {
+    if (store.allAssets.length) {
+        for (let asset of store.allAssets) {
             if (!asset.is_deleted && asset.value >= 0) {
                 pieChartLabels.value.push(asset.name)
                 pieChartValues.value.push(parseFloat(asset.value))
@@ -52,7 +52,7 @@ function formatData() {
 const lineChartData = computed(() => {
     return [{
         name: 'Total Assets',
-        data: refineHistory(store.state.allAssets, store.state.allHistory)
+        data: refineHistory(store.allAssets, store.allHistory)
     }]
 })
 

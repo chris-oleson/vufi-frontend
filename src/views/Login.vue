@@ -13,7 +13,7 @@
 <script setup>
 import axios from 'axios'
 import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -28,8 +28,11 @@ function login() {
         email: email.value,
         password: password.value
     }).then(resp => {
-        store.dispatch('getAllAssetData')
-        store.commit('logIn', resp.data)
+        store.getAllAssetData()
+        store.theme = resp.data.theme
+        store.currency = resp.data.currency
+        store.subscriptionStatus = resp.data.subscriptionStatus
+        store.isLoggedIn = true
         router.push('/assets')
     }).catch((err) => {
         error.value = true
@@ -41,12 +44,13 @@ function resend() {
     axios.post('auth/resend', {
         email: email.value
     }).then(() => {
-        store.commit("setNotification", {
+        store.notification = {
             text: "Resent email verification",
             color: "primary"
-        })
+        }
     }).catch((err) => {
         error.value = true
         errorMessage.value = err.response.data
-    })}
+    })
+}
 </script>

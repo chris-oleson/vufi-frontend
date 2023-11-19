@@ -29,16 +29,16 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
 function redirect(time) {
-    if (!store.state.isLoggedIn) {
+    if (!store.isLoggedIn) {
         router.push('/signup')
     }
-    else if (store.state.subscriptionStatus == "active") {
+    else if (store.subscriptionStatus == "active") {
         router.push('/assets')
     }
     else if (time == 'month') {

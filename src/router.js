@@ -16,9 +16,9 @@ import Home from '/src/views/Home.vue'
 import Pricing from '/src/views/Pricing.vue'
 import About from '/src/views/About.vue'
 import CancelSubscription from '/src/views/CancelSubscription.vue'
-import store from './store'
+import { useStore } from '/src/pinia.js'
 
-export default createRouter({
+export const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
@@ -84,8 +84,9 @@ export default createRouter({
         {
             path: '/login',
             beforeEnter: () => {
-                if (store.state.isLoggedIn) {
-                    if (store.state.subscriptionStatus == 'active') {
+                const store = useStore()
+                if (store.isLoggedIn) {
+                    if (store.subscriptionStatus == 'active') {
                         return { path: '/assets' }
                     }
                     else {
@@ -163,13 +164,15 @@ export default createRouter({
 })
 
 function rejectUnauthorized() {
-    if (!store.state.isLoggedIn) {
+    const store = useStore()
+    if (!store.isLoggedIn) {
         return { path: '/login' }
     }
 }
 
 function rejectNoSubscription() {
-    if (!store.state.subscriptionStatus == 'active') {
+    const store = useStore()
+    if (!store.subscriptionStatus == 'active') {
         return { path: '/pricing' }
     }
 }

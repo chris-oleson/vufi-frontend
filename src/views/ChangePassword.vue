@@ -10,7 +10,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useRouter, useRoute } from 'vue-router'
 const route = useRoute()
@@ -25,10 +25,10 @@ function changePassword() {
         token: route.query.t,
         newPassword: newPassword.value,
     }).then(() => {
-        store.commit("setNotification", {
+        store.notification = {
             text: "Successfully updated password",
             color: "primary"
-        })
+        }
         router.push('/login')
     }).catch((err) => {
         error.value = true

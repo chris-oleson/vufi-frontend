@@ -1,7 +1,7 @@
 <template>
-    <v-row v-if="$store.state.allAssets.length" class="ma-2">
+    <v-row v-if="store.allAssets.length" class="ma-2">
         <v-col cols="12">
-            <LineChart :color="$vuetify.theme.current.colors.primary" :series="lineChartData"/>
+            <LineChart :color="theme.current.value.colors.primary" :series="lineChartData"/>
         </v-col>
 
         <v-col cols="12" md="6">
@@ -13,8 +13,10 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
+import { useTheme } from 'vuetify'
+const theme = useTheme()
 import LineChart from '/src/components/LineChart.vue'
 import TreeMapChart from '/src/components/TreeMapChart.vue'
 
@@ -23,7 +25,7 @@ const treeChartData = ref([])
 const lineChartData = computed(() => {
     return [{
         name: 'Net Worth',
-        data: refineHistory(store.state.allAssets, store.state.allHistory)
+        data: refineHistory(store.allAssets, store.allHistory)
     }]
 })
 
@@ -39,7 +41,7 @@ function formatData() {
         data: []
     }]
     
-    for (let asset of store.state.allAssets) {
+    for (let asset of store.allAssets) {
         if (asset.value < 0 && !asset.is_deleted) {
             charts[1].data.push({
                 x: asset.name,

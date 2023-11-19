@@ -66,7 +66,7 @@
 <script setup>
 import axios from 'axios'
 import { mergeProps, ref, computed, nextTick } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useDisplay } from 'vuetify'
 const display = useDisplay()
@@ -174,7 +174,7 @@ async function replaceInDatabase(item) {
         name: item.name,
         type: item.type,
         value: props.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
-        user_id: store.state.userID,
+        user_id: store.userID,
     })
     .then(() => {
         store.dispatch('getAllAssetData')

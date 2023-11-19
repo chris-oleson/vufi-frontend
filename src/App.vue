@@ -16,7 +16,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import axios from 'axios'
-import { useStore } from 'vuex'
+import { useStore } from '/src/pinia'
 const store = useStore()
 import { useTheme } from 'vuetify'
 const theme = useTheme()
@@ -37,21 +37,21 @@ watch(route, (newRoute) => {
     document.title = newRoute.meta.title
 })
 
-watch(() => store.state.userPrefs.theme, () => {
+watch(() => store.theme, () => {
     setTheme()
 })
 
-watch(() => store.state.notification, (newNotification) => {
+watch(() => store.notification, (newNotification) => {
     notificationText.value = newNotification.text
     notificationColor.value = newNotification.color
     showNotification.value = true
 })
 
 function setTheme() {
-    if (store.state.userPrefs.theme == 1) {
+    if (store.theme == 1) {
         theme.global.name.value = 'light'
     }
-    else if (store.state.userPrefs.theme == 2) {
+    else if (store.theme == 2) {
         theme.global.name.value = 'dark'
     }
     else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -63,7 +63,7 @@ function setTheme() {
 }
 
 function checkSession() {
-    if (store.state.isLoggedIn) {
+    if (store.isLoggedIn) {
         axios.post('auth/check-session').catch(() => {
             store.commit('logOut')
             router.push('/')

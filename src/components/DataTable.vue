@@ -20,7 +20,6 @@
 
                         <v-card class="pa-4 text-center mx-auto" width="330">
                             <v-card-title class="font-weight-light text-center">{{ formTitle }}</v-card-title>
-
                             <v-card-text>
                                 <v-container>
                                     <v-text-field v-model="editedItem.name" variant="underlined" label="Name"></v-text-field>
@@ -28,7 +27,6 @@
                                     <v-text-field v-model="editedItem.value" variant="underlined" label="Value"></v-text-field>
                                 </v-container>
                             </v-card-text>
-
                             <v-btn rounded="0" width="200" class="mx-auto bg-primary" @click="save">Save</v-btn>
                             <v-btn rounded="0" width="200" class="mx-auto font-weight-light" variant="plain" @click="dialog = false">Cancel</v-btn>
                         </v-card>
@@ -165,7 +163,7 @@ async function addToDatabase(item) {
         value: props.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
     })
     .then(() => {
-        store.dispatch('getAllAssetData')
+        store.getAllAssetData()
     })
 }
 
@@ -177,14 +175,14 @@ async function replaceInDatabase(item) {
         user_id: store.userID,
     })
     .then(() => {
-        store.dispatch('getAllAssetData')
+        store.getAllAssetData()
     })
 }
 
 async function deleteFromDatabase(item) {
     await axios.delete('assets/' + item.id)
     .then(() => {
-        store.dispatch('getAllAssetData')
+        store.getAllAssetData()
     })
 }
 </script>

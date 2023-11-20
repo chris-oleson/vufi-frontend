@@ -27,7 +27,7 @@ function deleteAccount () {
             text: "Successfully deleted account",
             color: "primary"
         }
-        store.commit('logOut')
+        store.logOut()
         router.push('/')
     })
     .catch((err) => {

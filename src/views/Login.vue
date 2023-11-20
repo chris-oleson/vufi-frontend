@@ -28,11 +28,11 @@ function login() {
         email: email.value,
         password: password.value
     }).then(resp => {
-        store.getAllAssetData()
         store.theme = resp.data.theme
         store.currency = resp.data.currency
-        store.subscriptionStatus = resp.data.subscriptionStatus
+        store.subscriptionStatus = resp.data.subscription_status
         store.isLoggedIn = true
+        store.getAllAssetData()
         router.push('/assets')
     }).catch((err) => {
         error.value = true

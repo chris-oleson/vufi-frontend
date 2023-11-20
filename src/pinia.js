@@ -27,6 +27,7 @@ export const useStore = defineStore('store', {
             this.allHistory = []
             this.totalPositiveAssets = 0
             this.totalNegativeAssets = 0
+            this.subscriptionStatus = null
             this.theme = 0
             this.currency = 'USD'
         },

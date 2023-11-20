@@ -172,7 +172,7 @@ function rejectUnauthorized() {
 
 function rejectNoSubscription() {
     const store = useStore()
-    if (!store.subscriptionStatus == 'active') {
+    if (store.subscriptionStatus != 'active') {
         return { path: '/pricing' }
     }
 }

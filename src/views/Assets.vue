@@ -20,9 +20,9 @@ import { useStore } from '/src/pinia'
 const store = useStore()
 import { useTheme } from 'vuetify'
 const theme = useTheme()
-import DataTable from '/src/components/DataTable.vue'
-import PieChart from '/src/components/PieChart.vue'
-import LineChart from '/src/components/LineChart.vue'
+import DataTable from '/src/components/DataTable'
+import PieChart from '/src/components/PieChart'
+import LineChart from '/src/components/LineChart'
 
 const tableData = ref([])
 const pieChartLabels = ref([])

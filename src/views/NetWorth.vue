@@ -17,8 +17,8 @@ import { useStore } from '/src/pinia'
 const store = useStore()
 import { useTheme } from 'vuetify'
 const theme = useTheme()
-import LineChart from '/src/components/LineChart.vue'
-import TreeMapChart from '/src/components/TreeMapChart.vue'
+import LineChart from '/src/components/LineChart'
+import TreeMapChart from '/src/components/TreeMapChart'
 
 const treeChartData = ref([])
 

@@ -23,8 +23,8 @@ const theme = useTheme()
 import { useRouter, useRoute } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
-import TopBar from '/src/components/TopBar.vue'
-import SideBar from '/src/components/SideBar.vue'
+import TopBar from '/src/components/TopBar'
+import SideBar from '/src/components/SideBar'
 
 const showNotification = ref(false)
 const notificationColor = ref('')
@@ -43,7 +43,7 @@ watch(() => store.theme, () => {
 
 watch(() => store.notification, (newNotification) => {
     notificationText.value = newNotification.text
-    notificationColor.value = newNotification.color ? newNotification.color : theme.current.value.colors.background
+    notificationColor.value = newNotification.color ? newNotification.color : theme.current.value.colors.surface
     showNotification.value = true
 })
 

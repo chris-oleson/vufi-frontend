@@ -9,5 +9,9 @@ export default defineConfig({
             template: { transformAssetUrls }
         }),
         vuetify(),
-    ]
+    ],
+
+    resolve: {
+        extensions: ['.js', '.vue'],
+    },
 })

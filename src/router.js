@@ -16,6 +16,7 @@ import Home from '/src/views/Home'
 import Pricing from '/src/views/Pricing'
 import About from '/src/views/About'
 import CancelSubscription from '/src/views/CancelSubscription'
+import ThankYou from '/src/views/ThankYou'
 import { useStore } from '/src/pinia'
 
 export const router = createRouter({
@@ -158,6 +159,14 @@ export const router = createRouter({
             component: DeleteAccount,
             meta: {
                 title: 'Delete Account - VuFi'
+            }
+        },
+        {
+            path: '/thank-you',
+            beforeEnter: rejectUnauthorized,
+            component: ThankYou,
+            meta: {
+                title: 'Thank You - VuFi'
             }
         },
     ]

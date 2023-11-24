@@ -12,12 +12,11 @@ const store = useStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-async function loadData() {
-    const resp = await axios.get('user/subscription-status')
-    if (resp.data == 'active') {
-        store.subscriptionStatus = 'active'
-        await store.getAllAssetData()
+function loadData() {
+    axios.get('user/subscription-status').then((resp) => {
+        store.subscriptionStatus = resp.data
+        store.getAllAssetData()
         router.push('/assets')
-    }
+    })
 }
 </script>

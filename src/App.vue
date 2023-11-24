@@ -42,9 +42,11 @@ watch(() => store.theme, () => {
 })
 
 watch(() => store.notification, (newNotification) => {
-    notificationText.value = newNotification.text
-    notificationColor.value = newNotification.color ? newNotification.color : theme.current.value.colors.surface
-    showNotification.value = true
+    if (newNotification.text) {
+        notificationText.value = newNotification.text
+        notificationColor.value = newNotification.color
+        showNotification.value = true
+    }
 })
 
 function setTheme() {
@@ -65,7 +67,7 @@ function setTheme() {
 function checkSession() {
     if (store.isLoggedIn) {
         axios.post('auth/check-session').catch(() => {
-            store.logOut()
+            store.$reset()
             router.push('/login')
         })
     }

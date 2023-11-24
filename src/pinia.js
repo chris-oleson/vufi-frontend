@@ -21,18 +21,7 @@ export const useStore = defineStore('store', {
     }),
 
     actions: {
-        logOut() {
-            this.isLoggedIn = false
-            this.allAssets = []
-            this.allHistory = []
-            this.totalPositiveAssets = 0
-            this.totalNegativeAssets = 0
-            this.subscriptionStatus = null
-            this.theme = 0
-            this.currency = 'USD'
-        },
-
-        async getAllAssetData() {
+        getAllAssetData() {
             // Get raw asset data
             axios.get('assets').then(resp => {
                 let allAssets = resp.data
@@ -41,8 +30,6 @@ export const useStore = defineStore('store', {
 
                 // Set total values
                 if (allAssets.length) {
-
-                    // Calculate positive and negative asset totals
                     for (let asset of allAssets) {
                         if (!asset.is_deleted) {
                             if (asset.value < 0) {
@@ -58,14 +45,13 @@ export const useStore = defineStore('store', {
                 this.allAssets = allAssets
                 this.totalPositiveAssets = totalPositiveAssets
                 this.totalNegativeAssets = totalNegativeAssets
-
-                axios.get('assets/history').then(resp => {
-                    let allHistory = resp.data
-                    this.allHistory = allHistory
-                })
             })
             .catch((err) => {
                 console.log(err.message)
+            })
+
+            axios.get('assets/history').then(resp => {
+                this.allHistory = resp.data
             })
         },
     },

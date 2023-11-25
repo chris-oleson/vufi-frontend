@@ -48,6 +48,7 @@
             </template>
 
             <template v-slot:[`item.actions`]="{ item }">
+                <v-icon size="small" class="mr-2" @click="focusItem(item)">{{ item.visible ? 'mdi-eye-outline' : 'mdi-eye-closed' }}</v-icon>
                 <v-icon size="small" class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
                 <v-icon size="small" @click="deleteItem(item)">mdi-delete</v-icon>
             </template>
@@ -81,6 +82,25 @@ const defaultItem = {
     name: '',
     type: '',
     value: null,
+}
+
+function focusItem(item) {
+    if (item.visible) {
+        if (props.type == "Asset") {
+            store.allAssets[props.tableData.indexOf(item)].visible = false
+        }
+        else {
+            store.allDebts[props.tableData.indexOf(item)].visible = false
+        }
+    }
+    else {
+        if (props.type == "Asset") {
+            store.allAssets[props.tableData.indexOf(item)].visible = true
+        }
+        else {
+            store.allDebts[props.tableData.indexOf(item)].visible = true
+        }
+    }
 }
 
 const formTitle = computed(() => {
@@ -156,8 +176,8 @@ function save () {
     dialog.value = false
 }
 
-async function addToDatabase(item) {
-    await axios.post('assets', {
+function addToDatabase(item) {
+    axios.post('assets', {
         name: item.name,
         type: item.type,
         value: props.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
@@ -167,8 +187,8 @@ async function addToDatabase(item) {
     })
 }
 
-async function replaceInDatabase(item) {
-    await axios.put('assets/' + item.id, {
+function replaceInDatabase(item) {
+    axios.put('assets/' + item.id, {
         name: item.name,
         type: item.type,
         value: props.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
@@ -179,8 +199,8 @@ async function replaceInDatabase(item) {
     })
 }
 
-async function deleteFromDatabase(item) {
-    await axios.delete('assets/' + item.id)
+function deleteFromDatabase(item) {
+    axios.delete('assets/' + item.id)
     .then(() => {
         store.getAllAssetData()
     })

@@ -38,36 +38,31 @@ function formatData() {
     pieChartLabels.value = []
     pieChartValues.value = []
     tableData.value = []
-    if (store.allAssets.length) {
-        for (let debt of store.allAssets) {
-            if (!debt.is_deleted && debt.value < 0) {
-                pieChartLabels.value.push(debt.name)
-                pieChartValues.value.push(Math.abs(parseFloat(debt.value)))
-                tableData.value.push(debt)
-            }
-        }
+    for (let debt of store.allDebts) {
+        pieChartLabels.value.push(debt.name)
+        pieChartValues.value.push(Math.abs(parseFloat(debt.value)))
+        tableData.value.push(debt)
     }
 }
 
 const lineChartData = computed(() => {
     return [{
         name: 'Total Debts',
-        data: refineHistory(store.allAssets, store.allHistory)
+        data: refineHistory(store.allDebts, store.allDebtHistory)
     }]
 })
 
 function refineHistory(debts, history) {
-    // Remove positive assets
-    debts = debts.filter(e => e.value < 0)
-    history = history.filter(e => e.value < 0)
 
     // Get all individual debts
     let debtList = []
     for (let debt of debts) {
-        debtList.push({
-            id: debt.id,
-            history: []
-        })
+        if (debt.visible) {
+            debtList.push({
+                id: debt.id,
+                history: []
+            })
+        }
     }
 
     // Get all dates that there are records for

@@ -14,7 +14,10 @@ export const useStore = defineStore('store', {
         },
 
         allAssets: [],
-        allHistory: [],
+        allDebts: [],
+
+        allAssetHistory: [],
+        allDebtHistory: [],
 
         totalPositiveAssets: 0,
         totalNegativeAssets: 0,
@@ -24,36 +27,49 @@ export const useStore = defineStore('store', {
         getAllAssetData() {
             // Get raw asset data
             axios.get('assets').then(resp => {
-                let allAssets = resp.data
+                let items = resp.data
+                let allAssets = []
+                let allDebts = []
                 let totalPositiveAssets = 0
                 let totalNegativeAssets = 0
 
                 // Set total values
-                if (allAssets.length) {
-                    for (let asset of allAssets) {
-                        if (!asset.is_deleted) {
-                            if (asset.value < 0) {
-                                totalNegativeAssets += parseFloat(asset.value)
-                            }
-                            else {
-                                totalPositiveAssets += parseFloat(asset.value)
-                            }
-                        }
+                for (let i = 0; i < items.length; i++) {
+                    if (!items[i].is_deleted && items[i].value >= 0) {
+                        items[i].visible = true
+                        allAssets.push(items[i])
+                        totalPositiveAssets += parseFloat(items[i].value)
+                    }
+                    else if (!items[i].is_deleted) {
+                        items[i].visible = true
+                        allDebts.push(items[i])
+                        totalNegativeAssets += parseFloat(items[i].value)
                     }
                 }
-
                 this.allAssets = allAssets
+                this.allDebts = allDebts
                 this.totalPositiveAssets = totalPositiveAssets
                 this.totalNegativeAssets = totalNegativeAssets
             })
-            .catch((err) => {
-                console.log(err.message)
-            })
 
             axios.get('assets/history').then(resp => {
-                this.allHistory = resp.data
+                let history = resp.data
+                let allAssetHistory = []
+                let allDebtHistory = []
+
+                for (let i = 0; i < history.length; i++) {
+                    if (history[i].value >= 0) {
+                        allAssetHistory.push(history[i])
+                    }
+                    else {
+                        allDebtHistory.push([history[i]])
+                    }
+                }
+
+                this.allAssetHistory = allAssetHistory
+                this.allDebtHistory = allDebtHistory
             })
-        },
+        }
     },
     persist: true,
 })

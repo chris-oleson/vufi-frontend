@@ -38,36 +38,30 @@ function formatData() {
     pieChartLabels.value = []
     pieChartValues.value = []
     tableData.value = []
-    if (store.allAssets.length) {
-        for (let asset of store.allAssets) {
-            if (!asset.is_deleted && asset.value >= 0) {
-                pieChartLabels.value.push(asset.name)
-                pieChartValues.value.push(parseFloat(asset.value))
-                tableData.value.push(asset)
-            }
-        }
+    for (let asset of store.allAssets) {
+        pieChartLabels.value.push(asset.name)
+        pieChartValues.value.push(parseFloat(asset.value))
+        tableData.value.push(asset)
     }
 }
 
 const lineChartData = computed(() => {
     return [{
         name: 'Total Assets',
-        data: refineHistory(store.allAssets, store.allHistory)
+        data: refineHistory(store.allAssets, store.allAssetHistory)
     }]
 })
 
 function refineHistory(assets, history) {
-    // Remove negative assets
-    assets = assets.filter(e => e.value >= 0)
-    history = history.filter(e => e.value >= 0)
-
     // Get all individual assets
     let assetList = []
     for (let asset of assets) {
-        assetList.push({
-            id: asset.id,
-            history: []
-        })
+        if (asset.visible) {
+            assetList.push({
+                id: asset.id,
+                history: []
+            })
+        }
     }
 
     // Get all dates that there are records for

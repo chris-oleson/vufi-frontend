@@ -25,35 +25,36 @@ const treeChartData = ref([])
 const lineChartData = computed(() => {
     return [{
         name: 'Net Worth',
-        data: refineHistory(store.allAssets, store.allHistory)
+        data: refineHistory(store.allAssets, store.allDebts, store.allAssetHistory, store.allDebtHistory)
     }]
 })
 
 formatData()
 
 function formatData() {
-    let charts = [{
-        name: 'Assets',
-        data: []
-    },
-    {
-        name: 'Debts',
-        data: []
-    }]
-    
+    let charts = [
+        {
+            name: 'Assets',
+            data: []
+        },
+        {
+            name: 'Debts',
+            data: []
+        }
+    ]
+
     for (let asset of store.allAssets) {
-        if (asset.value < 0 && !asset.is_deleted) {
-            charts[1].data.push({
-                x: asset.name,
-                y: 0 - parseFloat(asset.value)
-            })
-        }
-        else if (!asset.is_deleted) {
-            charts[0].data.push({
-                x: asset.name,
-                y: parseFloat(asset.value)
-            })
-        }
+        charts[0].data.push({
+            x: asset.name,
+            y: parseFloat(asset.value)
+        })
+    }
+
+    for (let debt of store.allDebts) {
+        charts[1].data.push({
+            x: debt.name,
+            y: 0 - parseFloat(debt.value)
+        })
     }
 
     if (charts[0].data.length) {
@@ -64,7 +65,7 @@ function formatData() {
     }
 }
 
-function refineHistory(assets, history) {
+function refineHistory(assets, debts, assetHistory, debtHistory) {
     // Get all individual assets
     let assetList = []
     for (let asset of assets) {
@@ -73,6 +74,15 @@ function refineHistory(assets, history) {
             history: []
         })
     }
+    for (let debt of debts) {
+        assetList.push({
+            id: debt.id,
+            history: []
+        })
+    }
+
+    let history = assetHistory
+    history.push(...debtHistory)
 
     // Get all dates that there are records for
     let uniqueDates = []

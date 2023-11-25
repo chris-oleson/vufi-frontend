@@ -1,7 +1,7 @@
 <template>
     <v-app-bar elevation="4">
         <router-link class="d-inline-flex align-center mx-4" to="/">
-            <img src="/logo.svg" height="50"/>
+            <img src="/src/assets/logo.svg" height="50" width="50"/>
             <h2 class="font-weight-light ml-2">VuFi</h2>
         </router-link>
         <v-card class="font-weight-light text-error px-2" variant="outlined">alpha</v-card>
@@ -72,8 +72,8 @@ const dashboard = computed(() => {
 
 function logOut() {
     axios.post('user/logout').then(() => {
-        store.$reset()
         router.push('/')
+        store.$reset()
     })
 }
 </script>

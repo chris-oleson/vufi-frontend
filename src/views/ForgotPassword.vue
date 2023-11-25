@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <img src="/logo.svg" height="50" width="50" class="mx-auto"/>
+        <img src="/src/assets/logo.svg" height="50" width="50"/>
         <v-card-text class="font-weight-light mt-4 pa-0">Request a password reset for the account linked to the email address below.</v-card-text>
         <v-text-field v-if="!success" variant="underlined" class="mt-4" label="Email" type="email" :error="error" v-model="email" @keyup.enter="sendEmail"></v-text-field>
         <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>        

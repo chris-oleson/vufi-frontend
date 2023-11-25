@@ -22,21 +22,6 @@
                 <h2 class="font-weight-light mb-16">VuFi keeps all that data in one place, with one account.</h2>
             </v-col>
         </v-row>
-
-        <v-row class="bg-background ma-0">
-            <v-col class="my-16 px-8 mx-auto" cols="12" lg="6">
-                <h2 class="font-weight-thin text-h3 my-16">Track Everything</h2>
-                <h2 class="font-weight-light">Have more to worry about than bank accounts, credit cards, and investment accounts? No problem.</h2>
-                <h2 class="font-weight-light mb-16">VuFi tracks the value of your real estate, vehicles, individual stocks, cryptocurrencies, foreign currencies, precious metals, art, and domains.</h2>
-            </v-col>
-        </v-row>
-
-        <v-row class="ma-0">
-            <v-col class="my-16 px-8 mx-auto" cols="12" lg="6">
-                <h2 class="font-weight-thin text-h3 my-16">Privacy and Security</h2>
-                <h2 class="font-weight-light mb-16">All of your personal data is encrypted, and will never be shared or sold.</h2>
-            </v-col>
-        </v-row>
     </v-sheet>
 </template>
 

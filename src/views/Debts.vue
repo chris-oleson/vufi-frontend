@@ -53,7 +53,6 @@ const lineChartData = computed(() => {
 })
 
 function refineHistory(debts, history) {
-
     // Get all individual debts
     let debtList = []
     for (let debt of debts) {

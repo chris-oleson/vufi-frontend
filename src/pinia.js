@@ -62,7 +62,7 @@ export const useStore = defineStore('store', {
                         allAssetHistory.push(history[i])
                     }
                     else {
-                        allDebtHistory.push([history[i]])
+                        allDebtHistory.push(history[i])
                     }
                 }
 

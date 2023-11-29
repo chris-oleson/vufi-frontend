@@ -9,8 +9,8 @@
 
             <v-col cols="12" lg="7">
                 <v-card class="ma-5 mb-n16 elevation-10">
-                    <v-img v-show="theme.global.name.value == 'dark'" transition="none" eager src="/landingPage4.png"/>
-                    <v-img v-show="theme.global.name.value == 'light'" transition="none" eager src="/landingPage3.png"/>
+                    <v-img v-show="theme.global.name.value == 'dark'" transition="none" eager src="/src/assets/landingPage4.png"/>
+                    <v-img v-show="theme.global.name.value == 'light'" transition="none" eager src="/src/assets/landingPage3.png"/>
                 </v-card>
             </v-col>
         </v-row>

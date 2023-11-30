@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto my-10 text-center" width="330">
-        <img src="/src/assets/logo.svg" height="50" width="50"/>
+        <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
         <template v-if="accountCreated">
             <v-card-text class="pa-0 mt-4 font-weight-light">Your account has been created!</v-card-text>
             <v-card-text class="pa-0 mt-4 font-weight-light">We have sent you an email in order to verify your email address.</v-card-text>

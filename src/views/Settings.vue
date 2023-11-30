@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto ma-10 text-center" width="330">
-        <img src="/src/assets/logo.svg" height="50" width="50"/>
+        <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
 
         <v-card-text class="mt-4">Theme</v-card-text>
         <v-btn-toggle v-model="selectedTheme" mandatory variant="tonal" density="compact" rounded="0" class="mb-4" @update:modelValue="savePreferences">

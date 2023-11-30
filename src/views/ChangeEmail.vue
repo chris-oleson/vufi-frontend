@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <img src="/src/assets/logo.svg" height="50" width="50"/>
+        <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
         <v-text-field variant="underlined" class="mt-4" label="Current Password" :error="error" type="password" v-model="password"></v-text-field>
         <v-text-field variant="underlined" label="New Email" v-model="email" :error="error"></v-text-field>
         <v-text-field variant="underlined" label="Confirm New Email" v-model="confirmEmail" :error="error" @keyup.enter="changeEmail"></v-text-field>

@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto mt-10 text-center" width="330">
-        <img src="/src/assets/logo.svg" height="50" width="50"/>
+        <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
         <v-card-text class="font-weight-light mt-4 pa-0">After unsubscribing, you will still be able to use the application until the end of your current billing cycle</v-card-text>
         <v-text-field variant="underlined" class="my-4" label="Current Password" :error="error" type="password" v-model="password" @keyup.enter="cancelSubscription"></v-text-field>
         <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>

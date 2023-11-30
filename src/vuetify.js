@@ -1,21 +1,13 @@
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as labsComponents from 'vuetify/labs/components'
-import * as directives from 'vuetify/directives'
 
 export default createVuetify({
-    components: {
-        ...components,
-        ...labsComponents,
-    },
     defaults: {
         global: {
           ripple: false,
         },
     },
-    directives,
     theme: {
         themes: {
             light: {

@@ -8,6 +8,8 @@
                     <div class="font-weight-light text-h5 mx-4">{{ formatCurrency(props.totalValue) }}</div>
                     <v-spacer></v-spacer>
 
+                    <PlaidLink></PlaidLink>
+
                     <!-- Add or edit asset dialog -->
                     <v-dialog v-if="!display.xs.value" v-model="dialog" max-width="400px">
                         <template v-slot:activator="{ props:dialog }">
@@ -69,7 +71,9 @@ import { useStore } from '/src/pinia'
 const store = useStore()
 import { useDisplay } from 'vuetify'
 const display = useDisplay()
+import PlaidLink from '/src/components/PlaidLink'
 const props = defineProps(['color', 'type', 'url', 'tableData', 'totalValue'])
+
 const dialog = ref(false)
 const dialogDelete = ref (false)
 const editedIndex = ref(-1)

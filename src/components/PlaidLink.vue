@@ -5,20 +5,28 @@
 <script setup>
 import axios from 'axios'
 
-let plaid
-
 function openPlaid() {
-    axios.post('plaid/create-link-token').then((res) => {
-        plaid = window.Plaid.create({
+    axios.post('plaid/link-token').then((res) => {
+        let plaid = window.Plaid.create({
             token: res.data.link_token,
             onSuccess: (public_token) => {
-                console.log(public_token)
+                sendPublicToken(public_token)
             },
             onLoad: () => {},
             onExit: (err) => {},
             onEvent: (eventName) => {},
         })
         plaid.open()
+    }).catch((err) => {
+        console.log(err.message)
+    })
+}
+
+function sendPublicToken(token) {
+    axios.post('plaid/public-token', {
+        publicToken: token
+    }).catch((err) => {
+        console.log(err.message)
     })
 }
 </script>

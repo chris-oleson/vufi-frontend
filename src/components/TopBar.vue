@@ -23,28 +23,29 @@
         <!-- Mobile display -->
         <v-menu v-if="smAndDown && !dashboard" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ props }">
-                <v-btn icon="mdi-menu" variant="plain" class="ma-0" size="x-large" v-bind="props"/>
+                <v-btn icon="mdi-menu" class="mr-2" v-bind="props"/>
             </template>
-            <v-list class="font-weight-light" width="200">
-                <v-list-item class="font-weight-light" variant="plain" to="/">Home</v-list-item>
-                <v-list-item class="font-weight-light" variant="plain" to="/pricing">Pricing</v-list-item>
-                <v-list-item class="font-weight-light" variant="plain" to="/about">About</v-list-item>
-                <v-list-item class="font-weight-light" variant="plain" to="/contact">Contact</v-list-item>
+            <v-list class="font-weight-light pa-0" width="200">
+                <v-list-item to="/">Home</v-list-item>
+                <v-list-item to="/pricing">Pricing</v-list-item>
+                <v-list-item to="/about">About</v-list-item>
+                <v-list-item to="/contact">Contact</v-list-item>
                 <v-divider class="mx-2"></v-divider>
-                <v-list-item v-if="store.isLoggedIn && store.subscriptionStatus == 'active'" class="font-weight-light" variant="plain" to="/assets">Dashboard</v-list-item>
-                <v-list-item v-if="!store.isLoggedIn" class="font-weight-light" variant="plain" to="/login">Log In</v-list-item>
-                <v-list-item v-if="!store.isLoggedIn" disabled class="font-weight-light text-primary" to="/signup">Sign Up</v-list-item>
+                <v-list-item v-if="store.isLoggedIn && store.subscriptionStatus == 'active'" to="/assets">Dashboard</v-list-item>
+                <v-list-item v-if="!store.isLoggedIn" to="/login">Log In</v-list-item>
+                <v-list-item v-if="!store.isLoggedIn" disabled class="text-primary" to="/signup">Sign Up</v-list-item>
             </v-list>
         </v-menu>
 
-        <v-menu v-if="store.isLoggedIn" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
+        <!-- Dashboard menu -->
+        <v-menu v-if="store.isLoggedIn && dashboard" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ props }">
-                <v-btn icon="mdi-cog" variant="plain" size="x-large" class="mr-1" v-bind="props"/>
+                <v-btn icon="mdi-menu" class="mr-2" v-bind="props"/>
             </template>
-            <v-list class="font-weight-light" width="200">
-                <v-list-item prepend-icon="mdi-cog" variant="plain" to="/settings">Settings</v-list-item>
-                <v-list-item prepend-icon="mdi-email-outline" variant="plain" to="/contact">Support</v-list-item>
-                <v-list-item prepend-icon="mdi-logout" variant="plain" @click="logOut">Log out</v-list-item>
+            <v-list class="font-weight-light pa-0" width="200">
+                <v-list-item prepend-icon="mdi-cog" to="/settings">Settings</v-list-item>
+                <v-list-item prepend-icon="mdi-email-outline" to="/contact">Support</v-list-item>
+                <v-list-item prepend-icon="mdi-logout" @click="logOut">Log out</v-list-item>
             </v-list>
         </v-menu>
     </v-app-bar>

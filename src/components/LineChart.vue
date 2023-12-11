@@ -49,6 +49,9 @@ const chartOptions = ref({
         tickAmount: 4
     },
     xaxis: {
+        labels: {
+            show: false,
+        },
         type: 'datetime',
         tooltip: {
             enabled: false

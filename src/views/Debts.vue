@@ -54,10 +54,10 @@ const lineChartData = computed(() => {
 
 function refineHistory(debts, history) {
     // Get all individual debts
-    let debtList = []
+    let visibleDebts = []
     for (let debt of debts) {
         if (!debt.hidden) {
-            debtList.push({
+            visibleDebts.push({
                 id: debt.id,
                 history: []
             })
@@ -73,8 +73,8 @@ function refineHistory(debts, history) {
     }
     uniqueDates = uniqueDates.sort()
 
-    // Go through every debt
-    for (let debt of debtList) {
+    // Go through every visible debt
+    for (let debt of visibleDebts) {
         for (let date of uniqueDates) {
             // Check if there is any value for that debt on that date, add it if there is.
             for (let entry of history) {
@@ -100,7 +100,7 @@ function refineHistory(debts, history) {
 
     // Turn the debt data into something the line chart can read
     let refinedHistory = []
-    for (let debt of debtList) {
+    for (let debt of visibleDebts) {
         for (let entry of debt.history) {
             let i = refinedHistory.findIndex(e => e.x == entry.x)
             if (i < 0) {

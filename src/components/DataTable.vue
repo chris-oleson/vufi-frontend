@@ -12,7 +12,7 @@
                         <template v-slot:activator="{ props:menu }">
                             <v-tooltip :text="'Add ' + props.type">
                                 <template v-slot:activator="{ props:tooltip }">
-                                    <v-btn :color="color" variant="tonal" icon="mdi-plus" v-bind="mergeProps(menu, tooltip)"/>
+                                    <v-btn v-if="!display.xs.value" :color="color" variant="tonal" icon="mdi-plus" v-bind="mergeProps(menu, tooltip)"/>
                                 </template>
                             </v-tooltip>
                         </template>
@@ -24,7 +24,7 @@
 
 
                     <!-- Add or edit asset dialog -->
-                    <v-dialog v-if="!display.xs.value" v-model="dialog" max-width="400px">
+                    <v-dialog v-model="dialog" max-width="400px">
                         <v-card class="pa-4 text-center mx-auto" width="330">
                             <v-card-title class="font-weight-light text-center">{{ formTitle }}</v-card-title>
                             <v-card-text>

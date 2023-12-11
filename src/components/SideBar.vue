@@ -1,32 +1,23 @@
 <template>
     <v-navigation-drawer permanent floating :rail="mobile" elevation="4">
         <v-list class="font-weight-light pa-0" :value="page">
-            <v-list-item class="py-4" to="/assets">
-                <template v-slot:prepend>
-                    <v-icon class="mr-n4">mdi-cash-multiple</v-icon>
-                </template>
+            <v-list-item replace slim prepend-icon="mdi-cash-multiple" class="py-4" to="/assets">
                 <div class="d-flex justify-space-between">
-                    <div class="text-no-wrap">Assets</div>
+                    <div class="d-inline ml-2 text-no-wrap">Assets</div>
                     <div class="d-inline">{{ formatCurrency(store.totalAssetValue) }}</div>
                 </div>
             </v-list-item>
 
-            <v-list-item class="py-4" to="/debts">
-                <template v-slot:prepend>
-                    <v-icon class="mr-n4">mdi-credit-card-multiple</v-icon>
-                </template>
+            <v-list-item replace slim prepend-icon="mdi-credit-card-multiple" class="py-4" to="/debts">
                 <div class="d-flex justify-space-between">
-                    <div class="text-no-wrap">Debts</div>
+                    <div class="d-inline ml-2 text-no-wrap">Debts</div>
                     <div class="d-inline">{{ formatCurrency(store.totalDebtValue) }}</div>
                 </div>
             </v-list-item>
 
-            <v-list-item class="py-4" to="/net-worth">
-                <template v-slot:prepend>
-                    <v-icon class="mr-n4">mdi-sigma</v-icon>
-                </template>
+            <v-list-item replace slim prepend-icon="mdi-sigma" class="py-4" to="/net-worth">
                 <div class="d-flex justify-space-between">
-                    <div class="text-no-wrap">Net Worth</div>
+                    <div class="d-inline ml-2 text-no-wrap">Net Worth</div>
                     <div class="d-inline">{{ formatCurrency(store.totalAssetValue + store.totalDebtValue) }}</div>
                 </div>
             </v-list-item>

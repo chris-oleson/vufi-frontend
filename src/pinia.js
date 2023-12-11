@@ -14,13 +14,11 @@ export const useStore = defineStore('store', {
         },
 
         allAssets: [],
-        allDebts: [],
-
-        allAssetHistory: [],
-        allDebtHistory: [],
-
         totalAssetValue: 0,
+        allAssetHistory: [],
+        allDebts: [],
         totalDebtValue: 0,
+        allDebtHistory: [],
     }),
 
     actions: {

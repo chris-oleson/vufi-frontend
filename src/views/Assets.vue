@@ -54,10 +54,10 @@ const lineChartData = computed(() => {
 
 function refineHistory(assets, history) {
     // Get all individual assets
-    let assetList = []
+    let visibleAssets = []
     for (let asset of assets) {
         if (!asset.hidden) {
-            assetList.push({
+            visibleAssets.push({
                 id: asset.id,
                 history: []
             })
@@ -73,8 +73,8 @@ function refineHistory(assets, history) {
     }
     uniqueDates = uniqueDates.sort()
 
-    // Go through every asset
-    for (let asset of assetList) {
+    // Go through every visible asset
+    for (let asset of visibleAssets) {
         for (let date of uniqueDates) {
             // Check if there is any value for that asset on that date, add it if there is.
             for (let entry of history) {
@@ -100,7 +100,7 @@ function refineHistory(assets, history) {
 
     // Turn the asset data into something the line chart can read
     let refinedHistory = []
-    for (let asset of assetList) {
+    for (let asset of visibleAssets) {
         for (let entry of asset.history) {
             let i = refinedHistory.findIndex(e => e.x == entry.x)
             if (i < 0) {

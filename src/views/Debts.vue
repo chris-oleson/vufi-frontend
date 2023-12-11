@@ -5,7 +5,7 @@
         </v-col>
 
         <v-col cols="12" md="6">
-            <DataTable type="Debt" url="debts" :color="theme.current.value.colors.error" :tableData="tableData" :totalValue="store.totalNegativeAssets"/>
+            <DataTable type="Debt" url="debts" :color="theme.current.value.colors.error" :tableData="tableData" :totalValue="store.totalDebtValue"/>
         </v-col>
 
         <v-col v-if="pieChartValues.length" cols="12" md="6">
@@ -30,7 +30,7 @@ const pieChartValues = ref([])
 
 formatData()
 
-watch(() => store.allAssets, () => {
+watch(() => store.allDebts, () => {
     formatData()
 })
 
@@ -56,7 +56,7 @@ function refineHistory(debts, history) {
     // Get all individual debts
     let debtList = []
     for (let debt of debts) {
-        if (debt.visible) {
+        if (!debt.hidden) {
             debtList.push({
                 id: debt.id,
                 history: []
@@ -76,9 +76,9 @@ function refineHistory(debts, history) {
     // Go through every debt
     for (let debt of debtList) {
         for (let date of uniqueDates) {
-            // Check if there is any value for that asset on that date, add it if there is.
+            // Check if there is any value for that debt on that date, add it if there is.
             for (let entry of history) {
-                if (entry.date == date && entry.asset_id == debt.id) {
+                if (entry.date == date && entry.debt_id == debt.id) {
                     debt.history.push({
                         x: entry.date,
                         y: Math.abs(parseFloat(entry.value))

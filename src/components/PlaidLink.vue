@@ -1,5 +1,5 @@
 <template>
-    <v-btn @click="openPlaid">Plaid Link</v-btn>
+    <v-list-item @click="openPlaid">Financial Account</v-list-item>
 </template>
 
 <script setup>

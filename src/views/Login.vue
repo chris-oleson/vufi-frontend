@@ -24,7 +24,7 @@ const error = ref(false)
 const errorMessage = ref('')
 
 function login() {
-    axios.post('auth/login', {
+    axios.post('/auth/login', {
         email: email.value,
         password: password.value
     }).then(resp => {
@@ -41,7 +41,7 @@ function login() {
 }
 
 function resend() {
-    axios.post('auth/resend', {
+    axios.post('/auth/resend', {
         email: email.value
     }).then(() => {
         store.notification = {

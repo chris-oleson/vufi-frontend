@@ -35,4 +35,10 @@ axios.interceptors.request.use(
     }
 )
 
+if (import.meta.hot) {
+    import.meta.hot.on("vite:beforeUpdate", () => {
+        console.clear()
+    })
+}
+
 app.mount('#app')

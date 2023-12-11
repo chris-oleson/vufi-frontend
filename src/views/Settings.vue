@@ -39,7 +39,7 @@ function savePreferences() {
     store.theme = selectedTheme.value,
     store.currency = selectedCurrency.value
 
-    axios.patch('user/prefs', {
+    axios.patch('/user/prefs', {
         theme: selectedTheme.value,
         currency: selectedCurrency.value
     })

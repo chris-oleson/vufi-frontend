@@ -29,7 +29,7 @@ const errorMessage = ref('')
 const accountCreated = ref(false)
 
 function createAccount() {
-    axios.post('auth/create', {
+    axios.post('/auth/create', {
         name: name.value,
         email: email.value,
         password: password.value,

@@ -16,7 +16,8 @@ const chartOptions = ref({
         enabled: false
     },
     stroke: {
-        width: 1
+        width: 1,
+        curve: 'straight',
     },
     yaxis: {
         show: !display.xs,
@@ -45,7 +46,6 @@ const chartOptions = ref({
                 return 0
             }
         },
-        forceNiceScale: true,
         tickAmount: 4
     },
     xaxis: {

@@ -8,18 +8,23 @@
                     <div class="font-weight-light text-h5 mx-4">{{ formatCurrency(props.totalValue) }}</div>
                     <v-spacer></v-spacer>
 
-                    <PlaidLink></PlaidLink>
-
-                    <!-- Add or edit asset dialog -->
-                    <v-dialog v-if="!display.xs.value" v-model="dialog" max-width="400px">
-                        <template v-slot:activator="{ props:dialog }">
+                    <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
+                        <template v-slot:activator="{ props:menu }">
                             <v-tooltip :text="'Add ' + props.type">
                                 <template v-slot:activator="{ props:tooltip }">
-                                    <v-btn :color="color" variant="tonal" icon="mdi-plus" v-bind="mergeProps(dialog, tooltip)" @click="clearFields"/>
+                                    <v-btn :color="color" variant="tonal" icon="mdi-plus" v-bind="mergeProps(menu, tooltip)"/>
                                 </template>
                             </v-tooltip>
                         </template>
+                        <v-list>
+                            <PlaidLink></PlaidLink>
+                            <v-list-item v-bind="dialog" @click="clearFields(true)">Custom {{ props.type }}</v-list-item>
+                        </v-list>
+                    </v-menu>
 
+
+                    <!-- Add or edit asset dialog -->
+                    <v-dialog v-if="!display.xs.value" v-model="dialog" max-width="400px">
                         <v-card class="pa-4 text-center mx-auto" width="330">
                             <v-card-title class="font-weight-light text-center">{{ formTitle }}</v-card-title>
                             <v-card-text>
@@ -50,7 +55,7 @@
             </template>
 
             <template v-slot:[`item.actions`]="{ item }">
-                <v-icon size="small" class="mr-2" @click="focusItem(item)">{{ item.visible ? 'mdi-eye-outline' : 'mdi-eye-closed' }}</v-icon>
+                <v-icon size="small" class="mr-2" @click="focusItem(item)">{{ item.hidden ? 'mdi-eye-closed' : 'mdi-eye-outline' }}</v-icon>
                 <v-icon size="small" class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
                 <v-icon size="small" @click="deleteItem(item)">mdi-delete</v-icon>
             </template>
@@ -89,20 +94,20 @@ const defaultItem = {
 }
 
 function focusItem(item) {
-    if (item.visible) {
+    if (item.hidden) {
         if (props.type == "Asset") {
-            store.allAssets[props.tableData.indexOf(item)].visible = false
+            store.allAssets[props.tableData.indexOf(item)].hidden = false
         }
         else {
-            store.allDebts[props.tableData.indexOf(item)].visible = false
+            store.allDebts[props.tableData.indexOf(item)].hidden = false
         }
     }
     else {
         if (props.type == "Asset") {
-            store.allAssets[props.tableData.indexOf(item)].visible = true
+            store.allAssets[props.tableData.indexOf(item)].hidden = true
         }
         else {
-            store.allDebts[props.tableData.indexOf(item)].visible = true
+            store.allDebts[props.tableData.indexOf(item)].hidden = true
         }
     }
 }
@@ -111,7 +116,10 @@ const formTitle = computed(() => {
     return editedIndex.value === -1 ? 'New ' + props.type : 'Edit ' + props.type
 })
 
-function clearFields() {
+function clearFields(show) {
+    if (show) {
+        dialog.value = true
+    }
     editedItem.value = Object.assign(defaultItem)
     editedIndex.value = -1
 }
@@ -181,7 +189,7 @@ function save () {
 }
 
 function addToDatabase(item) {
-    axios.post('assets', {
+    axios.post(`/${props.url}`, {
         name: item.name,
         type: item.type,
         value: props.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
@@ -192,7 +200,7 @@ function addToDatabase(item) {
 }
 
 function replaceInDatabase(item) {
-    axios.put('assets/' + item.id, {
+    axios.put(`/${props.url}/${item.id}`, {
         name: item.name,
         type: item.type,
         value: props.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
@@ -204,7 +212,7 @@ function replaceInDatabase(item) {
 }
 
 function deleteFromDatabase(item) {
-    axios.delete('assets/' + item.id)
+    axios.delete(`/${props.url}/${item.id}`)
     .then(() => {
         store.getAllAssetData()
     })

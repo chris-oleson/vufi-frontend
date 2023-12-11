@@ -19,56 +19,28 @@ export const useStore = defineStore('store', {
         allAssetHistory: [],
         allDebtHistory: [],
 
-        totalPositiveAssets: 0,
-        totalNegativeAssets: 0,
+        totalAssetValue: 0,
+        totalDebtValue: 0,
     }),
 
     actions: {
-        getAllAssetData() {
+        async getAllAssetData() {
             // Get raw asset data
-            axios.get('assets').then(resp => {
-                let items = resp.data
-                let allAssets = []
-                let allDebts = []
-                let totalPositiveAssets = 0
-                let totalNegativeAssets = 0
+            let [assetResponse, assetValueResponse, assetHistoryResponse, debtResponse, debtValueResponse, debtHistoryResponse] = await Promise.all([
+                axios.get('/assets'),
+                axios.get('/assets/value'),
+                axios.get('/assets/history'),
+                axios.get('/debts'),
+                axios.get('/debts/value'),
+                axios.get('/debts/history'),
+            ])
 
-                // Set total values
-                for (let i = 0; i < items.length; i++) {
-                    if (!items[i].is_deleted && items[i].value >= 0) {
-                        items[i].visible = true
-                        allAssets.push(items[i])
-                        totalPositiveAssets += parseFloat(items[i].value)
-                    }
-                    else if (!items[i].is_deleted) {
-                        items[i].visible = true
-                        allDebts.push(items[i])
-                        totalNegativeAssets += parseFloat(items[i].value)
-                    }
-                }
-                this.allAssets = allAssets
-                this.allDebts = allDebts
-                this.totalPositiveAssets = totalPositiveAssets
-                this.totalNegativeAssets = totalNegativeAssets
-            })
-
-            axios.get('assets/history').then(resp => {
-                let history = resp.data
-                let allAssetHistory = []
-                let allDebtHistory = []
-
-                for (let i = 0; i < history.length; i++) {
-                    if (history[i].value >= 0) {
-                        allAssetHistory.push(history[i])
-                    }
-                    else {
-                        allDebtHistory.push(history[i])
-                    }
-                }
-
-                this.allAssetHistory = allAssetHistory
-                this.allDebtHistory = allDebtHistory
-            })
+            this.allAssets = assetResponse.data
+            this.totalAssetValue = assetValueResponse.data
+            this.allAssetHistory = assetHistoryResponse.data
+            this.allDebts = debtResponse.data
+            this.totalDebtValue = debtValueResponse.data
+            this.allDebtHistory = debtHistoryResponse.data
         }
     },
     persist: true,

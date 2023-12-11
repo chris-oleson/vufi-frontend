@@ -5,7 +5,7 @@
         </v-col>
 
         <v-col cols="12" md="6">
-            <DataTable type="Asset" url="assets" :color="theme.current.value.colors.primary" :tableData="tableData" :totalValue="store.totalPositiveAssets"/>
+            <DataTable type="Asset" url="assets" :color="theme.current.value.colors.primary" :tableData="tableData" :totalValue="store.totalAssetValue"/>
         </v-col>
 
         <v-col v-if="pieChartValues.length" cols="12" md="6">
@@ -56,7 +56,7 @@ function refineHistory(assets, history) {
     // Get all individual assets
     let assetList = []
     for (let asset of assets) {
-        if (asset.visible) {
+        if (!asset.hidden) {
             assetList.push({
                 id: asset.id,
                 history: []

@@ -33,7 +33,7 @@ const store = useStore()
 
 const selectedTheme = ref(store.theme)
 const selectedCurrency = ref(store.currency)
-const currencies = ref(['USD'])
+// const currencies = ref(['USD'])
 
 function savePreferences() {
     store.theme = selectedTheme.value,

@@ -21,7 +21,7 @@ const error = ref(false)
 const errorMessage = ref('')
 
 function cancelSubscription () {
-    axios.delete('billing', {data: {password: password.value}}).then(() => {
+    axios.delete('/stripe/subscription', {data: {password: password.value}}).then(() => {
         store.notification = {
             text: 'Successfully cancelled subscription',
             color: 'success'

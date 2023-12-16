@@ -38,9 +38,9 @@
         </v-menu>
 
         <!-- Dashboard menu -->
-        <v-menu v-if="store.isLoggedIn && dashboard" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
+        <v-menu v-if="store.isLoggedIn" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ props }">
-                <v-btn icon="mdi-menu" class="mr-2" v-bind="props"/>
+                <v-btn icon="mdi-account" class="mr-2" v-bind="props"/>
             </template>
             <v-list class="font-weight-light pa-0" width="200">
                 <v-list-item prepend-icon="mdi-cog" to="/settings">Settings</v-list-item>

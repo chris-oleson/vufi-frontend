@@ -12,9 +12,6 @@ function openPlaid() {
             onSuccess: (public_token) => {
                 sendPublicToken(public_token)
             },
-            onLoad: () => {},
-            onExit: (err) => {},
-            onEvent: (eventName) => {},
         })
         plaid.open()
     }).catch((err) => {

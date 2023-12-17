@@ -7,7 +7,7 @@
             <v-card-text class="pa-0 mt-4 font-weight-light">Please verify your account before logging in.</v-card-text>
         </template>
         <template v-else>
-            <v-text-field variant="underlined" label="Name" :error="error" v-model="name"></v-text-field>
+            <v-text-field id="name" variant="underlined" label="Name" :error="error" v-model="name"></v-text-field>
             <v-text-field variant="underlined" label="Email" :error="error" v-model="email"/>
             <v-text-field variant="underlined" label="Password" type="password" :error="error" v-model="password" @keyup.enter="createAccount"/>
             <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>
@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
 const name = ref('')
@@ -27,6 +27,10 @@ const password = ref('')
 const error = ref(false)
 const errorMessage = ref('')
 const accountCreated = ref(false)
+
+onMounted(() => {
+    document.getElementById('name').focus()
+})
 
 function createAccount() {
     axios.post('/auth/create', {

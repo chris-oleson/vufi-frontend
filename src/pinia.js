@@ -24,7 +24,14 @@ export const useStore = defineStore('store', {
     actions: {
         async getAllAssetData() {
             // Get raw asset data
-            let [assetResponse, assetValueResponse, assetHistoryResponse, debtResponse, debtValueResponse, debtHistoryResponse] = await Promise.all([
+            let [
+                assetResponse,
+                assetValueResponse,
+                assetHistoryResponse,
+                debtResponse,
+                debtValueResponse,
+                debtHistoryResponse
+            ] = await Promise.all([
                 axios.get('/assets'),
                 axios.get('/assets/value'),
                 axios.get('/assets/history'),

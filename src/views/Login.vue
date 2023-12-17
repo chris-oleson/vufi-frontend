@@ -1,7 +1,7 @@
 <template>
     <v-card class="pa-10 mx-auto my-10 text-center" width="330">
         <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
-        <v-text-field variant="underlined" label="Email" v-model="email" :error="error"/>
+        <v-text-field id="email" variant="underlined" label="Email" v-model="email" :error="error"/>
         <v-text-field variant="underlined" label="Password" type="password" v-model="password" :error="error" @keyup.enter="login"/>
         <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>
         <v-btn width="200" rounded="0" class="bg-primary mt-4" @click="login">Log In</v-btn>
@@ -12,7 +12,7 @@
 
 <script setup>
 import axios from 'axios'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useStore } from '/src/pinia'
 const store = useStore()
 import { useRouter } from 'vue-router'
@@ -22,6 +22,10 @@ const email = ref('')
 const password = ref('')
 const error = ref(false)
 const errorMessage = ref('')
+
+onMounted(() => {
+    document.getElementById('email').focus()
+})
 
 function login() {
     axios.post('/auth/login', {

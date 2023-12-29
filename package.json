@@ -1,6 +1,5 @@
 {
     "name": "vufi",
-    "version": "0.1.0",
     "private": true,
     "type": "module",
     "scripts": {
@@ -9,22 +8,22 @@
         "serve": "vite preview"
     },
     "dependencies": {
-        "apexcharts": "^3.44.2",
-        "axios": "^1.6.2",
+        "apexcharts": "^3.45.1",
+        "axios": "^1.6.3",
         "pinia": "^2.1.7",
-        "pinia-plugin-persistedstate": "^3.2.0",
-        "vue": "^3.3.10",
+        "pinia-plugin-persistedstate": "^3.2.1",
+        "vue": "^3.3.13",
         "vue-router": "^4.2.4",
         "vue3-apexcharts": "^1.4.4",
-        "vuetify": "^3.4.5"
+        "vuetify": "^3.4.9"
     },
     "devDependencies": {
-        "@mdi/font": "^7.2.96",
-        "@vitejs/plugin-vue": "^4.5.1",
-        "eslint": "^8.55.0",
+        "@mdi/font": "^7.4.47",
+        "@vitejs/plugin-vue": "^5.0.0",
+        "eslint": "^8.56.0",
         "eslint-plugin-vue": "^9.19.2",
-        "vite": "^4.5.0",
-        "vite-plugin-vuetify": "^1.0.2"
+        "vite": "^5.0.10",
+        "vite-plugin-vuetify": "^2.0.1"
     },
     "browserslist": [
         "> 1%",

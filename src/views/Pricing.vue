@@ -1,6 +1,6 @@
 <template>
-    <v-sheet class="bg-accent text-center fill-height">
-        <v-row class="ma-0 bg-background">
+    <v-container fluid class="bg-accent text-center pa-3" style="height: 100%">
+        <v-row class="bg-background">
             <v-col cols="12" lg="6" class="mx-auto py-16">
                 <h1 class="font-weight-light mb-8">Pricing</h1>
                 <div class="font-weight-light">Choose the plan that works best for you.</div>
@@ -8,7 +8,7 @@
             </v-col>
         </v-row>
 
-        <v-row class="justify-center ma-0">
+        <v-row class="justify-center">
             <v-col cols="12" md="4" lg="3" class="mx-4 mb-16 mt-n16">
                 <v-card elevation="10" width="330" class="py-16 mx-auto bg-secondary">
                     <h1 class="font-weight-light">$9<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
@@ -25,7 +25,7 @@
                 </v-card>
             </v-col>
         </v-row>
-    </v-sheet>
+    </v-container>
 </template>
 
 <script setup>

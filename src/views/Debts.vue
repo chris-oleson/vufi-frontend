@@ -5,7 +5,7 @@
         </v-col>
 
         <v-col cols="12" md="6">
-            <DataTable type="Debt" url="debts" :color="theme.current.value.colors.error" :tableData="store.allDebts" :totalValue="store.totalDebtValue"/>
+            <DataTable type="Debt" url="debts" :color="theme.current.value.colors.error" :tableData="tableData" :totalValue="store.totalDebtValue"/>
         </v-col>
 
         <v-col v-if="pieChartValues.length" cols="12" md="6">
@@ -24,10 +24,14 @@ import DataTable from '/src/components/DataTable'
 import PieChart from '/src/components/PieChart'
 import LineChart from '/src/components/LineChart'
 
+const tableData = computed(() => {
+    return store.allDebts.filter((debt) => !debt.is_deleted)
+})
+
 const pieChartLabels = computed(() => {
     let labels = []
     for (let debt of store.allDebts) {
-        if (!debt.hidden) {
+        if (!debt.hidden && !debt.is_deleted) {
             labels.push(debt.name)
         }
     }
@@ -37,8 +41,8 @@ const pieChartLabels = computed(() => {
 const pieChartValues = computed(() => {
     let values = []
     for (let debt of store.allDebts) {
-        if (!debt.hidden) {
-            values.push(Math.abs(parseFloat(debt.value)))
+        if (!debt.hidden && !debt.is_deleted) {
+            values.push(parseFloat(debt.value))
         }
     }
     return values
@@ -80,7 +84,7 @@ function refineHistory(debts, history) {
                 if (entry.date == date && entry.debt_id == debt.id) {
                     debt.history.push({
                         x: entry.date,
-                        y: Math.abs(parseFloat(entry.value))
+                        y: parseFloat(entry.value)
                     })
                 }
             }
@@ -90,7 +94,7 @@ function refineHistory(debts, history) {
                 if (debt.history.length) {
                     debt.history.push({
                         x: date,
-                        y: Math.abs(parseFloat(debt.history[debt.history.length - 1].y))
+                        y: parseFloat(debt.history[debt.history.length - 1].y)
                     })
                 }
             }

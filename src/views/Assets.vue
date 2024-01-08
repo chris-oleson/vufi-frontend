@@ -5,7 +5,7 @@
         </v-col>
 
         <v-col cols="12" md="6">
-            <DataTable type="Asset" url="assets" :color="theme.current.value.colors.primary" :tableData="store.allAssets" :totalValue="store.totalAssetValue"/>
+            <DataTable type="Asset" url="assets" :color="theme.current.value.colors.primary" :tableData="tableData" :totalValue="store.totalAssetValue"/>
         </v-col>
 
         <v-col v-if="pieChartValues.length" cols="12" md="6">
@@ -24,10 +24,14 @@ import DataTable from '/src/components/DataTable'
 import PieChart from '/src/components/PieChart'
 import LineChart from '/src/components/LineChart'
 
+const tableData = computed(() => {
+    return store.allAssets.filter((asset) => !asset.is_deleted)
+})
+
 const pieChartLabels = computed(() => {
     let labels = []
     for (let asset of store.allAssets) {
-        if (!asset.hidden) {
+        if (!asset.hidden && !asset.is_deleted) {
             labels.push(asset.name)
         }
     }
@@ -37,7 +41,7 @@ const pieChartLabels = computed(() => {
 const pieChartValues = computed(() => {
     let values = []
     for (let asset of store.allAssets) {
-        if (!asset.hidden) {
+        if (!asset.hidden && !asset.is_deleted) {
             values.push(parseFloat(asset.value))
         }
     }

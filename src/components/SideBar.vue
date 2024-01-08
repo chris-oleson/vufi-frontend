@@ -18,7 +18,7 @@
             <v-list-item replace slim prepend-icon="mdi-sigma" class="py-4" to="/net-worth">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline ml-2 text-no-wrap">Net Worth</div>
-                    <div class="d-inline">{{ formatCurrency(store.totalAssetValue + store.totalDebtValue) }}</div>
+                    <div class="d-inline">{{ formatCurrency(store.totalAssetValue - store.totalDebtValue) }}</div>
                 </div>
             </v-list-item>
         </v-list>

@@ -44,17 +44,21 @@ function formatData() {
     ]
 
     for (let asset of store.allAssets) {
-        charts[0].data.push({
-            x: asset.name,
-            y: parseFloat(asset.value)
-        })
+        if (!asset.is_deleted) {
+            charts[0].data.push({
+                x: asset.name,
+                y: parseFloat(asset.value)
+            })
+        }
     }
 
     for (let debt of store.allDebts) {
-        charts[1].data.push({
-            x: debt.name,
-            y: 0 - parseFloat(debt.value)
-        })
+        if (!debt.is_deleted) {
+            charts[1].data.push({
+                x: debt.name,
+                y: 0 - parseFloat(debt.value)
+            })
+        }
     }
 
     if (charts[0].data.length) {
@@ -81,6 +85,7 @@ function refineHistory(assets, debts, assetHistory, debtHistory) {
         })
     }
 
+    // Combine histories
     let history = assetHistory
     history.push(...debtHistory)
 

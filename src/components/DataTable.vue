@@ -192,7 +192,7 @@ function addToDatabase(item) {
     axios.post(`/${props.url}`, {
         name: item.name,
         type: item.type,
-        value: props.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
+        value: item.value,
     })
     .then(() => {
         store.getAllAssetData()
@@ -203,7 +203,7 @@ function replaceInDatabase(item) {
     axios.put(`/${props.url}/${item.id}`, {
         name: item.name,
         type: item.type,
-        value: props.url == 'assets' ? Math.abs(item.value) : 0 - Math.abs(item.value),
+        value: item.value,
         user_id: store.userID,
     })
     .then(() => {

@@ -5,7 +5,7 @@
         </v-col>
 
         <v-col cols="12" md="6">
-            <DataTable type="Asset" url="assets" :color="theme.current.value.colors.primary" :tableData="tableData" :totalValue="store.totalAssetValue"/>
+            <DataTable type="Asset" url="assets" :color="theme.current.value.colors.primary" :tableData="store.allAssets" :totalValue="store.totalAssetValue"/>
         </v-col>
 
         <v-col v-if="pieChartValues.length" cols="12" md="6">
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useStore } from '/src/pinia'
 const store = useStore()
 import { useTheme } from 'vuetify'
@@ -24,26 +24,25 @@ import DataTable from '/src/components/DataTable'
 import PieChart from '/src/components/PieChart'
 import LineChart from '/src/components/LineChart'
 
-const tableData = ref([])
-const pieChartLabels = ref([])
-const pieChartValues = ref([])
-
-formatData()
-
-watch(() => store.allAssets, () => {
-    formatData()
+const pieChartLabels = computed(() => {
+    let labels = []
+    for (let asset of store.allAssets) {
+        if (!asset.hidden) {
+            labels.push(asset.name)
+        }
+    }
+    return labels
 })
 
-function formatData() {
-    pieChartLabels.value = []
-    pieChartValues.value = []
-    tableData.value = []
+const pieChartValues = computed(() => {
+    let values = []
     for (let asset of store.allAssets) {
-        pieChartLabels.value.push(asset.name)
-        pieChartValues.value.push(parseFloat(asset.value))
-        tableData.value.push(asset)
+        if (!asset.hidden) {
+            values.push(parseFloat(asset.value))
+        }
     }
-}
+    return values
+})
 
 const lineChartData = computed(() => {
     return [{

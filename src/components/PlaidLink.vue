@@ -1,6 +1,6 @@
 <template>
     <v-list-item @click="getLinkToken">Financial Account</v-list-item>
-    <v-list-item @click="getPlaidData">asdf</v-list-item>
+    <v-list-item @click="updatePlaidData">Update plaid data</v-list-item>
 </template>
 
 <script setup>
@@ -26,16 +26,15 @@ function sendPublicToken(token) {
     axios.post('plaid/public-token', {
         publicToken: token
     }).then(() => {
-        getPlaidData()
+        updatePlaidData()
     }).catch((err) => {
         console.log(err.message)
     })
 }
 
-function getPlaidData() {
-    axios.get('plaid/accounts', {
-    }).then((response) => {
-        console.log(response.data)
+function updatePlaidData() {
+    axios.post('plaid/update', {
+    }).then(() => {
         store.getAllAssetData()
     }).catch((err) => {
         console.log(err.message)

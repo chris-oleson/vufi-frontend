@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '/src/views/Login'
 import PageNotFound from '/src/views/PageNotFound'
 import SignUp from '/src/views/SignUp'
-import VerifyAccount from '/src/views/VerifyAccount'
 import Assets from '/src/views/Assets'
 import Debts from '/src/views/Debts'
 import Contact from '/src/views/Contact'
@@ -108,14 +107,6 @@ export const router = createRouter({
             }
         },
         {
-            path: '/verify-account',
-            beforeEnter: rejectNoParams,
-            component: VerifyAccount,
-            meta: {
-                title: 'Verify Account - VuFi'
-            }
-        },
-        {
             path: '/settings',
             beforeEnter: rejectUnauthorized,
             component: Settings,
@@ -183,11 +174,5 @@ function rejectNoSubscription() {
     const store = useStore()
     if (store.subscriptionStatus != 'active') {
         return { path: '/pricing' }
-    }
-}
-
-function rejectNoParams(to) {
-    if (!Object.keys(to.query).length) {
-        return { path: '/404' }
     }
 }

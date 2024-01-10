@@ -6,7 +6,7 @@
         <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>
         <v-btn width="200" rounded="0" class="bg-primary mt-4" @click="login">Log In</v-btn>
         <v-btn v-if="errorMessage == 'This account has not been verified'" width="200" size="small" variant="plain" class="font-weight-light mt-4" @click="resend">Resend Verification</v-btn>
-        <v-btn width="200" size="small" variant="plain" class="mt-4 font-weight-light" to="/forgot-password">Forgot Password</v-btn>
+        <v-btn width="200" size="small" variant="plain" class="mt-4 font-weight-light" :to="'/forgot-password?e=' + email">Forgot Password</v-btn>
     </v-card>
 </template>
 

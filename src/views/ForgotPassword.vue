@@ -13,8 +13,10 @@
 <script setup>
 import axios from 'axios'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 
-const email = ref('')
+const email = ref(route.query.e)
 const errorMessage = ref('')
 const error = ref(false)
 const success = ref(false)

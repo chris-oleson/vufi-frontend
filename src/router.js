@@ -59,7 +59,7 @@ export const router = createRouter({
         },
         {
             path: '/assets',
-            beforeEnter: [rejectUnauthorized, rejectNoSubscription],
+            beforeEnter: [rejectUnauthorized],
             component: Assets,
             meta: {
                 title: 'Assets - VuFi'
@@ -67,7 +67,7 @@ export const router = createRouter({
         },
         {
             path: '/debts',
-            beforeEnter: [rejectUnauthorized, rejectNoSubscription],
+            beforeEnter: [rejectUnauthorized],
             component: Debts,
             meta: {
                 title: 'Debts - VuFi'
@@ -75,7 +75,7 @@ export const router = createRouter({
         },
         {
             path: '/net-worth',
-            beforeEnter: [rejectUnauthorized, rejectNoSubscription],
+            beforeEnter: [rejectUnauthorized],
             component: NetWorth,
             meta: {
                 title: 'Net Worth - VuFi'
@@ -167,12 +167,5 @@ function rejectUnauthorized() {
     const store = useStore()
     if (!store.isLoggedIn) {
         return { path: '/login' }
-    }
-}
-
-function rejectNoSubscription() {
-    const store = useStore()
-    if (store.subscriptionStatus != 'active') {
-        return { path: '/pricing' }
     }
 }

@@ -15,7 +15,7 @@
             <v-btn class="font-weight-light mr-4" variant="plain" to="/about">About</v-btn>
             <v-btn class="font-weight-light mr-4" variant="plain" to="/contact">Contact</v-btn>
             <v-divider vertical inset></v-divider>
-            <v-btn v-if="store.isLoggedIn && store.subscriptionStatus == 'active'" class="font-weight-light ml-4" variant="plain" to="/assets">Dashboard</v-btn>
+            <v-btn v-if="store.isLoggedIn" class="font-weight-light ml-4" variant="plain" to="/assets">Dashboard</v-btn>
             <v-btn v-if="!store.isLoggedIn" class="font-weight-light mx-4" variant="plain" to="/login">Log In</v-btn>
             <v-btn v-if="!store.isLoggedIn" class="bg-primary mr-4" disabled rounded="0" to="/signup">Sign Up</v-btn>
         </template>

@@ -9,14 +9,10 @@
                     <v-spacer></v-spacer>
 
                     <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
-                        <template v-slot:activator="{ props:menu }">
-                            <v-tooltip :text="'Add ' + props.type">
-                                <template v-slot:activator="{ props:tooltip }">
-                                    <v-btn v-if="!display.xs.value" :color="color" variant="tonal" icon="mdi-plus" v-bind="mergeProps(menu, tooltip)"/>
-                                </template>
-                            </v-tooltip>
+                        <template v-slot:activator="{ props }">
+                            <v-btn v-if="!display.xs.value" variant="plain" icon="mdi-menu" v-bind="props"/>
                         </template>
-                        <v-list>
+                        <v-list class="pa-0">
                             <PlaidLink></PlaidLink>
                             <v-list-item v-bind="dialog" @click="clearFields(true)">Custom {{ props.type }}</v-list-item>
                         </v-list>
@@ -71,7 +67,7 @@
 
 <script setup>
 import axios from 'axios'
-import { mergeProps, ref, computed, nextTick } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { useStore } from '/src/pinia'
 const store = useStore()
 import { useDisplay } from 'vuetify'

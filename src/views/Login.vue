@@ -1,10 +1,10 @@
 <template>
     <v-card class="pa-10 mx-auto my-10 text-center" width="330">
         <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
-        <template v-if="route.query.t">
-            <v-card-text v-if="error" class="text-error pa-0 mt-4">{{ errorMessage }}</v-card-text>
-            <v-progress-circular v-else class="mt-4 mx-auto d-block" indeterminate></v-progress-circular>
-        </template>
+
+        <v-card-text v-if="error && route.query.t" class="text-error pa-0 mt-4">{{ errorMessage }}</v-card-text>
+
+        <v-progress-circular v-if="loading" class="mt-4 mx-auto d-block" indeterminate></v-progress-circular>
         <template v-else>
             <v-text-field id="email" variant="underlined" label="Email" v-model="email" :error="error"/>
             <v-text-field variant="underlined" label="Password" type="password" v-model="password" :error="error" @keyup.enter="login"/>
@@ -29,9 +29,10 @@ const email = ref('')
 const password = ref('')
 const error = ref(false)
 const errorMessage = ref('')
+const loading = ref(false)
 
 if (route.query.t) {
-    login()
+    verify()
 }
 
 onMounted(() => {
@@ -41,14 +42,29 @@ onMounted(() => {
 })
 
 function login() {
+    loading.value = true
+    error.value = false
     axios.post('/auth/login', {
         email: email.value,
         password: password.value,
-        token: route.query.t
     }).then(resp => {
         store.theme = resp.data.theme
         store.currency = resp.data.currency
         store.subscriptionStatus = resp.data.subscription_status
+        store.isLoggedIn = true
+        store.getAllAssetData()
+        router.push('/assets')
+    }).catch((err) => {
+        loading.value = false
+        error.value = true
+        errorMessage.value = err.response.data
+    })
+}
+
+function verify() {
+    axios.post('/auth/verify', {
+        token: route.query.t
+    }).then(() => {
         store.isLoggedIn = true
         store.getAllAssetData()
         router.push('/assets')

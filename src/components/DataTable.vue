@@ -10,14 +10,13 @@
 
                     <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
                         <template v-slot:activator="{ props }">
-                            <v-btn v-if="!display.xs.value" variant="plain" icon="mdi-menu" v-bind="props"/>
+                            <v-btn v-if="!display.xs.value" variant="tonal" :color="color" icon="mdi-plus" v-bind="props"/>
                         </template>
                         <v-list class="pa-0">
                             <PlaidLink></PlaidLink>
                             <v-list-item v-bind="dialog" @click="clearFields(true)">Custom {{ props.type }}</v-list-item>
                         </v-list>
                     </v-menu>
-
 
                     <!-- Add or edit asset dialog -->
                     <v-dialog v-model="dialog" max-width="400px">

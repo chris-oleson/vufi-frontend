@@ -10,18 +10,26 @@
 
         <v-row class="justify-center">
             <v-col cols="12" md="4" lg="3" class="mx-4 mb-16 mt-n16">
-                <v-card elevation="10" width="330" class="py-16 mx-auto bg-secondary">
-                    <h1 class="font-weight-light">$9<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
-                    <p class="font-weight-light mt-4 mb-10">Cancel any time!</p>
-                    <v-btn class="bg-primary elevation-4" width="200" size="large" variant="text" disabled rounded="0" @click="redirect('month')">Start Free Trial</v-btn>
+                <v-card elevation="10" width="330" class="pa-16 mx-auto bg-secondary">
+                    <h1 class="font-weight-light">Free</h1>
+                    <p class="font-weight-light mt-4">Manual tracking only</p>
+                    <v-btn class="bg-primary elevation-4 mt-10" width="200" size="large" variant="text" rounded="0" to="/signup">Get Started</v-btn>
                 </v-card>
             </v-col>
 
             <v-col cols="12" md="4" lg="3" class="mx-4 mb-16 mt-n16">
-                <v-card elevation="10" width="330" class="py-16 mx-auto bg-secondary">
+                <v-card elevation="10" width="330" class="pa-16 mx-auto bg-secondary">
+                    <h1 class="font-weight-light">$9<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
+                    <p class="font-weight-light mt-4">Cancel any time!</p>
+                    <v-btn class="bg-primary elevation-4 mt-10" width="200" size="large" variant="text" rounded="0" @click="redirect('month')">Start Free Trial</v-btn>
+                </v-card>
+            </v-col>
+
+            <v-col cols="12" md="4" lg="3" class="mx-4 mb-16 mt-n16">
+                <v-card elevation="10" width="330" class="pa-16 mx-auto bg-secondary">
                     <h1 class="font-weight-light">$99<p class="font-weight-light text-subtitle-1 d-inline">/year</p></h1>
-                    <p class="font-weight-light mt-4 mb-10">Two months free!</p>
-                    <v-btn class="bg-primary elevation-4" width="200" size="large" variant="text" disabled rounded="0" @click="redirect('year')">Start Free Trial</v-btn>
+                    <p class="font-weight-light mt-4">Two months free!</p>
+                    <v-btn class="bg-primary elevation-4 mt-10" width="200" size="large" variant="text" rounded="0" @click="redirect('year')">Start Free Trial</v-btn>
                 </v-card>
             </v-col>
         </v-row>

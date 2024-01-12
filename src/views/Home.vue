@@ -4,13 +4,13 @@
             <v-col cols="12" lg="5" class="py-16 px-5 mt-10 mb-n16">
                 <h1 class="text-h2 font-weight-thin">Finance at a Glance</h1>
                 <h2 class="my-16 font-weight-light">One, simple, intuitive platform to organize and track your assets and debts</h2>
-                <v-btn class="bg-primary elevation-4" variant="text" disabled size="x-large" rounded="0" to="/signup">Start Free Trial</v-btn>
+                <v-btn class="bg-primary elevation-4" variant="text" size="x-large" rounded="0" to="/signup">Get started for free</v-btn>
             </v-col>
 
             <v-col cols="12" lg="7">
                 <v-card class="ma-5 mb-n16 elevation-10">
-                    <v-img v-show="theme.global.name.value == 'dark'" transition="none" eager src="/src/assets/landingPage4.png" alt="VuFi interface"/>
-                    <v-img v-show="theme.global.name.value == 'light'" transition="none" eager src="/src/assets/landingPage3.png" alt="VuFi interface"/>
+                    <img v-if="theme.global.name.value == 'dark'" class="d-block" style="max-width: 100%;" src="/src/assets/landingPage4.png" alt="VuFi interface"/>
+                    <img v-else class="d-block" style="max-width: 100%;" src="/src/assets/landingPage3.png" alt="VuFi interface"/>
                 </v-card>
             </v-col>
         </v-row>

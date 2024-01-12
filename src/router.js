@@ -83,17 +83,7 @@ export const router = createRouter({
         },
         {
             path: '/login',
-            beforeEnter: () => {
-                const store = useStore()
-                if (store.isLoggedIn) {
-                    if (store.subscriptionStatus == 'active') {
-                        return { path: '/assets' }
-                    }
-                    else {
-                        return { path: '/pricing' }
-                    }
-                }
-            },
+            beforeEnter: forwardLogin,
             component: Login,
             meta: {
                 title: 'Login - VuFi'
@@ -101,6 +91,7 @@ export const router = createRouter({
         },
         {
             path: '/signup',
+            beforeEnter: forwardLogin,
             component: SignUp,
             meta: {
                 title: 'Sign Up - VuFi'
@@ -167,5 +158,12 @@ function rejectUnauthorized() {
     const store = useStore()
     if (!store.isLoggedIn) {
         return { path: '/login' }
+    }
+}
+
+function forwardLogin() {
+    const store = useStore()
+    if (store.isLoggedIn) {
+        return { path: '/assets' }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <v-row class="ma-2">
-        <v-col v-if="lineChartData[0].data.length" cols="12">
+        <v-col v-if="lineChartData[0].data.length > 1" cols="12">
             <LineChart :color="theme.current.value.colors.error" :series="lineChartData"/>
         </v-col>
 

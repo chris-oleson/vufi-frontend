@@ -15,20 +15,12 @@ const chartOptions = computed(() => {
         theme: {
             mode: theme.name.value,
             monochrome: {
-                enabled: props.color,
+                enabled: true,
                 color: props.color,
                 shadeTo: theme.name.value,
             },
         },
         labels: props.labels,
-        plotOptions: {
-            pie: {
-                expandOnClick: false,
-                dataLabels: {
-                    offset: -10
-                },
-            }
-        },
         dataLabels: {
             formatter(val) {
                 return [val.toFixed(1) + '%']

@@ -2,16 +2,13 @@
     <v-card class="pa-10 mx-auto my-10 text-center" width="330">
         <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
 
-        <template v-if="route.query.t">
-            <v-card-text v-if="error" class="text-error pa-0 mt-4">{{ errorMessage }}</v-card-text>
-            <v-progress-circular v-else class="mt-4 mx-auto d-block" indeterminate></v-progress-circular>
-        </template>
+        <v-progress-circular v-if="loading" class="mt-4 mx-auto d-block" indeterminate></v-progress-circular>
+        <v-card-text v-else-if="error && route.query.t" class="text-error pa-0 mt-4">{{ errorMessage }}</v-card-text>
         <template v-else>
             <v-text-field id="email" variant="underlined" label="Email" v-model="email" :error="error"/>
             <v-text-field variant="underlined" label="Password" type="password" v-model="password" :error="error" @keyup.enter="login"/>
             <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>
-            <v-progress-circular v-if="loading" class="mt-4 mx-auto d-block" indeterminate></v-progress-circular>
-            <v-btn v-else width="200" rounded="0" class="bg-primary mt-4" @click="login">Log In</v-btn>
+            <v-btn width="200" rounded="0" class="bg-primary mt-4" @click="login">Log In</v-btn>
             <v-btn v-if="errorMessage == 'This account has not been verified'" width="200" size="small" variant="plain" class="font-weight-light mt-4" @click="resend">Resend Verification</v-btn>
             <v-btn width="200" size="small" variant="plain" class="mt-4 font-weight-light" :to="'/forgot-password?e=' + email">Forgot Password</v-btn>
         </template>
@@ -57,15 +54,16 @@ function login() {
         store.getAllAssetData()
         router.push('/assets')
     }).catch((err) => {
-        loading.value = false
         error.value = true
         errorMessage.value = err.response.data
+        loading.value = false
     })
 }
 
 function verify() {
     axios.post('/auth/verify', {
-        token: route.query.t
+        token: route.query.t,
+        email: route.query.e
     }).then(() => {
         store.isLoggedIn = true
         store.getAllAssetData()

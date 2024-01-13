@@ -114,6 +114,12 @@ export const router = createRouter({
         },
         {
             path: '/change-password',
+            beforeEnter: (to) => {
+                const store = useStore()
+                if (!store.isLoggedIn && !to.query.t) {
+                    return { path: '/404' }
+                }
+            },
             component: ChangePassword,
             meta: {
                 title: 'Change Password - VuFi'

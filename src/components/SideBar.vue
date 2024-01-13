@@ -11,7 +11,7 @@
             <v-list-item replace slim prepend-icon="mdi-credit-card-multiple" class="py-4" to="/debts">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline ml-2 text-no-wrap">Debts</div>
-                    <div class="d-inline">{{ formatCurrency(store.totalDebtValue) }}</div>
+                    <div class="d-inline">-{{ formatCurrency(store.totalDebtValue) }}</div>
                 </div>
             </v-list-item>
 

@@ -1,6 +1,6 @@
 <template>
     <v-row v-if="store.allAssets.length || store.allDebts.length" class="ma-2">
-        <v-col cols="12">
+        <v-col v-if="lineChartData > 1" cols="12">
             <LineChart :color="theme.current.value.colors.primary" :series="lineChartData"/>
         </v-col>
 
@@ -56,7 +56,7 @@ function formatData() {
         if (!debt.is_deleted) {
             charts[1].data.push({
                 x: debt.name,
-                y: 0 - parseFloat(debt.value)
+                y: parseFloat(debt.value)
             })
         }
     }

@@ -167,9 +167,9 @@ function rejectUnauthorized() {
     }
 }
 
-function forwardLogin() {
+function forwardLogin(to) {
     const store = useStore()
-    if (store.isLoggedIn) {
+    if (store.isLoggedIn && !to.query.t) {
         return { path: '/assets' }
     }
 }

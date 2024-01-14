@@ -9,20 +9,20 @@
     },
     "dependencies": {
         "apexcharts": "^3.45.1",
-        "axios": "^1.6.3",
+        "axios": "^1.6.5",
         "pinia": "^2.1.7",
         "pinia-plugin-persistedstate": "^3.2.1",
-        "vue": "^3.3.13",
+        "vue": "^3.4.13",
         "vue-router": "^4.2.4",
         "vue3-apexcharts": "^1.4.4",
-        "vuetify": "^3.4.9"
+        "vuetify": "^3.4.10"
     },
     "devDependencies": {
         "@mdi/font": "^7.4.47",
-        "@vitejs/plugin-vue": "^5.0.0",
+        "@vitejs/plugin-vue": "^5.0.3",
         "eslint": "^8.56.0",
-        "eslint-plugin-vue": "^9.19.2",
-        "vite": "^5.0.10",
+        "eslint-plugin-vue": "^9.20.1",
+        "vite": "^5.0.11",
         "vite-plugin-vuetify": "^2.0.1"
     },
     "browserslist": [

@@ -8,7 +8,7 @@
 import { computed } from 'vue'
 import { useTheme, useDisplay } from 'vuetify'
 const theme = useTheme()
-const display = useDisplay()
+const { xs } = useDisplay()
 const props = defineProps(['color', 'series'])
 
 const chartOptions = computed(() => {
@@ -21,7 +21,7 @@ const chartOptions = computed(() => {
             curve: 'straight',
         },
         yaxis: {
-            show: !display.xs.value,
+            show: !xs.value,
             labels: {
                 formatter: function (value) {
                     var formatter = new Intl.NumberFormat('en-US', {
@@ -51,7 +51,7 @@ const chartOptions = computed(() => {
         },
         xaxis: {
             labels: {
-                show: !display.xs.value,
+                show: !xs.value,
             },
             type: 'datetime',
             tooltip: {

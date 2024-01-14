@@ -17,7 +17,7 @@
             <v-divider vertical inset></v-divider>
             <v-btn v-if="store.isLoggedIn" class="font-weight-light ml-4" variant="plain" to="/assets">Dashboard</v-btn>
             <v-btn v-if="!store.isLoggedIn" class="font-weight-light mx-4" variant="plain" to="/login">Log In</v-btn>
-            <v-btn v-if="!store.isLoggedIn" class="bg-primary mr-4" rounded="0" to="/signup">Sign Up</v-btn>
+            <v-btn v-if="!store.isLoggedIn" class="bg-primary mr-4" rounded="0" @click="router.push('/signup')">Sign Up</v-btn>
         </template>
 
         <!-- Mobile display -->

@@ -41,7 +41,12 @@ function changePassword() {
             text: "Successfully updated password",
             color: "primary"
         }
-        router.push('/login')
+        if (route.query.t) {
+            router.push('/login')
+        }
+        else {
+            router.push('/assets')
+        }
     }).catch((err) => {
         error.value = true
         errorMessage.value = err.response.data

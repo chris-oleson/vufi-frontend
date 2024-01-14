@@ -1,7 +1,8 @@
 <template>
     <v-card class="pa-10 mx-auto my-10 text-center" width="330">
         <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
-        <template v-if="accountCreated">
+        <v-progress-circular v-if="loading" class="mt-4 mx-auto d-block" indeterminate></v-progress-circular>
+        <template v-else-if="accountCreated">
             <v-card-text class="pa-0 mt-4 font-weight-light">Your account has been created!</v-card-text>
             <v-card-text class="pa-0 mt-4 font-weight-light">We have sent you an email in order to verify your email address.</v-card-text>
             <v-card-text class="pa-0 mt-4 font-weight-light">Please verify your account before logging in.</v-card-text>
@@ -27,12 +28,14 @@ const password = ref('')
 const error = ref(false)
 const errorMessage = ref('')
 const accountCreated = ref(false)
+const loading = ref(false)
 
 onMounted(() => {
     document.getElementById('name').focus()
 })
 
 function createAccount() {
+    loading.value = true
     axios.post('/auth/create', {
         name: name.value,
         email: email.value,
@@ -40,10 +43,12 @@ function createAccount() {
     })
     .then(() => {
         accountCreated.value = true
+        loading.value = false
     })
     .catch((err) => {
         errorMessage.value = err.response.data
         error.value = true
+        loading.value = false
     })
 }
 </script>

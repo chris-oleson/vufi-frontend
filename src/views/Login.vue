@@ -1,7 +1,6 @@
 <template>
     <v-card class="pa-10 mx-auto my-10 text-center" width="330">
         <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
-
         <v-progress-circular v-if="loading" class="mt-4 mx-auto d-block" indeterminate></v-progress-circular>
         <v-card-text v-else-if="error && route.query.t" class="text-error pa-0 mt-4">{{ errorMessage }}</v-card-text>
         <template v-else>
@@ -67,6 +66,10 @@ function verify() {
     }).then(() => {
         store.isLoggedIn = true
         store.getAllAssetData()
+        store.notification = {
+            text: "Successfully verified email!",
+            color: "primary"
+        }
         router.push('/assets')
     }).catch((err) => {
         error.value = true

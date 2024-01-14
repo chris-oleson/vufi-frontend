@@ -26,6 +26,14 @@ const chartOptions = computed(() => {
                 return [val.toFixed(1) + '%']
             },
         },
+        plotOptions: {
+            pie: {
+                expandOnClick: false,
+                dataLabels: {
+                    offset: -10
+                },
+            }
+        },
         legend: {
             show: true,
             position: 'right'

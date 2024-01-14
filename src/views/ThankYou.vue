@@ -13,7 +13,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 function loadData() {
-    axios.get('user/subscription-status').then((resp) => {
+    axios.get('auth/subscription-status').then((resp) => {
         store.subscriptionStatus = resp.data
         store.getAllAssetData()
         router.push('/assets')

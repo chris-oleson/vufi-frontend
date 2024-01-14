@@ -23,7 +23,6 @@ export const useStore = defineStore('store', {
 
     actions: {
         async getAllAssetData() {
-            // Get raw asset data
             let [
                 assetResponse,
                 assetValueResponse,

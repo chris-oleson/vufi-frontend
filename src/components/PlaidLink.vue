@@ -1,6 +1,5 @@
 <template>    
     <v-list-item @click="getLinkToken">Financial Account</v-list-item>
-    <v-list-item @click="updatePlaidData">Update plaid data</v-list-item>
 </template>
 
 <script setup>

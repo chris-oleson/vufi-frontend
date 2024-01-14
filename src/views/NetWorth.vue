@@ -1,6 +1,6 @@
 <template>
     <v-row v-if="store.allAssets.length || store.allDebts.length" class="ma-2">
-        <v-col v-if="lineChartData > 1" cols="12">
+        <v-col v-if="lineChartData[0].data.length > 1" cols="12">
             <LineChart :color="theme.current.value.colors.primary" :series="lineChartData"/>
         </v-col>
 
@@ -86,8 +86,15 @@ function refineHistory(assets, debts, assetHistory, debtHistory) {
     }
 
     // Combine histories
-    let history = assetHistory
-    history.push(...debtHistory)
+    let history = []
+    history.push(...assetHistory)
+    for (let entry of debtHistory) {
+        history.push({
+            asset_id: entry.debt_id,
+            value: parseFloat(entry.value) * -1,
+            date: entry.date
+        })
+    }
 
     // Get all dates that there are records for
     let uniqueDates = []
@@ -103,13 +110,7 @@ function refineHistory(assets, debts, assetHistory, debtHistory) {
         for (let date of uniqueDates) {
             // Check if there is any value for that asset on that date, add it if there is.
             for (let entry of history) {
-                if (entry.date == date && entry.asset_id == asset.id && asset.value < 0) {
-                    asset.history.push({
-                        x: entry.date,
-                        y: parseFloat(entry.value)
-                    })
-                }
-                else if (entry.date == date && entry.asset_id == asset.id) {
+                if (entry.date == date && entry.asset_id == asset.id) {
                     asset.history.push({
                         x: entry.date,
                         y: parseFloat(entry.value)

@@ -21,16 +21,14 @@ const error = ref(false)
 const errorMessage = ref('')
 
 function deleteAccount () {
-    axios.delete('user', {data: {password: password.value}})
-    .then(() => {
+    axios.delete('/auth', { data: { password: password.value } }).then(() => {
         store.notification = {
             text: "Successfully deleted account",
             color: "primary"
         }
         store.$reset()
         router.push('/')
-    })
-    .catch((err) => {
+    }).catch((err) => {
         error.value = true
         errorMessage.value = err.response.data
     })

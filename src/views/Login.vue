@@ -60,6 +60,7 @@ function login() {
 }
 
 function verify() {
+    loading.value = true
     axios.post('/auth/verify', {
         token: route.query.t,
         email: route.query.e
@@ -74,6 +75,7 @@ function verify() {
     }).catch((err) => {
         error.value = true
         errorMessage.value = err.response.data
+        loading.value = false
     })
 }
 

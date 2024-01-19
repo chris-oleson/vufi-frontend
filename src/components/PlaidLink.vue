@@ -14,6 +14,7 @@ function getLinkToken() {
             let plaid = window.Plaid.create({
                 token: res.data.link_token,
                 onSuccess: (public_token) => {
+                    console.log('succeeded')
                     sendPublicToken(public_token)
                 },
             })

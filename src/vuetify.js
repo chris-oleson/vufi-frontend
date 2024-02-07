@@ -18,6 +18,7 @@ export default createVuetify({
                     accent: '#aed581',
                     secondary: '#ffffff',
                     success: '#83af50',
+                    warning: '#ff8c19',
                     error: '#c13e3e',
                 }
             },
@@ -28,6 +29,7 @@ export default createVuetify({
                     accent: '#3d4b2f',
                     secondary: '#272727',
                     success: '#83af50',
+                    warning: '#ff8c19',
                     error: '#c13e3e',
                 }
             },

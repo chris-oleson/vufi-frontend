@@ -4,7 +4,7 @@
             <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
             <h2 class="font-weight-light ml-2">VuFi</h2>
         </router-link>
-        <v-card class="font-weight-light text-error px-2" variant="outlined">alpha</v-card>
+        <v-card class="font-weight-light text-warning px-2" variant="outlined">beta</v-card>
 
         <v-spacer/>
 

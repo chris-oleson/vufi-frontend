@@ -36,7 +36,7 @@ const chartOptions = computed(() => {
         },
         legend: {
             show: true,
-            position: 'right'
+            position: 'bottom'
         },
         tooltip: {
             fillSeriesColor: false,

@@ -68,7 +68,9 @@ function checkSession() {
     if (store.isLoggedIn) {
         axios.post('auth/check-session').catch(() => {
             store.$reset()
-            router.push('/login')
+            if (route.path != '/') {
+                router.push('/login')
+            }
         })
     }
 }

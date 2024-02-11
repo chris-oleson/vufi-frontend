@@ -1,8 +1,8 @@
 <template>
-    <v-container fluid class="text-center pa-3" style="height: 100%">
+    <v-container fluid class="text-center pa-3">
         <v-row>
             <v-col cols="12" lg="6" class="py-16 px-8 mx-auto">
-                <h1 class="font-weight-light mb-8">Hello! <br> I'm Chris</h1>
+                <h1 class="font-weight-light mb-8">Hi, I'm Chris.</h1>
                 <div class="font-weight-light text-left" style="text-indent: 2em;">
                     After graduating college and getting my budget under control, I quickly realized that my money was ending up in a lot of different places.
                     I like being organized, and I hated the idea of losing track of my investments.

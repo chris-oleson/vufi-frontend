@@ -18,14 +18,17 @@
         <v-row class="bg-accent py-16">
             <v-col class="px-8 mx-auto" cols="12" lg="6">
                 <h2 class="font-weight-thin text-h3 my-16">Unify Your Assets</h2>
-                <h2 class="font-weight-light mb-16">No more logging into 10 different accounts to keep track of your money. VuFi keeps all that data in one place, with one account.</h2>
+                <h2 class="font-weight-light mb-16">No more logging into ten different accounts to keep track of your money. VuFi keeps all that data in one place, with one account.</h2>
             </v-col>
         </v-row>
 
         <v-row class="py-16">
             <v-col class="px-8 mx-auto" cols="12" lg="6">
                 <h2 class="font-weight-thin text-h3 my-16">Private and Secure</h2>
-                <h2 class="font-weight-light mb-16">VuFi doesn't store any of your financial credentials; they are passed directly to our third party financial services.</h2>
+                <h2 class="font-weight-light mb-16">
+                    VuFi doesn't store any of your financial credentials; they are passed directly to our third party financial services.
+                    We'll never share or sell your data, and you'll never see a single ad.
+                </h2>
             </v-col>
         </v-row>
     </v-container>

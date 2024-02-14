@@ -26,27 +26,31 @@ const router = useRouter()
 import TopBar from '/src/components/TopBar'
 import SideBar from '/src/components/SideBar'
 
-const showNotification = ref(false)
-const notificationColor = ref('')
-const notificationText = ref('')
+// Auto logout after 15 minutes of inactivity
+let timeout = setTimeout(logOut, 15 * 60 * 1000)
+addEventListener("click", resetTimeout)
 
-setTheme()
-checkSession()
+function resetTimeout() {
+    clearTimeout(timeout)
+    timeout = setTimeout(logOut, 15 * 60 * 1000)
+}
 
+function logOut() {
+    axios.post('auth/logout').then(() => {
+        router.push('/login')
+        store.$reset()
+    })
+}
+
+// Update site title when page changes
 watch(route, (newRoute) => {
     document.title = newRoute.meta.title
 })
 
+// Update current theme
+setTheme()
 watch(() => store.theme, () => {
     setTheme()
-})
-
-watch(() => store.notification, (newNotification) => {
-    if (newNotification.text) {
-        notificationText.value = newNotification.text
-        notificationColor.value = newNotification.color
-        showNotification.value = true
-    }
 })
 
 function setTheme() {
@@ -64,16 +68,17 @@ function setTheme() {
     }
 }
 
-function checkSession() {
-    if (store.isLoggedIn) {
-        axios.post('auth/check-session').catch(() => {
-            store.$reset()
-            if (route.path != '/') {
-                router.push('/login')
-            }
-        })
+// Handling notifications
+const showNotification = ref(false)
+const notificationColor = ref('')
+const notificationText = ref('')
+watch(() => store.notification, (newNotification) => {
+    if (newNotification.text) {
+        notificationText.value = newNotification.text
+        notificationColor.value = newNotification.color
+        showNotification.value = true
     }
-}
+})
 </script>
 
 <style>

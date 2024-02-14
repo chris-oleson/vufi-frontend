@@ -14,7 +14,7 @@
                         </template>
                         <v-list class="pa-0">
                             <PlaidLink></PlaidLink>
-                            <v-list-item v-bind="dialog" @click="clearFields(true)">Custom {{ props.type }}</v-list-item>
+                            <v-list-item v-bind="dialog" @click="newItem">Custom {{ props.type }}</v-list-item>
                         </v-list>
                     </v-menu>
 
@@ -39,7 +39,7 @@
                         <v-card class="pa-4 text-center mx-auto" width="330">
                             <v-card-text class="font-weight-light mb-4">Are you sure you want to delete this {{ props.type.toLowerCase() }}?</v-card-text>
                             <v-btn rounded="0" width="200" class="mx-auto bg-error" @click="deleteItemConfirm">Yes</v-btn>
-                            <v-btn rounded="0" width="200" variant="plain" class="mx-auto" @click="closeDelete">Cancel</v-btn>
+                            <v-btn rounded="0" width="200" variant="plain" class="mx-auto" @click="dialogDelete = false">Cancel</v-btn>
                         </v-card>
                     </v-dialog>
                 </v-toolbar>
@@ -66,7 +66,7 @@
 
 <script setup>
 import axios from 'axios'
-import { ref, computed, nextTick } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from '/src/pinia'
 const store = useStore()
 import { useDisplay } from 'vuetify'
@@ -75,7 +75,7 @@ import PlaidLink from '/src/components/PlaidLink'
 const props = defineProps(['color', 'type', 'url', 'tableData', 'totalValue'])
 
 const dialog = ref(false)
-const dialogDelete = ref (false)
+const dialogDelete = ref(false)
 const editedIndex = ref(-1)
 const editedItem = ref({
     name: '',
@@ -111,14 +111,6 @@ const formTitle = computed(() => {
     return editedIndex.value === -1 ? 'New ' + props.type : 'Edit ' + props.type
 })
 
-function clearFields(show) {
-    if (show) {
-        dialog.value = true
-    }
-    editedItem.value = Object.assign(defaultItem)
-    editedIndex.value = -1
-}
-
 const headers = computed(() => {
     if (display.xs.value) {
         return [
@@ -147,6 +139,12 @@ function formatCurrency(value) {
     return formatter.format(value);
 }
 
+function newItem() {
+    editedItem.value = Object.assign({}, defaultItem)
+    editedIndex.value = -1
+    dialog.value = true
+}
+
 function editItem (item) {
     editedIndex.value = props.tableData.indexOf(item)
     editedItem.value = Object.assign({}, item)
@@ -161,15 +159,7 @@ function deleteItem (item) {
 
 function deleteItemConfirm () {
     deleteFromDatabase(editedItem.value)
-    closeDelete()
-}
-
-function closeDelete () {
     dialogDelete.value = false
-    nextTick(() => {
-        editedItem.value = Object.assign({}, defaultItem.value)
-        editedIndex.value = -1
-    })
 }
 
 function save () {
@@ -187,7 +177,7 @@ function addToDatabase(item) {
     axios.post(`/${props.url}`, {
         name: item.name,
         type: item.type,
-        value: item.value,
+        value: item.value.replace(',', ''),
     })
     .then(() => {
         store.getAllAssetData()
@@ -198,7 +188,7 @@ function replaceInDatabase(item) {
     axios.put(`/${props.url}/${item.id}`, {
         name: item.name,
         type: item.type,
-        value: item.value,
+        value: item.value.replace(',', ''),
         user_id: store.userID,
     })
     .then(() => {

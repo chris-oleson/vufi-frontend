@@ -26,7 +26,7 @@ const router = useRouter()
 import TopBar from '/src/components/TopBar'
 import SideBar from '/src/components/SideBar'
 
-// Make sure there's an active session on login
+// Make sure there's an active session
 checkSession()
 function checkSession() {
     if (store.isLoggedIn) {
@@ -39,15 +39,8 @@ function checkSession() {
     }
 }
 
-// Auto logout after 15 minutes of inactivity
-let timeout = setTimeout(logOut, 15 * 60 * 1000)
-addEventListener("click", resetTimeout)
-
-function resetTimeout() {
-    clearTimeout(timeout)
-    timeout = setTimeout(logOut, 15 * 60 * 1000)
-}
-
+// Auto logout after 30 minutes
+setTimeout(logOut, 30 * 60 * 1000)
 function logOut() {
     axios.post('auth/logout').then(() => {
         router.push('/login')

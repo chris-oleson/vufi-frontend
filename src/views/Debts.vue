@@ -31,7 +31,7 @@ const tableData = computed(() => {
 const pieChartLabels = computed(() => {
     let labels = []
     for (let debt of store.allDebts) {
-        if (!debt.hidden && !debt.is_deleted) {
+        if (!debt.is_hidden && !debt.is_deleted) {
             labels.push(debt.name)
         }
     }
@@ -41,7 +41,7 @@ const pieChartLabels = computed(() => {
 const pieChartValues = computed(() => {
     let values = []
     for (let debt of store.allDebts) {
-        if (!debt.hidden && !debt.is_deleted) {
+        if (!debt.is_hidden && !debt.is_deleted) {
             values.push(parseFloat(debt.value))
         }
     }
@@ -59,7 +59,7 @@ function refineHistory(debts, history) {
     // Get all individual debts
     let visibleDebts = []
     for (let debt of debts) {
-        if (!debt.hidden) {
+        if (!debt.is_hidden) {
             visibleDebts.push({
                 id: debt.id,
                 history: []

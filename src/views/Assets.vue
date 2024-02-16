@@ -31,7 +31,7 @@ const tableData = computed(() => {
 const pieChartLabels = computed(() => {
     let labels = []
     for (let asset of store.allAssets) {
-        if (!asset.hidden && !asset.is_deleted) {
+        if (!asset.is_hidden && !asset.is_deleted) {
             labels.push(asset.name)
         }
     }
@@ -41,7 +41,7 @@ const pieChartLabels = computed(() => {
 const pieChartValues = computed(() => {
     let values = []
     for (let asset of store.allAssets) {
-        if (!asset.hidden && !asset.is_deleted) {
+        if (!asset.is_hidden && !asset.is_deleted) {
             values.push(parseFloat(asset.value))
         }
     }
@@ -59,7 +59,7 @@ function refineHistory(assets, history) {
     // Get all individual assets
     let visibleAssets = []
     for (let asset of assets) {
-        if (!asset.hidden) {
+        if (!asset.is_hidden) {
             visibleAssets.push({
                 id: asset.id,
                 history: []

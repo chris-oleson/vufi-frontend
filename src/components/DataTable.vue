@@ -50,7 +50,7 @@
             </template>
 
             <template v-slot:[`item.actions`]="{ item }">
-                <v-icon size="small" class="mr-2" @click="focusItem(item)">{{ item.hidden ? 'mdi-eye-closed' : 'mdi-eye-outline' }}</v-icon>
+                <v-icon size="small" class="mr-2" @click="focusItem(item)">{{ item.is_hidden ? 'mdi-eye-closed' : 'mdi-eye-outline' }}</v-icon>
                 <v-icon size="small" class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
                 <v-icon size="small" @click="deleteItem(item)">mdi-delete</v-icon>
             </template>
@@ -89,21 +89,15 @@ const defaultItem = {
 }
 
 function focusItem(item) {
-    if (item.hidden) {
-        if (props.type == "Asset") {
-            store.allAssets[props.tableData.indexOf(item)].hidden = false
-        }
-        else {
-            store.allDebts[props.tableData.indexOf(item)].hidden = false
-        }
+    if (item.is_hidden) {
+        axios.put(`/${props.url}/show/${item.id}`).then(() => {
+            store.getAllAssetData()
+        })
     }
     else {
-        if (props.type == "Asset") {
-            store.allAssets[props.tableData.indexOf(item)].hidden = true
-        }
-        else {
-            store.allDebts[props.tableData.indexOf(item)].hidden = true
-        }
+        axios.put(`/${props.url}/hide/${item.id}`).then(() => {
+            store.getAllAssetData()
+        })
     }
 }
 

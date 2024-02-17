@@ -8,8 +8,7 @@
         </template>
         <template v-else>
             <v-text-field variant="underlined" label="New Email" v-model="newEmail" :error="error" class="mt-4"></v-text-field>
-            <v-text-field variant="underlined" label="Confirm Email" v-model="confirmEmail" :error="error"></v-text-field>
-            <v-text-field variant="underlined" label="Password" v-model="password" :error="error" type="password" @keyup.enter="changeEmail"></v-text-field>
+            <v-text-field :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" variant="underlined" label="Password" :type="showPassword ? 'text' : 'password'" v-model="password" :error="error" @click:append="showPassword = !showPassword" @keyup.enter="changeEmail"/>
             <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>
             <v-btn rounded="0" class="bg-primary mt-4" width="200" @click="changeEmail">Submit</v-btn>
         </template>
@@ -22,7 +21,7 @@ import axios from 'axios'
 
 const password = ref('')
 const newEmail = ref('')
-const confirmEmail = ref('')
+const showPassword = ref(false)
 const error = ref(false)
 const errorMessage = ref('')
 const sentVerification = ref(false)
@@ -33,7 +32,6 @@ function changeEmail () {
     axios.patch('auth/email', {
         password: password.value,
         newEmail: newEmail.value,
-        confirmEmail: confirmEmail.value
     })
     .then(() => {
         sentVerification.value = true

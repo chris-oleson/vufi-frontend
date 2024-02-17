@@ -10,8 +10,7 @@
         <template v-else>
             <v-text-field id="name" variant="underlined" label="Name" :error="error" v-model="name"></v-text-field>
             <v-text-field variant="underlined" label="Email" :error="error" v-model="email"/>
-            <v-text-field variant="underlined" label="Password" type="password" :error="error" v-model="password"/>
-            <v-text-field variant="underlined" label="Confirm Password" type="password" :error="error" v-model="confirmPassword" @keyup.enter="createAccount"/>
+            <v-text-field :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" variant="underlined" label="Password" :type="showPassword ? 'text' : 'password'" v-model="password" :error="error" @click:append="showPassword = !showPassword" @keyup.enter="createAccount"/>
             <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>
             <v-btn v-if="errorMessage == 'This email already exists'" width="200" size="small" rounded="0" class="bg-error mt-4" to="/forgot-password">Forgot Password?</v-btn>
             <v-btn width="200" rounded="0" class="bg-primary mt-4" @click="createAccount">Create Account</v-btn>
@@ -26,7 +25,7 @@ import axios from 'axios'
 const name = ref('')
 const email = ref('')
 const password = ref('')
-const confirmPassword = ref('')
+const showPassword = ref(false)
 const error = ref(false)
 const errorMessage = ref('')
 const accountCreated = ref(false)
@@ -42,7 +41,6 @@ function createAccount() {
         name: name.value,
         email: email.value,
         password: password.value,
-        confirmPassword: confirmPassword.value
     })
     .then(() => {
         accountCreated.value = true

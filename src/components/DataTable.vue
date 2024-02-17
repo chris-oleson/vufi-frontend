@@ -52,7 +52,7 @@
             </template>
 
             <template v-slot:[`item.actions`]="{ item }">
-                <v-icon size="small" class="mr-2" @click="focusItem(item)">{{ item.is_hidden ? 'mdi-eye-closed' : 'mdi-eye-outline' }}</v-icon>
+                <v-icon size="small" class="mr-2" @click="focusItem(item)">{{ item.is_hidden ? 'mdi-eye-off' : 'mdi-eye' }}</v-icon>
                 <v-icon size="small" class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
                 <v-icon size="small" @click="deleteItem(item)">mdi-delete</v-icon>
             </template>

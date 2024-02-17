@@ -25,26 +25,34 @@ export const useStore = defineStore('store', {
         async getAllAssetData() {
             let [
                 assetResponse,
-                assetValueResponse,
                 assetHistoryResponse,
                 debtResponse,
-                debtValueResponse,
                 debtHistoryResponse
             ] = await Promise.all([
                 axios.get('/assets'),
-                axios.get('/assets/value'),
                 axios.get('/assets/history'),
                 axios.get('/debts'),
-                axios.get('/debts/value'),
                 axios.get('/debts/history'),
             ])
 
             this.allAssets = assetResponse.data
-            this.totalAssetValue = assetValueResponse.data
             this.allAssetHistory = assetHistoryResponse.data
             this.allDebts = debtResponse.data
-            this.totalDebtValue = debtValueResponse.data
             this.allDebtHistory = debtHistoryResponse.data
+
+            this.totalAssetValue = 0
+            for (let asset of this.allAssets) {
+                if (!asset.is_deleted && !asset.is_hidden) {
+                    this.totalAssetValue += parseFloat(asset.value)
+                }
+            }
+
+            this.totalDebtValue = 0
+            for (let debt of this.allDebts) {
+                if (!debt.is_deleted && !debt.is_hidden) {
+                    this.totalDebtValue += parseFloat(debt.value)
+                }
+            }
         }
     },
     persist: true,

@@ -77,12 +77,6 @@ const chartOptions = computed(() => {
             animations: {
                 enabled: false
             },
-            toolbar: {
-                show: false,
-                tools: {
-                    zoom: false,
-                },
-            },
             background: 'none'
         }
     }

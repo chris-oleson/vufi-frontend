@@ -44,7 +44,7 @@ function formatData() {
     ]
 
     for (let asset of store.allAssets) {
-        if (!asset.is_deleted) {
+        if (!asset.is_deleted && !asset.is_hidden) {
             charts[0].data.push({
                 x: asset.name,
                 y: parseFloat(asset.value)
@@ -53,7 +53,7 @@ function formatData() {
     }
 
     for (let debt of store.allDebts) {
-        if (!debt.is_deleted) {
+        if (!debt.is_deleted && !debt.is_hidden) {
             charts[1].data.push({
                 x: debt.name,
                 y: parseFloat(debt.value)

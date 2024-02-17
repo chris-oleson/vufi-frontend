@@ -6,6 +6,7 @@
                     <div class="font-weight-light text-h5 mx-4">{{ props.type }}s</div>
                     <v-divider inset vertical></v-divider>
                     <div class="font-weight-light text-h5 mx-4">{{ formatCurrency(props.totalValue) }}</div>
+
                     <v-spacer></v-spacer>
 
                     <v-menu offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>

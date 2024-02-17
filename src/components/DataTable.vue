@@ -40,7 +40,8 @@
                         <v-card class="pa-4 text-center mx-auto" width="330">
                             <v-card-text class="font-weight-light mb-4">Are you sure you want to delete this {{ props.type.toLowerCase() }}?</v-card-text>
                             <v-btn rounded="0" width="200" class="mx-auto bg-error" @click="deleteItemConfirm">Yes</v-btn>
-                            <v-btn rounded="0" width="200" variant="plain" class="mx-auto" @click="dialogDelete = false">Cancel</v-btn>
+                            <v-btn rounded="0" width="200" variant="plain" class="mx-auto font-weight-light text-error" @click="deleteItemAndHistory">Yes, and its history</v-btn>
+                            <v-btn rounded="0" width="200" variant="plain" class="mx-auto font-weight-light" @click="dialogDelete = false">Cancel</v-btn>
                         </v-card>
                     </v-dialog>
                 </v-toolbar>
@@ -152,20 +153,27 @@ function deleteItem (item) {
     dialogDelete.value = true
 }
 
-function deleteItemConfirm () {
-    deleteFromDatabase(editedItem.value)
-    dialogDelete.value = false
-}
-
 function save () {
     if (editedIndex.value > -1) {
-        // Editing existing
         replaceInDatabase(editedItem.value)
     } else {
-        // Adding new item
         addToDatabase(editedItem.value)
     }
     dialog.value = false
+}
+
+function deleteItemAndHistory() {
+    axios.delete(`/${props.url}/${editedItem.value.id}/history`).then(() => {
+        store.getAllAssetData()
+        dialogDelete.value = false
+    })
+}
+
+function deleteItemConfirm() {
+    axios.delete(`/${props.url}/${editedItem.value.id}`).then(() => {
+        store.getAllAssetData()
+        dialogDelete.value = false
+    })
 }
 
 function addToDatabase(item) {
@@ -186,13 +194,6 @@ function replaceInDatabase(item) {
         value: item.value.replace(',', ''),
         user_id: store.userID,
     })
-    .then(() => {
-        store.getAllAssetData()
-    })
-}
-
-function deleteFromDatabase(item) {
-    axios.delete(`/${props.url}/${item.id}`)
     .then(() => {
         store.getAllAssetData()
     })

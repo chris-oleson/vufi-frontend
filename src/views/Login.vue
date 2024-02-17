@@ -45,12 +45,12 @@ function login() {
     axios.post('/auth/login', {
         email: email.value,
         password: password.value,
-    }).then(resp => {
+    }).then(async (resp) => {
         store.theme = resp.data.theme
         store.currency = resp.data.currency
         store.subscriptionStatus = resp.data.subscription_status
         store.isLoggedIn = true
-        store.getAllAssetData()
+        await store.getAllAssetData()
         router.push('/assets')
     }).catch((err) => {
         error.value = true

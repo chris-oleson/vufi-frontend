@@ -9,7 +9,7 @@ import { router } from '../router';
 const store = useStore()
 
 function getLinkToken() {
-    if (store.subscriptionStatus == 'active') {
+    if (store.subscriptionStatus == 'Active') {
         axios.post('plaid/link-token').then((res) => {
             let plaid = window.Plaid.create({
                 token: res.data.link_token,

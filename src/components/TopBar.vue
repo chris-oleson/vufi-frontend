@@ -31,7 +31,7 @@
                 <v-list-item to="/about">About</v-list-item>
                 <v-list-item to="/contact">Contact</v-list-item>
                 <v-divider class="mx-2"></v-divider>
-                <v-list-item v-if="store.isLoggedIn && store.subscriptionStatus == 'active'" to="/assets">Dashboard</v-list-item>
+                <v-list-item v-if="store.isLoggedIn && store.subscriptionStatus == 'Active'" to="/assets">Dashboard</v-list-item>
                 <v-list-item v-if="!store.isLoggedIn" to="/login">Log In</v-list-item>
                 <v-list-item v-if="!store.isLoggedIn" class="text-primary" to="/signup">Sign Up</v-list-item>
             </v-list>

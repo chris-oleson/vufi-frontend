@@ -4,7 +4,7 @@ import axios from 'axios'
 export const useStore = defineStore('store', {
     state: () => ({
         isLoggedIn: false,
-        subscriptionStatus: null,
+        subscriptionStatus: 'Free',
         theme: 0,
         currency: 'USD',
 

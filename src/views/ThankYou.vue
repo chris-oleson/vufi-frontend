@@ -13,10 +13,23 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 function loadData() {
-    axios.get('auth/subscription-status').then((resp) => {
-        store.subscriptionStatus = resp.data
-        store.getAllAssetData()
+    axios.get('auth/expires').then((resp) => {
+        store.subscriptionStatus = getSubscriptionStatus(resp.data)
         router.push('/assets')
+    }).catch(() => {
+        router.push('/login')
     })
+}
+
+function getSubscriptionStatus(expiration) {
+    if (!expiration) {
+        return 'Free'
+    }
+    else if (expiration >= new Date().toISOString().split('T')[0]) {
+        return 'Active'
+    }
+    else {
+        return 'Canceled'
+    }
 }
 </script>

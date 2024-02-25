@@ -17,8 +17,8 @@
         <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/change-email">Change Email</v-btn>
         <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4 text-error" width="200" to="/delete-account">Delete Account</v-btn>
 
-        <v-card-text>Subscription: {{ store.subscriptionStatus.toUpperCase() }}</v-card-text>
-        <v-btn v-if="store.subscriptionStatus == 'active'" rounded="0" variant="tonal" class="font-weight-light text-error mb-4" width="200" to="/cancel-subscription">Unsubscribe</v-btn>
+        <v-card-text>Subscription: {{ store.subscriptionStatus }}</v-card-text>
+        <v-btn v-if="store.subscriptionStatus == 'Active'" rounded="0" variant="tonal" class="font-weight-light text-error mb-4" width="200" to="/cancel-subscription">Unsubscribe</v-btn>
         <v-btn v-else rounded="0" variant="tonal" class="font-weight-light text-primary mb-4" width="200" to="/pricing">Upgrade</v-btn>
     </v-card>
 </template>

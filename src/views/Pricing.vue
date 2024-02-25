@@ -46,7 +46,7 @@ function redirect(time) {
     if (!store.isLoggedIn) {
         router.push('/signup')
     }
-    else if (store.subscriptionStatus == "active") {
+    else if (store.subscriptionStatus == "Active") {
         router.push('/assets')
     }
     else if (time == 'month') {

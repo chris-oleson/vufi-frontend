@@ -50,10 +50,10 @@ function redirect(time) {
         router.push('/assets')
     }
     else if (time == 'month') {
-        window.location.href = "https://buy.stripe.com/test_8wM3gi3Nr3DN9oI6or"
+        window.location.href = "https://buy.stripe.com/5kAdTAcZD6x15qM7su"
     }
     else if (time == 'year') {
-        window.location.href = "https://buy.stripe.com/test_00g9EGgAd4HRcAUbIM"
+        window.location.href = "https://buy.stripe.com/5kA5n43p32gL06s145"
     }
 }
 </script>

@@ -51,6 +51,10 @@
                 <span v-if="item">{{ formatCurrency(parseFloat(item.value)) }}</span>
             </template>
 
+            <template v-slot:[`item.updated`]="{ item }">
+                <span v-if="item.updated">{{ item.updated.split('T')[0] }}</span>
+            </template>
+
             <template v-slot:[`item.actions`]="{ item }">
                 <v-icon size="small" class="mr-2" @click="focusItem(item)">{{ item.is_hidden ? 'mdi-eye' : 'mdi-eye-off' }}</v-icon>
                 <v-icon size="small" class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
@@ -119,6 +123,7 @@ const headers = computed(() => {
             { title: 'Name', align: 'start', key: 'name' },
             { title: 'Type', align: 'start', key: 'type' },
             { title: 'Value', align: 'end', key: 'value' },
+            { title: 'Updated', align: 'end', key: 'updated' },
             { title: 'Actions', align: 'end', key: 'actions', sortable: false },
         ]
     }

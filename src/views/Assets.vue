@@ -4,11 +4,11 @@
             <LineChart :color="theme.current.value.colors.primary" :series="lineChartData"/>
         </v-col>
 
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="7">
             <DataTable type="Asset" url="assets" :color="theme.current.value.colors.primary" :tableData="tableData" :totalValue="store.totalAssetValue"/>
         </v-col>
 
-        <v-col v-if="pieChartValues.length" cols="12" md="6">
+        <v-col v-if="pieChartValues.length" cols="12" md="5">
             <PieChart :color="theme.current.value.colors.primary" :series="pieChartValues" :labels="pieChartLabels"/>
         </v-col>
     </v-row>

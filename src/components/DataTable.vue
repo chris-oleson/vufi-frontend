@@ -48,11 +48,11 @@
             </template>
 
             <template v-slot:[`item.value`]="{ item }">
-                <span v-if="item">{{ formatCurrency(parseFloat(item.value)) }}</span>
+                <span>{{ formatCurrency(parseFloat(item.value)) }}</span>
             </template>
 
             <template v-slot:[`item.updated`]="{ item }">
-                <span v-if="item.updated">{{ item.updated.split('T')[0] }}</span>
+                <span v-if="item.updated">{{ new Date(item.updated).toLocaleDateString() }}</span>
             </template>
 
             <template v-slot:[`item.actions`]="{ item }">

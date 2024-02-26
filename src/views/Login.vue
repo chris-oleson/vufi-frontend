@@ -64,7 +64,7 @@ function getSubscriptionStatus(expiration) {
     if (!expiration) {
         return 'Free'
     }
-    else if (expiration >= new Date().toISOString().split('T')[0]) {
+    else if (expiration >= new Date().toLocaleDateString("en-US")) {
         return 'Active'
     }
     else {

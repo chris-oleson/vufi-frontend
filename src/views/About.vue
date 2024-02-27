@@ -4,11 +4,10 @@
             <v-col cols="12" lg="6" class="py-16 px-8 mx-auto">
                 <h1 class="font-weight-light mb-8">Hi, I'm Chris.</h1>
                 <div class="font-weight-light text-left" style="text-indent: 2em;">
-                    After graduating college and getting my budget under control, I quickly realized that my money was ending up in a lot of different places.
-                    I like being organized, and I hated the idea of losing track of my investments.
-                    So after trying to maintain a spreadsheet and realizing how much of a hassle it is to check all my accounts manually, I created VuFi to do it for me.
+                    After graduating college I quickly realized that my money was ending up in a lot of different places.
+                    I found it difficult to keep track of my investments, so I created VuFi to do it for me.
                     It worked pretty well, so I decided to share it with the world.
-                    The app is a one man operation; I'm not a big company, but you can rest easy knowing that when you contact VuFi support, you'll be talking to the CEO and Founder of the service you're using.
+                    The app is my passion project, so you can rest easy knowing that when you contact VuFi support, you'll be talking to the CEO and Founder of the company.
                 </div>
             </v-col>
         </v-row>

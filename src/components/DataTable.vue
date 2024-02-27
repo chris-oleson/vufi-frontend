@@ -48,7 +48,7 @@
             </template>
 
             <template v-slot:[`item.value`]="{ item }">
-                <span>{{ formatCurrency(parseFloat(item.value)) }}</span>
+                <span v-if="item.value">{{ formatCurrency(parseFloat(item.value)) }}</span>
             </template>
 
             <template v-slot:[`item.updated`]="{ item }">

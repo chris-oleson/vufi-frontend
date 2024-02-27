@@ -27,7 +27,7 @@
 
             <v-col cols="12" md="4" lg="3" class="mx-4 mb-16 mt-n16">
                 <v-card elevation="10" width="330" class="pa-16 mx-auto bg-secondary">
-                    <h1 class="font-weight-light">$99<p class="font-weight-light text-subtitle-1 d-inline">/year</p></h1>
+                    <h1 class="font-weight-light">$90<p class="font-weight-light text-subtitle-1 d-inline">/year</p></h1>
                     <p class="font-weight-light mt-4">Two months free!</p>
                     <v-btn class="bg-primary elevation-4 mt-10" width="200" size="large" variant="text" rounded="0" @click="redirect('year')">Start Free Trial</v-btn>
                 </v-card>

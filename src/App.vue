@@ -42,9 +42,11 @@ function checkSession() {
 // Auto logout after 30 minutes
 setTimeout(logOut, 30 * 60 * 1000)
 function logOut() {
-    axios.post('auth/logout')
-    store.$reset()
-    router.push('/login')
+    if (store.isLoggedIn) {
+        axios.post('auth/logout')
+        store.$reset()
+        router.push('/login')
+    }
 }
 
 // Update site title when page changes

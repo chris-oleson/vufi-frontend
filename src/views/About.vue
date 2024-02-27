@@ -23,7 +23,7 @@
                 <div class="font-weight-light mb-8">Logging into your bank, investment, and retirement accounts manually is a pain. VuFi automatically tracks them for you, and gives you powerful tools to analyse that data.</div>
                 
                 <h2 class="font-weight-light">Is VuFi secure?</h2>
-                <div class="font-weight-light mb-8">Yes. VuFi uses Plaid to connect to your financial accounts, and never stores or saves your financial credentials. Our data is encrypted in transit and at rest.</div>
+                <div class="font-weight-light mb-8">Yes. VuFi uses Plaid to connect to your financial accounts, and Stripe to process payments. We do not store financial credentials or payment information, and your data is encrypted in transit and at rest.</div>
 
                 <h2 class="font-weight-light">Is VuFi private?</h2>
                 <div class="font-weight-light mb-8">Yes. We will never show or sell your data to third parties, and you will never see an advertisement while using our app.</div>

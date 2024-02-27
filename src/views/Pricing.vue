@@ -21,7 +21,7 @@
                 <v-card elevation="10" width="330" class="pa-16 mx-auto bg-secondary">
                     <h1 class="font-weight-light">$9<p class="font-weight-light text-subtitle-1 d-inline">/month</p></h1>
                     <p class="font-weight-light mt-4">Cancel any time!</p>
-                    <v-btn class="bg-primary elevation-4 mt-10" width="200" size="large" variant="text" rounded="0" @click="redirect('month')">Start Free Trial</v-btn>
+                    <v-btn class="bg-primary elevation-4 mt-10" width="200" size="large" variant="text" rounded="0" @click="redirect('month')">Get Started</v-btn>
                 </v-card>
             </v-col>
 
@@ -29,7 +29,7 @@
                 <v-card elevation="10" width="330" class="pa-16 mx-auto bg-secondary">
                     <h1 class="font-weight-light">$90<p class="font-weight-light text-subtitle-1 d-inline">/year</p></h1>
                     <p class="font-weight-light mt-4">Two months free!</p>
-                    <v-btn class="bg-primary elevation-4 mt-10" width="200" size="large" variant="text" rounded="0" @click="redirect('year')">Start Free Trial</v-btn>
+                    <v-btn class="bg-primary elevation-4 mt-10" width="200" size="large" variant="text" rounded="0" @click="redirect('year')">Get Started</v-btn>
                 </v-card>
             </v-col>
         </v-row>

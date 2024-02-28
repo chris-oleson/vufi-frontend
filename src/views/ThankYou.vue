@@ -14,7 +14,7 @@ const router = useRouter()
 
 function loadData() {
     axios.get('auth/expires').then((resp) => {
-        store.subscriptionStatus = getSubscriptionStatus(resp.data)
+        store.subscriptionStatus = getSubscriptionStatus(new Date(resp.data))
         router.push('/assets')
     }).catch(() => {
         router.push('/login')

@@ -49,7 +49,7 @@ function login() {
     }).then(async (resp) => {
         store.theme = resp.data.theme
         store.currency = resp.data.currency
-        store.subscriptionStatus = getSubscriptionStatus(resp.data.expires)
+        store.subscriptionStatus = getSubscriptionStatus(new Date(resp.data.expires))
         store.isLoggedIn = true
         await store.getAllAssetData()
         router.push('/assets')

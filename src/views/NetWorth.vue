@@ -1,6 +1,6 @@
 <template>
     <v-row v-if="store.allAssets.length || store.allDebts.length" class="ma-2">
-        <v-col v-if="lineChartData[0].data.length > 1" cols="12">
+        <v-col cols="12">
             <LineChart :color="theme.current.value.colors.primary" :series="lineChartData"/>
         </v-col>
 

@@ -7,7 +7,7 @@ export const useStore = defineStore('store', {
         subscriptionStatus: 'Free',
         theme: 0,
         currency: 'USD',
-        privacy: 'false',
+        privacy: false,
 
         notification: {
             text: '',

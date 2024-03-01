@@ -10,6 +10,8 @@ import { useTheme, useDisplay } from 'vuetify'
 const theme = useTheme()
 const { xs } = useDisplay()
 const props = defineProps(['color', 'series'])
+import { useStore } from '/src/pinia'
+const store = useStore()
 
 const chartOptions = computed(() => {
     return {
@@ -21,7 +23,7 @@ const chartOptions = computed(() => {
             curve: 'straight',
         },
         yaxis: {
-            show: !xs.value,
+            show: !xs.value && !store.privacy,
             labels: {
                 formatter: function (value) {
                     var formatter = new Intl.NumberFormat('en-US', {
@@ -51,7 +53,7 @@ const chartOptions = computed(() => {
         },
         xaxis: {
             labels: {
-                show: !xs.value,
+                show: !xs.value
             },
             type: 'datetime',
             tooltip: {

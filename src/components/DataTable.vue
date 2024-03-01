@@ -5,7 +5,7 @@
                 <v-toolbar flat rounded color="transparent">
                     <div class="font-weight-light text-h5 mx-4">{{ props.type }}s</div>
                     <v-divider inset vertical></v-divider>
-                    <div class="font-weight-light text-h5 mx-4">{{ formatCurrency(props.totalValue) }}</div>
+                    <div class="font-weight-light text-h5 mx-4" :class="{blur: store.privacy}">{{ formatCurrency(props.totalValue) }}</div>
 
                     <v-spacer></v-spacer>
 
@@ -48,7 +48,7 @@
             </template>
 
             <template v-slot:[`item.value`]="{ item }">
-                <span v-if="item.value">{{ formatCurrency(parseFloat(item.value)) }}</span>
+                <span v-if="item.value" :class="{blur: store.privacy}">{{ formatCurrency(parseFloat(item.value)) }}</span>
             </template>
 
             <template v-slot:[`item.updated`]="{ item }">

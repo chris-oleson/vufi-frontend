@@ -100,4 +100,10 @@ a {
     color: inherit;
     text-decoration: inherit;
 }
+
+/* Privacy mode */
+.blur {
+    color: transparent;
+    text-shadow: 0 0 8px #000;
+}
 </style>

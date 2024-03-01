@@ -1,25 +1,24 @@
 <template>
     <v-navigation-drawer permanent floating :rail="mobile" elevation="4">
         <v-list class="font-weight-light pa-0" :value="page">
-            <v-list-item replace slim prepend-icon="mdi-cash-multiple" class="py-4" to="/assets">
+            <v-list-item replace slim prepend-icon="mdi-cash-multiple" class="py-4 pr-0" to="/assets">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline ml-2 text-no-wrap">Assets</div>
-                    <div class="d-inline">{{ formatCurrency(store.totalAssetValue) }}</div>
+                    <div class="d-inline pr-4" :class="{blur: store.privacy}">{{ formatCurrency(store.totalAssetValue) }}</div>
                 </div>
             </v-list-item>
 
-            <v-list-item replace slim prepend-icon="mdi-credit-card-multiple" class="py-4" to="/debts">
+            <v-list-item replace slim prepend-icon="mdi-credit-card-multiple" class="py-4 pr-0" to="/debts">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline ml-2 text-no-wrap">Debts</div>
-                    <div v-if="store.totalDebtValue" class="d-inline">{{ formatCurrency(store.totalDebtValue) }}</div>
-                    <div v-else class="d-inline">{{ formatCurrency(0) }}</div>
+                    <div v-if="store.totalDebtValue" class="d-inline pr-4" :class="{blur: store.privacy}">{{ formatCurrency(store.totalDebtValue) }}</div>
                 </div>
             </v-list-item>
 
-            <v-list-item replace slim prepend-icon="mdi-sigma" class="py-4" to="/net-worth">
+            <v-list-item replace slim prepend-icon="mdi-sigma" class="py-4 pr-0" to="/net-worth">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline ml-2 text-no-wrap">Net Worth</div>
-                    <div class="d-inline">{{ formatCurrency(store.totalAssetValue - store.totalDebtValue) }}</div>
+                    <div class="d-inline pr-4" :class="{blur: store.privacy}">{{ formatCurrency(store.totalAssetValue - store.totalDebtValue) }}</div>
                 </div>
             </v-list-item>
         </v-list>

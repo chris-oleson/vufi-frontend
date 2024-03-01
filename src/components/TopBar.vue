@@ -1,6 +1,6 @@
 <template>
     <v-app-bar elevation="4">
-        <router-link class="d-inline-flex align-center mx-4" to="/">
+        <router-link class="mx-4 d-inline-flex align-center" to="/">
             <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
             <h2 class="font-weight-light ml-2">VuFi</h2>
         </router-link>
@@ -37,10 +37,12 @@
             </v-list>
         </v-menu>
 
+        <v-btn v-if="store.isLoggedIn" variant="plain" @click="store.privacy = !store.privacy" :icon="store.privacy ? 'mdi-eye' : 'mdi-eye-off'"></v-btn>
+
         <!-- Dashboard menu -->
         <v-menu v-if="store.isLoggedIn" offset-y close-on-click transition="slide-y-transition" nudge-bottom='24'>
             <template v-slot:activator="{ props }">
-                <v-btn icon="mdi-account" class="mx-2" variant="plain" v-bind="props"/>
+                <v-btn icon="mdi-account" class="mr-2" variant="plain" v-bind="props"/>
             </template>
             <v-list class="font-weight-light pa-0" width="200">
                 <v-list-item prepend-icon="mdi-cog" to="/settings">Settings</v-list-item>

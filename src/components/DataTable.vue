@@ -26,7 +26,7 @@
                             <v-card-text>
                                 <v-container>
                                     <v-text-field v-model="editedItem.name" variant="underlined" label="Name"></v-text-field>
-                                    <v-text-field v-model="editedItem.type" variant="underlined" label="Type"></v-text-field>
+                                    <v-select v-model="editedItem.type" :items="props.type == 'Asset' ? assetTypes : debtTypes" variant="underlined" density="compact" label="Type"></v-select>
                                     <v-text-field v-model="editedItem.value" variant="underlined" label="Value"></v-text-field>
                                 </v-container>
                             </v-card-text>
@@ -93,6 +93,25 @@ const defaultItem = {
     type: '',
     value: null,
 }
+const assetTypes = [
+    'Bank Account',
+    'Investment Account',
+    'Retirement Account',
+    'Vehicle',
+    'Real Estate',
+    'Foreign Currency',
+    'Crytocurrency',
+    'Precious Metal',
+    'Art',
+    'Other'
+]
+
+const debtTypes = [
+    'Credit Card',
+    'Mortgage',
+    'Car Loan',
+    'Other'
+]
 
 function focusItem(item) {
     if (item.is_hidden) {

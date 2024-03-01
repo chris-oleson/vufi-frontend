@@ -47,11 +47,11 @@ function login() {
         email: email.value,
         password: password.value,
     }).then(async (resp) => {
+        await store.getAllAssetData()
         store.theme = resp.data.theme
         store.currency = resp.data.currency
         store.subscriptionStatus = getSubscriptionStatus(new Date(resp.data.expires))
         store.isLoggedIn = true
-        await store.getAllAssetData()
         router.push('/assets')
     }).catch((err) => {
         error.value = true

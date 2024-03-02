@@ -202,6 +202,10 @@ function deleteItemConfirm() {
 }
 
 function addToDatabase(item) {
+    // Convert to USD
+    if (store.currency != 'USD') {
+        item.value /= store.currencyRates[store.currency]
+    }
     axios.post(`/${props.url}`, {
         name: item.name,
         type: item.type,
@@ -213,6 +217,10 @@ function addToDatabase(item) {
 }
 
 function replaceInDatabase(item) {
+    // Convert to USD
+    if (store.currency != 'USD') {
+        item.value /= store.currencyRates[store.currency]
+    }
     axios.put(`/${props.url}/${item.id}`, {
         name: item.name,
         type: item.type,

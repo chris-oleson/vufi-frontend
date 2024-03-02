@@ -85,12 +85,12 @@ const dialogDelete = ref(false)
 const editedIndex = ref(-1)
 const editedItem = ref({
     name: '',
-    type: '',
+    type: null,
     value: null,
 })
 const defaultItem = {
     name: '',
-    type: '',
+    type: null,
     value: null,
 }
 const assetTypes = [
@@ -110,6 +110,7 @@ const debtTypes = [
     'Credit Card',
     'Mortgage',
     'Car Loan',
+    'Student Loan',
     'Other'
 ]
 
@@ -143,7 +144,7 @@ const headers = computed(() => {
             { title: 'Type', align: 'start', key: 'type' },
             { title: 'Value', align: 'end', key: 'value' },
             { title: 'Updated', align: 'end', key: 'updated' },
-            { title: 'Actions', align: 'end', key: 'actions', sortable: false },
+            { title: 'Actions', align: 'end', key: 'actions', sortable: false, minWidth: '105px' },
         ]
     }
 })

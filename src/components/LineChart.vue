@@ -33,22 +33,6 @@ const chartOptions = computed(() => {
                     return formatter.format(value);
                 }
             },
-            min: function(smallest) {
-                if (smallest > 0) {
-                    return 0
-                }
-                else {
-                    return smallest * 1.5
-                }
-            },
-            max: function(biggest) {
-                if (biggest > 0) {
-                    return biggest * 1.1
-                }
-                else {
-                    return 0
-                }
-            },
             tickAmount: 4
         },
         xaxis: {

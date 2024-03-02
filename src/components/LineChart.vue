@@ -26,10 +26,13 @@ const chartOptions = computed(() => {
             show: !xs.value && !store.privacy,
             labels: {
                 formatter: function (value) {
+                    if (store.currency != 'USD') {
+                        value *= store.currencyRates[store.currency]
+                    }
                     var formatter = new Intl.NumberFormat('en-US', {
                         style: 'currency',
-                        currency: 'USD'
-                    });
+                        currency: store.currency
+                    })
                     return formatter.format(value);
                 }
             },

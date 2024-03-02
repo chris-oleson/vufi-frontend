@@ -47,9 +47,9 @@ function login() {
         email: email.value,
         password: password.value,
     }).then(async (resp) => {
-        await store.getAllAssetData()
-        store.theme = resp.data.theme
         store.currency = resp.data.currency
+        store.theme = resp.data.theme
+        await store.getAllAssetData()
         store.subscriptionStatus = getSubscriptionStatus(new Date(resp.data.expires))
         store.isLoggedIn = true
         router.push('/assets')

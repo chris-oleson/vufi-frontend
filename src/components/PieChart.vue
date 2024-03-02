@@ -8,6 +8,8 @@
 import { computed } from 'vue'
 import { useTheme } from 'vuetify'
 const theme = useTheme()
+import { useStore } from '/src/pinia'
+const store = useStore()
 const props = defineProps(['color', 'series', 'labels'])
 
 const chartOptions = computed(() => {
@@ -43,9 +45,12 @@ const chartOptions = computed(() => {
             theme: theme.name.value,
             y: {
                 formatter(value) {
+                    if (store.currency != 'USD') {
+                        value *= store.currencyRates[store.currency]
+                    }
                     var formatter = new Intl.NumberFormat('en-US', {
                         style: 'currency',
-                        currency: 'USD'
+                        currency: store.currency
                     })
                     return formatter.format(value)
                 },

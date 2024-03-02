@@ -150,8 +150,8 @@ const headers = computed(() => {
 })
 
 function formatCurrency(value) {
-    if (typeof value !== "number") {
-        return value
+    if (store.currency != 'USD') {
+        value *= store.currencyRates[store.currency]
     }
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',

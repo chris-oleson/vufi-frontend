@@ -7,6 +7,7 @@ export const useStore = defineStore('store', {
         subscriptionStatus: 'Free',
         theme: 0,
         currency: 'USD',
+        currencyRates: {},
         privacy: false,
 
         notification: {
@@ -28,18 +29,21 @@ export const useStore = defineStore('store', {
                 assetResponse,
                 assetHistoryResponse,
                 debtResponse,
-                debtHistoryResponse
+                debtHistoryResponse,
+                currencyValueResponse,
             ] = await Promise.all([
                 axios.get('/assets'),
                 axios.get('/assets/history'),
                 axios.get('/debts'),
                 axios.get('/debts/history'),
+                axios.get('/currencies/rates'),
             ])
 
             this.allAssets = assetResponse.data
             this.allAssetHistory = assetHistoryResponse.data
             this.allDebts = debtResponse.data
             this.allDebtHistory = debtHistoryResponse.data
+            this.currencyRates = currencyValueResponse.data
 
             this.totalAssetValue = 0
             for (let asset of this.allAssets) {

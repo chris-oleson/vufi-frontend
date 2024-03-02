@@ -75,7 +75,9 @@ const dashboard = computed(() => {
 
 function logOut() {
     axios.post('auth/logout').then(() => {
-        router.push('/')
+        if (dashboard.value) {
+            router.push('/')
+        }
         store.$reset()
     })
 }

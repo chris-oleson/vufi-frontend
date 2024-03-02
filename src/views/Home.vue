@@ -26,9 +26,9 @@
 
         <v-row class="py-16">
             <v-col class="px-8 mx-auto" cols="12" lg="6">
-                <h2 class="font-weight-thin text-h3 my-16">Automated Orgnaization</h2>
+                <h2 class="font-weight-thin text-h3 my-16">Automated Organization</h2>
                 <h2 class="font-weight-light mb-16">
-                    VuFi uses Plaid to automatically track your accounts for you. Values are updated every day; not every month on an excel spreadsheet.
+                    VuFi automatically tracks your net worth for you. Values are updated every day; not every month on an excel spreadsheet.
                 </h2>
             </v-col>
         </v-row>

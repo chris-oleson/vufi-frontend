@@ -29,5 +29,80 @@
                 <div class="font-weight-light mb-8">Yes. We will never show or sell your data to third parties, and you will never see an advertisement while using our app.</div>
             </v-col>
         </v-row>
+
+        <v-row>
+            <v-col cols="12" class="py-16 px-8 mx-auto">
+                <h1 class="font-weight-light mb-8">Technologies</h1>
+                
+                <v-row class="justify-center">
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">Plaid</h2>
+                            <div class="font-weight-light mb-8">Account value tracking</div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">OpenExchange</h2>
+                            <div class="font-weight-light mb-8">Currency value tracking</div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">Stripe</h2>
+                            <div class="font-weight-light mb-8">Payment processing</div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">Postmark</h2>
+                            <div class="font-weight-light mb-8">Email delivery</div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">Render</h2>
+                            <div class="font-weight-light mb-8">Web hosting</div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">Digital Ocean</h2>
+                            <div class="font-weight-light mb-8">Database hosting</div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">MySQL</h2>
+                            <div class="font-weight-light mb-8">Database</div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">Vue.js</h2>
+                            <div class="font-weight-light mb-8">Frontend framework</div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">Vuetify</h2>
+                            <div class="font-weight-light mb-8">UI framework</div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">Node.js</h2>
+                            <div class="font-weight-light mb-8">Web server</div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4" lg="3">
+                        <v-card class="pt-6">
+                            <h2 class="font-weight-light">Express.js</h2>
+                            <div class="font-weight-light mb-8">Backend framework</div>
+                        </v-card>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
     </v-container>
 </template>

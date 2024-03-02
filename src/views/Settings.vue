@@ -9,8 +9,8 @@
             <v-btn class="font-weight-light" size="small">Dark</v-btn>
         </v-btn-toggle>
 
-        <!-- <v-card-text>Currency</v-card-text>
-        <v-select :items="currencies" v-model="selectedCurrency" variant="outlined" density="compact" class="mx-6" rounded="0" @update:modelValue="savePreferences"></v-select> -->
+        <v-card-text>Currency</v-card-text>
+        <v-select :items="currencies" v-model="selectedCurrency" variant="outlined" density="compact" class="mx-6" rounded="0" @update:model-value="savePreferences"></v-select>
 
         <v-card-text>Account</v-card-text>
         <v-btn rounded="0" variant="tonal" class="font-weight-light mb-4" width="200" to="/change-password">Change Password</v-btn>
@@ -31,7 +31,14 @@ const store = useStore()
 
 const selectedTheme = ref(store.theme)
 const selectedCurrency = ref(store.currency)
-// const currencies = ref(['USD'])
+let currencies = ref([])
+getCurrencies()
+
+function getCurrencies() {
+    axios.get('/currencies').then((resp) => {
+        currencies.value = Object.keys(resp.data)
+    })
+}
 
 function savePreferences() {
     store.theme = selectedTheme.value,

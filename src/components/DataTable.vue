@@ -150,7 +150,7 @@ const headers = computed(() => {
 })
 
 function formatCurrency(value, currency) {
-    if (currency != 'USD') {
+    if (currency && currency != 'USD') {
         value /= store.currencyRates[currency]
     }
     else if (store.currency != 'USD') {

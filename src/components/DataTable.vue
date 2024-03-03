@@ -15,22 +15,19 @@
                         </template>
                         <v-list class="pa-0">
                             <PlaidLink></PlaidLink>
-                            <v-list-item v-bind="dialog" @click="newItem">Custom {{ props.type }}</v-list-item>
+                            <v-list-item @click="newItem">Custom {{ props.type }}</v-list-item>
                         </v-list>
                     </v-menu>
 
                     <!-- Add or edit asset dialog -->
                     <v-dialog v-model="dialog" max-width="400px">
-                        <v-card class="pa-4 text-center mx-auto" width="330">
+                        <v-card class="pa-10 text-center mx-auto" width="330">
                             <v-card-title class="font-weight-light text-center">{{ formTitle }}</v-card-title>
-                            <v-card-text>
-                                <v-container>
-                                    <v-text-field v-model="editedItem.name" variant="underlined" label="Name"></v-text-field>
-                                    <v-select v-model="editedItem.type" :items="props.type == 'Asset' ? assetTypes : debtTypes" variant="underlined" density="compact" label="Type"></v-select>
-                                    <v-text-field v-model="editedItem.value" variant="underlined" label="Value"></v-text-field>
-                                </v-container>
-                            </v-card-text>
-                            <v-btn rounded="0" width="200" class="mx-auto bg-primary" @click="save">Save</v-btn>
+                            <v-text-field v-model="editedItem.name" variant="underlined" label="Name" class="pb-4"></v-text-field>
+                            <v-select v-model="editedItem.type" :items="props.type == 'Asset' ? assetTypes : debtTypes" variant="underlined" density="compact" label="Type"></v-select>
+                            <v-text-field v-model="editedItem.value" variant="underlined" label="Value"></v-text-field>
+                            <v-select :items="currencies" v-model="editedItem.currency" variant="underlined" density="compact" class="mt-4" label="Currency"></v-select>
+                            <v-btn rounded="0" width="200" class="mx-auto bg-primary mt-4" @click="save">Save</v-btn>
                             <v-btn rounded="0" width="200" class="mx-auto font-weight-light" variant="plain" @click="dialog = false">Cancel</v-btn>
                         </v-card>
                     </v-dialog>
@@ -80,6 +77,7 @@ const display = useDisplay()
 import PlaidLink from '/src/components/PlaidLink'
 const props = defineProps(['color', 'type', 'url', 'tableData', 'totalValue'])
 
+const currencies = Object.keys(store.currencyRates)
 const dialog = ref(false)
 const dialogDelete = ref(false)
 const editedIndex = ref(-1)
@@ -87,11 +85,13 @@ const editedItem = ref({
     name: '',
     type: null,
     value: null,
+    currency: null,
 })
 const defaultItem = {
     name: '',
     type: null,
     value: null,
+    currency: store.currency
 }
 const assetTypes = [
     'Bank Account',
@@ -210,6 +210,7 @@ function addToDatabase(item) {
         name: item.name,
         type: item.type,
         value: item.value.replace(',', ''),
+        currency: item.value.currency
     })
     .then(() => {
         store.getAllAssetData()
@@ -225,7 +226,8 @@ function replaceInDatabase(item) {
         name: item.name,
         type: item.type,
         value: item.value.replace(',', ''),
-        user_id: store.userID,
+        currency: item.value.currency,
+        user_id: store.userID
     })
     .then(() => {
         store.getAllAssetData()

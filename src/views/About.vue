@@ -43,7 +43,7 @@
                     </v-col>
                     <v-col cols="12" sm="6" md="4" lg="3">
                         <v-card class="pt-6">
-                            <h2 class="font-weight-light">OpenExchange</h2>
+                            <h2 class="font-weight-light">Open Exchange Rates</h2>
                             <div class="font-weight-light mb-8">Currency value tracking</div>
                         </v-card>
                     </v-col>

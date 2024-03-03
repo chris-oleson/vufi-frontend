@@ -31,14 +31,7 @@ const store = useStore()
 
 const selectedTheme = ref(store.theme)
 const selectedCurrency = ref(store.currency)
-let currencies = ref([])
-getCurrencies()
-
-function getCurrencies() {
-    axios.get('/currencies').then((resp) => {
-        currencies.value = Object.keys(resp.data)
-    })
-}
+const currencies = Object.keys(store.currencyRates)
 
 function savePreferences() {
     store.theme = selectedTheme.value,

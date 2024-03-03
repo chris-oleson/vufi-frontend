@@ -42,8 +42,7 @@ function sendPublicToken(token) {
 }
 
 function updatePlaidData() {
-    axios.post('plaid/update', {
-    }).then(() => {
+    axios.post('plaid/update').then(() => {
         store.getAllAssetData()
     }).catch((err) => {
         console.log(err.message)

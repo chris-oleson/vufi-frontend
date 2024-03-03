@@ -45,7 +45,7 @@
             </template>
 
             <template v-slot:[`item.value`]="{ item }">
-                <span v-if="item.value" :class="{blur: store.privacy}">{{ formatCurrency(parseFloat(item.value)) }}</span>
+                <span v-if="item.value" :class="{blur: store.privacy}">{{ formatCurrency(parseFloat(item.value), item.currency) }}</span>
             </template>
 
             <template v-slot:[`item.updated`]="{ item }">
@@ -149,8 +149,11 @@ const headers = computed(() => {
     }
 })
 
-function formatCurrency(value) {
-    if (store.currency != 'USD') {
+function formatCurrency(value, currency) {
+    if (currency != 'USD') {
+        value /= store.currencyRates[currency]
+    }
+    else if (store.currency != 'USD') {
         value *= store.currencyRates[store.currency]
     }
     var formatter = new Intl.NumberFormat('en-US', {
@@ -226,7 +229,7 @@ function replaceInDatabase(item) {
         name: item.name,
         type: item.type,
         value: item.value.replace(',', ''),
-        currency: item.value.currency,
+        currency: item.currency,
         user_id: store.userID
     })
     .then(() => {

@@ -62,6 +62,7 @@ function refineHistory(assets, history) {
         if (!asset.is_hidden) {
             visibleAssets.push({
                 id: asset.id,
+                currency: asset.currency,
                 history: []
             })
         }
@@ -84,7 +85,7 @@ function refineHistory(assets, history) {
                 if (entry.date == date && entry.asset_id == asset.id) {
                     asset.history.push({
                         x: entry.date,
-                        y: parseFloat(entry.value)
+                        y: convertValue(parseFloat(entry.value), asset.currency)
                     })
                 }
             }
@@ -116,5 +117,9 @@ function refineHistory(assets, history) {
     }
 
     return refinedHistory
+}
+
+function convertValue(value, currency) {
+    return value /= store.currencyRates[currency]
 }
 </script>

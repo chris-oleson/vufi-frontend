@@ -62,6 +62,7 @@ function refineHistory(debts, history) {
         if (!debt.is_hidden) {
             visibleDebts.push({
                 id: debt.id,
+                currency: debt.currency,
                 history: []
             })
         }
@@ -84,7 +85,7 @@ function refineHistory(debts, history) {
                 if (entry.date == date && entry.debt_id == debt.id) {
                     debt.history.push({
                         x: entry.date,
-                        y: parseFloat(entry.value)
+                        y: convertValue(parseFloat(entry.value))
                     })
                 }
             }
@@ -116,5 +117,9 @@ function refineHistory(debts, history) {
     }
 
     return refinedHistory
+}
+
+function convertValue(value, currency) {
+    return value /= store.currencyRates[currency]
 }
 </script>

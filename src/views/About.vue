@@ -32,14 +32,14 @@
                 <div class="font-weight-light mb-8">Linked accounts and currency exchange rates are updated daily.</div>
 
                 <h2 class="font-weight-light">What accounts can be tracked automatically?</h2>
-                <div class="font-weight-light mb-8">We track account balances using Plaid, which supports over 12,000 institutions. The exact list is always changing, so it's difficult to track if a particular institution is supported or not.</div>
+                <div class="font-weight-light mb-8">We track account balances using Plaid, which supports over 12,000 institutions. The exact list is always changing, so it's uncertain if a particular institution is supported or not.</div>
             </v-col>
         </v-row>
 
         <v-row>
             <v-col cols="12" class="py-16 px-8 mx-auto">
                 <h1 class="font-weight-light mb-8">Technologies</h1>
-                
+
                 <v-row class="justify-center">
                     <v-col cols="12" sm="6" md="4" lg="3">
                         <v-card class="pt-6">

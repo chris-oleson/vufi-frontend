@@ -71,18 +71,24 @@ function formatData() {
 
 function refineHistory(assets, debts, assetHistory, debtHistory) {
     // Get all individual assets
-    let assetList = []
+    let visibleItems = []
     for (let asset of assets) {
-        assetList.push({
-            id: asset.id,
-            history: []
-        })
+        if (!asset.is_hidden) {
+            visibleItems.push({
+                id: asset.id,
+                history: [],
+                currency: store.currency
+            })
+        }
     }
     for (let debt of debts) {
-        assetList.push({
-            id: debt.id,
-            history: []
-        })
+        if (!debt.is_hidden) {
+            visibleItems.push({
+                id: debt.id,
+                history: [],
+                currency: store.currency
+            })
+        }
     }
 
     // Combine histories
@@ -106,14 +112,14 @@ function refineHistory(assets, debts, assetHistory, debtHistory) {
     uniqueDates = uniqueDates.sort()
 
     // Go through every asset
-    for (let asset of assetList) {
+    for (let asset of visibleItems) {
         for (let date of uniqueDates) {
             // Check if there is any value for that asset on that date, add it if there is.
             for (let entry of history) {
                 if (entry.date == date && entry.asset_id == asset.id) {
                     asset.history.push({
                         x: entry.date,
-                        y: parseFloat(entry.value)
+                        y: convertValue(parseFloat(entry.value), asset.currency)
                     })
                 }
             }
@@ -133,7 +139,7 @@ function refineHistory(assets, debts, assetHistory, debtHistory) {
     // Turn the asset data into something the line chart can read
     let refinedHistory = []
 
-    for (let asset of assetList) {
+    for (let asset of visibleItems) {
         for (let entry of asset.history) {
             let i = refinedHistory.findIndex(e => e.x == entry.x)
             if (i < 0) {
@@ -146,5 +152,9 @@ function refineHistory(assets, debts, assetHistory, debtHistory) {
     }
 
     return refinedHistory
+}
+
+function convertValue(value, currency) {
+    return value /= store.currencyRates[currency]
 }
 </script>

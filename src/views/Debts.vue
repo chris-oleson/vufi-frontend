@@ -85,7 +85,7 @@ function refineHistory(debts, history) {
                 if (entry.date == date && entry.debt_id == debt.id) {
                     debt.history.push({
                         x: entry.date,
-                        y: convertValue(parseFloat(entry.value))
+                        y: convertValue(parseFloat(entry.value), debt.currency)
                     })
                 }
             }

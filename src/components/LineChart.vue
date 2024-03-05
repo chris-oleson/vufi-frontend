@@ -47,14 +47,6 @@ const chartOptions = computed(() => {
                 enabled: false
             }
         },
-        fill: {
-            type: 'gradient',
-                gradient: {
-                shadeIntensity: 0,
-                opacityFrom: 1,
-                opacityTo: 0,
-            }
-        },
         colors: [props.color],
         tooltip: {
             theme: theme.global.name.value
@@ -66,7 +58,10 @@ const chartOptions = computed(() => {
             animations: {
                 enabled: false
             },
-            background: 'none'
+            background: 'none',
+            toolbar: {
+                show: false,
+            }
         }
     }
 })

@@ -11,8 +11,8 @@
         <!-- Desktop display -->
         <template v-if="!smAndDown && !dashboard">
             <v-btn class="font-weight-light mr-4" variant="plain" to="/">Home</v-btn>
-            <v-btn class="font-weight-light mr-4" variant="plain" to="/pricing">Pricing</v-btn>
             <v-btn class="font-weight-light mr-4" variant="plain" to="/about">About</v-btn>
+            <v-btn class="font-weight-light mr-4" variant="plain" to="/pricing">Pricing</v-btn>
             <v-btn class="font-weight-light mr-4" variant="plain" to="/contact">Contact</v-btn>
             <v-divider vertical inset></v-divider>
             <v-btn v-if="store.isLoggedIn" class="font-weight-light ml-4" variant="plain" to="/assets">Dashboard</v-btn>
@@ -27,8 +27,8 @@
             </template>
             <v-list class="font-weight-light pa-0" width="200">
                 <v-list-item to="/">Home</v-list-item>
-                <v-list-item to="/pricing">Pricing</v-list-item>
                 <v-list-item to="/about">About</v-list-item>
+                <v-list-item to="/pricing">Pricing</v-list-item>
                 <v-list-item to="/contact">Contact</v-list-item>
                 <v-divider class="mx-2"></v-divider>
                 <v-list-item v-if="store.isLoggedIn && store.subscriptionStatus == 'Active'" to="/assets">Dashboard</v-list-item>

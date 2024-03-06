@@ -14,12 +14,15 @@ import DeleteAccount from '/src/views/DeleteAccount'
 import Home from '/src/views/Home'
 import Pricing from '/src/views/Pricing'
 import About from '/src/views/About'
-import CancelSubscription from '/src/views/CancelSubscription'
 import ThankYou from '/src/views/ThankYou'
+import PrivacyPolicy from '/src/views/PrivacyPolicy'
 import { useStore } from '/src/pinia'
 
 export const router = createRouter({
     history: createWebHistory(),
+    scrollBehavior() {
+        return { top: 0 }
+    },
     routes: [
         {
             path: '/404',
@@ -134,14 +137,6 @@ export const router = createRouter({
             }
         },
         {
-            path: '/cancel-subscription',
-            beforeEnter: rejectUnauthorized,
-            component: CancelSubscription,
-            meta: {
-                title: 'Cancel Subscription - VuFi'
-            }
-        },
-        {
             path: '/delete-account',
             beforeEnter: rejectUnauthorized,
             component: DeleteAccount,
@@ -155,6 +150,13 @@ export const router = createRouter({
             component: ThankYou,
             meta: {
                 title: 'Thank You - VuFi'
+            }
+        },
+        {
+            path: '/privacy',
+            component: PrivacyPolicy,
+            meta: {
+                title: 'Privacy Policy - VuFi'
             }
         },
     ]

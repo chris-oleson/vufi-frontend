@@ -23,16 +23,25 @@
                 <div class="font-weight-light mb-8">Logging into your bank, investment, and retirement accounts manually is a pain. VuFi automatically tracks them for you, and gives you powerful tools to analyse that data.</div>
 
                 <h2 class="font-weight-light">Is VuFi secure?</h2>
-                <div class="font-weight-light mb-8">Yes. VuFi uses Plaid to connect to your financial accounts, and Stripe to process payments. We do not store financial credentials or payment information, and your data is encrypted in transit and at rest.</div>
+                <div class="font-weight-light mb-8">
+                    Yes. VuFi uses Plaid to connect to your financial accounts, and Stripe to process payments.
+                    We do not store financial credentials or payment information, and your data is encrypted in transit and at rest.
+                </div>
 
                 <h2 class="font-weight-light">Is VuFi private?</h2>
-                <div class="font-weight-light mb-8">Yes. We will never show or sell your data to third parties, and you will never see an advertisement while using our app.</div>
+                <div class="font-weight-light mb-8">
+                    Yes. We will never show or sell your data to third parties, and you will never see an advertisement while using our app.
+                    Please see our <router-link class="text-primary" to="/privacy">Privacy Policy</router-link> for details.
+                </div>
 
                 <h2 class="font-weight-light">How often are accounts and currencies updated?</h2>
                 <div class="font-weight-light mb-8">Linked accounts and currency exchange rates are updated daily.</div>
 
                 <h2 class="font-weight-light">What accounts can be tracked automatically?</h2>
-                <div class="font-weight-light mb-8">We track account balances using Plaid, which supports over 12,000 institutions. The exact list is always changing, so it's uncertain if a particular institution is supported or not.</div>
+                <div class="font-weight-light mb-8">
+                    We track account balances using Plaid, which supports over 12,000 institutions.
+                    The exact list is always changing, so it's uncertain if a particular institution is supported or not.
+                </div>
             </v-col>
         </v-row>
 
@@ -79,7 +88,7 @@
                     </v-col>
                     <v-col cols="12" sm="6" md="4" lg="3">
                         <v-card class="pt-6">
-                            <h2 class="font-weight-light">Digital Ocean</h2>
+                            <h2 class="font-weight-light">DigitalOcean</h2>
                             <div class="font-weight-light mb-8">Database hosting</div>
                         </v-card>
                     </v-col>

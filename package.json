@@ -15,15 +15,15 @@
         "vue": "^3.4.21",
         "vue-router": "^4.3.0",
         "vue3-apexcharts": "^1.5.2",
-        "vuetify": "^3.5.7"
+        "vuetify": "^3.5.8"
     },
     "devDependencies": {
         "@mdi/font": "^7.4.47",
-        "@vitejs/plugin-vue": "^5.0.3",
+        "@vitejs/plugin-vue": "^5.0.4",
         "eslint": "^8.56.0",
         "eslint-plugin-vue": "^9.20.1",
         "vite": "^5.1.5",
-        "vite-plugin-vuetify": "^2.0.1"
+        "vite-plugin-vuetify": "^2.0.2"
     },
     "browserslist": [
         "> 1%",

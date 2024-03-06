@@ -1,7 +1,7 @@
 <template>
     <v-row v-if="store.allAssets.length || store.allDebts.length" class="ma-2">
         <v-col cols="12">
-            <LineChart :color="theme.current.value.colors.primary" :series="lineChartData"/>
+            <LineChart :color="getColor()" :series="lineChartData"/>
         </v-col>
 
         <v-col cols="12" md="6">
@@ -156,5 +156,14 @@ function refineHistory(assets, debts, assetHistory, debtHistory) {
 
 function convertValue(value, currency) {
     return value /= store.currencyRates[currency]
+}
+
+function getColor() {
+    if (store.totalAssetValue - store.totalDebtValue < 0) {
+        return theme.current.value.colors.error
+    }
+    else {
+        return theme.current.value.colors.primary
+    }
 }
 </script>

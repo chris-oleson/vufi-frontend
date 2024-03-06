@@ -44,10 +44,12 @@
             <template v-slot:activator="{ props }">
                 <v-btn icon="mdi-account" class="mr-2" variant="plain" v-bind="props"/>
             </template>
-            <v-list class="font-weight-light pa-0" width="200">
-                <v-list-item prepend-icon="mdi-cog" to="/settings">Settings</v-list-item>
-                <v-list-item prepend-icon="mdi-email-outline" to="/contact">Support</v-list-item>
-                <v-list-item prepend-icon="mdi-logout" @click="logOut">Log out</v-list-item>
+            <v-list class="font-weight-light pa-0">
+                <v-list-item slim prepend-icon="mdi-account">{{ store.name }}</v-list-item>
+                <v-divider></v-divider>
+                <v-list-item slim prepend-icon="mdi-cog" to="/settings">Settings</v-list-item>
+                <v-list-item slim prepend-icon="mdi-email-outline" to="/contact">Support</v-list-item>
+                <v-list-item slim prepend-icon="mdi-logout" @click="logOut">Log out</v-list-item>
             </v-list>
         </v-menu>
     </v-app-bar>

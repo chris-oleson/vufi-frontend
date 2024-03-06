@@ -51,6 +51,7 @@ function login() {
         store.theme = resp.data.theme
         await store.getAllAssetData()
         store.subscriptionStatus = getSubscriptionStatus(new Date(resp.data.expires))
+        store.name = resp.data.name
         store.isLoggedIn = true
         router.push('/assets')
     }).catch((err) => {

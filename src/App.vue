@@ -87,14 +87,6 @@ watch(() => store.notification, (newNotification) => {
 </script>
 
 <style>
-/* Text selection color */
-::selection {
-    background: #83af50
-}
-::-moz-selection {
-    background: #83af50
-}
-
 /* Removing default link styling */
 a {
     color: inherit;

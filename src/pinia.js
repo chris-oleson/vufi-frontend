@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export const useStore = defineStore('store', {
     state: () => ({
+        name: '',
         isLoggedIn: false,
         subscriptionStatus: 'Free',
         theme: 0,

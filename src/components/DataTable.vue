@@ -213,7 +213,7 @@ function addToDatabase(item) {
         name: item.name,
         type: item.type,
         value: item.value.replace(',', ''),
-        currency: item.value.currency
+        currency: item.currency
     })
     .then(() => {
         store.getAllAssetData()

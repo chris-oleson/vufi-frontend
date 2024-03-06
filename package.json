@@ -8,21 +8,21 @@
         "serve": "vite preview"
     },
     "dependencies": {
-        "apexcharts": "^3.45.2",
-        "axios": "^1.6.5",
+        "apexcharts": "^3.46.0",
+        "axios": "^1.6.7",
         "pinia": "^2.1.7",
         "pinia-plugin-persistedstate": "^3.2.1",
-        "vue": "^3.4.15",
-        "vue-router": "^4.2.4",
-        "vue3-apexcharts": "^1.4.4",
-        "vuetify": "^3.5.1"
+        "vue": "^3.4.21",
+        "vue-router": "^4.3.0",
+        "vue3-apexcharts": "^1.5.2",
+        "vuetify": "^3.5.7"
     },
     "devDependencies": {
         "@mdi/font": "^7.4.47",
         "@vitejs/plugin-vue": "^5.0.3",
         "eslint": "^8.56.0",
         "eslint-plugin-vue": "^9.20.1",
-        "vite": "^5.0.12",
+        "vite": "^5.1.5",
         "vite-plugin-vuetify": "^2.0.1"
     },
     "browserslist": [

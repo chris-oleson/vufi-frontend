@@ -11,7 +11,7 @@
             <v-list-item replace slim prepend-icon="mdi-credit-card-multiple" class="py-4 pr-0" to="/debts">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline ml-2 text-no-wrap">Debts</div>
-                    <div v-if="store.totalDebtValue" class="d-inline pr-4" :class="{blur: store.privacy}">{{ formatCurrency(0 - store.totalDebtValue) }}</div>
+                    <div class="d-inline pr-4" :class="{blur: store.privacy}">{{ formatCurrency(0 - store.totalDebtValue) }}</div>
                 </div>
             </v-list-item>
 
@@ -34,9 +34,6 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 function formatCurrency(value) {
-    if (typeof value !== "number") {
-        return value
-    }
     if (store.currency != 'USD') {
         value *= store.currencyRates[store.currency]
     }

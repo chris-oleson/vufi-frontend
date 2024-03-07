@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-2 font" elevation="4">
-        <v-data-table :headers="headers" :items="props.tableData" item-value="name">
+        <v-data-table v-model:page="page" :headers="headers" :items="props.tableData" item-value="name" :items-per-page="itemsPerPage">
             <template v-slot:top>
                 <v-toolbar flat rounded color="transparent">
                     <div class="font-weight-light text-h5 mx-4">{{ props.type }}s</div>
@@ -62,7 +62,11 @@
                 <div class="font-weight-light text-disabled">No {{ props.url }} have been added</div>
             </template>
 
-            <template v-slot:bottom></template>
+            <template v-slot:bottom>
+                <div class="text-center">
+                    <v-pagination v-model="page" :length="pageCount" density="compact"></v-pagination>
+                </div>
+            </template>
         </v-data-table>
     </v-card>
 </template>
@@ -80,6 +84,11 @@ const props = defineProps(['color', 'type', 'url', 'tableData', 'totalValue'])
 const currencies = Object.keys(store.currencyRates)
 const dialog = ref(false)
 const dialogDelete = ref(false)
+const page = ref(1)
+const itemsPerPage = 5
+const pageCount = computed(() => {
+    return Math.ceil(props.tableData.length / itemsPerPage)
+})
 const editedIndex = ref(-1)
 const editedItem = ref({
     name: '',

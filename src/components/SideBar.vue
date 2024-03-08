@@ -1,24 +1,24 @@
 <template>
     <v-navigation-drawer permanent floating :rail="mobile" elevation="4">
-        <v-list class="font-weight-light pa-0" :value="page">
+        <v-list class="font-weight-light pa-0">
             <v-list-item replace slim prepend-icon="mdi-cash-multiple" class="py-4 pr-0" to="/assets">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline ml-2 text-no-wrap">Assets</div>
-                    <div class="d-inline pr-4" :class="{blur: store.privacy}">{{ formatCurrency(store.totalAssetValue) }}</div>
+                    <div class="d-inline pr-4 text-no-wrap" :class="{blur: store.privacy}">{{ formatCurrency(store.totalAssetValue) }}</div>
                 </div>
             </v-list-item>
 
             <v-list-item replace slim prepend-icon="mdi-credit-card-multiple" class="py-4 pr-0" to="/debts">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline ml-2 text-no-wrap">Debts</div>
-                    <div class="d-inline pr-4" :class="{blur: store.privacy}">{{ formatCurrency(0 - store.totalDebtValue) }}</div>
+                    <div class="d-inline pr-4 text-no-wrap" :class="{blur: store.privacy}">{{ formatCurrency(0 - store.totalDebtValue) }}</div>
                 </div>
             </v-list-item>
 
             <v-list-item replace slim prepend-icon="mdi-sigma" class="py-4 pr-0" to="/net-worth">
                 <div class="d-flex justify-space-between">
                     <div class="d-inline ml-2 text-no-wrap">Net Worth</div>
-                    <div class="d-inline pr-4" :class="{blur: store.privacy}">{{ formatCurrency(store.totalAssetValue - store.totalDebtValue) }}</div>
+                    <div class="d-inline pr-4 text-no-wrap" :class="{blur: store.privacy}">{{ formatCurrency(store.totalAssetValue - store.totalDebtValue) }}</div>
                 </div>
             </v-list-item>
         </v-list>
@@ -30,8 +30,6 @@ import { useStore } from '/src/pinia'
 const store = useStore()
 import { useDisplay } from 'vuetify'
 const { mobile } = useDisplay()
-import { useRoute } from 'vue-router'
-const route = useRoute()
 
 function formatCurrency(value) {
     if (store.currency != 'USD') {
@@ -42,17 +40,5 @@ function formatCurrency(value) {
         currency: store.currency
     })
     return formatter.format(value);
-}
-
-function page() {
-    if (route.path == "/assets") {
-        return 0
-    }
-    else if (route.path == "/debts") {
-        return 1
-    }
-    else if (route.path == "/net-worth") {
-        return 2
-    }
 }
 </script>

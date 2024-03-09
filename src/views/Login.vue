@@ -50,7 +50,7 @@ function login() {
         store.currency = resp.data.currency
         store.theme = resp.data.theme
         await store.getAllAssetData()
-        store.subscriptionStatus = getSubscriptionStatus(new Date(resp.data.expires))
+        store.subscriptionStatus = resp.data.subscription_status
         store.name = resp.data.name
         store.isLoggedIn = true
         router.push('/assets')
@@ -59,18 +59,6 @@ function login() {
         errorMessage.value = err.response.data
         loading.value = false
     })
-}
-
-function getSubscriptionStatus(expiration) {
-    if (!expiration) {
-        return 'Free'
-    }
-    else if (expiration >= new Date()) {
-        return 'Active'
-    }
-    else {
-        return 'Canceled'
-    }
 }
 
 function verify() {

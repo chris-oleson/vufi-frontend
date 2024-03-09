@@ -25,14 +25,14 @@ import PieChart from '/src/components/PieChart'
 import LineChart from '/src/components/LineChart'
 
 const tableData = computed(() => {
-    return store.allAssets.filter((asset) => !asset.is_deleted)
+    return store.allItems.filter((item) => !item.is_deleted && item.type == 'asset')
 })
 
 const pieChartLabels = computed(() => {
     let labels = []
-    for (let asset of store.allAssets) {
-        if (!asset.is_hidden && !asset.is_deleted) {
-            labels.push(asset.name)
+    for (let item of store.allItems) {
+        if (!item.is_hidden && !item.is_deleted && item.type == 'asset') {
+            labels.push(item.name)
         }
     }
     return labels
@@ -40,9 +40,9 @@ const pieChartLabels = computed(() => {
 
 const pieChartValues = computed(() => {
     let values = []
-    for (let asset of store.allAssets) {
-        if (!asset.is_hidden && !asset.is_deleted) {
-            values.push(parseFloat(asset.value))
+    for (let item of store.allItems) {
+        if (!item.is_hidden && !item.is_deleted) {
+            values.push(parseFloat(item.value))
         }
     }
     return values
@@ -51,18 +51,18 @@ const pieChartValues = computed(() => {
 const lineChartData = computed(() => {
     return [{
         name: 'Total Assets',
-        data: refineHistory(store.allAssets, store.allAssetHistory)
+        data: refineHistory(store.allItems, store.allItemHistory)
     }]
 })
 
-function refineHistory(assets, history) {
+function refineHistory(items, history) {
     // Get all individual assets
     let visibleAssets = []
-    for (let asset of assets) {
-        if (!asset.is_hidden) {
+    for (let item of items) {
+        if (!item.is_hidden && item.type == 'asset') {
             visibleAssets.push({
-                id: asset.id,
-                currency: asset.currency,
+                id: item.id,
+                currency: item.currency,
                 history: []
             })
         }
@@ -82,7 +82,7 @@ function refineHistory(assets, history) {
         for (let date of uniqueDates) {
             // Check if there is any value for that asset on that date, add it if there is.
             for (let entry of history) {
-                if (entry.date == date && entry.asset_id == asset.id) {
+                if (entry.date == date && entry.item_id == asset.id) {
                     asset.history.push({
                         x: entry.date,
                         y: convertValue(parseFloat(entry.value), asset.currency)

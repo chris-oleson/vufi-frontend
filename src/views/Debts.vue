@@ -25,14 +25,14 @@ import PieChart from '/src/components/PieChart'
 import LineChart from '/src/components/LineChart'
 
 const tableData = computed(() => {
-    return store.allDebts.filter((debt) => !debt.is_deleted)
+    return store.allItems.filter((item) => !item.is_deleted && item.type == 'debt')
 })
 
 const pieChartLabels = computed(() => {
     let labels = []
-    for (let debt of store.allDebts) {
-        if (!debt.is_hidden && !debt.is_deleted) {
-            labels.push(debt.name)
+    for (let item of store.allItems) {
+        if (!item.is_hidden && !item.is_deleted && item.type == 'debt') {
+            labels.push(item.name)
         }
     }
     return labels
@@ -40,9 +40,9 @@ const pieChartLabels = computed(() => {
 
 const pieChartValues = computed(() => {
     let values = []
-    for (let debt of store.allDebts) {
-        if (!debt.is_hidden && !debt.is_deleted) {
-            values.push(parseFloat(debt.value))
+    for (let item of store.allItems) {
+        if (!item.is_hidden && !item.is_deleted && item.type == 'debt') {
+            values.push(parseFloat(item.value))
         }
     }
     return values
@@ -51,18 +51,18 @@ const pieChartValues = computed(() => {
 const lineChartData = computed(() => {
     return [{
         name: 'Total Debts',
-        data: refineHistory(store.allDebts, store.allDebtHistory)
+        data: refineHistory(store.allItems, store.allItemHistory)
     }]
 })
 
-function refineHistory(debts, history) {
+function refineHistory(items, history) {
     // Get all individual debts
     let visibleDebts = []
-    for (let debt of debts) {
-        if (!debt.is_hidden) {
+    for (let item of items) {
+        if (!item.is_hidden && item.type == 'debt') {
             visibleDebts.push({
-                id: debt.id,
-                currency: debt.currency,
+                id: item.id,
+                currency: item.currency,
                 history: []
             })
         }
@@ -82,7 +82,7 @@ function refineHistory(debts, history) {
         for (let date of uniqueDates) {
             // Check if there is any value for that debt on that date, add it if there is.
             for (let entry of history) {
-                if (entry.date == date && entry.debt_id == debt.id) {
+                if (entry.date == date && entry.item_id == debt.id) {
                     debt.history.push({
                         x: entry.date,
                         y: convertValue(parseFloat(entry.value), debt.currency)

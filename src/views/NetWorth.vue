@@ -1,5 +1,5 @@
 <template>
-    <v-row v-if="store.allAssets.length || store.allDebts.length" class="ma-2">
+    <v-row v-if="store.allItems.length" class="ma-2">
         <v-col cols="12">
             <LineChart :color="getColor()" :series="lineChartData"/>
         </v-col>
@@ -25,7 +25,7 @@ const treeChartData = ref([])
 const lineChartData = computed(() => {
     return [{
         name: 'Net Worth',
-        data: refineHistory(store.allAssets, store.allDebts, store.allAssetHistory, store.allDebtHistory)
+        data: refineHistory(store.allItems, store.allItemHistory)
     }]
 })
 
@@ -43,21 +43,20 @@ function formatData() {
         }
     ]
 
-    for (let asset of store.allAssets) {
-        if (!asset.is_deleted && !asset.is_hidden) {
-            charts[0].data.push({
-                x: asset.name,
-                y: parseFloat(asset.value)
-            })
-        }
-    }
-
-    for (let debt of store.allDebts) {
-        if (!debt.is_deleted && !debt.is_hidden) {
-            charts[1].data.push({
-                x: debt.name,
-                y: parseFloat(debt.value)
-            })
+    for (let item of store.allItems) {
+        if (!item.is_deleted && !item.is_hidden) {
+            if (item.type == 'asset') {
+                charts[0].data.push({
+                    x: item.name,
+                    y: parseFloat(item.value)
+                })
+            }
+            else {
+                charts[1].data.push({
+                    x: item.name,
+                    y: parseFloat(item.value)
+                })
+            }
         }
     }
 
@@ -69,37 +68,18 @@ function formatData() {
     }
 }
 
-function refineHistory(assets, debts, assetHistory, debtHistory) {
-    // Get all individual assets
+function refineHistory(items, history) {
+    // Get all individual items
     let visibleItems = []
-    for (let asset of assets) {
-        if (!asset.is_hidden) {
+    for (let item of items) {
+        if (!item.is_hidden) {
             visibleItems.push({
-                id: asset.id,
+                id: item.id,
+                type: item.type,
                 history: [],
                 currency: store.currency
             })
         }
-    }
-    for (let debt of debts) {
-        if (!debt.is_hidden) {
-            visibleItems.push({
-                id: debt.id,
-                history: [],
-                currency: store.currency
-            })
-        }
-    }
-
-    // Combine histories
-    let history = []
-    history.push(...assetHistory)
-    for (let entry of debtHistory) {
-        history.push({
-            asset_id: entry.debt_id,
-            value: parseFloat(entry.value) * -1,
-            date: entry.date
-        })
     }
 
     // Get all dates that there are records for
@@ -112,24 +92,24 @@ function refineHistory(assets, debts, assetHistory, debtHistory) {
     uniqueDates = uniqueDates.sort()
 
     // Go through every asset
-    for (let asset of visibleItems) {
+    for (let item of visibleItems) {
         for (let date of uniqueDates) {
-            // Check if there is any value for that asset on that date, add it if there is.
+            // Check if there is any value for that item on that date, add it if there is.
             for (let entry of history) {
-                if (entry.date == date && entry.asset_id == asset.id) {
-                    asset.history.push({
+                if (entry.date == date && entry.item_id == item.id) {
+                    item.history.push({
                         x: entry.date,
-                        y: convertValue(parseFloat(entry.value), asset.currency)
+                        y: convertValue(parseFloat(entry.value), item.currency, item.type)
                     })
                 }
             }
 
             // If the asset doesn't have an entry for a date with data, add one with the previous value.
-            if (!asset.history.some(e => e.x == date)) {
-                if (asset.history.length) {
-                    asset.history.push({
+            if (!item.history.some(e => e.x == date)) {
+                if (item.history.length) {
+                    item.history.push({
                         x: date,
-                        y: parseFloat(asset.history[asset.history.length - 1].y)
+                        y: parseFloat(item.history[item.history.length - 1].y)
                     })
                 }
             }
@@ -139,8 +119,8 @@ function refineHistory(assets, debts, assetHistory, debtHistory) {
     // Turn the asset data into something the line chart can read
     let refinedHistory = []
 
-    for (let asset of visibleItems) {
-        for (let entry of asset.history) {
+    for (let item of visibleItems) {
+        for (let entry of item.history) {
             let i = refinedHistory.findIndex(e => e.x == entry.x)
             if (i < 0) {
                 refinedHistory.push(entry)
@@ -154,7 +134,10 @@ function refineHistory(assets, debts, assetHistory, debtHistory) {
     return refinedHistory
 }
 
-function convertValue(value, currency) {
+function convertValue(value, currency, type) {
+    if (type == 'debt') {
+        value *= -1
+    }
     return value /= store.currencyRates[currency]
 }
 

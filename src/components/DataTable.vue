@@ -24,7 +24,7 @@
                         <v-card class="pa-10 text-center mx-auto" width="330">
                             <v-card-title class="font-weight-light text-center">{{ formTitle }}</v-card-title>
                             <v-text-field v-model="editedItem.name" variant="underlined" label="Name" class="pb-4"></v-text-field>
-                            <v-select v-model="editedItem.type" :items="props.type == 'Asset' ? assetTypes : debtTypes" variant="underlined" density="compact" label="Type"></v-select>
+                            <v-select v-model="editedItem.subtype" :items="props.type == 'Asset' ? assetTypes : debtTypes" variant="underlined" density="compact" label="Type"></v-select>
                             <v-text-field v-model="editedItem.value" variant="underlined" label="Value"></v-text-field>
                             <v-select :items="currencies" v-model="editedItem.currency" variant="underlined" density="compact" class="mt-4" label="Currency"></v-select>
                             <v-btn rounded="0" width="200" class="mx-auto bg-primary mt-4" @click="save">Save</v-btn>
@@ -59,7 +59,7 @@
             </template>
 
             <template v-slot:no-data>
-                <div class="font-weight-light text-disabled">No {{ props.url }} have been added</div>
+                <div class="font-weight-light text-disabled">No {{ props.type.toLowerCase() }}s have been added</div>
             </template>
 
             <template v-slot:bottom>
@@ -79,7 +79,7 @@ const store = useStore()
 import { useDisplay } from 'vuetify'
 const display = useDisplay()
 import PlaidLink from '/src/components/PlaidLink'
-const props = defineProps(['color', 'type', 'url', 'tableData', 'totalValue'])
+const props = defineProps(['color', 'type', 'tableData', 'totalValue'])
 
 const currencies = Object.keys(store.currencyRates)
 const dialog = ref(false)
@@ -92,13 +92,13 @@ const pageCount = computed(() => {
 const editedIndex = ref(-1)
 const editedItem = ref({
     name: '',
-    type: null,
+    subtype: null,
     value: null,
     currency: null,
 })
 const defaultItem = {
     name: '',
-    type: null,
+    subtype: null,
     value: null,
     currency: store.currency
 }
@@ -125,12 +125,12 @@ const debtTypes = [
 
 function focusItem(item) {
     if (item.is_hidden) {
-        axios.put(`/${props.url}/show/${item.id}`).then(() => {
+        axios.put(`/items/show/${item.id}`).then(() => {
             store.getAllAssetData()
         })
     }
     else {
-        axios.put(`/${props.url}/hide/${item.id}`).then(() => {
+        axios.put(`/items/hide/${item.id}`).then(() => {
             store.getAllAssetData()
         })
     }
@@ -150,7 +150,7 @@ const headers = computed(() => {
     else {
         return [
             { title: 'Name', align: 'start', key: 'name' },
-            { title: 'Type', align: 'start', key: 'type' },
+            { title: 'Type', align: 'start', key: 'subtype' },
             { title: 'Value', align: 'end', key: 'value' },
             { title: 'Updated', align: 'end', key: 'updated' },
             { title: 'Actions', align: 'end', key: 'actions', sortable: false, minWidth: '105px' },
@@ -200,14 +200,14 @@ function save () {
 }
 
 function deleteItemAndHistory() {
-    axios.delete(`/${props.url}/${editedItem.value.id}/history`).then(() => {
+    axios.delete(`/items/${editedItem.value.id}/history`).then(() => {
         store.getAllAssetData()
         dialogDelete.value = false
     })
 }
 
 function deleteItemConfirm() {
-    axios.delete(`/${props.url}/${editedItem.value.id}`).then(() => {
+    axios.delete(`/items/${editedItem.value.id}`).then(() => {
         store.getAllAssetData()
         dialogDelete.value = false
     })
@@ -218,9 +218,10 @@ function addToDatabase(item) {
     if (store.currency != 'USD') {
         item.value /= store.currencyRates[store.currency]
     }
-    axios.post(`/${props.url}`, {
+    axios.post(`/items`, {
         name: item.name,
-        type: item.type,
+        type: props.type == 'Asset' ? 'asset' : 'debt',
+        subtype: item.subtype,
         value: item.value.replace(',', ''),
         currency: item.currency
     })
@@ -234,9 +235,10 @@ function replaceInDatabase(item) {
     if (store.currency != 'USD') {
         item.value /= store.currencyRates[store.currency]
     }
-    axios.put(`/${props.url}/${item.id}`, {
+    axios.put(`/items/${item.id}`, {
         name: item.name,
-        type: item.type,
+        type: props.type == 'Asset' ? 'asset' : 'debt',
+        subtype: item.subtype,
         value: item.value.replace(',', ''),
         currency: item.currency,
         user_id: store.userID

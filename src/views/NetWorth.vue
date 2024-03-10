@@ -12,7 +12,7 @@
 </template> 
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useStore } from '/src/pinia'
 const store = useStore()
 import { useTheme } from 'vuetify'
@@ -20,7 +20,43 @@ const theme = useTheme()
 import LineChart from '/src/components/LineChart'
 import TreeMapChart from '/src/components/TreeMapChart'
 
-const treeChartData = ref([])
+const treeChartData = computed(() => {
+    let assets = {
+        name: 'Assets',
+        data: []
+    }
+    let debts = {
+        name: 'Debts',
+        data: []
+    }
+
+    for (let item of store.allItems) {
+        if (!item.is_deleted && !item.is_hidden) {
+            if (item.type == 'asset') {
+                assets.data.push({
+                    x: item.name,
+                    y: parseFloat(item.value)
+                })
+            }
+            else {
+                debts.data.push({
+                    x: item.name,
+                    y: parseFloat(item.value)
+                })
+            }
+        }
+    }
+
+    let chart = []
+    if (assets.data.length){
+        chart.push(assets)
+    }
+    if (debts.data.length) {
+        chart.push(debts)
+    }
+
+    return chart
+})
 
 const lineChartData = computed(() => {
     return [{
@@ -28,45 +64,6 @@ const lineChartData = computed(() => {
         data: refineHistory(store.allItems, store.allItemHistory)
     }]
 })
-
-formatData()
-
-function formatData() {
-    let charts = [
-        {
-            name: 'Assets',
-            data: []
-        },
-        {
-            name: 'Debts',
-            data: []
-        }
-    ]
-
-    for (let item of store.allItems) {
-        if (!item.is_deleted && !item.is_hidden) {
-            if (item.type == 'asset') {
-                charts[0].data.push({
-                    x: item.name,
-                    y: parseFloat(item.value)
-                })
-            }
-            else {
-                charts[1].data.push({
-                    x: item.name,
-                    y: parseFloat(item.value)
-                })
-            }
-        }
-    }
-
-    if (charts[0].data.length) {
-        treeChartData.value.push(charts[0])
-    }
-    if (charts[1].data.length) {
-        treeChartData.value.push(charts[1])
-    }
-}
 
 function refineHistory(items, history) {
     // Get all individual items

@@ -41,12 +41,14 @@ export const useStore = defineStore('store', {
             this.totalAssetValue = 0
             this.totalDebtValue = 0
             for (let item of this.allItems) {
-                if (!item.is_deleted && !item.is_hidden && item.type == "asset") {
-                    this.totalAssetValue += parseFloat(item.value)
+                if (!item.is_deleted && !item.is_hidden) {
+                    if (item.type == "asset") {
+                        this.totalAssetValue += parseFloat(item.value)
+                    }
+                    else {
+                        this.totalDebtValue -= parseFloat(item.value)
+                    }
                 }
-                else (
-                    this.totalDebtValue += parseFloat(item.value)
-                )
             }
         }
     },

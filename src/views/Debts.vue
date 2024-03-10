@@ -8,8 +8,8 @@
             <DataTable type="Debt" url="debts" :color="theme.current.value.colors.error" :tableData="tableData" :totalValue="store.totalDebtValue"/>
         </v-col>
 
-        <v-col v-if="pieChartValues.length" cols="12" md="5">
-            <PieChart :color="theme.current.value.colors.error" :series="pieChartValues" :labels="pieChartLabels"/>
+        <v-col v-if="pieChart.values.length" cols="12" md="5">
+            <PieChart :color="theme.current.value.colors.error" :series="pieChart.values" :labels="pieChart.labels"/>
         </v-col>
     </v-row>
 </template>
@@ -28,24 +28,20 @@ const tableData = computed(() => {
     return store.allItems.filter((item) => !item.is_deleted && item.type == 'debt')
 })
 
-const pieChartLabels = computed(() => {
+const pieChart = computed(() => {
     let labels = []
-    for (let item of store.allItems) {
-        if (!item.is_hidden && !item.is_deleted && item.type == 'debt') {
-            labels.push(item.name)
-        }
-    }
-    return labels
-})
-
-const pieChartValues = computed(() => {
     let values = []
     for (let item of store.allItems) {
         if (!item.is_hidden && !item.is_deleted && item.type == 'debt') {
+            labels.push(item.name)
             values.push(parseFloat(item.value))
         }
     }
-    return values
+    
+    return {
+        labels: labels,
+        values: values,
+    }
 })
 
 const lineChartData = computed(() => {

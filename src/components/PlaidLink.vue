@@ -20,7 +20,11 @@ function getLinkToken() {
                 let plaid = window.Plaid.create({
                     token: res.data.link_token,
                     onSuccess: (public_token) => {
-                        if (!props.update) {
+                        if (props.update) {
+                            store.reauthenticate = false
+                            updatePlaidData()
+                        }
+                        else {
                             sendPublicToken(public_token)
                         }
                     },

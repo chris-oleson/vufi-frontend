@@ -6,6 +6,7 @@ export const useStore = defineStore('store', {
         name: '',
         isLoggedIn: false,
         subscriptionStatus: 'Free',
+        reauthenticate: false,
         theme: 0,
         currency: 'USD',
         currencyRates: {},

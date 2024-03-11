@@ -1,8 +1,13 @@
 <template>
     <v-app>
         <TopBar/>
-        <SideBar v-if="route.path == '/assets' || route.path == '/debts' || route.path == '/net-worth'"/>
+        <SideBar v-if="usingApp"/>
         <v-main>
+            <v-banner v-if="usingApp && store.reauthenticate" lines="one" class="bg-warning" text="One or more of your accounts needs to be reauthenticated to continue updating.">
+                <template v-slot:actions>
+                    <PlaidLink update="true"></PlaidLink>
+                </template>
+            </v-banner>
             <router-view/>
             <v-snackbar v-model="showNotification" :color="notificationColor" app transition="slide-y-transition" timeout="3000">
                 <template v-slot:text>
@@ -14,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import axios from 'axios'
 import { useStore } from '/src/pinia'
 const store = useStore()
@@ -25,6 +30,7 @@ const route = useRoute()
 const router = useRouter()
 import TopBar from '/src/components/TopBar'
 import SideBar from '/src/components/SideBar'
+import PlaidLink from '/src/components/PlaidLink.vue';
 
 // Make sure there's an active session
 checkSession()
@@ -83,6 +89,13 @@ watch(() => store.notification, (newNotification) => {
         notificationColor.value = newNotification.color
         showNotification.value = true
     }
+})
+
+const usingApp = computed(() => {
+    if (route.path == '/assets' || route.path == '/debts' || route.path == '/net-worth') {
+        return true
+    }
+    return false
 })
 </script>
 

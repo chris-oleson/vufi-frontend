@@ -4,8 +4,7 @@
             <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
             <h2 class="font-weight-light ml-2">VuFi</h2>
         </router-link>
-        <v-card class="font-weight-light text-warning px-2" variant="outlined">beta</v-card>
-
+        <v-card class="font-weight-light text-amber px-2" variant="outlined">beta</v-card>
         <v-spacer/>
 
         <!-- Desktop display -->
@@ -17,7 +16,7 @@
             <v-divider vertical inset></v-divider>
             <v-btn v-if="store.isLoggedIn" class="font-weight-light ml-4" variant="plain" to="/assets">Dashboard</v-btn>
             <v-btn v-if="!store.isLoggedIn" class="font-weight-light mx-4" variant="plain" to="/login">Log In</v-btn>
-            <router-link to="/signup"><v-btn v-if="!store.isLoggedIn" class="bg-primary mr-4" rounded="0">Sign Up</v-btn></router-link>
+            <v-btn v-if="!store.isLoggedIn" tile class="bg-primary mr-4" to="/signup">Sign Up</v-btn>
         </template>
 
         <!-- Mobile display -->
@@ -31,7 +30,7 @@
                 <v-list-item to="/pricing">Pricing</v-list-item>
                 <v-list-item to="/contact">Contact</v-list-item>
                 <v-divider class="mx-2"></v-divider>
-                <v-list-item v-if="store.isLoggedIn && store.subscriptionStatus == 'Active'" to="/assets">Dashboard</v-list-item>
+                <v-list-item v-if="store.isLoggedIn" to="/assets">Dashboard</v-list-item>
                 <v-list-item v-if="!store.isLoggedIn" to="/login">Log In</v-list-item>
                 <v-list-item v-if="!store.isLoggedIn" class="text-primary" to="/signup">Sign Up</v-list-item>
             </v-list>

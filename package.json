@@ -8,7 +8,7 @@
         "serve": "vite preview"
     },
     "dependencies": {
-        "apexcharts": "^3.46.0",
+        "apexcharts": "^3.47.0",
         "axios": "^1.6.7",
         "pinia": "^2.1.7",
         "pinia-plugin-persistedstate": "^3.2.1",
@@ -22,8 +22,8 @@
         "@vitejs/plugin-vue": "^5.0.4",
         "eslint": "^8.56.0",
         "eslint-plugin-vue": "^9.20.1",
-        "vite": "^5.1.5",
-        "vite-plugin-vuetify": "^2.0.2"
+        "vite": "^5.1.6",
+        "vite-plugin-vuetify": "^2.0.3"
     },
     "browserslist": [
         "> 1%",

@@ -47,13 +47,13 @@ function redirect(time) {
         router.push('/signup')
     }
     else if (store.subscriptionStatus == "active") {
-        router.push('/assets')
+        window.location.href = 'https://billing.stripe.com/p/login/fZe16Ng0E4svc2Q6oo'
     }
     else if (time == 'month') {
-        window.location.href = "https://buy.stripe.com/5kAdTAcZD6x15qM7su"
+        window.location.href = 'https://buy.stripe.com/5kAdTAcZD6x15qM7su'
     }
     else if (time == 'year') {
-        window.location.href = "https://buy.stripe.com/5kA5n43p32gL06s145"
+        window.location.href = 'https://buy.stripe.com/5kA5n43p32gL06s145'
     }
 }
 </script>

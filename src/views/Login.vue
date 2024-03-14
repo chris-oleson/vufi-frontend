@@ -51,7 +51,7 @@ function login() {
         store.theme = resp.data.theme
         await store.getAllAssetData()
         store.subscriptionStatus = resp.data.subscription_status
-        store.updateToken = resp.data.updateToken
+        store.reauthenticate = resp.data.reauthenticate
         store.name = resp.data.name
         store.isLoggedIn = true
         router.push('/assets')

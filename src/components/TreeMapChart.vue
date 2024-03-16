@@ -13,6 +13,9 @@ const props = defineProps(['series'])
 const chartOptions = computed(() => {
     return {
         colors: [theme.current.value.colors.primary, theme.current.value.colors.error],
+        stroke: {
+            colors: [theme.current.value.colors.surface]
+        },
         theme: {
             mode: theme.name.value,
         },

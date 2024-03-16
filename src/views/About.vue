@@ -47,7 +47,7 @@
 
         <v-row>
             <v-col cols="12" class="py-16 px-8 mx-auto">
-                <h1 class="font-weight-light mb-8">Technologies</h1>
+                <h1 class="font-weight-light mb-8">Tech Stack</h1>
 
                 <v-row class="justify-center">
                     <v-col cols="12" sm="6" md="4" lg="3">

@@ -53,7 +53,7 @@
             </template>
 
             <template v-slot:[`item.actions`]="{ item }">
-                <v-icon size="small" class="mr-2" @click="focusItem(item)">{{ item.is_hidden ? 'mdi-eye' : 'mdi-eye-off' }}</v-icon>
+                <v-icon size="small" class="mr-2" @click="hideItem(item)">{{ item.hidden ? 'mdi-eye' : 'mdi-eye-off' }}</v-icon>
                 <v-icon size="small" class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
                 <v-icon size="small" @click="deleteItem(item)">mdi-delete</v-icon>
             </template>
@@ -123,17 +123,9 @@ const debtTypes = [
     'Other'
 ]
 
-function focusItem(item) {
-    if (item.is_hidden) {
-        axios.put(`/items/show/${item.id}`).then(() => {
-            store.getAllAssetData()
-        })
-    }
-    else {
-        axios.put(`/items/hide/${item.id}`).then(() => {
-            store.getAllAssetData()
-        })
-    }
+function hideItem(item) {
+    let foundItem = store.allItems.find(i => i.id == item.id)
+    foundItem.hidden = !foundItem.hidden
 }
 
 const formTitle = computed(() => {

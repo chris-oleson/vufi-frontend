@@ -31,7 +31,7 @@ const treeChartData = computed(() => {
     }
 
     for (let item of store.allItems) {
-        if (!item.is_deleted && !item.is_hidden) {
+        if (!item.is_deleted && !item.hidden) {
             if (item.type == 'asset') {
                 assets.data.push({
                     x: item.name,
@@ -69,7 +69,7 @@ function refineHistory(items, history) {
     // Get all individual items
     let visibleItems = []
     for (let item of items) {
-        if (!item.is_hidden) {
+        if (!item.hidden) {
             visibleItems.push({
                 id: item.id,
                 type: item.type,

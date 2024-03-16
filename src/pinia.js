@@ -19,9 +19,28 @@ export const useStore = defineStore('store', {
 
         allItems: [],
         allItemHistory: [],
-        totalAssetValue: 0,
-        totalDebtValue: 0,
     }),
+
+    getters: {
+        totalAssetValue: (state) => {
+            let total = 0
+            for (let item of state.allItems) {
+                if (!item.is_deleted && !item.hidden && item.type == "asset") {
+                    total += parseFloat(item.value)
+                }
+            }
+            return total
+        },
+        totalDebtValue: (state) => {
+            let total = 0
+            for (let item of state.allItems) {
+                if (!item.is_deleted && !item.hidden && item.type == "debt") {
+                    total -= parseFloat(item.value)
+                }
+            }
+            return total
+        },
+    },
 
     actions: {
         async getAllAssetData() {
@@ -38,20 +57,8 @@ export const useStore = defineStore('store', {
             this.allItems = itemResponse.data
             this.allItemHistory = itemHistoryResponse.data
             this.currencyRates = currencyValueResponse.data
-
-            this.totalAssetValue = 0
-            this.totalDebtValue = 0
-            for (let item of this.allItems) {
-                if (!item.is_deleted && !item.is_hidden) {
-                    if (item.type == "asset") {
-                        this.totalAssetValue += parseFloat(item.value)
-                    }
-                    else {
-                        this.totalDebtValue -= parseFloat(item.value)
-                    }
-                }
-            }
         }
     },
+    
     persist: true,
 })

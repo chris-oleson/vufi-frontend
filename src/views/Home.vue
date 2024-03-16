@@ -9,7 +9,8 @@
 
             <v-col cols="12" lg="7">
                 <v-card class="ma-5 mb-n16 elevation-10">
-                    <img class="d-block" style="max-width: 100%;" :src="theme.global.name.value == 'light' ? '/src/assets/assetsLight.png' : '/src/assets/assetsDark.png'" alt="VuFi assets"/>
+                    <img v-if="theme.global.name.value == 'dark'" class="d-block" style="max-width: 100%;" src="/src/assets/assetsDark.png" alt="VuFi interface"/>
+                    <img v-else class="d-block" style="max-width: 100%;" src="/src/assets/assetsLight.png" alt="VuFi interface"/>
                 </v-card>
             </v-col>
         </v-row>

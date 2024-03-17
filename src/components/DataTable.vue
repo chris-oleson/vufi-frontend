@@ -176,12 +176,6 @@ function editItem (item) {
     dialog.value = true
 }
 
-function deleteItem (item) {
-    editedIndex.value = props.tableData.indexOf(item)
-    editedItem.value = Object.assign({}, item)
-    dialogDelete.value = true
-}
-
 function save () {
     if (editedIndex.value > -1) {
         replaceInDatabase(editedItem.value)
@@ -191,25 +185,7 @@ function save () {
     dialog.value = false
 }
 
-function deleteItemAndHistory() {
-    axios.delete(`/items/${editedItem.value.id}/history`).then(() => {
-        store.getAllAssetData()
-        dialogDelete.value = false
-    })
-}
-
-function deleteItemConfirm() {
-    axios.delete(`/items/${editedItem.value.id}`).then(() => {
-        store.getAllAssetData()
-        dialogDelete.value = false
-    })
-}
-
 function addToDatabase(item) {
-    // Convert to USD
-    if (store.currency != 'USD') {
-        item.value /= store.currencyRates[store.currency]
-    }
     axios.post(`/items`, {
         name: item.name,
         type: props.type == 'Asset' ? 'asset' : 'debt',
@@ -223,10 +199,6 @@ function addToDatabase(item) {
 }
 
 function replaceInDatabase(item) {
-    // Convert to USD
-    if (store.currency != 'USD') {
-        item.value /= store.currencyRates[store.currency]
-    }
     axios.put(`/items/${item.id}`, {
         name: item.name,
         type: props.type == 'Asset' ? 'asset' : 'debt',
@@ -236,6 +208,26 @@ function replaceInDatabase(item) {
         user_id: store.userID
     })
     .then(() => {
+        store.getAllAssetData()
+    })
+}
+
+function deleteItem (item) {
+    editedIndex.value = props.tableData.indexOf(item)
+    editedItem.value = Object.assign({}, item)
+    dialogDelete.value = true
+}
+
+function deleteItemAndHistory() {
+    dialogDelete.value = false
+    axios.delete(`/items/${editedItem.value.id}/history`).then(() => {
+        store.getAllAssetData()
+    })
+}
+
+function deleteItemConfirm() {
+    dialogDelete.value = false
+    axios.delete(`/items/${editedItem.value.id}`).then(() => {
         store.getAllAssetData()
     })
 }

@@ -67,9 +67,10 @@ function verify() {
     axios.post('/auth/verify', {
         token: route.query.t,
         email: route.query.e
-    }).then(() => {
+    }).then((resp) => {
         store.isLoggedIn = true
         store.getAllAssetData()
+        store.name = resp.data
         store.notification = {
             text: "Successfully verified email!",
             color: "primary"

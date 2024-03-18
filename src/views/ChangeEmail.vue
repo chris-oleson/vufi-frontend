@@ -8,7 +8,7 @@
         </template>
         <template v-else>
             <v-text-field variant="underlined" label="New Email" v-model="newEmail" :error="error" class="mt-4"></v-text-field>
-            <v-text-field :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" variant="underlined" label="Password" :type="showPassword ? 'text' : 'password'" v-model="password" :error="error" @click:append="showPassword = !showPassword" @keyup.enter="changeEmail"/>
+            <v-text-field :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'" variant="underlined" label="Password" :type="showPassword ? 'text' : 'password'" v-model="password" :error="error" @click:append="showPassword = !showPassword" @keyup.enter="changeEmail"/>
             <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>
             <v-btn rounded="0" class="bg-primary mt-4" width="200" @click="changeEmail">Submit</v-btn>
         </template>

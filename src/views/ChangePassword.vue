@@ -3,8 +3,8 @@
         <img src="/src/assets/logo.svg" height="50" width="50" alt="VuFi logo"/>
         <v-progress-circular v-if="loading" class="mt-4 mx-auto d-block" indeterminate></v-progress-circular>
         <template v-else>
-            <v-text-field v-if="!route.query.t" :append-icon="showCurrentPassword ? 'mdi-eye' : 'mdi-eye-off'" variant="underlined" class="mt-4" label="Current Password" :type="showCurrentPassword ? 'text' : 'password'" :error="error" v-model="currentPassword" @click:append="showCurrentPassword = !showCurrentPassword"></v-text-field>
-            <v-text-field :append-icon="showNewPassword ? 'mdi-eye' : 'mdi-eye-off'" variant="underlined" label="New Password" :type="showNewPassword ? 'text' : 'password'" v-model="newPassword" :error="error" @click:append="showNewPassword = !showNewPassword" @keyup.enter="changePassword"/>
+            <v-text-field v-if="!route.query.t" :append-icon="showCurrentPassword ? 'mdi-eye-off' : 'mdi-eye'" variant="underlined" class="mt-4" label="Current Password" :type="showCurrentPassword ? 'text' : 'password'" :error="error" v-model="currentPassword" @click:append="showCurrentPassword = !showCurrentPassword"></v-text-field>
+            <v-text-field :append-icon="showNewPassword ? 'mdi-eye-off' : 'mdi-eye'" variant="underlined" label="New Password" :type="showNewPassword ? 'text' : 'password'" v-model="newPassword" :error="error" @click:append="showNewPassword = !showNewPassword" @keyup.enter="changePassword"/>
             <v-card-text v-if="error" class="text-error pa-0">{{ errorMessage }}</v-card-text>
             <v-btn rounded="0" class="bg-primary mt-4" width="200" @click="changePassword">Submit</v-btn>
         </template>

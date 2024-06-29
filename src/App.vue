@@ -53,11 +53,6 @@ function logOut() {
     }
 }
 
-// Update site title when page changes
-watch(route, (newRoute) => {
-    document.title = newRoute.meta.title
-})
-
 // Update current theme
 setTheme()
 watch(() => store.theme, () => {

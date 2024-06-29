@@ -29,35 +29,32 @@ export const router = createRouter({
             alias: '/:pathMatch(.*)*',
             component: PageNotFound,
             meta: {
-                title: '404 - VuFi'
+                title: '404'
             }
         },
         {
             path: '/',
             component: Home,
-            meta: {
-                title: 'VuFi - Finance at a Glance'
-            }
         },
         {
             path: '/pricing',
             component: Pricing,
             meta: {
-                title: 'Pricing - VuFi'
+                title: 'Pricing'
             }
         },
         {
             path: '/about',
             component: About,
             meta: {
-                title: 'About - VuFi'
+                title: 'About'
             }
         },
         {
             path: '/contact',
             component: Contact,
             meta: {
-                title: 'Contact - VuFi'
+                title: 'Contact'
             }
         },
         {
@@ -65,7 +62,7 @@ export const router = createRouter({
             beforeEnter: [rejectUnauthorized],
             component: Assets,
             meta: {
-                title: 'Assets - VuFi'
+                title: 'Assets'
             }
         },
         {
@@ -73,7 +70,7 @@ export const router = createRouter({
             beforeEnter: [rejectUnauthorized],
             component: Debts,
             meta: {
-                title: 'Debts - VuFi'
+                title: 'Debts'
             }
         },
         {
@@ -81,7 +78,7 @@ export const router = createRouter({
             beforeEnter: [rejectUnauthorized],
             component: NetWorth,
             meta: {
-                title: 'Net Worth - VuFi'
+                title: 'Net Worth'
             }
         },
         {
@@ -89,7 +86,7 @@ export const router = createRouter({
             beforeEnter: forwardLogin,
             component: Login,
             meta: {
-                title: 'Login - VuFi'
+                title: 'Login'
             }
         },
         {
@@ -97,7 +94,7 @@ export const router = createRouter({
             beforeEnter: forwardLogin,
             component: SignUp,
             meta: {
-                title: 'Sign Up - VuFi'
+                title: 'Sign Up'
             }
         },
         {
@@ -105,14 +102,14 @@ export const router = createRouter({
             beforeEnter: rejectUnauthorized,
             component: Settings,
             meta: {
-                title: 'Settings - VuFi'
+                title: 'Settings'
             }
         },
         {
             path: '/forgot-password',
             component: ForgotPassword,
             meta: {
-                title: 'Forgot Password - VuFi'
+                title: 'Forgot Password'
             }
         },
         {
@@ -125,7 +122,7 @@ export const router = createRouter({
             },
             component: ChangePassword,
             meta: {
-                title: 'Change Password - VuFi'
+                title: 'Change Password'
             }
         },
         {
@@ -133,7 +130,7 @@ export const router = createRouter({
             beforeEnter: rejectUnauthorized,
             component: ChangeEmail,
             meta: {
-                title: 'Change Email - VuFi'
+                title: 'Change Email'
             }
         },
         {
@@ -141,7 +138,7 @@ export const router = createRouter({
             beforeEnter: rejectUnauthorized,
             component: DeleteAccount,
             meta: {
-                title: 'Delete Account - VuFi'
+                title: 'Delete Account'
             }
         },
         {
@@ -149,17 +146,26 @@ export const router = createRouter({
             beforeEnter: rejectUnauthorized,
             component: ThankYou,
             meta: {
-                title: 'Thank You - VuFi'
+                title: 'Thank You'
             }
         },
         {
             path: '/privacy',
             component: PrivacyPolicy,
             meta: {
-                title: 'Privacy Policy - VuFi'
+                title: 'Privacy Policy'
             }
         },
     ]
+})
+
+router.afterEach(to => {
+    if (to.meta.title) {
+      document.title = `${to.meta.title} - VuFi`;
+    }
+    else {
+        document.title = 'VuFi - Finance at a Glance'
+    }
 })
 
 function rejectUnauthorized() {

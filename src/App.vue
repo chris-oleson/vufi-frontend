@@ -9,11 +9,7 @@
                 </template>
             </v-banner>
             <router-view/>
-            <v-snackbar v-model="showNotification" :color="notificationColor" app transition="slide-y-transition" timeout="3000">
-                <template v-slot:text>
-                    <div class="text-center">{{ notificationText }}</div>
-                </template>
-            </v-snackbar>
+            <v-snackbar v-model="showNotification" :color="store.notification.color" transition="slide-y-transition" timeout="3000">{{ store.notification.text }}</v-snackbar>
         </v-main>
     </v-app>
 </template>
@@ -76,14 +72,8 @@ function setTheme() {
 
 // Handling notifications
 const showNotification = ref(false)
-const notificationColor = ref('')
-const notificationText = ref('')
-watch(() => store.notification, (newNotification) => {
-    if (newNotification.text) {
-        notificationText.value = newNotification.text
-        notificationColor.value = newNotification.color
-        showNotification.value = true
-    }
+watch(() => store.notification, () => {
+    showNotification.value = true
 })
 
 const usingApp = computed(() => {
